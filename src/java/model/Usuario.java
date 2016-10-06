@@ -5,6 +5,7 @@
  */
 package model;
 
+import dao.UsuarioDAO;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -82,6 +83,6 @@ public class Usuario {
         this.idNivel = idNivel;
     }
      public static List<Usuario> obterUsuario() throws ClassNotFoundException, SQLException {
-        return Usuario.obterUsuario();
+        return UsuarioDAO.obterUsuarios();
     }
 }

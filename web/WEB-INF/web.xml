@@ -9,11 +9,11 @@
         <servlet-class>controller.PesquisaClienteController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>PesquisaFormaPagamentocontroller</servlet-name>
+        <servlet-name>PesquisaFormaPagamentoController</servlet-name>
         <servlet-class>controller.PesquisaFormaPagamentoController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>PesquisaLigacaocontroller</servlet-name>
+        <servlet-name>PesquisaLigacaoController</servlet-name>
         <servlet-class>controller.PesquisaLigacaoController</servlet-class>
     </servlet>
     <servlet>
@@ -25,7 +25,7 @@
         <servlet-class>controller.PesquisaListaProdutoController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>PesquisaNivelcontroller</servlet-name>
+        <servlet-name>PesquisaNivelController</servlet-name>
         <servlet-class>controller.PesquisaNivelController</servlet-class>
     </servlet>
     <servlet>
@@ -35,11 +35,7 @@
     <servlet>
         <servlet-name>PesquisaProdutoController</servlet-name>
         <servlet-class>controller.PesquisaProdutoController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>PesquisaFormaPagamentoController</servlet-name>
-        <servlet-class>controller.PesquisaFormaPagamentoController</servlet-class>
-    </servlet>
+    </servlet>   
     <servlet-mapping>
         <servlet-name>PesquisaBairroController</servlet-name>
         <url-pattern>/PesquisaBairroController</url-pattern>
@@ -49,12 +45,12 @@
         <url-pattern>/PesquisaClienteController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>PesquisaFormaPagamentocontroller</servlet-name>
-        <url-pattern>/PesquisaFormaPagamentocontroller</url-pattern>
+        <servlet-name>PesquisaFormaPagamentoController</servlet-name>
+        <url-pattern>/PesquisaFormaPagamentoController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>PesquisaLigacaocontroller</servlet-name>
-        <url-pattern>/PesquisaLigacaocontroller</url-pattern>
+        <servlet-name>PesquisaLigacaoController</servlet-name>
+        <url-pattern>/PesquisaLigacaoController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PesquisaUsuarioController</servlet-name>
@@ -65,8 +61,8 @@
         <url-pattern>/PesquisaListaProduto</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>PesquisaNivelcontroller</servlet-name>
-        <url-pattern>/PesquisaNivelcontroller</url-pattern>
+        <servlet-name>PesquisaNivelController</servlet-name>
+        <url-pattern>/PesquisaNivelController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PesquisaPedidoController</servlet-name>
@@ -75,11 +71,7 @@
     <servlet-mapping>
         <servlet-name>PesquisaProdutoController</servlet-name>
         <url-pattern>/PesquisaProdutoController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>PesquisaFormaPagamentoController</servlet-name>
-        <url-pattern>/PesquisaFormaPagamentoController</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>   
     <session-config>
         <session-timeout>
             30
