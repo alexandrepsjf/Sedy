@@ -13,11 +13,9 @@
 				<tr>
 					<td><button><h1>USUÁRIO</h1></button></td>
 					<td><button><h1>BINA</h1></button></td>
-					<td><button><h1>IMPRESSORA</h1></button></td>
-					
+					<td><button><h1>IMPRESSORA</h1></button></td>					
 				</tr>
-			</table>
-				<br><br><br>
+			</table>			
 			<table>
 			
 				 <tr>

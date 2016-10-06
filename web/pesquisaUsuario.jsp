@@ -13,7 +13,7 @@ and open the template in the editor.
     <head>
         <title>Usuario</title>
         <meta charset="UTF-8">
-       
+
     </head>
     <body>
         <div><h1>Usuario</h1></div>
@@ -24,17 +24,17 @@ and open the template in the editor.
                 <th colspan =2>Ação</th>
             </tr>
             <c:forEach items="${usuarios}" var="usuario">
-            <tr> 
-                <td><c:out value="${usuario.id}"/></td>
-                <td><c:out value="${usuario.nome}"/></td>
-                <td><a href="ManterUsuarioController?acao=prepararEditar&id=<c:out value="${usuario.id}"/>">Editar</a></td>
-                <td><a href="ManterUsuarioController?acao=prepararExcluir&id=<c:out value="${usuario.id}"/>">Excluir</a></td>
-                
-            </tr>
+                <tr> 
+                    <td><c:out value="${usuario.id}"/></td>
+                    <td><c:out value="${usuario.nome}"/></td>
+                    <td><a href="ManterUsuarioController?acao=prepararEditar&id=<c:out value="${usuario.id}"/>">Editar</a></td>
+                    <td><a href="ManterUsuarioController?acao=prepararExcluir&id=<c:out value="${usuario.id}"/>">Excluir</a></td>
+
+                </tr>
             </c:forEach>        
         </table>
-        <form action="ManterUsuarioController?acao=prepararIncluir" method="post">
-            <imput type="submit" name="btnIncluir" value="Incluir">
+        <form action="ManterUsuarioController?acao=prepararIncluir" method="POST">
+            <input type="submit" name="btnIncluir" value="Incluir">
         </form>
     </body>
 </html>
