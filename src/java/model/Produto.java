@@ -5,6 +5,7 @@
  */
 package model;
 
+import dao.ProdutoDAO;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -56,6 +57,6 @@ public class Produto {
         this.id = id;
     }
     public static List<Produto> obterProduto() throws ClassNotFoundException, SQLException {
-        return Produto.obterProduto();
+        return ProdutoDAO.obterProduto();
     }
 }
