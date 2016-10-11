@@ -6,6 +6,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,13 +15,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Usuario;
+import model.FormaPagamento;
+import model.Nivel;
 
 /**
  *
- * @author Sujajeb
+ * @author mateu
  */
-public class PesquisaUsuarioController extends HttpServlet {
+public class PesquisaNivelController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,22 +32,18 @@ public class PesquisaUsuarioController extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-          try {
-                      
-           request.setAttribute("bairros", Usuario.obterUsuario());
-           RequestDispatcher view = 
-                    request.getRequestDispatcher("/pesquisaUsuario.jsp");
-           view.forward(request,response);
-        
-        }catch (ClassNotFoundException ex){
-                    
-                    }
+        try (PrintWriter out = response.getWriter()) {
+            request.setAttribute("niveis", Nivel.obterNivel());
+            RequestDispatcher view = request.getRequestDispatcher("/pesquisaNivel.jsp");
+            view.forward(request, response);
+        } catch (ClassNotFoundException ex) {
+        }
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -62,7 +60,7 @@ public class PesquisaUsuarioController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(PesquisaUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PesquisaNivelController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -80,7 +78,7 @@ public class PesquisaUsuarioController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(PesquisaUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PesquisaNivelController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
