@@ -35,7 +35,11 @@
     <servlet>
         <servlet-name>PesquisaProdutoController</servlet-name>
         <servlet-class>controller.PesquisaProdutoController</servlet-class>
-    </servlet>   
+    </servlet>
+    <servlet>
+        <servlet-name>ManterBairroController</servlet-name>
+        <servlet-class>controller.ManterBairroController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaBairroController</servlet-name>
         <url-pattern>/PesquisaBairroController</url-pattern>
@@ -71,7 +75,11 @@
     <servlet-mapping>
         <servlet-name>PesquisaProdutoController</servlet-name>
         <url-pattern>/PesquisaProdutoController</url-pattern>
-    </servlet-mapping>   
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterBairroController</servlet-name>
+        <url-pattern>/ManterBairroController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
