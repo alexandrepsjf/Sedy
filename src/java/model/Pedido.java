@@ -5,6 +5,7 @@
  */
 package model;
 
+import dao.PedidoDAO;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -127,6 +128,6 @@ public class Pedido {
         this.idFormaPgto = idFormaPgto;
     }
 public static List<Pedido> obterPedido() throws ClassNotFoundException, SQLException {
-        return Pedido.obterPedido();
+        return PedidoDAO.obterPedidos();
     }
 }
