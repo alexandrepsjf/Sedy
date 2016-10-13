@@ -5,6 +5,10 @@
         <servlet-class>controller.PesquisaBairroController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>PesquisaEmailController</servlet-name>
+        <servlet-class>controller.PesquisaEmailController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>PesquisaClienteController</servlet-name>
         <servlet-class>controller.PesquisaClienteController</servlet-class>
     </servlet>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>PesquisaFormaPagamentoController</servlet-name>
         <url-pattern>/PesquisaFormaPagamentoController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PesquisaEmailController</servlet-name>
+        <url-pattern>/PesquisaEmailController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PesquisaLigacaoController</servlet-name>
