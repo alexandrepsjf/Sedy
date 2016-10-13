@@ -48,6 +48,14 @@
         <servlet-name>pesquisaProduto</servlet-name>
         <servlet-class>pesquisaProduto</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManterFormaPagemntosController</servlet-name>
+        <servlet-class>controller.ManterFormaPagemntosController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManterProdutoController</servlet-name>
+        <servlet-class>controller.ManterProdutoController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaBairroController</servlet-name>
         <url-pattern>/PesquisaBairroController</url-pattern>
@@ -95,6 +103,14 @@
     <servlet-mapping>
         <servlet-name>pesquisaProduto</servlet-name>
         <url-pattern>/pesquisaProduto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterFormaPagemntosController</servlet-name>
+        <url-pattern>/ManterFormaPagemntosController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterProdutoController</servlet-name>
+        <url-pattern>/ManterProdutoController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
