@@ -21,9 +21,9 @@ and open the template in the editor.
                 <th>Nome</th>
                 <th>Unidade</th>
                 <th>Valor</th>
-                                
+                 <th colspan =2>Ação</th>                                
             </tr>
-            <c:forEach items="${produtos}" var="produto">
+            <c:forEach items="${produto}" var="produto">
                 <tr>
                     <td ><c:out value="${produto.id}" /> </td>
                     <td ><c:out value="${produto.nome}" /> </td>

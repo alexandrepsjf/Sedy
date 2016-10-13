@@ -23,10 +23,10 @@ and open the template in the editor.
                 <th>Nome Usuário </th>
                 <th colspan =2>Ação</th>
             </tr>
-            <c:forEach items="${usuarios}" var="usuario">
+            <c:forEach items="${usuario}" var="usuario">
                 <tr> 
                     <td><c:out value="${usuario.id}"/></td>
-                    <td><c:out value="${usuario.nome}"/></td>
+                    <td><c:out value="${usuario.usuario}"/></td>
                     <td><a href="ManterUsuarioController?acao=prepararEditar&id=<c:out value="${usuario.id}"/>">Editar</a></td>
                     <td><a href="ManterUsuarioController?acao=prepararExcluir&id=<c:out value="${usuario.id}"/>">Excluir</a></td>
 

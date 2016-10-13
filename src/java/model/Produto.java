@@ -25,8 +25,6 @@ public class Produto {
         this.unidade = unidade;
         this.valor = valor;
     }
-
-    
     
     public void setNome(String nome){
         this.nome=nome;

@@ -22,7 +22,7 @@ and open the template in the editor.
                 <th>Email</th>
                 <th colspan="2">Ação</th>                
             </tr>
-            <c:forEach items="${emails}" var="email">
+            <c:forEach items="${email}" var="email">
                 <tr>
                     <td ><c:out value="${email.id}" /> </td>
                     <td ><c:out value="${email.email}" /> </td>

@@ -37,7 +37,7 @@ public class PesquisaUsuarioController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
           try {
                       
-           request.setAttribute("bairros", Usuario.obterUsuario());
+           request.setAttribute("usuario", Usuario.obterUsuario());
            RequestDispatcher view = 
                     request.getRequestDispatcher("/pesquisaUsuario.jsp");
            view.forward(request,response);

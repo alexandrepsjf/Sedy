@@ -29,9 +29,9 @@ public class EmailDAO {
                 rs.getString("EMAIL"),
                 rs.getString("SENHA"),
                 rs.getString("AUTENTICA"),
-                rs.getString("SERVIDOR_SAIDA"),
-                rs.getString("SERVIDOR_ENTRADA"));
-                
+                rs.getString("servidorSaida"),
+                rs.getString("servidorEntrada"));
+               emails.add(email);
             }
 
         } catch (SQLException e) {

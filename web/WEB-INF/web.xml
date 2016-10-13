@@ -44,10 +44,11 @@
         <servlet-name>ManterBairroController</servlet-name>
         <servlet-class>controller.ManterBairroController</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>pesquisaProduto</servlet-name>
-        <servlet-class>pesquisaProduto</servlet-class>
+     <servlet>
+        <servlet-name>ManterClienteController</servlet-name>
+        <servlet-class>controller.ManterClienteController</servlet-class>
     </servlet>
+   
     <servlet>
         <servlet-name>ManterFormaPagementoController</servlet-name>
         <servlet-class>controller.ManterFormaPagementoController</servlet-class>
@@ -117,9 +118,9 @@
         <url-pattern>/ManterBairroController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>pesquisaProduto</servlet-name>
-        <url-pattern>/pesquisaProduto</url-pattern>
-    </servlet-mapping>
+        <servlet-name>ManterClienteController</servlet-name>
+        <url-pattern>/ManterClienteController</url-pattern>
+    </servlet-mapping>   
     <servlet-mapping>
         <servlet-name>ManterFormaPagementoController</servlet-name>
         <url-pattern>/ManterFormaPagementoController</url-pattern>

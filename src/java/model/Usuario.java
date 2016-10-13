@@ -31,9 +31,6 @@ public class Usuario {
     }
 
    
-
-    
-
     public String getUsuario() {
         return usuario;
     }

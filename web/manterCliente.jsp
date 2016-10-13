@@ -14,10 +14,11 @@ and open the template in the editor.
         <div><h1>Cliente -  ${operacao}</h1></div>
         <table> 
             <tr> 
-                <td>Data cadastro <input type="text" value="${cliente.data_cadastro}"></td><td>Hora cadastro <input type="time"></td>
+                <td>Data cadastro <input type="text" value="${cliente.data_cadastro}"></td><td>Hora cadastro <input type="text" value="${cliente.hora_cadastro}"></td>
             </tr>
             <tr> 
-                <td colspan="2"> Cod. Cliente <input type="text" value="${cliente.id}" size="15"></td>
+                <td colspan="2"> Cod. Cliente <input type="text" value="${cliente.id}" size="15"></td>       
+                
             </tr>
             <tr> 
                 <td>DDD <select>            
