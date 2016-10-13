@@ -5,6 +5,7 @@
  */
 package model;
 
+import dao.NivelDAO;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -128,6 +129,6 @@ public class Nivel {
         this.id = id;
     }
      public static List<Nivel> obterNivel() throws ClassNotFoundException, SQLException {
-        return Nivel.obterNivel();
+        return NivelDAO.obterNivel();
     }
 }

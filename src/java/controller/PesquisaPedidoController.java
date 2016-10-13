@@ -37,7 +37,7 @@ public class PesquisaPedidoController extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            request.setAttribute("pedidos", Pedido.obterPedido());
+            request.setAttribute("pedido", Pedido.obterPedido());
             RequestDispatcher view = request.getRequestDispatcher("/pesquisaPedido.jsp");
             view.forward(request, response);
         } catch (ClassNotFoundException ex) {

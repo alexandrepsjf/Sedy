@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Alexandre
  */
-public class ManterClienteController extends HttpServlet {
+public class ManterEmailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -62,7 +62,7 @@ public class ManterClienteController extends HttpServlet {
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response){
         try{
             request.setAttribute("operacao","Incluir");
-            RequestDispatcher view = request.getRequestDispatcher("/manterCliente.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("/manterEmail.jsp");
             view.forward(request, response);
         }catch(ServletException | IOException ex){            
         }

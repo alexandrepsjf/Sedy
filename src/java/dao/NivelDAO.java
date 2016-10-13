@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import model.FormaPagamento;
+import model.Nivel;
 
 /**
  *
@@ -19,19 +19,18 @@ import model.FormaPagamento;
  */
 public class NivelDAO {
 
-    public static List<FormaPagamento> obterFormaPagamento() throws ClassNotFoundException, SQLException {
+    public static List<Nivel> obterNivel() throws ClassNotFoundException, SQLException {
         Connection conexao = null;
         Statement comando = null;
-        List<FormaPagamento> formaspagamento = new ArrayList<FormaPagamento>();
+        List<Nivel> niveis = new ArrayList<Nivel>();
 
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
             ResultSet rs = comando.executeQuery("select*from nivel");
             while (rs.next()) {
-                FormaPagamento formapagamento = new FormaPagamento(rs.getInt("ID"),
-                        rs.getString("FORMA"));
-                formaspagamento.add(formapagamento);
+                Nivel nivel = new Nivel(rs.getInt("ID"),rs.getString("nome"),true,true,true,true,true,true,true,true,true);
+                niveis.add(nivel);
             }
 
         } catch (SQLException e) {
@@ -39,7 +38,7 @@ public class NivelDAO {
         } finally {
             fecharConexao(conexao, comando);
         }
-        return formaspagamento;
+        return niveis;
     }
 
     public static void fecharConexao(Connection conexao, Statement comando) {

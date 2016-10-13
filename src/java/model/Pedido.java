@@ -27,7 +27,7 @@ public class Pedido {
     private FormaPagamento formaPgto;
     private int idFormaPgto;
 
-    public Pedido(int id, String hora, String data, float total, String telefone, Cliente cliente, int idCliente, Usuario usuario, int idUsuario, FormaPagamento formaPgto) {
+    public Pedido(int id, String hora, String data, float total, String telefone, Cliente cliente, int idCliente, Usuario usuario, int idUsuario, FormaPagamento formaPgto, int idFormaPgto) {
         this.id = id;
         this.hora = hora;
         this.data = data;
@@ -38,6 +38,8 @@ public class Pedido {
         this.usuario = usuario;
         this.idUsuario = idUsuario;
         this.formaPgto = formaPgto;
+        this.idFormaPgto=idFormaPgto;
+        
     }
 
     public int getId() {

@@ -15,7 +15,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div><h1>Pesquisa Forma Pagamento</h1></div>
+        <div><h1>Pesquisa Formas Pagamento</h1></div>
         <table border="1">            
             <tr> 
                 <th>Cod</th>

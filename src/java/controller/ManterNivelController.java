@@ -6,6 +6,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Alexandre
  */
-public class ManterClienteController extends HttpServlet {
+public class ManterNivelController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,7 +28,7 @@ public class ManterClienteController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String acao = request.getParameter("acao");
         if(acao.equals("prepararIncluir")){
@@ -62,7 +63,7 @@ public class ManterClienteController extends HttpServlet {
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response){
         try{
             request.setAttribute("operacao","Incluir");
-            RequestDispatcher view = request.getRequestDispatcher("/manterCliente.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("/manterNivel.jsp");
             view.forward(request, response);
         }catch(ServletException | IOException ex){            
         }

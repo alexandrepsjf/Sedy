@@ -11,11 +11,11 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div><h1>Pedido</h1></div>
+        <div><h1>Pedido -  ${operacao}</h1></div>
         <table>            
             <tr>
                 <td>Codigo cliente <input type="text" size="5"></td>                
-                <td>Esse pedido serÃ¡: Entregue <input name="entrega" type="radio">
+                <td>Esse pedido será: Entregue <input name="entrega" type="radio">
              Retirado <input name="entrega" type="radio"></td> 
             </tr>            
             <tr>
@@ -39,7 +39,7 @@ and open the template in the editor.
             <tr>     
                 
                 <td colspan="2">Nome <input type="text" size="40"></td>
-                <td>ObservaÃ§Ãµes <textarea>
+                <td>Observações <textarea>
                     </textarea></td>
             </tr>
             <tr>

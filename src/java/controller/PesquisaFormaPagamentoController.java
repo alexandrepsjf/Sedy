@@ -38,7 +38,7 @@ public class PesquisaFormaPagamentoController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
                       
-           request.setAttribute("formaPagamento",FormaPagamento.obterFormaPagamento());
+           request.setAttribute("formasPagamento",FormaPagamento.obterFormaPagamento());
            RequestDispatcher view = 
                     request.getRequestDispatcher("/pesquisaFormaspgto.jsp");
            view.forward(request,response);

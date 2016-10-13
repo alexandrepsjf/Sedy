@@ -11,7 +11,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div><h1>Usuario</h1></div>
+        <div><h1>Usuario -  ${operacao}</h1></div>
         <table>            
             <tr> 
                 <td colspan="2"> Cod. usuario </td><td><input type="text" size="15"></td>

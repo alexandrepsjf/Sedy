@@ -10,38 +10,21 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body>
-        <div><h1>Produto</h1></div>
-        <%@page contentType="text/html" pageEncoding="utf-8"%> 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<html>
-    <head>
-        <title>Produto</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div><h1>Produto</h1></div>
-        <table> 
+    <body>       
+
+        <div><h1>Produto - ${operacao}</h1></div>
+        <table>            
             <tr> 
-                <th>Cod Produto</th>
-                <th>Nome Produto </th>
-                <th colspan =2>AÃ§Ã£o</th>
+                <td colspan="2"> Cod. Produto </td><td><input type="text" value="${produto.id}" size="15"></td>
             </tr>
-            <c:forEach items="${produtos}" var="Produto">
-            <tr> 
-                <td><c:out value="${produto.id}"/></td>
-                <td><c:out value="${produto.nome}"/></td>
-                <td><a href="ManterProdutoController?acao=prepararEditar&id=<c:out value="${produto.id}"/>">Editar</a></td>
-                <td><a href="ManterProdutoController?acao=prepararExcluir&id=<c:out value="${produto.id}"/>">Excluir</a></td>
-                
-            </tr>
-            </c:forEach>        
-        </table>
-        <form action="ManterProdutoController?acao=prepararIncluir" method="post">
-            <imput type="submit" name="btnIncluir" value="Incluir">
-        </form>
+            <tr>
+            <td colspan="2"> Nome Produto </td><td><input type="text" value="${produto.nome}" size="40"></td>
+        </tr>
+        <tr>
+            <td colspan="2"> Pre�o produto </td><td><input type="text" value="${produto.valor}" size="15"></td>
+        </tr>
+    </table>
+    <h3><button>Confirmar</button></h3>
     </body>
-    
+
 </html>

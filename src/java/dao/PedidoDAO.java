@@ -27,11 +27,11 @@ public class PedidoDAO {
         try {
         conexao = BD.getConexao();
         comando = conexao.createStatement();
-        ResultSet rs = comando.executeQuery("select*from nivel");
+        ResultSet rs = comando.executeQuery("select*from pedido");
         while (rs.next()) {
             Pedido pedido = new Pedido
                     (rs.getInt("ID"),
-                    rs.getString("HORA"),rs.getString("DATA"),rs.getFloat("TOTAL"),"0",null,0,null,0,null);
+                    rs.getString("HORA"),rs.getString("DATA"),rs.getFloat("TOTAL"),"0",null,0,null,0,null,0);
             pedido.setIdCliente(rs.getInt("CLIENTE_ID"));
             pedido.setIdFormaPgto(rs.getInt("FORMA_PGM_ID"));
             pedido.setIdUsuario(rs.getInt("USUARIO_ID"));
