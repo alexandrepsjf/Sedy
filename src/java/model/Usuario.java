@@ -30,9 +30,8 @@ public class Usuario {
         this.idNivel = idNivel;
     }
 
-    public Usuario(int aInt, String string, Object object, int i, String string0, Object object0, int i0, String string1, Object object1, int i1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
+
     
 
     public String getUsuario() {

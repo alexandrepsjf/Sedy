@@ -36,6 +36,14 @@ public Cliente(int id, String nome, String rua, String numero, String cep, Strin
         this.bairro = bairro;
         this.idBairro = idBairro;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
     public String getNome() {
         return nome;

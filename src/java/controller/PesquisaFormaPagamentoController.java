@@ -40,7 +40,7 @@ public class PesquisaFormaPagamentoController extends HttpServlet {
                       
            request.setAttribute("formaPagamento",FormaPagamento.obterFormaPagamento());
            RequestDispatcher view = 
-                    request.getRequestDispatcher("/pesquisaFormapgto.jsp");
+                    request.getRequestDispatcher("/pesquisaFormaspgto.jsp");
            view.forward(request,response);
         
         }catch (ClassNotFoundException ex){

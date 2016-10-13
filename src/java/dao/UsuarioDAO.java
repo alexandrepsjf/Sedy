@@ -26,7 +26,7 @@ public class UsuarioDAO {
             comando = conexao.createStatement();
             ResultSet rs = comando.executeQuery("select*from usuario");
             while (rs.next()) {
-                Usuario usuario = new Usuario (rs.getInt("ID"),rs.getString("USUARIO"), null, 0,rs.getString("SENHA"), null, 0, rs.getString("LOGIN"), null,0);
+                Usuario usuario = new Usuario (rs.getInt("ID"),rs.getString("USUARIO"),rs.getString("SENHA"), rs.getString("LOGIN"), null,0);
                 usuario.setIdNivel(rs.getInt("NIVEL_ID"));
                 usuarios.add(usuario);
             }
