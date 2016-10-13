@@ -26,9 +26,7 @@ public class Produto {
         this.valor = valor;
     }
 
-    public Produto(int aInt, int aInt0, Object object, int i, int aInt1, Object object0, int i0, float aFloat, Object object1, int i1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
     
     public void setNome(String nome){
         this.nome=nome;

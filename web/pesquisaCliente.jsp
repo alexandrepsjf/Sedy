@@ -17,7 +17,7 @@ and open the template in the editor.
     </head>
     <body>
         <div><h1>Cliente</h1></div>
-        <table> 
+        <table border="1"> 
             <tr> 
                 <th>Cod Cliente</th>
                 <th>Nome Cliente</th>
@@ -34,7 +34,7 @@ and open the template in the editor.
             </c:forEach>        
         </table>
         <form action="ManterClienteController?acao=prepararIncluir" method="post">
-            <imput type="submit" name="btnIncluir" value="Incluir">
+            <input type="submit" name="btnIncluir" value="Incluir">
         </form>
     </body>
 </html>

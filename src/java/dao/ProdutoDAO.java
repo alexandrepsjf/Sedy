@@ -29,7 +29,7 @@ public class ProdutoDAO {
             comando = conexao.createStatement();
             ResultSet rs = comando.executeQuery("select*from produto");
             while (rs.next()) {
-                Produto produto = new Produto (rs.getInt("ID"),rs.getInt("NOME"), null, 0,rs.getInt("UNIDADE"), null, 0, rs.getFloat("VALOR"), null,0);
+                Produto produto = new Produto (rs.getInt("ID"),rs.getString("NOME"),rs.getString("UNIDADE"), rs.getFloat("VALOR"));
                 
                 produtos.add(produto);
             }
