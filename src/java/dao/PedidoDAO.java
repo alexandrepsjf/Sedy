@@ -13,25 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Pedido;
 
-/**
- *
- * @author Sujajeb
- */
 public class PedidoDAO {
     public static List<Pedido>obterPedidos() throws ClassNotFoundException, SQLException{
     Connection conexao = null;
     Statement comando = null;
-    List<Pedido> pedidos = new ArrayList<Pedido>();
-
-    
+    List<Pedido> pedidos = new ArrayList<Pedido>();    
         try {
         conexao = BD.getConexao();
         comando = conexao.createStatement();
         ResultSet rs = comando.executeQuery("select*from pedido");
         while (rs.next()) {
             Pedido pedido = new Pedido
-                    (rs.getInt("ID"),
-                    rs.getString("HORA"),rs.getString("DATA"),rs.getFloat("TOTAL"),"0",null,0,null,0,null,0);
+                    (rs.getInt("ID"),rs.getString("HORA"),rs.getString("DATA"),rs.getFloat("TOTAL"),"3232323232",null,0,null,0,null,0);
             pedido.setIdCliente(rs.getInt("CLIENTE_ID"));
             pedido.setIdFormaPgto(rs.getInt("FORMA_PGM_ID"));
             pedido.setIdUsuario(rs.getInt("USUARIO_ID"));
@@ -42,7 +35,6 @@ public class PedidoDAO {
 }catch(SQLException e) {
         e.printStackTrace();
     }
-
     
     finally{
         fecharConexao(conexao, comando);

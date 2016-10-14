@@ -129,7 +129,7 @@ public class Pedido {
     public void setIdFormaPgto(int idFormaPgto) {
         this.idFormaPgto = idFormaPgto;
     }
-public static List<Pedido> obterPedido() throws ClassNotFoundException, SQLException {
+public static List<Pedido> obterPedidos() throws ClassNotFoundException, SQLException {
         return PedidoDAO.obterPedidos();
     }
 }

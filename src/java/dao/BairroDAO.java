@@ -14,45 +14,40 @@ import model.Bairro;
 import java.util.ArrayList;
 
 public class BairroDAO {
-public static List<Bairro>obterBairros() throws ClassNotFoundException, SQLException{
-    Connection conexao = null;
-    Statement comando = null;
-    List<Bairro> bairros = new ArrayList<Bairro>();
 
-    
+    public static List<Bairro> obterBairros() throws ClassNotFoundException, SQLException {
+        Connection conexao = null;
+        Statement comando = null;
+        List<Bairro> bairros = new ArrayList<Bairro>();
         try {
-        conexao = BD.getConexao();
-        comando = conexao.createStatement();
-        ResultSet rs = comando.executeQuery("select*from bairro");
-        while (rs.next()) {
-            Bairro bairro = new Bairro
-                    (rs.getInt("ID"),
-                    rs.getString("BAIRRO"),
-                    rs.getFloat("TAXA"));
-            bairros.add(bairro);
-        }
-    
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("select*from bairro");
+            while (rs.next()) {
+                Bairro bairro = new Bairro(rs.getInt("ID"),
+                        rs.getString("BAIRRO"),
+                        rs.getFloat("TAXA"));
+                bairros.add(bairro);
+            }
 
-}catch(SQLException e) {
-        e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return bairros;
     }
 
-    
-    finally{
-        fecharConexao(conexao, comando);
-    }
-    return bairros;
-}
-public static void fecharConexao(Connection conexao, Statement comando){
-    try{
-        if(comando!=null){
-            comando.close();
+    public static void fecharConexao(Connection conexao, Statement comando) {
+        try {
+            if (comando != null) {
+                comando.close();
+            }
+            if (conexao != null) {
+                conexao.close();
+            }
+        } catch (SQLException e) {
+
         }
-        if(conexao!=null){
-        conexao.close();
     }
-    }catch(SQLException e){
-        
-    }
-}
 }

@@ -6,7 +6,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,8 +35,8 @@ public class PesquisaPedidoController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            request.setAttribute("pedido", Pedido.obterPedido());
+        try  {
+            request.setAttribute("pedido", Pedido.obterPedidos());
             RequestDispatcher view = request.getRequestDispatcher("/pesquisaPedido.jsp");
             view.forward(request, response);
         } catch (ClassNotFoundException ex) {

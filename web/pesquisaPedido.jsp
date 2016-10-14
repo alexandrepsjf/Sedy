@@ -21,7 +21,7 @@ and open the template in the editor.
                 <th>Nome Pedido</th>
                 <th colspan="2">Ação</th>                
             </tr>
-            <c:forEach items="${pedido}" var="pedidos">
+            <c:forEach items="${pedido}" var="pedido">
                 <tr>
                     <td ><c:out value="${pedido.id}" /> </td>
                     <td ><c:out value="${pedido.id}" /> </td>
