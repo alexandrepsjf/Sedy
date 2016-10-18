@@ -52,4 +52,8 @@ public class Bairro {
     public static List<Bairro> obterBairro() throws ClassNotFoundException, SQLException {
         return BairroDAO.obterBairros();
     }
+
+    public void gravar() throws SQLException, ClassNotFoundException{
+        BairroDAO.gravar(this);
+    }
 }

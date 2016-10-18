@@ -5,13 +5,16 @@
  */
 package dao;
 
+import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import model.Bairro;
 import java.util.ArrayList;
+import javax.servlet.ServletException;
 
 public class BairroDAO {
 
@@ -49,5 +52,20 @@ public class BairroDAO {
         } catch (SQLException e) {
 
         }
+    }
+
+    public static void gravar(Bairro bairro)throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try{
+            conexao = BD.getConexao();
+            String sql= "insert into bairro(id,nome,taxa) values(?,?,?)";
+            PreparedStatement comando=conexao.prepareStatement(sql);
+            comando.setInt(1,bairro.getId());
+            comando.setString(2,bairro.getNome());
+            comando.setFloat(3,bairro.getTaxa());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        }catch(SQLException e){throw e;}
     }
 }

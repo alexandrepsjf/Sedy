@@ -7,6 +7,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -78,7 +79,7 @@ public class ManterBairroController extends HttpServlet {
             bairro.gravar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaBairroController");
             view.forward(request,response);
-       }catch(ServletException | IOException | ClassNotFoundException | ServletException ex){            
+       }catch(SQLException | IOException | ClassNotFoundException | ServletException ex){            
         }
         
     }
