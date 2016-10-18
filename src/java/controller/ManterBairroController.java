@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Bairro;
 
 /**
  *
@@ -72,12 +73,13 @@ public class ManterBairroController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String nome = request.getParameter("nome");
         float taxa = Float.parseFloat(request.getParameter("taxa"));
-       
+       try{
             Bairro bairro = new Bairro(id,nome,taxa);
             bairro.gravar();
-            request.getRequestDispatcher("PesquisaBairroCOntroller");
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaBairroController");
             view.forward(request,response);
-       
+       }catch(ServletException | IOException | ClassNotFoundException | ServletException ex){            
+        }
         
     }
             
