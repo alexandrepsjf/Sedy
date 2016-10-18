@@ -15,7 +15,7 @@ and open the template in the editor.
     </head>
     <body>
         <div><h1>Bairros - ${operacao}</h1></div>
-               <form action="ManterBairroController?acao=confirmar${operacao}" method="post" name="frmManterCurso" >
+               <form action="ManterBairroController?acao=confirmar${operacao}" method="post" name="frmManterBairro" >
 
         <table>            
             <tr> 
