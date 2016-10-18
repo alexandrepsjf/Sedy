@@ -33,10 +33,10 @@ public class ManterBairroController extends HttpServlet {
         String acao = request.getParameter("acao");
         if(acao.equals("prepararIncluir")){
             prepararIncluir(request, response);
-        /*}else{
+        }else{
             if(acao.equals("confirmarIncluir")){
                 prepararIncluir(request, response);
-            }else{
+            }/*else{
                 if(acao.equals("prepararEditar")){
                     prepararIncluir(request, response);
                 }else{
@@ -68,7 +68,18 @@ public class ManterBairroController extends HttpServlet {
         }catch(ServletException | IOException ex){            
         }
         }
-    
+    public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response){
+        int id = Integer.parseInt(request.getParameter("id"));
+        String nome = request.getParameter("nome");
+        float taxa = Float.parseFloat(request.getParameter("taxa"));
+       
+            Bairro bairro = new Bairro(id,nome,taxa);
+            bairro.gravar();
+            request.getRequestDispatcher("PesquisaBairroCOntroller");
+            view.forward(request,response);
+       
+        
+    }
             
             
             
