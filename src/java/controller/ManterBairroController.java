@@ -33,10 +33,10 @@ public class ManterBairroController extends HttpServlet {
         String acao = request.getParameter("acao");
         if(acao.equals("prepararIncluir")){
             prepararIncluir(request, response);
-        /*}else{
+        }else{
             if(acao.equals("confirmarIncluir")){
                 prepararIncluir(request, response);
-            }else{
+            }/*else{
                 if(acao.equals("prepararEditar")){
                     prepararIncluir(request, response);
                 }else{
