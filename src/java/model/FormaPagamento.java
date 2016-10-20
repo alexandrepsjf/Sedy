@@ -40,4 +40,7 @@ public class FormaPagamento {
     public static List<FormaPagamento> obterFormaPagamento() throws ClassNotFoundException, SQLException {
         return FormaPagamentoDAO.obterFormaPagamento();
     }
+    public void gravar() throws SQLException, ClassNotFoundException{
+        FormaPagamentoDAO.gravar(this);
+    }
 }
