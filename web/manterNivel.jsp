@@ -14,11 +14,11 @@ and open the template in the editor.
         <div><h1>Nivel</h1></div>
         <table>            
             <tr> 
-                <td colspan="2"> Nome  nivel <input type="text" size="40"></td>
+                <td colspan="2"> Nome  nivel <input type="text" size="40" value="${nivel.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
             </tr>
-            <tr><td>NIVEL<input  type="radio"></td><td>RELATORIO <input  type="radio"></td><td>LIGACAO RECEBIDA<input checked="true"  disabled="true" type="radio"></td></tr>
-            <tr> <td>CONFIGURACAO<input  type="radio"></td><td>USUARIO <input  type="radio"></td><td>PEDIDO<input checked="true"  disabled="true" type="radio"></td></tr>
-            <tr><td>PRODUTOS<input  type="radio"></td><td>FORMAS DE PAGTO <input  type="radio"></td><td>CLIENTES<input checked="true"  disabled="true" type="radio"></td></tr>
+            <tr><td>NIVEL<input  type="radio" value="${nivel.id}"<c:if test="${operacao == 'Incluir'}"> readonly</c:if>></td><td>RELATORIO <input  type="radio" value="${nivel.relatorio}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td><td>LIGACAO RECEBIDA<input checked="true"  disabled="true" type="radio" value="${nivel.ligacaoRecebida}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td></tr>
+            <tr> <td>CONFIGURACAO<input  type="radio" value="${nivel.configuracao}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td><td>USUARIO <input  type="radio" value="${nivel.usuario}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td><td>PEDIDO<input checked="true"  disabled="true" type="radio" value="${nivel.pedido}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td></tr>
+            <tr><td>PRODUTOS<input  type="radio" value="${nivel.produto}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td><td>FORMAS DE PAGTO <input  type="radio" vallue="${nivel.formaPagamento}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td><td>CLIENTES<input checked="true"  disabled="true" type="radio" value="${nivel.cliente}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td></tr>
         </table>
 
         <h3><button>Confirmar</button></h3>
