@@ -33,12 +33,11 @@ public class ManterBairroController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String acao = request.getParameter("acao");
-        if(acao.equals("prepararIncluir")){
+        if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
-        }else{
-            if(acao.equals("confirmarIncluir")){
-                prepararIncluir(request, response);
-            }/*else{
+        } else if (acao.equals("confirmarIncluir")) {
+            confirmarIncluir(request, response);
+        }/*else{
                 if(acao.equals("prepararEditar")){
                     prepararIncluir(request, response);
                 }else{
@@ -55,38 +54,33 @@ public class ManterBairroController extends HttpServlet {
                     }
                 }
             }*/
-        
-        }
-        
-        
-        }
-    
 
-    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response){
-        try{
-            request.setAttribute("operacao","Incluir");
+    }
+
+    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Incluir");
             RequestDispatcher view = request.getRequestDispatcher("/manterBairros.jsp");
             view.forward(request, response);
-        }catch(ServletException | IOException ex){            
+        } catch (ServletException | IOException ex) {
         }
-        }
-    public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response){
+    }
+
+    public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         String nome = request.getParameter("nome");
         float taxa = Float.parseFloat(request.getParameter("taxa"));
-       try{
-            Bairro bairro = new Bairro(id,nome,taxa);
+        try {
+            Bairro bairro = new Bairro(id, nome, taxa);
             bairro.gravar();
-            RequestDispatcher view = request.getRequestDispatcher("/PesquisaBairroController");
-            view.forward(request,response);
-       }catch(SQLException | IOException | ClassNotFoundException | ServletException ex){   
-           
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaBairroController");
+            view.forward(request, response);
+        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
+
         }
-        
+
     }
-            
-            
-            
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

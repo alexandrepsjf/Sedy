@@ -5,7 +5,6 @@
  */
 package dao;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +13,6 @@ import java.sql.Statement;
 import java.util.List;
 import model.Bairro;
 import java.util.ArrayList;
-import javax.servlet.ServletException;
 
 public class BairroDAO {
 
@@ -58,7 +56,7 @@ public class BairroDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "insert into bairro(id,nome,taxa) values(?,?,?)";
+            String sql = "insert into bairro(id,bairro,taxa) values(?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, bairro.getId());
             comando.setString(2, bairro.getNome());
