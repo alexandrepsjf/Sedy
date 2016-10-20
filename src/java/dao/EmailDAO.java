@@ -60,7 +60,7 @@ public class EmailDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "insert into bairro(id,nome,taxa) values(?,?,?,?,?,?)";
+            String sql = "insert into email(id,email,senha,autentica,servidorSaida,servidorEntrada) values(?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, email.getId());
             comando.setString(2, email.getEmail());

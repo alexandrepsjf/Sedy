@@ -10,6 +10,7 @@ package dao;
  * @author Sujajeb
  */
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -52,6 +53,21 @@ public class FormaPagamentoDAO {
             }
         } catch (SQLException e) {
 
+        }
+    }
+        public static void gravar(FormaPagamento formapagamento) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "insert into forma_pgm(id,forma) values(?,?)";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, formapagamento.getId());
+            comando.setString(2, formapagamento.getForma());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
         }
     }
 }
