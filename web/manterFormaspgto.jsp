@@ -14,10 +14,10 @@ and open the template in the editor.
         <div><h1>Formas Pagamento</h1></div>
         <table>            
             <tr> 
-                <td colspan="2"> Cod. Forma pgto </td><td><input type="text" size="15"></td>
+                <td colspan="2"> Cod. Forma pgto </td><td><input type="text" size="15" value="${formaPagamento.id}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
             </tr>
 
-            <td colspan="2"> Nome Forma pgto </td><td><input type="text" size="40"></td>
+            <td colspan="2"> Nome Forma pgto </td> <td><input type="text" size="40" value="${formaPagemto.nome}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
         </tr>
     </table>
     <h3><button>Confirmar</button></h3>
