@@ -17,7 +17,7 @@ public class Pedido {
 
     private int id;
     private String hora;
-    private String data;
+    private String data_2;
     private float total;
     private String telefone;
     private Cliente cliente;
@@ -30,7 +30,7 @@ public class Pedido {
     public Pedido(int id, String hora, String data, float total, String telefone, Cliente cliente, int idCliente, Usuario usuario, int idUsuario, FormaPagamento formaPgto, int idFormaPgto) {
         this.id = id;
         this.hora = hora;
-        this.data = data;
+        this.data_2 = data;
         this.total = total;
         this.telefone = telefone;
         this.cliente = cliente;
@@ -40,6 +40,16 @@ public class Pedido {
         this.formaPgto = formaPgto;
         this.idFormaPgto=idFormaPgto;
         
+    }
+
+    public Pedido(int id, String hora, int idCliente, int idUsuario, int idFormaPgto, String data_2, float total) {
+        this.id = id;
+        this.hora = hora;
+        this.data_2 = data_2;
+        this.total = total;
+        this.idCliente = idCliente;
+        this.idUsuario = idUsuario;
+        this.idFormaPgto = idFormaPgto;
     }
 
     public int getId() {
@@ -58,12 +68,12 @@ public class Pedido {
         this.hora = hora;
     }
 
-    public String getData() {
-        return data;
+    public String getData_2() {
+        return data_2;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setData_2(String data_2) {
+        this.data_2 = data_2;
     }
 
     public float getTotal() {

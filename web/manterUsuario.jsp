@@ -15,11 +15,13 @@ and open the template in the editor.
         <table>            
             <tr> 
                 <td colspan="2"> Cod. usuario </td><td><input type="text" size="15"></td>
-                            </tr>
+            </tr>
             <tr> 
-                 <tr> 
-                     <td colspan="2"> Nivel usuario </td><td><select><option>Gerente</option><option></option><option></option><option></option></select></td>
-                            </tr>
+            <tr> 
+                <td colspan="2"> Nivel usuario </td>
+                <td>
+                    <select><option>Gerente</option><option></option><option></option><option></option></select></td>
+            </tr>
             <tr> 
                 <td colspan="2"> Nome usuario </td><td><input type="text" size="40"></td>
             </tr>
@@ -29,7 +31,7 @@ and open the template in the editor.
             <tr> 
                 <td colspan="2"> confirma senha usuario </td><td><input type="text" size="15"></td>
             </tr>
-            
+
         </table>
         <h3><button>Cadastrar nivel</button></h3>
         <h3><button>Confirmar</button></h3>

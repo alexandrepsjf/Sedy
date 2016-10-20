@@ -77,9 +77,10 @@ public class ManterBairroController extends HttpServlet {
        try{
             Bairro bairro = new Bairro(id,nome,taxa);
             bairro.gravar();
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaBairroController");
+            RequestDispatcher view = request.getRequestDispatcher("/PesquisaBairroController");
             view.forward(request,response);
-       }catch(SQLException | IOException | ClassNotFoundException | ServletException ex){            
+       }catch(SQLException | IOException | ClassNotFoundException | ServletException ex){   
+           
         }
         
     }
