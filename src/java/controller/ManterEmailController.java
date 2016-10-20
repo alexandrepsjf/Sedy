@@ -6,11 +6,13 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Email;
 
 /**
  *
@@ -68,7 +70,23 @@ public class ManterEmailController extends HttpServlet {
         }
         }
     
-            
+        public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response){
+        int id = Integer.parseInt(request.getParameter("id"));
+        String email2 = request.getParameter("email");
+        String senha = request.getParameter("senha");
+        String autentica = request.getParameter("autentica");
+        String servidorSaida = request.getParameter("servidorSaida");
+        String servidorEntrada = request.getParameter("servidorEntrada");
+       
+       try{
+            Email email = new Email(id,email2,senha, autentica, servidorSaida, servidorEntrada);
+            email.gravar();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaEmailController");
+            view.forward(request,response);
+       }catch(SQLException | IOException | ClassNotFoundException | ServletException ex){            
+        }
+        
+    }        
             
             
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

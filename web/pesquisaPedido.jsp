@@ -21,10 +21,10 @@ and open the template in the editor.
                 <th>Nome Pedido</th>
                 <th colspan="2">Ação</th>                
             </tr>
-            <c:forEach items="${pedido}" var="pedido">
+            <c:forEach items="${pedidos}" var="pedido">
                 <tr>
                     <td ><c:out value="${pedido.id}" /> </td>
-                    <td ><c:out value="${pedido.id}" /> </td>
+                    <td ><c:out value="${pedido.cliente_id.nome}" /> </td>
                     <td ><a href="ManterPedidoController?acao=prepararEditar&id=<c:out value="${pedido.id}" /> " >Editar</a></td>
                     <td ><a href="ManterPedidoController?acao=prepararExcluir&id=<c:out value="${pedido.id}" /> " >Excluir</a></td>
                 </tr>

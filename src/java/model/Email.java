@@ -5,6 +5,7 @@
  */
 package model;
 
+import dao.BairroDAO;
 import dao.EmailDAO;
 import java.sql.SQLException;
 import java.util.List;
@@ -81,6 +82,8 @@ public class Email {
     public static List<Email> obterEmail() throws ClassNotFoundException, SQLException {
         return EmailDAO.obterEmail();
     }
-    
-    
+    public void gravar() throws SQLException, ClassNotFoundException{
+        EmailDAO.gravar(this);
+    }
 }
+    

@@ -6,6 +6,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -52,6 +53,26 @@ public class EmailDAO {
             }
         } catch (SQLException e) {
 
+        }
+    }
+
+        public static void gravar(Email email) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "insert into bairro(id,nome,taxa) values(?,?,?,?,?,?)";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, email.getId());
+            comando.setString(2, email.getEmail());
+            comando.setString(3, email.getSenha());
+            comando.setString(4, email.getAutentica());
+            comando.setString(5, email.getServidorSaida());
+            comando.setString(6, email.getServidorEntrada());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
         }
     }
 }

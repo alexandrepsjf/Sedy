@@ -54,18 +54,20 @@ public class BairroDAO {
         }
     }
 
-    public static void gravar(Bairro bairro)throws SQLException, ClassNotFoundException {
+    public static void gravar(Bairro bairro) throws SQLException, ClassNotFoundException {
         Connection conexao = null;
-        try{
+        try {
             conexao = BD.getConexao();
-            String sql= "insert into bairro(id,nome,taxa) values(?,?,?)";
-            PreparedStatement comando=conexao.prepareStatement(sql);
-            comando.setInt(1,bairro.getId());
-            comando.setString(2,bairro.getNome());
-            comando.setFloat(3,bairro.getTaxa());
+            String sql = "insert into bairro(id,nome,taxa) values(?,?,?)";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, bairro.getId());
+            comando.setString(2, bairro.getNome());
+            comando.setFloat(3, bairro.getTaxa());
             comando.execute();
             comando.close();
             conexao.close();
-        }catch(SQLException e){throw e;}
+        } catch (SQLException e) {
+            throw e;
+        }
     }
 }
