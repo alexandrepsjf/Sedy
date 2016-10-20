@@ -15,17 +15,17 @@ and open the template in the editor.
     </head>
     <body>
         <div><h1>Bairros - ${operacao}</h1></div>
-               <form action="ManterBairroController?acao=confirmar${operacao}" method="post" name="frmManterBairro" >
+               <form action="ManterBairroController?acao=confirmar${operacao}" method="POST" name="frmManterBairro" >
 
         <table>            
             <tr> 
-                <td colspan="2"> Cod. Bairro </td><td><input type="text" value="${bairro.id}" size="15" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
+                <td colspan="2"> Cod. Bairro </td><td><input type="text" name="id" value="${bairro.id}" size="15" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
             </tr> 
             <tr>
-            <td colspan="2"> Nome Bairro </td><td><input type="text" value="${bairro.nome}" size="40" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+            <td colspan="2"> Nome Bairro </td><td><input type="text" name="nome" value="${bairro.nome}" size="40" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
         </tr>
         <tr>
-            <td colspan="2"> Taxa entrega do Bairro </td><td><input type="text" value="${bairro.taxa}" size="15" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+            <td colspan="2"> Taxa entrega do Bairro </td><td><input type="text" name="taxa" value="${bairro.taxa}" size="15" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
         </tr>
     </table>
         <h3><button type="submit" >Confirmar</button></h3>
