@@ -14,9 +14,8 @@ and open the template in the editor.
         <div><h1>Pedido -  ${operacao}</h1></div>
         <table>            
             <tr>
-                <td>Codigo cliente <input type="text" size="5"></td>                
-                <td>Esse pedido será: Entregue <input name="entrega" type="radio">
-             Retirado <input name="entrega" type="radio"></td> 
+                <td>Codigo cliente <input type="text" size="5" name="id" value="${pedido.id}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>               
+       
             </tr>            
             <tr>
                 <td> Telefone DDD <select>            
@@ -32,19 +31,20 @@ and open the template in the editor.
                         <option></option>
                     </select>
                 </td>
-                <td>Data Pedido <input type="date"></td>
-                 <td>Hora Pedido <input type="time"></td>
+                <td>Data Pedido <input type="date" name="data_2" value="${pedido.data_2}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                 <td>Hora Pedido <input type="time" name="hora" value="${pedido.hora}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 <td><button>Ultimo Pedido</button></td>
             </tr>            
             <tr>     
                 
-                <td colspan="2">Nome <input type="text" size="40"></td>
+                <td colspan="2">Nome <input type="text" size="40" name="nome" value="${pedido.nome}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 <td>Observações <textarea>
                     </textarea></td>
             </tr>
             <tr>
-                <td>Codigo Produto <input type="text" size="20"></td>
-                <td>QTD<input type="number" min="1" max="10"> Produto                
+                <!--REAVALIAR SITUAÇÃO DOS CAMPOS ABAIXO DE UMA FORMA QUE PODEMOS TRABALHAR DE UMA FORMA CERTA -->
+                <td>Codigo Produto <input type="text" size="20"></td> 
+                <td>QTD<input type="number" min="1" max="10" > Produto                
                     <select >            
                         <option></option>
                         <option></option>
