@@ -4,6 +4,9 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
+<%@page contentType="text/html" pageEncoding="utf-8"%>  
 <html>
     <head>
         <title>cliente</title>
@@ -12,6 +15,7 @@ and open the template in the editor.
     </head>
     <body>
         <div><h1>Pedido -  ${operacao}</h1></div>
+        <form action="ManterPedidoController?acao=confirmar${operacao}" method="POST" name="frmManterPedido" >
         <table>            
             <tr>
                 <td>Codigo cliente <input type="text" size="5" name="id" value="${pedido.id}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>               
@@ -38,11 +42,11 @@ and open the template in the editor.
             <tr>     
                 
                 <td colspan="2">Nome <input type="text" size="40" name="nome" value="${pedido.nome}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                <td>Observações <textarea>
+                <td>ObservaÃ§Ãµes <textarea>
                     </textarea></td>
             </tr>
             <tr>
-                <!--REAVALIAR SITUAÇÃO DOS CAMPOS ABAIXO DE UMA FORMA QUE PODEMOS TRABALHAR DE UMA FORMA CERTA -->
+                <!--REAVALIAR SITUAÃ‡ÃƒO DOS CAMPOS ABAIXO DE UMA FORMA QUE PODEMOS TRABALHAR DE UMA FORMA CERTA -->
                 <td>Codigo Produto <input type="text" size="20"></td> 
                 <td>QTD<input type="number" min="1" max="10" > Produto                
                     <select >            
@@ -76,6 +80,7 @@ and open the template in the editor.
             </tr>
 
         </table>
+                </form>
         <table>
             <tr><td>COD</td><td>QTDE</td><td>PRODUTO</td><td>V.UNIT</td><td>V.TOTAL</td><td>OBS.</td><td>EDITAR</td></tr>
                

@@ -4,6 +4,9 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
+<%@page contentType="text/html" pageEncoding="utf-8"%>  
 <html>
     <head>
         <title>Produto</title>
@@ -13,17 +16,19 @@ and open the template in the editor.
     <body>       
 
         <div><h1>Produto - ${operacao}</h1></div>
+        <form action="ManterProdutoController?acao=confirmar${operacao}" method="POST" name="frmManterProduto" >
         <table>            
             <tr> 
-                <td colspan="2"> Cod. Produto </td><td><input type="text" value="${produto.id}" size="15"></td>
+                <td colspan="2"> Cod. Produto </td><td><input type="text"  name= "id" value="${produto.id}" size="15"></td>
             </tr>
             <tr>
-            <td colspan="2"> Nome Produto </td><td><input type="text" value="${produto.nome}" size="40"></td>
+            <td colspan="2"> Nome Produto </td><td><input type="text" name ="nome" value="${produto.nome}" size="40"></td>
         </tr>
         <tr>
-            <td colspan="2"> Preço produto </td><td><input type="text" value="${produto.valor}" size="15"></td>
+            <td colspan="2"> PreÃ§o produto </td><td><input type="text" name="valor" value="${produto.valor}" size="15"></td>
         </tr>
     </table>
+        </form>
     <h3><button>Confirmar</button></h3>
     </body>
 
