@@ -131,4 +131,7 @@ public class Nivel {
      public static List<Nivel> obterNivel() throws ClassNotFoundException, SQLException {
         return NivelDAO.obterNivel();
     }
+      public void gravar() throws SQLException, ClassNotFoundException{
+        NivelDAO.gravar(this);
+    }
 }

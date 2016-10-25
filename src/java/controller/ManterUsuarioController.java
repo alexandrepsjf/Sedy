@@ -28,15 +28,14 @@ public class ManterUsuarioController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String acao = request.getParameter("acao");
-        if(acao.equals("prepararIncluir")){
+        if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
-        /*}else{
-            if(acao.equals("confirmarIncluir")){
-                prepararIncluir(request, response);
-            }else{
+        } else if (acao.equals("confirmarIncluir")) {
+            confirmarIncluir(request, response);
+            /* }else{
                 if(acao.equals("prepararEditar")){
                     prepararIncluir(request, response);
                 }else{
@@ -53,25 +52,19 @@ public class ManterUsuarioController extends HttpServlet {
                     }
                 }
             }*/
-        
-        }
-        
-        
-        }
-    
 
-    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response){
-        try{
-            request.setAttribute("operacao","Incluir");
+        }
+    }
+
+    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Incluir");
             RequestDispatcher view = request.getRequestDispatcher("/manterUsuario.jsp");
             view.forward(request, response);
-        }catch(ServletException | IOException ex){            
+        } catch (ServletException | IOException ex) {
         }
-        }
-    
-            
-            
-            
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -110,5 +103,9 @@ public class ManterUsuarioController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }
