@@ -36,7 +36,7 @@ public class PesquisaProdutoController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try {
             request.setAttribute("produto", Produto.obterProduto());
             RequestDispatcher view = request.getRequestDispatcher("/pesquisaProduto.jsp");
             view.forward(request, response);

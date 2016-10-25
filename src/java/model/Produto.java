@@ -55,4 +55,7 @@ public class Produto {
     public static List<Produto> obterProduto() throws ClassNotFoundException, SQLException {
         return ProdutoDAO.obterProduto();
     }
+    public void gravar() throws SQLException, ClassNotFoundException{
+        ProdutoDAO.gravar(this);
+    }
 }

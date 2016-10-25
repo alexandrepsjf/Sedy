@@ -54,10 +54,8 @@ public class ManterEmailController extends HttpServlet {
                     }
                 }
             }*/
-        
-        }
-        
-        
+                }
+                
         }
     
 
