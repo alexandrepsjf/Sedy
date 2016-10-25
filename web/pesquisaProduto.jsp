@@ -19,18 +19,14 @@ and open the template in the editor.
             <tr> 
                 <th>Código Produto</th>
                 <th>Nome</th>
-                <th>Unidade</th>
-                <th>Valor</th>
-                 <th colspan =2>Ação</th>                                
+                <th colspan =2>Ação</th>                                
             </tr>
-            <c:forEach items="${produto}" var="produto">
+            <c:forEach items="${produtos}" var="produto">
                 <tr>
                     <td ><c:out value="${produto.id}" /> </td>
-                    <td ><c:out value="${produto.nome}" /> </td>
-                    <td ><c:out value="${produto.unidade}" /> </td>
-                    <td ><c:out value="${produto.valor}" /> </td>
-                    <td ><a href="ManterBairroController?acao=prepararEditar&id=<c:out value="${produto.id}"/>">Editar</a></td>
-                    <td ><a href="ManterBairroController?acao=prepararExcluir&id=<c:out value="${produto.id}"/>">Excluir</a></td>
+                    <td ><c:out value="${produto.nome}" /> </td>                   
+                    <td ><a href="ManterProdutoController?acao=prepararEditar&id=<c:out value="${produto.id}"/>">Editar</a></td>
+                    <td ><a href="ManterProdutoController?acao=prepararExcluir&id=<c:out value="${produto.id}"/>">Excluir</a></td>
                 </tr>
             </c:forEach>
         </table>
