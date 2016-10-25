@@ -19,13 +19,13 @@ and open the template in the editor.
         <form action="ManterProdutoController?acao=confirmar${operacao}" method="POST" name="frmManterProduto" >
         <table>            
             <tr> 
-                <td colspan="2"> Cod. Produto </td><td><input type="text"  name= "id" value="${produto.id}" size="15"></td>
+                <td colspan="2"> Cod. Produto </td><td><input type="text"  name= "id" value="${produto.id}" size="15"<c:if test="${operacao =! 'Incluir'}"> readonly</c:if>></td>
             </tr>
             <tr>
-            <td colspan="2"> Nome Produto </td><td><input type="text" name ="nome" value="${produto.nome}" size="40"></td>
+            <td colspan="2"> Nome Produto </td><td><input type="text" name ="nome" value="${produto.nome}" size="40"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
         </tr>
         <tr>
-            <td colspan="2"> Preço produto </td><td><input type="text" name="valor" value="${produto.valor}" size="15"></td>
+            <td colspan="2"> Preço produto </td><td><input type="text" name="valor" value="${produto.valor}" size="15"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
         </tr>
     </table>
         </form>

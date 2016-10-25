@@ -18,7 +18,7 @@ and open the template in the editor.
         <form action="ManterBairroController?acao=confirmar${operacao}" method="POST" name="frmManterBairro" >
         <table>            
             <tr> 
-                <td colspan="2"> Cod. usuario </td><td><input type="text" size="15" name="id" value="${usuario.id}"></td>
+                <td colspan="2"> Cod. usuario </td><td><input type="text" size="15" name="id" value="${usuario.id}"<c:if test="${operacao =! 'Incluir'}"> readonly</c:if>></td>
             </tr>
             <tr> 
             <tr> 
@@ -27,13 +27,13 @@ and open the template in the editor.
                     <select><option>Gerente</option><option></option><option></option><option></option></select></td>
             </tr>
             <tr> 
-                <td colspan="2"> Nome usuario </td><td><input type="text" size="40" name="nome" value="${usuario.nome}"></td>
+                <td colspan="2"> Nome usuario </td><td><input type="text" size="40" name="nome" value="${usuario.nome}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
             </tr>
             <tr> 
                 <td colspan="2"> senha usuario </td><td><input type="text" size="15"  ></td>
             </tr>
             <tr> 
-                <td colspan="2"> confirma senha usuario </td><td><input type="text" size="15" name="senha" value="${usuario.senha}"></td>
+                <td colspan="2"> confirma senha usuario </td><td><input type="text" size="15" name="senha" value="${usuario.senha}"></td><c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
             </tr>
 
         </table>
