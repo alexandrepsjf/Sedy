@@ -16,29 +16,24 @@ and open the template in the editor.
     <body>
         <div><h1>Cliente -  ${operacao}</h1></div>
         <form action="ManterClienteController?acao=confirmar${operacao}" method="post" name="frmManterCliente" >
-            <table border="1"  style="text-align:right;"> 
+            <table   style="text-align:right;"> 
                 <tr > 
                     <td >Data cadastro <input type="text" size="10" value="${cliente.data_cadastro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                <td>ergeqgge</td>
-                 <td>fwfwef</td>
-                  <td>qwerf</td>
-                   <td>wfeqw</td>
-                    <td>wfqwefewef</td></tr>
-                    
-                    <tr align="center">
+                              
+                    <tr >
                         <td>Hora cadastro <input type="text" size="10" value="${cliente.hora_cadastro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
-                    <tr align="justify"> 
+                    <tr > 
                         <td> Cod. Cliente <input type="text" size="10" value="${cliente.id}"  <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>       
                     </tr>
                     <tr> 
                         <td>(DDD)Telefone
-                            <select name="optTel" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                           <!--select name="optTel" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                             <option value="0" <c:if test="${cliente.telefone.telefone == null}"> selected</c:if>> </option>  
-                            <c:forEach items="${cliente}" var="cliente">
+                            <c:forEach items="${telefones}" var="cliente">
                                 <option value="${cliente.id}" <c:if test="${cliente.telefone.telefone == cliente.telefone}"> selected</c:if>>${cliente.telefone}</option>  
                             </c:forEach>
-                        </select>                           
+                        </select-->                           
                     </td>
                 </tr>
                 <tr> 
@@ -48,37 +43,34 @@ and open the template in the editor.
                         <td >Email <input type="text" value="${cliente.email}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td>Logradouro<input type="text" ></td>
+                        <td>Logradouro<input type="text" value="${cliente.logradouro}" ></td>
                     </tr>
                     <tr>
                         <td>Numero <input type="text" value="${cliente.numero}" size="15"></td>
                 </tr> 
                 <tr>
-                    <td>Referência<input type="text"></td>
+                    <td>Referência<input type="text" value="${cliente.referencia}"></td>
                 </tr>
                 <tr>
-                    <td>Compl. <input type="text"></td>
+                    <td>Compl. <input type="text" value="${cliente.complemento}"></td>
                 </tr>
                 <tr > 
-                    <td >CEP  <input type="text"></td>
+                    <td >CEP  <input type="text" value="${cliente.cep}"></td>
                 </tr>
                 <tr>
-                    <td> Bairro  <select name="optTel" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                    <td> Bairro  <!--select name="optTel" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                             <option value="0" <c:if test="${cliente.bairro.nome == null}"> selected</c:if>> </option>  
-                            <c:forEach items="${bairro}" var="bairro">
+                            <c:forEach items="${bairros}" var="bairro">
                                 <option value="${cliente.id}" <c:if test="${cliente.bairro.nome == cliente.bairro}"> selected</c:if>>${cliente.bairro}</option>  
                             </c:forEach>
-                        </select>  
+                        </select-->  
                     </td>
+                </tr>               
+                <tr>
+                    <td>Cidade <input type="text" value="${cliente.cidade}"></td>
                 </tr>
                 <tr>
-                    <td><button>Cadastrar bairro</button></td>
-                </tr>
-                <tr>
-                    <td>Cidade <input type="text"></td>
-                </tr>
-                <tr>
-                    <td>Estado <input type="text">
+                    <td>Estado <input type="text" value="${cliente.estado}">
                     </td>
                 </tr>        
             </table>

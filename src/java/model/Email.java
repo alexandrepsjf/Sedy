@@ -5,7 +5,6 @@
  */
 package model;
 
-import dao.BairroDAO;
 import dao.EmailDAO;
 import java.sql.SQLException;
 import java.util.List;

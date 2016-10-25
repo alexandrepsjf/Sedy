@@ -5,8 +5,8 @@
  */
 package dao;
 
-
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,6 +19,7 @@ import model.Produto;
  * @author Mateu
  */
 public class ProdutoDAO {
+
     public static List<Produto> obterProduto() throws ClassNotFoundException, SQLException {
         Connection conexao = null;
         Statement comando = null;
@@ -29,8 +30,8 @@ public class ProdutoDAO {
             comando = conexao.createStatement();
             ResultSet rs = comando.executeQuery("select*from produto");
             while (rs.next()) {
-                Produto produto = new Produto (rs.getInt("ID"),rs.getString("NOME"),rs.getString("UNIDADE"), rs.getFloat("VALOR"));
-                
+                Produto produto = new Produto(rs.getInt("ID"), rs.getString("NOME"), rs.getString("UNIDADE"), rs.getFloat("VALOR"));
+
                 produtos.add(produto);
             }
 
@@ -54,4 +55,23 @@ public class ProdutoDAO {
 
         }
     }
+
+    public static void gravar(Produto produto) throws ClassNotFoundException, SQLException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "insert into produto(id,nome,unidade,valor) values(?,?,?,?)";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, produto.getId());
+            comando.setString(2, produto.getNome());
+            comando.setString(3,produto.getUnidade());
+            comando.setFloat(4, produto.getValor());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
 }
+
