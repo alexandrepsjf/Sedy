@@ -71,7 +71,7 @@ public class ManterProdutoController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String nome = request.getParameter("nome");
         String unidade = request.getParameter("unidade");
-        float valor = Float.parseFloat(request.getParameter("taxa"));
+        float valor = Float.parseFloat(request.getParameter("valor"));
         try {
             Produto produto = new Produto(id, nome, unidade, valor);
             produto.gravar();
