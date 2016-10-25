@@ -7,11 +7,13 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.FormaPagamento;
 
 /**
  *
@@ -104,8 +106,19 @@ public class ManterFormaPagamentoController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+            public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response){
+        int id = Integer.parseInt(request.getParameter("id"));
+        String forma = request.getParameter("forma");
+        
+       
+       try{
+            FormaPagamento formapagamento = new FormaPagamento(id, forma);
+            formapagamento.gravar();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaFormaPagamentoController");
+            view.forward(request,response);
+       }catch(SQLException | IOException | ClassNotFoundException | ServletException ex){            
+        }
+        
+    }  
 
 }
