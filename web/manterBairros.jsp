@@ -16,7 +16,6 @@ and open the template in the editor.
     <body>
         <div><h1>Bairros - ${operacao}</h1></div>
                <form action="ManterBairroController?acao=confirmar${operacao}" method="POST" name="frmManterBairro" >
-
         <table>            
             <tr> 
                 <td colspan="2"> Cod. Bairro </td><td><input type="text" name="id" value="${bairro.id}" size="15" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>

@@ -71,18 +71,17 @@ public class ManterNivelController extends HttpServlet {
     public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         String nome = request.getParameter("nome");
-        System.out.println(request.getParameter("pedido"));
-        boolean pedido = Boolean.parseBoolean(request.getParameter("pedido"));
-          boolean cliente = Boolean.parseBoolean(request.getParameter("cliente"));
-        boolean ligacaoRecebida = Boolean.parseBoolean(request.getParameter("ligacaoRecebida"));
-        boolean configuracao = Boolean.parseBoolean(request.getParameter("configuracao"));
-        boolean checkNivel = Boolean.parseBoolean(request.getParameter("nivel"));
-          System.out.println(checkNivel);
-          System.out.println(request.getParameterValues("nivel"));
-        boolean usuario = Boolean.parseBoolean(request.getParameter("usuario"));
-        boolean relatorio = Boolean.parseBoolean(request.getParameter("relatorio"));
-        boolean formaPagamento = Boolean.parseBoolean(request.getParameter("formaPagamento"));
-        boolean produto = Boolean.parseBoolean(request.getParameter("produto"));
+        System.out.println(request.getParameter("nivel"));
+        int checkNivel,cliente,pedido,ligacaoRecebida,configuracao,usuario,relatorio,formaPagamento,produto;
+        if(request.getParameter("nivel")==null) { checkNivel=0;} else { checkNivel=1;}
+        if(request.getParameter("cliente")==null) { cliente=0;} else { cliente=1;}
+        if(request.getParameter("pedido")==null) { pedido=0;} else { pedido=1;}
+        if(request.getParameter("ligacaoRecebida")==null) { ligacaoRecebida=0;} else { ligacaoRecebida=1;}
+        if(request.getParameter("configuracao")==null) { configuracao=0;} else { configuracao=1;}
+        if(request.getParameter("usuario")==null) { usuario=0;} else { usuario=1;}
+        if(request.getParameter("relatorio")==null) { relatorio=0;} else { relatorio=1;}
+        if(request.getParameter("formaPagamento")==null) { formaPagamento=0;} else { formaPagamento=1;}
+        if(request.getParameter("produto")==null) { produto=0;} else { produto=1;}
         try {
             Nivel nivel = new Nivel(id, nome, configuracao, usuario, checkNivel, produto, relatorio, formaPagamento, ligacaoRecebida, pedido, cliente);
             nivel.gravar();

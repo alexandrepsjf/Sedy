@@ -16,17 +16,17 @@ import java.util.List;
 public class Nivel {
      private int id;
     private String nome;
-    private boolean configuracao;
-    private boolean usuario;
-    private boolean nivel;
-    private boolean produto;
-    private boolean relatorio;
-    private boolean formaPagamento;
-    private boolean ligacaoRecebida;
-    private boolean pedido;
-    private boolean cliente;
+    private int configuracao;
+    private int usuario;
+    private int nivel;
+    private int produto;
+    private int relatorio;
+    private int formaPagamento;
+    private int ligacaoRecebida;
+    private int pedido;
+    private int cliente;
 
-    public Nivel(int id, String nome, boolean configuracao, boolean usuario, boolean nivel, boolean produto, boolean relatorio, boolean formaPagamento, boolean ligacaoRecebida, boolean pedido, boolean cliente) {
+    public Nivel(int id, String nome, int configuracao, int usuario, int nivel, int produto, int relatorio, int formaPagamento, int ligacaoRecebida, int pedido, int cliente) {
         this.id = id;
         this.nome = nome;
         this.configuracao = configuracao;
@@ -37,87 +37,6 @@ public class Nivel {
         this.formaPagamento = formaPagamento;
         this.ligacaoRecebida = ligacaoRecebida;
         this.pedido = pedido;
-        this.cliente = cliente;
-    }
-    
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public boolean isConfiguracao() {
-        return configuracao;
-    }
-
-    public void setConfiguracao(boolean configuracao) {
-        this.configuracao = configuracao;
-    }
-
-    public boolean isUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(boolean usuario) {
-        this.usuario = usuario;
-    }
-
-    public boolean isNivel() {
-        return nivel;
-    }
-
-    public void setNivel(boolean nivel) {
-        this.nivel = nivel;
-    }
-
-    public boolean isProduto() {
-        return produto;
-    }
-
-    public void setProduto(boolean produto) {
-        this.produto = produto;
-    }
-
-    public boolean isRelatorio() {
-        return relatorio;
-    }
-
-    public void setRelatorio(boolean relatorio) {
-        this.relatorio = relatorio;
-    }
-
-    public boolean isFormaPagamento() {
-        return formaPagamento;
-    }
-
-    public void setFormaPagamento(boolean formaPagamento) {
-        this.formaPagamento = formaPagamento;
-    }
-
-    public boolean isLigacaoRecebida() {
-        return ligacaoRecebida;
-    }
-
-    public void setLigacaoRecebida(boolean ligacaoRecebida) {
-        this.ligacaoRecebida = ligacaoRecebida;
-    }
-
-    public boolean isPedido() {
-        return pedido;
-    }
-
-    public void setPedido(boolean pedido) {
-        this.pedido = pedido;
-    }
-
-    public boolean isCliente() {
-        return cliente;
-    }
-
-    public void setCliente(boolean cliente) {
         this.cliente = cliente;
     }
 
@@ -128,6 +47,89 @@ public class Nivel {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getConfiguracao() {
+        return configuracao;
+    }
+
+    public void setConfiguracao(int configuracao) {
+        this.configuracao = configuracao;
+    }
+
+    public int getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(int usuario) {
+        this.usuario = usuario;
+    }
+
+    public int getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+
+    public int getProduto() {
+        return produto;
+    }
+
+    public void setProduto(int produto) {
+        this.produto = produto;
+    }
+
+    public int getRelatorio() {
+        return relatorio;
+    }
+
+    public void setRelatorio(int relatorio) {
+        this.relatorio = relatorio;
+    }
+
+    public int getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(int formaPagamento) {
+        this.formaPagamento = formaPagamento;
+    }
+
+    public int getLigacaoRecebida() {
+        return ligacaoRecebida;
+    }
+
+    public void setLigacaoRecebida(int ligacaoRecebida) {
+        this.ligacaoRecebida = ligacaoRecebida;
+    }
+
+    public int getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(int pedido) {
+        this.pedido = pedido;
+    }
+
+    public int getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(int cliente) {
+        this.cliente = cliente;
+    }
+    
+
+
      public static List<Nivel> obterNivel() throws ClassNotFoundException, SQLException {
         return NivelDAO.obterNivel();
     }

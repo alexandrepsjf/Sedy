@@ -50,8 +50,8 @@
     </servlet>
    
     <servlet>
-        <servlet-name>ManterFormaPagementoController</servlet-name>
-        <servlet-class>controller.ManterFormaPagementoController</servlet-class>
+        <servlet-name>ManterFormaPagamentoController</servlet-name>
+        <servlet-class>controller.ManterFormaPagamentoController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ManterProdutoController</servlet-name>
@@ -122,8 +122,8 @@
         <url-pattern>/ManterClienteController</url-pattern>
     </servlet-mapping>   
     <servlet-mapping>
-        <servlet-name>ManterFormaPagementoController</servlet-name>
-        <url-pattern>/ManterFormaPagementoController</url-pattern>
+        <servlet-name>ManterFormaPagamentoController</servlet-name>
+        <url-pattern>/ManterFormaPagamentoController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManterProdutoController</servlet-name>

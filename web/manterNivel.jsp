@@ -24,18 +24,18 @@ and open the template in the editor.
                         <td colspan="2"> Nome  nivel <input type="text" size="40"  name="nome" value="${nivel.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td><input  type="radio"  name="nivel" value="${nivel.nivel}"<c:if test="${operacao != 'Incluir'}"> disabled</c:if>>NIVEL</td>
-                    <td> <input  type="radio" name="relatorio" value="${nivel.relatorio}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>RELATORIO</td>
-                    <td><input checked  disabled type="radio" name="ligacaoRecebida" value="${nivel.ligacaoRecebida}">LIGACAO RECEBIDA</td>
+                        <td><input  type="checkbox"  name="nivel" value="${nivel.nivel}"<c:if test="${operacao != 'Incluir'}"> disabled</c:if>>NIVEL</td>
+                    <td> <input  type="checkbox" name="relatorio" value="${nivel.relatorio}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>RELATORIO</td>
+                    <td><input checked   type="checkbox" name="ligacaoRecebida" value="${nivel.ligacaoRecebida}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>LIGACAO RECEBIDA</td>
                 </tr>
                 <tr> 
-                    <td><input  type="radio" name="configuracao" value="${nivel.configuracao}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>CONFIGURACAO</td>
-                    <td> <input  type="radio" name="usuario" value="${nivel.usuario}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>USUARIO</td>
-                    <td><input checked  disabled type="radio" name="pedido" value="${nivel.pedido}">PEDIDO</td>
+                    <td><input  type="checkbox" name="configuracao" value="${nivel.configuracao}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>CONFIGURACAO</td>
+                    <td> <input  type="checkbox" name="usuario" value="${nivel.usuario}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>USUARIO</td>
+                    <td><input checked   type="checkbox" name="pedido" value="${nivel.pedido}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>PEDIDO</td>
                 </tr>
-                <tr><td><input  type="radio" name="produto" value="${nivel.produto}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>PRODUTOS</td>
-                    <td> <input  type="radio" name="formaPagamento" value="${nivel.formaPagamento}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>FORMAS DE PAGTO</td>
-                    <td><input checked  disabled type="radio" name="cliente" value="${nivel.cliente}">CLIENTES</td>
+                <tr><td><input  type="checkbox" name="produto" value="${nivel.produto}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>PRODUTOS</td>
+                    <td> <input  type="checkbox" name="formaPagamento" value="${nivel.formaPagamento}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>FORMAS DE PAGTO</td>
+                    <td><input checked   type="checkbox" name="cliente" value="${nivel.cliente}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>CLIENTES</td>
                 </tr>
             </table>
             <h3><button type="submit">Confirmar</button></h3>

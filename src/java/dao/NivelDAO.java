@@ -31,7 +31,7 @@ public class NivelDAO {
             comando = conexao.createStatement();
             ResultSet rs = comando.executeQuery("select*from nivel");
             while (rs.next()) {
-                Nivel nivel = new Nivel(rs.getInt("ID"), rs.getString("NOME"),rs.getBoolean("configuracao"), rs.getBoolean("usuario"), rs.getBoolean("nivel"), rs.getBoolean("produto"), rs.getBoolean("relatorio"), rs.getBoolean("FORMA_PGM"), rs.getBoolean("LIGACAO_RECEBIDA"), rs.getBoolean("pedido"), rs.getBoolean("cliente"));
+                Nivel nivel = new Nivel(rs.getInt("ID"), rs.getString("NOME"),rs.getInt("configuracao"), rs.getInt("usuario"), rs.getInt("nivel"), rs.getInt("produto"), rs.getInt("relatorio"), rs.getInt("FORMA_PGM"), rs.getInt("LIGACAO_RECEBIDA"), rs.getInt("pedido"), rs.getInt("cliente"));
                 niveis.add(nivel);                
             }
 
@@ -60,19 +60,19 @@ public class NivelDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "insert into nivel(INSERT INTO `nivel`(`ID`, `NOME`, `CONFIGURACAO`, `USUARIO`, `NIVEL`, `PRODUTO`, `RELATORIO`, `FORMA_PGM`, `LIGACAO_RECEBIDA`, `PEDIDO`, `CLIENTE`) values(?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO `nivel`(`ID`, `NOME`, `CONFIGURACAO`, `USUARIO`, `NIVEL`, `PRODUTO`, `RELATORIO`, `FORMA_PGM`, `LIGACAO_RECEBIDA`, `PEDIDO`, `CLIENTE`) values(?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, nivel.getId());
             comando.setString(2, nivel.getNome());
-            comando.setBoolean(3, nivel.isConfiguracao());
-            comando.setBoolean(8, nivel.isFormaPagamento());
-            comando.setBoolean(9, nivel.isLigacaoRecebida());
-            comando.setBoolean(5, nivel.isNivel());
-            comando.setBoolean(10, nivel.isPedido());
-            comando.setBoolean(6, nivel.isProduto());
-            comando.setBoolean(4, nivel.isUsuario());
-            comando.setBoolean(11, nivel.isCliente());
-            comando.setBoolean(7, nivel.isRelatorio());
+            comando.setInt(3, nivel.getConfiguracao());
+            comando.setInt(8, nivel.getFormaPagamento());
+            comando.setInt(9, nivel.getLigacaoRecebida());
+            comando.setInt(5, nivel.getNivel());
+            comando.setInt(10, nivel.getPedido());
+            comando.setInt(6, nivel.getProduto());
+            comando.setInt(4, nivel.getUsuario());
+            comando.setInt(11, nivel.getCliente());
+            comando.setInt(7, nivel.getRelatorio());
             comando.execute();
             comando.close();
             conexao.close();
