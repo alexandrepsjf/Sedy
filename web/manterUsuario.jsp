@@ -38,6 +38,46 @@ and open the template in the editor.
 
         </table>
         </form>
+    <SCRIPT language="JavaScript">
+            <!--
+            
+            function campoNumerico(valor)
+            {
+                var caracteresValidos = "0123456789";
+                var ehNumero = true;
+                var umCaracter;
+                for (i = 0; i < valor.length && ehNumero == true; i++) 
+                { 
+                    umCaracter = valor.charAt(i); 
+                    if (caracteresValidos.indexOf(umCaracter) == -1) 
+                    {
+                        ehNumero = false;
+                    }
+                }
+                return ehNumero;
+            }
+
+            function validarFormulario(form) { 
+                var mensagem;
+                mensagem = "";
+                if (form.txtCodUsuario.value == "${usuario.id}"){
+                    mensagem = mensagem + "Informe o Código do Usuário\n";
+                }                             
+                
+                if (!campoNumerico(form.txtCodUsuario.value)){
+                    mensagem = mensagem + "Código do Usuário deve ser numérico\n";
+                }
+                                                
+                if (mensagem == ""){
+                    return true;
+                }else{
+                    alert(mensagem);
+                    return false;
+                }                
+                
+           }
+            //-->
+        </SCRIPT>
         <h3><button>Cadastrar nivel</button></h3>
         <h3><button>Confirmar</button></h3>
     </body>

@@ -33,6 +33,56 @@ and open the template in the editor.
             </table>
               <h3><button type="submit">Confirmar</button></h3>
         </form>
+    <SCRIPT language="JavaScript">
+            <!--
+            
+            function campoNumerico(valor)
+            {
+                var caracteresValidos = "0123456789";
+                var ehNumero = true;
+                var umCaracter;
+                for (i = 0; i < valor.length && ehNumero == true; i++) 
+                { 
+                    umCaracter = valor.charAt(i); 
+                    if (caracteresValidos.indexOf(umCaracter) == -1) 
+                    {
+                        ehNumero = false;
+                    }
+                }
+                return ehNumero;
+            }
+
+            function validarFormulario(form) { 
+                var mensagem;
+                mensagem = "";
+                if (form.txtCodProduto.value == "${Produto.id}"){
+                    mensagem = mensagem + "Informe o Código do Produto\n";
+                }                             
+                if (form.txtUnudade.value == "${produto.unidade}"){
+                    mensagem = mensagem + "Informe únidade do Produto\n";
+                }
+                if (form.txtValor.value == "${produto.valor}"){
+                    mensagem = mensagem + "Informe o Valor do Produto\n";
+                }
+                if (!campoNumerico(form.txtProduto.value)){
+                    mensagem = mensagem + " O Código do Produto deve ser numérico\n";
+                }
+                if (!campoNumerico(form.txtUnidade.value)){
+                    mensagem = mensagem + "A únidade deve ser numérica\n";
+                }
+                if (!campoNumerico(form.txtValor.value)){
+                    mensagem = mensagem + " O Valor do Produto deve ser numérico\n";
+                }
+                if (mensagem == ""){
+                    return true;
+                }else{
+                    alert(mensagem);
+                    return false;
+                }                
+                
+           }
+            //-->
+        </SCRIPT>            
     </body>
 
 </html>

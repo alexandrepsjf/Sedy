@@ -81,6 +81,46 @@ and open the template in the editor.
 
         </table>
                 </form>
+    <SCRIPT language="JavaScript">
+            <!--
+            
+            function campoNumerico(valor)
+            {
+                var caracteresValidos = "0123456789";
+                var ehNumero = true;
+                var umCaracter;
+                for (i = 0; i < valor.length && ehNumero == true; i++) 
+                { 
+                    umCaracter = valor.charAt(i); 
+                    if (caracteresValidos.indexOf(umCaracter) == -1) 
+                    {
+                        ehNumero = false;
+                    }
+                }
+                return ehNumero;
+            }
+
+            function validarFormulario(form) { 
+                var mensagem;
+                mensagem = "";
+                if (form.txtCodPedido.value == "${peidido.id}"){
+                    mensagem = mensagem + "Informe o Código do Pedido\n";
+                }                             
+                
+                if (!campoNumerico(form.txtCodPedido.value)){
+                    mensagem = mensagem + "Código do Pedido deve ser numérico\n";
+                }
+                                                
+                if (mensagem == ""){
+                    return true;
+                }else{
+                    alert(mensagem);
+                    return false;
+                }                
+                
+           }
+            //-->
+        </SCRIPT>            
         <table>
             <tr><td>COD</td><td>QTDE</td><td>PRODUTO</td><td>V.UNIT</td><td>V.TOTAL</td><td>OBS.</td><td>EDITAR</td></tr>
                

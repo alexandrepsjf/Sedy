@@ -40,5 +40,45 @@ and open the template in the editor.
             </table>
             <h3><button type="submit">Confirmar</button></h3>
         </form>
+    <SCRIPT language="JavaScript">
+            <!--
+            
+            function campoNumerico(valor)
+            {
+                var caracteresValidos = "0123456789";
+                var ehNumero = true;
+                var umCaracter;
+                for (i = 0; i < valor.length && ehNumero == true; i++) 
+                { 
+                    umCaracter = valor.charAt(i); 
+                    if (caracteresValidos.indexOf(umCaracter) == -1) 
+                    {
+                        ehNumero = false;
+                    }
+                }
+                return ehNumero;
+            }
+
+            function validarFormulario(form) { 
+                var mensagem;
+                mensagem = "";
+                if (form.txtCodNivel.value == "${nivel.id}"){
+                    mensagem = mensagem + "Informe o Código do Nivel\n";
+                }                             
+                
+                if (!campoNumerico(form.txtCodNivel.value)){
+                    mensagem = mensagem + "Código do Nivel deve ser numérico\n";
+                }
+                                                
+                if (mensagem == ""){
+                    return true;
+                }else{
+                    alert(mensagem);
+                    return false;
+                }                
+                
+           }
+            //-->
+        </SCRIPT>            
     </body>
 </html>

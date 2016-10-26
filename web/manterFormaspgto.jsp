@@ -26,5 +26,45 @@ and open the template in the editor.
     </table>
     <h3><button>Confirmar</button></h3>
         </form>
+        <SCRIPT language="JavaScript">
+            <!--
+            
+            function campoNumerico(valor)
+            {
+                var caracteresValidos = "0123456789";
+                var ehNumero = true;
+                var umCaracter;
+                for (i = 0; i < valor.length && ehNumero == true; i++) 
+                { 
+                    umCaracter = valor.charAt(i); 
+                    if (caracteresValidos.indexOf(umCaracter) == -1) 
+                    {
+                        ehNumero = false;
+                    }
+                }
+                return ehNumero;
+            }
+
+            function validarFormulario(form) { 
+                var mensagem;
+                mensagem = "";
+                if (form.txtCodFormaPagamento.value == "${formaPagamento.id}"){
+                    mensagem = mensagem + "Informe o Código da Forma de Pagamento\n";
+                }                             
+                
+                if (!campoNumerico(form.txtCodFormaPagamento.value)){
+                    mensagem = mensagem + "Código da Forma de Pagamento deve ser numérica\n";
+                }
+                                                
+                if (mensagem == ""){
+                    return true;
+                }else{
+                    alert(mensagem);
+                    return false;
+                }                
+                
+           }
+            //-->
+        </SCRIPT>
 </body>
 </html>

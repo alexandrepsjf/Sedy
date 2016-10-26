@@ -29,5 +29,49 @@ and open the template in the editor.
             </table>
             <h3><button type="submit" >Confirmar</button></h3>
         </form>
+                <SCRIPT language="JavaScript">
+            <!--
+            
+            function campoNumerico(valor)
+            {
+                var caracteresValidos = "0123456789";
+                var ehNumero = true;
+                var umCaracter;
+                for (i = 0; i < valor.length && ehNumero == true; i++) 
+                { 
+                    umCaracter = valor.charAt(i); 
+                    if (caracteresValidos.indexOf(umCaracter) == -1) 
+                    {
+                        ehNumero = false;
+                    }
+                }
+                return ehNumero;
+            }
+
+            function validarFormulario(form) { 
+                var mensagem;
+                mensagem = "";
+                if (form.txtCodBairro.value == "${bairro.id}"){
+                    mensagem = mensagem + "Informe o Código do Bairro\n";
+                }                             
+                if (form.txtTaxa.value == "${bairro.taxa}"){
+                    mensagem = mensagem + "Informe o Taxa do Bairro\n";
+                }
+                if (!campoNumerico(form.txtCodBairro.value)){
+                    mensagem = mensagem + "Código do Bairro deve ser numérico\n";
+                }
+                if (!campoNumerico(form.txtTaxa.value)){
+                    mensagem = mensagem + "Taxa deve ser numérica\n";
+                }                 
+                if (mensagem == ""){
+                    return true;
+                }else{
+                    alert(mensagem);
+                    return false;
+                }                
+                
+           }
+            //-->
+        </SCRIPT>
     </body>
 </html>

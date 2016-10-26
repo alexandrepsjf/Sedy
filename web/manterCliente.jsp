@@ -18,13 +18,13 @@ and open the template in the editor.
         <form action="ManterClienteController?acao=confirmar${operacao}" method="post" name="frmManterCliente" >
             <table   style="text-align:right;"> 
                 <tr > 
-                    <td >Data cadastro <input type="text" size="10" value="${cliente.data_cadastro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td >Data cadastro <input type="text" name="data_cadastro" size="10" value="${cliente.data_cadastro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                               
                     <tr >
-                        <td>Hora cadastro <input type="text" size="10" value="${cliente.hora_cadastro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td>Hora cadastro <input type="text" name="hora_cadastro" size="10" value="${cliente.hora_cadastro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr > 
-                        <td> Cod. Cliente <input type="text" size="10" value="${cliente.id}"  <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>       
+                        <td> Cod. Cliente <input type="text" name="id" size="10" value="${cliente.id}"  <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>       
                     </tr>
                     <tr> 
                         <td>(DDD)Telefone
@@ -37,22 +37,22 @@ and open the template in the editor.
                     </td>
                 </tr>
                 <tr> 
-                    <td >Nome <input type="text" value="${telefone.nome}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td >Nome <input type="text" name="nome" value="${cliente.nome}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr> 
-                        <td >Email <input type="text" value="${cliente.email}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td >Email <input type="text" name="email" value="${cliente.email}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td>Logradouro<input type="text" value="${cliente.logradouro}" ></td>
+                        <td>Logradouro<input type="text" name ="logradouro" value="${cliente.logradouro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td>Numero <input type="text" value="${cliente.numero}" size="15"></td>
+                        <td>Numero <input type="text" name="numero" value="${cliente.numero}" size="15" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr> 
                 <tr>
-                    <td>Referência<input type="text" value="${cliente.referencia}"></td>
+                    <td>Referência<input type="text" name ="referencia" value="${cliente.referencia}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
-                    <td>Compl. <input type="text" value="${cliente.complemento}"></td>
+                    <td>Compl. <input type="text" name="complemento" value="${cliente.complemento}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr > 
                     <td >CEP  <input type="text" value="${cliente.cep}"></td>
@@ -67,15 +67,64 @@ and open the template in the editor.
                     </td>
                 </tr>               
                 <tr>
-                    <td>Cidade <input type="text" value="${cliente.cidade}"></td>
+                    <td>Cidade <input type="text" name="cidade" value="${cliente.cidade}"></td>
                 </tr>
                 <tr>
-                    <td>Estado <input type="text" value="${cliente.estado}">
+                    <td>Estado <input type="text" name="estado" value="${cliente.estado}">
                     </td>
                 </tr>        
             </table>
             <h3><button type="submit">Confirmar</button></h3>
         </form>
+                    <SCRIPT language="JavaScript">
+            <!--
+            
+            function campoNumerico(valor)
+            {
+                var caracteresValidos = "0123456789";
+                var ehNumero = true;
+                var umCaracter;
+                for (i = 0; i < valor.length && ehNumero == true; i++) 
+                { 
+                    umCaracter = valor.charAt(i); 
+                    if (caracteresValidos.indexOf(umCaracter) == -1) 
+                    {
+                        ehNumero = false;
+                    }
+                }
+                return ehNumero;
+            }
+
+            function validarFormulario(form) { 
+                var mensagem;
+                mensagem = "";
+                if (form.txtCodCliente.value == "${cliente.id}"){
+                    mensagem = mensagem + "Informe o Código do Cliente\n";
+                }
+                if (form.txtNumero.value == "${cliente.numero}"){
+                    mensagem = mensagem + "Informe o Numero do Cliente\n";
+                }
+                if (form.txtTelefone.value == "${cliente.telefone}"){
+                    mensagem = mensagem + "Informe o Numero do Cliente\n";
+                }
+                if (!campoNumerico(form.txtCodCliente.value)){
+                    mensagem = mensagem + "Código do Cliente deve ser numérico\n";
+                }                  
+                if (!campoNumerico(form.txtNumero.value)){
+                    mensagem = mensagem + "O Numero deve ser numérico\n";
+                }                  
+                if (!campoNumerico(form.txtTelefone.value)){
+                    mensagem = mensagem + "O Telefone deve ser numérico\n";
+                }                  
+                if (mensagem == ""){
+                    return true;
+                }else{
+                    alert(mensagem);
+                    return false;
+                }                
+            } 
+            //-->
+        </SCRIPT>
     </body>
 </html>
 
