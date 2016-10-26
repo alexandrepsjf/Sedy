@@ -8,7 +8,6 @@ and open the template in the editor.
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
 <%@page contentType="text/html" pageEncoding="utf-8"%> 
 <html>
-    
     <head>
         
         <title>Cliente</title>
