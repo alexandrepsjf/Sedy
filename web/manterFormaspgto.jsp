@@ -25,5 +25,6 @@ and open the template in the editor.
         </tr>
     </table>
     <h3><button>Confirmar</button></h3>
+        </form>
 </body>
 </html>

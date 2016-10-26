@@ -30,8 +30,8 @@ and open the template in the editor.
                     <tr>
                         <td colspan="2"> Preço produto </td><td><input type="text" name="valor" value="${produto.valor}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
-            </table>        
-            <h3><button type="submit">Confirmar</button></h3>
+            </table>
+              <h3><button type="submit">Confirmar</button></h3>
         </form>
     </body>
 
