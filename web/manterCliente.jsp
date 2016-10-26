@@ -98,13 +98,13 @@ and open the template in the editor.
             function validarFormulario(form) { 
                 var mensagem;
                 mensagem = "";
-                if (form.txtCodCliente.value == "${cliente.id}"){
+                if (form.txtCodCliente.value == ""){
                     mensagem = mensagem + "Informe o Código do Cliente\n";
                 }
-                if (form.txtNumero.value == "${cliente.numero}"){
+                if (form.txtNumero.value == ""){
                     mensagem = mensagem + "Informe o Numero do Cliente\n";
                 }
-                if (form.txtTelefone.value == "${cliente.telefone}"){
+                if (form.txtTelefone.value == ""){
                     mensagem = mensagem + "Informe o Numero do Cliente\n";
                 }
                 if (!campoNumerico(form.txtCodCliente.value)){

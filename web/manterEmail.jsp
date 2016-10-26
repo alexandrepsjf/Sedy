@@ -63,7 +63,7 @@ and open the template in the editor.
             function validarFormulario(form) { 
                 var mensagem;
                 mensagem = "";
-                if (form.txtCodEmail.value == "${email.id}"){
+                if (form.txtCodEmail.value == ""){
                     mensagem = mensagem + "Informe o Código do email\n";
                 }                             
                 

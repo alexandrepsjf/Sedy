@@ -62,7 +62,7 @@ and open the template in the editor.
             function validarFormulario(form) { 
                 var mensagem;
                 mensagem = "";
-                if (form.txtCodNivel.value == "${nivel.id}"){
+                if (form.txtCodNivel.value == ""){
                     mensagem = mensagem + "Informe o Código do Nivel\n";
                 }                             
                 

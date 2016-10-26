@@ -55,13 +55,13 @@ and open the template in the editor.
             function validarFormulario(form) { 
                 var mensagem;
                 mensagem = "";
-                if (form.txtCodProduto.value == "${Produto.id}"){
+                if (form.txtCodProduto.value == ""){
                     mensagem = mensagem + "Informe o Código do Produto\n";
                 }                             
-                if (form.txtUnudade.value == "${produto.unidade}"){
+                if (form.txtUnudade.value == ""){
                     mensagem = mensagem + "Informe únidade do Produto\n";
                 }
-                if (form.txtValor.value == "${produto.valor}"){
+                if (form.txtValor.value == ""){
                     mensagem = mensagem + "Informe o Valor do Produto\n";
                 }
                 if (!campoNumerico(form.txtProduto.value)){

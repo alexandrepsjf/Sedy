@@ -103,7 +103,7 @@ and open the template in the editor.
             function validarFormulario(form) { 
                 var mensagem;
                 mensagem = "";
-                if (form.txtCodPedido.value == "${peidido.id}"){
+                if (form.txtCodPedido.value == ""){
                     mensagem = mensagem + "Informe o Código do Pedido\n";
                 }                             
                 

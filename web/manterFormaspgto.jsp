@@ -48,7 +48,7 @@ and open the template in the editor.
             function validarFormulario(form) { 
                 var mensagem;
                 mensagem = "";
-                if (form.txtCodFormaPagamento.value == "${formaPagamento.id}"){
+                if (form.txtCodFormaPagamento.value == ""){
                     mensagem = mensagem + "Informe o Código da Forma de Pagamento\n";
                 }                             
                 
