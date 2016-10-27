@@ -108,7 +108,7 @@ public class ManterFormaPagamentoController extends HttpServlet {
 
             public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response){
         int id = Integer.parseInt(request.getParameter("id"));
-        String forma = request.getParameter("forma");
+        String forma = request.getParameter("nome");
         
        
        try{

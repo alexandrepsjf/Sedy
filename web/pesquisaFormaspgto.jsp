@@ -26,12 +26,12 @@ and open the template in the editor.
                 <tr>
                     <td><c:out value="${formasPagamento.id}" /></td>
                     <td><c:out value="${formasPagamento.forma}" /></td>
-                    <td><a href="ManterFormasPagamentoController?acao=preparaEditar&id=<c:out value="${formasPagamento.id}"/>">Editar</a></td>
-                    <td><a href="ManterFormasPagamentoController?acao=preparaExcluir&id=<c:out value="${formasPagamento.id}"/>">Excluir</a></td>
+                    <td><a href="ManterFormaPagamentoController?acao=preparaEditar&id=<c:out value="${formasPagamento.id}"/>">Editar</a></td>
+                    <td><a href="ManterFormaPagamentoController?acao=preparaExcluir&id=<c:out value="${formasPagamento.id}"/>">Excluir</a></td>
                 </tr>
             </c:forEach>
         </table>
-        <form action="ManterFormasPagamentoController?acao=prepararIncluir" method="POST">
+        <form action="ManterFormaPagamentoController?acao=prepararIncluir" method="POST">
             <input type="submit" name="btnIncluir" value="Incluir">
         </form>
     </body>

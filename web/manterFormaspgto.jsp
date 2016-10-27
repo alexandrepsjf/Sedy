@@ -18,10 +18,10 @@ and open the template in the editor.
         <form action="ManterFormaPagamentoController?acao=confirmar${operacao}" method="POST" name="frmManterFormaPagamento" >
         <table>            
             <tr> 
-                <td colspan="2"> Cod. Forma pgto </td><td><input name="id" type="text" size="15" value="${formaPagamento.id}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
+                <td colspan="2"> Cod. Forma pgto </td><td><input name="id" type="text" size="15" value="${formasPagamento.id}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
             </tr>
 
-            <td colspan="2"> Nome Forma pgto </td> <td><input name="nome" type="text" size="40" value="${formaPagemto.nome}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+            <td colspan="2"> Nome Forma pgto </td> <td><input name="nome" type="text" size="40" value="${formasPagemento.nome}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
         </tr>
     </table>
     <h3><button>Confirmar</button></h3>
