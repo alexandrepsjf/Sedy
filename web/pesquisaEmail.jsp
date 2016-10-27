@@ -26,8 +26,8 @@ and open the template in the editor.
                 <tr>
                     <td ><c:out value="${email.id}" /> </td>
                     <td ><c:out value="${email.email}" /> </td>
-                    <td ><a href="ManterEmailController?acao=preparaEditar&id=<c:out value="${email.id}"/>">Editar</a></td>
-                    <td ><a href="ManterEmailController?acao=preparaExcluir&id=<c:out value="${email.id}"/>">Excluir</a></td>
+                    <td ><a href="ManterEmailController?acao=prepararEditar&id=<c:out value="${email.id}"/>">Editar</a></td>
+                    <td ><a href="ManterEmailController?acao=prepararExcluir&id=<c:out value="${email.id}"/>">Excluir</a></td>
                 </tr>
             </c:forEach>
         </table>
