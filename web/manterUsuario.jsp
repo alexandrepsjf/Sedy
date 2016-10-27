@@ -15,10 +15,10 @@ and open the template in the editor.
     </head>
     <body>
         <div><h1>Usuario -  ${operacao}</h1></div>
-        <form action="ManterBairroController?acao=confirmar${operacao}" method="POST" name="frmManterBairro" >
+        <form action="ManterBairroController?acao=confirmar${operacao}" method="POST" name="frmManterBairro">
         <table>            
             <tr> 
-                <td colspan="2"> Cod. usuario </td><td><input type="text" size="15" name="id" value="${usuario.id}"<c:if test="${operacao =! 'Incluir'}"> readonly</c:if>></td>
+                <td colspan="2"> Cod. usuario </td><td><input type="text" size="15" name="id" value="${usuario.id}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
             </tr>
             <tr> 
             <tr> 
