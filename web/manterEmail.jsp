@@ -42,7 +42,7 @@ and open the template in the editor.
 
         </form>
     <SCRIPT language="JavaScript">
-            <!--
+          
             
             function campoNumerico(valor)
             {
@@ -79,7 +79,7 @@ and open the template in the editor.
                 }                
                 
            }
-            //-->
+           
         </SCRIPT>            
     </body>
 </html>

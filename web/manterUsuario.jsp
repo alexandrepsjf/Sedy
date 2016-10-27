@@ -30,10 +30,9 @@ and open the template in the editor.
                 <td colspan="2"> Nome usuario </td><td><input type="text" size="40" name="nome" value="${usuario.nome}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
             </tr>
             <tr> 
-                <td colspan="2"> senha usuario </td><td><input type="text" size="15"  ></td>
-            </tr>
+                <td colspan="2"> senha usuario </td><td><input type="text" size="40" name="senha" value="${usuario.senha}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
             <tr> 
-                <td colspan="2"> confirma senha usuario </td><td><input type="text" size="15" name="senha" value="${usuario.senha}"></td><c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                <td colspan="2"> confirma senha usuario </td><td><input type="text" size="40" name="senha" value="${usuario.senha}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
             </tr>
 
         </table>
