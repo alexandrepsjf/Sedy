@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Convert;
 import model.Nivel;
 
 /**
@@ -21,7 +20,7 @@ import model.Nivel;
  */
 public class NivelDAO {
 
-    public static List<Nivel> obterNivel() throws ClassNotFoundException, SQLException {
+    public static List<Nivel> obterNiveis() throws ClassNotFoundException, SQLException {
         Connection conexao = null;
         Statement comando = null;
         List<Nivel> niveis = new ArrayList<Nivel>();
@@ -31,8 +30,8 @@ public class NivelDAO {
             comando = conexao.createStatement();
             ResultSet rs = comando.executeQuery("select*from nivel");
             while (rs.next()) {
-                Nivel nivel = new Nivel(rs.getInt("ID"), rs.getString("NOME"),rs.getInt("configuracao"), rs.getInt("usuario"), rs.getInt("nivel"), rs.getInt("produto"), rs.getInt("relatorio"), rs.getInt("FORMA_PGM"), rs.getInt("LIGACAO_RECEBIDA"), rs.getInt("pedido"), rs.getInt("cliente"));
-                niveis.add(nivel);                
+                Nivel nivel = new Nivel(rs.getInt("ID"), rs.getString("NOME"), rs.getInt("configuracao"), rs.getInt("usuario"), rs.getInt("nivel"), rs.getInt("produto"), rs.getInt("relatorio"), rs.getInt("FORMA_PGM"), rs.getInt("LIGACAO_RECEBIDA"), rs.getInt("pedido"), rs.getInt("cliente"));
+                niveis.add(nivel);
             }
 
         } catch (SQLException e) {
@@ -79,5 +78,34 @@ public class NivelDAO {
         } catch (SQLException e) {
             throw e;
         }
+    }
+
+    public static Nivel obterNivel(int id) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        Nivel nivel = new Nivel();
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("select*from nivel where id = " + id);
+            rs.first();            
+                nivel.setId(rs.getInt("ID"));
+                nivel.setNome(rs.getString("NOME"));
+                nivel.setConfiguracao(rs.getInt("configuracao"));
+                nivel.setUsuario(rs.getInt("usuario"));
+                nivel.setNivel(rs.getInt("nivel"));
+                nivel.setProduto(rs.getInt("produto"));
+                nivel.setRelatorio(rs.getInt("relatorio"));
+                nivel.setFormaPagamento(rs.getInt("FORMA_PGM"));
+                nivel.setLigacaoRecebida(rs.getInt("LIGACAO_RECEBIDA"));
+                nivel.setPedido(rs.getInt("pedido"));
+                nivel.setCliente(rs.getInt("cliente"));        
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return nivel;
     }
 }

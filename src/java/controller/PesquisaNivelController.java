@@ -35,7 +35,7 @@ public class PesquisaNivelController extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try  {
-            request.setAttribute("niveis", Nivel.obterNivel());
+            request.setAttribute("niveis", Nivel.obterNiveis());
             RequestDispatcher view = request.getRequestDispatcher("/pesquisaNivel.jsp");
             view.forward(request, response);
         } catch (ClassNotFoundException ex) {
