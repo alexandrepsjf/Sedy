@@ -13,7 +13,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body>
+    <body onLoad="checkbox()">
         <div><h1>Nivel - ${operacao}</h1></div>
         <form action="ManterNivelController?acao=confirmar${operacao}" method="post" name="frmManterNivel" >
             <table>            
@@ -21,28 +21,33 @@ and open the template in the editor.
                     <td colspan="2"> Cod.  nivel <input type="text" size="10"  name="id" value="${nivel.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td colspan="2"> Nome  nivel <input type="text" size="40"  name="nome" value="${nivel.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td colspan="2"> Nome  nivel <input type="text" size="40"  name="nome"  value="${nivel.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td><input  type="checkbox"  name="nivel" value="${nivel.nivel}" <c:if test="${operacao == 'Editar'}&& ${nivel.nivel}==1"> checked</c:if> <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>NIVEL</td>
-                    <td> <input  type="checkbox" name="relatorio" value="${nivel.relatorio}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>RELATORIO</td>
-                    <td><input checked   type="checkbox" name="ligacaoRecebida" value="${nivel.ligacaoRecebida}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>LIGACAO RECEBIDA</td>
+                        <td><input  type="checkbox" id="1" name="nivel" value="${nivel.nivel}"  <c:if test="${operacao == 'Editar'}&& ${nivel.nivel}==null"> checked</c:if> >NIVEL</td>
+                    <td> <input  type="checkbox" id="2" name="relatorio" value="${nivel.relatorio}" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>RELATORIO</td>
+                    <td><input checked   type="checkbox" id="3" name="ligacaoRecebida" value="${nivel.ligacaoRecebida}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>LIGACAO RECEBIDA</td>
                 </tr>
                 <tr> 
-                    <td><input  type="checkbox" name="configuracao" value="${nivel.configuracao}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>CONFIGURACAO</td>
-                    <td> <input  type="checkbox" name="usuario" value="${nivel.usuario}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>USUARIO</td>
-                    <td><input checked   type="checkbox" name="pedido" value="${nivel.pedido}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>PEDIDO</td>
+                    <td><input  type="checkbox" id="4" name="configuracao" value="${nivel.configuracao}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>CONFIGURACAO</td>
+                    <td> <input  type="checkbox" id="5" name="usuario" value="${nivel.usuario}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>USUARIO</td>
+                    <td><input checked   type="checkbox" id="6" name="pedido" value="${nivel.pedido}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>PEDIDO</td>
                 </tr>
-                <tr><td><input  type="checkbox" name="produto" value="${nivel.produto}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>PRODUTOS</td>
-                    <td> <input  type="checkbox" name="formaPagamento" value="${nivel.formaPagamento}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>FORMAS DE PAGTO</td>
-                    <td><input checked   type="checkbox" name="cliente" value="${nivel.cliente}" <c:if test="${operacao == 'Editar'}&& ${nivel.cliente}!='0'"> checked</c:if> <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>CLIENTES</td>
+                <tr><td><input  type="checkbox" name="produto" id="7" value="${nivel.produto}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>PRODUTOS</td>
+                    <td> <input  type="checkbox" name="formaPagamento" id="8" value="${nivel.formaPagamento}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>FORMAS DE PAGTO</td>
+                    <td><input checked   type="checkbox" name="cliente" id="9" value="${nivel.cliente}" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>CLIENTES</td>
                 </tr>
             </table>
             <h3><button type="submit">Confirmar</button></h3>
         </form>
     <SCRIPT language="JavaScript">
             <!--
-            
+            function checkbox(){    
+                for(x=1; x<=9; x++){                    
+                    if (document.getElementById(x).value==1){
+                    document.getElementById(x).checked = true;}
+                }
+            }
             function campoNumerico(valor)
             {
                 var caracteresValidos = "0123456789";
