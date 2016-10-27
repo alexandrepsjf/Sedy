@@ -38,7 +38,7 @@ public class PesquisaBairroController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
                       
-           request.setAttribute("bairros", Bairro.obterBairro());
+           request.setAttribute("bairros", Bairro.obterBairros());
            RequestDispatcher view = 
                     request.getRequestDispatcher("/pesquisaBairros.jsp");
            view.forward(request,response);

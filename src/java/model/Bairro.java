@@ -15,6 +15,10 @@ import java.util.List;
  */
 public class Bairro {
 
+    public static Bairro obterBairro(int id) throws ClassNotFoundException, SQLException {
+        return BairroDAO.obterBairro(id);
+    }
+
     private int id;
     private String nome;
     private float taxa;
@@ -24,6 +28,9 @@ public class Bairro {
         this.nome = nome;
         this.taxa = taxa;
     }
+
+    public Bairro() {
+        }
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -49,7 +56,7 @@ public class Bairro {
         this.id = id;
     }
 
-    public static List<Bairro> obterBairro() throws ClassNotFoundException, SQLException {
+    public static List<Bairro> obterBairros() throws ClassNotFoundException, SQLException {
         return BairroDAO.obterBairros();
     }
 

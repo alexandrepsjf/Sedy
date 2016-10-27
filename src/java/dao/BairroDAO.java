@@ -68,4 +68,27 @@ public class BairroDAO {
             throw e;
         }
     }
+
+    public static Bairro obterBairro(int id) throws ClassNotFoundException, SQLException {
+        Connection conexao = null;
+        Statement comando = null;
+        Bairro bairro = new Bairro();
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("select*from bairro where id = " + id);
+            rs.first();
+           bairro.setId(rs.getInt("ID"));
+           bairro.setNome(rs.getString("BAIRRO"));
+           bairro.setTaxa(rs.getFloat("TAXA"));
+                        
+            
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+    return bairro;    
+    }  
 }
