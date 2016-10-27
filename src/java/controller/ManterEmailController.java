@@ -37,10 +37,10 @@ public class ManterEmailController extends HttpServlet {
         }else{
             if(acao.equals("confirmarIncluir")){
                confirmarIncluir(request, response);
-            }/*else{
+            }else{
                 if(acao.equals("prepararEditar")){
-                    prepararIncluir(request, response);
-                }else{
+                    prepararEditar(request, response);
+                }}/*else{
                     if(acao.equals("confirmarEditar")){
                         prepararIncluir(request, response);
                      }else{
@@ -85,7 +85,17 @@ public class ManterEmailController extends HttpServlet {
         }
         
     }        
-            
+       public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Editar");
+            int id = Integer.parseInt (request.getParameter("id"));
+            Email email = Email.obterEmail(id);
+            request.setAttribute("email",email);        
+            RequestDispatcher view = request.getRequestDispatcher("/manterEmail.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
+        }
+    }        
             
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -125,5 +135,7 @@ public class ManterEmailController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+ 
 
 }

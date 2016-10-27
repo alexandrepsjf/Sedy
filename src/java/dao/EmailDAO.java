@@ -16,7 +16,7 @@ import model.Email;
 
 public class EmailDAO {
 
-    public static List<Email> obterEmail() throws ClassNotFoundException, SQLException {
+    public static List<Email> obterEmails() throws ClassNotFoundException, SQLException {
         Connection conexao = null;
         Statement comando = null;
         List<Email> emails = new ArrayList<Email>();
@@ -74,5 +74,29 @@ public class EmailDAO {
         } catch (SQLException e) {
             throw e;
         }
+    }
+
+    public static Email obterEmail(int id) throws ClassNotFoundException, SQLException {
+        Connection conexao = null;
+        Statement comando = null;
+        Email email = new Email();
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("select*from email where id = " + id);
+            rs.first();
+           email.setId(rs.getInt("ID"));
+           email.setEmail(rs.getString("email"));
+           email.setSenha(rs.getString("senha"));
+           email.setAutentica(rs.getString("autentica"));             
+           email.setServidorSaida(rs.getString("servidorSaida"));
+           email.setServidorEntrada(rs.getString("servidorEntrada"));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+    return email;    
     }
 }

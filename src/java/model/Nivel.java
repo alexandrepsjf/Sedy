@@ -14,6 +14,8 @@ import java.util.List;
  * @author Sujajeb
  */
 public class Nivel {
+
+   
      private int id;
     private String nome;
     private int configuracao;
@@ -38,6 +40,10 @@ public class Nivel {
         this.ligacaoRecebida = ligacaoRecebida;
         this.pedido = pedido;
         this.cliente = cliente;
+    }
+
+    public Nivel() {
+        
     }
 
     public int getId() {
@@ -130,8 +136,11 @@ public class Nivel {
     
 
 
-     public static List<Nivel> obterNivel() throws ClassNotFoundException, SQLException {
-        return NivelDAO.obterNivel();
+     public static List<Nivel> obterNiveis() throws ClassNotFoundException, SQLException {
+        return NivelDAO.obterNiveis();
+    }
+      public static Nivel obterNivel(int id) throws ClassNotFoundException {
+         return NivelDAO.obterNivel(id);
     }
       public void gravar() throws SQLException, ClassNotFoundException{
         NivelDAO.gravar(this);

@@ -37,10 +37,10 @@ public class ManterNivelController extends HttpServlet {
             prepararIncluir(request, response);
         } else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-            /* }else{
+          }else{
                 if(acao.equals("prepararEditar")){
-                    prepararIncluir(request, response);
-                }else{
+                    prepararEditar(request, response);
+                }   /*else{
                     if(acao.equals("confirmarEditar")){
                         prepararIncluir(request, response);
                      }else{
@@ -54,9 +54,7 @@ public class ManterNivelController extends HttpServlet {
                     }
                 }
             }*/
-
         }
-
     }
 
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
@@ -71,7 +69,6 @@ public class ManterNivelController extends HttpServlet {
     public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         String nome = request.getParameter("nome");
-        System.out.println(request.getParameter("nivel"));
         int checkNivel,cliente,pedido,ligacaoRecebida,configuracao,usuario,relatorio,formaPagamento,produto;
         if(request.getParameter("nivel")==null) { checkNivel=0;} else { checkNivel=1;}
         if(request.getParameter("cliente")==null) { cliente=0;} else { cliente=1;}
@@ -131,5 +128,17 @@ public class ManterNivelController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Editar");
+            int id = Integer.parseInt(request.getParameter("id"));
+            Nivel nivel = Nivel.obterNivel(id);
+            request.setAttribute("nivel",nivel);
+               RequestDispatcher view = request.getRequestDispatcher("/manterNivel.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException | ClassNotFoundException ex) {
+        }
+    }
 
 }

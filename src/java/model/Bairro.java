@@ -15,9 +15,7 @@ import java.util.List;
  */
 public class Bairro {
 
-    public static Bairro obterBairro(int id) throws ClassNotFoundException, SQLException {
-        return BairroDAO.obterBairro(id);
-    }
+    
 
     private int id;
     private String nome;
@@ -62,5 +60,8 @@ public class Bairro {
 
     public void gravar() throws SQLException, ClassNotFoundException{
         BairroDAO.gravar(this);
+    }
+    public static Bairro obterBairro(int id) throws ClassNotFoundException, SQLException {
+        return BairroDAO.obterBairro(id);
     }
 }
