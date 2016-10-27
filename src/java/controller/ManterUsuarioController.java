@@ -78,6 +78,7 @@ public class ManterUsuarioController extends HttpServlet {
             Logger.getLogger(ManterUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ManterUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
     }
 

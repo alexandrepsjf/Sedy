@@ -23,6 +23,7 @@ public class NivelDAO {
     public static List<Nivel> obterNiveis() throws ClassNotFoundException, SQLException {
         Connection conexao = null;
         Statement comando = null;
+        
         List<Nivel> niveis = new ArrayList<Nivel>();
 
         try {

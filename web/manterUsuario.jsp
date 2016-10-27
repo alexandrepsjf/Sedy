@@ -23,6 +23,7 @@ and open the template in the editor.
             <tr> 
             <tr> 
                 <td colspan="2"> Nivel usuario </td>
+                
                 <td>
                       <select name="pergunta1" class="usuario">
                             <option value="">Selecione</option>
