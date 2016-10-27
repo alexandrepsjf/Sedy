@@ -5,13 +5,19 @@
  */
 package controller;
 
+import dao.NivelDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Nivel;
 
 /**
  *
@@ -30,6 +36,8 @@ public class ManterUsuarioController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       
+        
         String acao = request.getParameter("acao");
         if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
@@ -58,10 +66,18 @@ public class ManterUsuarioController extends HttpServlet {
 
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         try {
+            
+            List<Nivel> niveis = NivelDAO.obterNiveis();
+            
             request.setAttribute("operacao", "Incluir");
+            request.setAttribute("niveis", niveis);
             RequestDispatcher view = request.getRequestDispatcher("/manterUsuario.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ManterUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ManterUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -24,9 +24,12 @@ and open the template in the editor.
             <tr> 
                 <td colspan="2"> Nivel usuario </td>
                 <td>
-                   <select name="optNivelUsuario" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                        <option value="Gerente" <c:if test="${usuario.nivel == 'Gerente'}"> selected</c:if>>Gerente</option>
-                        <option value="Funcionario" <c:if test="${usuario.nivel == 'Funcionario'}"> selected</c:if>>Funcionario</option>
+                      <select name="pergunta1" class="usuario">
+                            <option value="">Selecione</option>
+                            <c:forEach var="nivel" items="${niveis}">
+                                <option value="${nivel.id}"> ${nivel.nome} </option>
+                             </c:forEach>
+                      </select>
             </tr>
             <tr> 
                 <td colspan="2"> Nome usuario </td><td><input type="text" size="40" name="nome" value="${usuario.nome}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
