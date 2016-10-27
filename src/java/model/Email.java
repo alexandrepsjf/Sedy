@@ -14,6 +14,8 @@ import java.util.List;
  * @author Alexandre
  */
 public class Email {
+
+    
     private int id;
     private String email;
     private String senha;
@@ -29,6 +31,11 @@ public class Email {
         this.servidorSaida = servidorSaida;
         this.servidorEntrada = servidorEntrada;
     }
+
+    public Email() {
+        }
+
+    
 
 
     public int getId() {
@@ -79,10 +86,14 @@ public class Email {
         this.servidorEntrada = servidorEntrada;
     }
     public static List<Email> obterEmail() throws ClassNotFoundException, SQLException {
-        return EmailDAO.obterEmail();
+        return EmailDAO.obterEmails();
     }
     public void gravar() throws SQLException, ClassNotFoundException{
         EmailDAO.gravar(this);
+    }
+    
+   public static Email obterEmail(int id) throws ClassNotFoundException, SQLException {
+        return EmailDAO.obterEmail(id);
     }
 }
     

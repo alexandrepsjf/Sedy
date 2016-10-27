@@ -34,10 +34,10 @@ public class ManterClienteController extends HttpServlet {
             prepararIncluir(request, response);
         } else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-            /* }else{
+             }else{
                 if(acao.equals("prepararEditar")){
-                    prepararIncluir(request, response);
-                }else{
+                    prepararEditar(request, response);
+                }/*else{
                     if(acao.equals("confirmarEditar")){
                         prepararIncluir(request, response);
                      }else{
@@ -105,6 +105,10 @@ public class ManterClienteController extends HttpServlet {
     }// </editor-fold>
 
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
