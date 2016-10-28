@@ -42,6 +42,7 @@ and open the template in the editor.
             </tr>
 
         </table>
+             <h3><button type="submit">Confirmar</button></h3>
         </form>
     <SCRIPT language="JavaScript">
             <!--
