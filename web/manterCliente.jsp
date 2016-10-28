@@ -16,61 +16,61 @@ and open the template in the editor.
     <body>
         <div><h1>Cliente -  ${operacao}</h1></div>
         <form action="ManterClienteController?acao=confirmar${operacao}" method="post" name="frmManterCliente" >
-            <table   style="text-align:right;"> 
+            <table  > 
                 <tr > 
-                    <td >Data cadastro <input type="text" name="data_cadastro" size="10" value="${cliente.data_cadastro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                              
+                    <td >Data cadastro </td><td><input type="text" name="data_cadastro"  value="${cliente.data_cadastro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                </tr>           
                     <tr >
-                        <td>Hora cadastro <input type="text" name="hora_cadastro" size="10" value="${cliente.hora_cadastro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td>Hora cadastro </td><td><input type="text" name="hora_cadastro"  value="${cliente.hora_cadastro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr > 
-                        <td> Cod. Cliente <input type="text" name="id" size="10" value="${cliente.id}"  <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>       
+                        <td> Cod. Cliente </td><td><input type="text" name="id" value="${cliente.id}"  <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>       
                     </tr>
                     <tr> 
-                        <td>(DDD)Telefone
-                           <!--select name="optTel" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                        <td>(DDD)Telefone</td><td>
+                           <select name="optTel" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                             <option value="0" <c:if test="${cliente.telefone.telefone == null}"> selected</c:if>> </option>  
                             <c:forEach items="${telefones}" var="cliente">
                                 <option value="${cliente.id}" <c:if test="${cliente.telefone.telefone == cliente.telefone}"> selected</c:if>>${cliente.telefone}</option>  
                             </c:forEach>
-                        </select-->                           
+                        </select>                           
                     </td>
                 </tr>
                 <tr> 
-                    <td >Nome <input type="text" name="nome" value="${cliente.nome}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td >Nome </td><td><input type="text" name="nome" value="${cliente.nome}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr> 
-                        <td >Email <input type="text" name="email" value="${cliente.email}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td >Email </td><td><input type="text" name="email" value="${cliente.email}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td>Logradouro<input type="text" name ="logradouro" value="${cliente.logradouro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td>Logradouro </td><td><input type="text" name ="logradouro" value="${cliente.logradouro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td>Numero <input type="text" name="numero" value="${cliente.numero}" size="15" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td>Numero </td><td><input type="text" name="numero" value="${cliente.numero}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr> 
                 <tr>
-                    <td>Referência<input type="text" name ="referencia" value="${cliente.referencia}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td>Referência </td><td><input type="text" name ="referencia" value="${cliente.referencia}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
-                    <td>Compl. <input type="text" name="complemento" value="${cliente.complemento}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td>Compl.</td><td><input type="text" name="complemento" value="${cliente.complemento}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr > 
-                    <td >CEP  <input type="text" value="${cliente.cep}"></td>
+                    <td >CEP </td><td><input type="text" value="${cliente.cep}"></td>
                 </tr>
                 <tr>
-                    <td> Bairro  <!--select name="optTel" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                    <td> Bairro </td><td> <select name="optTel" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                             <option value="0" <c:if test="${cliente.bairro.nome == null}"> selected</c:if>> </option>  
                             <c:forEach items="${bairros}" var="bairro">
                                 <option value="${cliente.id}" <c:if test="${cliente.bairro.nome == cliente.bairro}"> selected</c:if>>${cliente.bairro}</option>  
                             </c:forEach>
-                        </select-->  
+                        </select>  
                     </td>
                 </tr>               
                 <tr>
-                    <td>Cidade <input type="text" name="cidade" value="${cliente.cidade}"></td>
+                    <td>Cidade </td><td><input type="text" name="cidade" value="${cliente.cidade}"></td>
                 </tr>
                 <tr>
-                    <td>Estado <input type="text" name="estado" value="${cliente.estado}">
+                    <td>Estado </td><td><input type="text" name="estado" value="${cliente.estado}">
                     </td>
                 </tr>        
             </table>
