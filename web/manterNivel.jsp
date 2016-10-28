@@ -18,10 +18,10 @@ and open the template in the editor.
         <form action="ManterNivelController?acao=confirmar${operacao}" method="post" name="frmManterNivel" >
             <table>            
                 <tr>
-                    <td colspan="2"> Cod.  nivel <input type="text" size="10"  name="id" value="${nivel.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
+                    <td> COD. NÍVEL </td><td><input type="text"  name="id" value="${nivel.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td colspan="2"> Nome  nivel <input type="text" size="40"  name="nome"  value="${nivel.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td > NOME DO NÍVEL</td><td><input type="text"   name="nome"  value="${nivel.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
                         <td><input  type="checkbox" id="1" name="nivel" value="${nivel.nivel}"  <c:if test="${operacao == 'Editar'}&& ${nivel.nivel}==null"> checked</c:if> >NIVEL</td>

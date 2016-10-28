@@ -18,13 +18,13 @@ and open the template in the editor.
         <form action="ManterBairroController?acao=confirmar${operacao}" method="POST" name="frmManterBairro" >
             <table>            
                 <tr> 
-                    <td colspan="2"> Cod. Bairro </td><td><input type="text" name="id" value="${bairro.id}" size="15" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
+                    <td > COD. DO BAIRRO </td><td><input type="text" name="id" value="${bairro.id}"  <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                     </tr> 
                     <tr>
-                        <td colspan="2"> Nome Bairro </td><td><input type="text" name="nome" value="${bairro.nome}" size="40" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td > NOME DO BAIRRO </td><td><input type="text" name="nome" value="${bairro.nome}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td colspan="2"> Taxa entrega do Bairro </td><td><input type="text" name="taxa" value="${bairro.taxa}" size="15" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td > TAXA DE ENTREGA </td><td><input type="text" name="taxa" value="${bairro.taxa}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
             </table>
             <h3><button type="submit" >Confirmar</button></h3>

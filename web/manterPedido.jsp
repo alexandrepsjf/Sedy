@@ -14,7 +14,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div><h1>PEDIDO -  ${operacao}</h1></div>
+        <div><h1>Pedido -  ${operacao}</h1></div>
         <form action="ManterPedidoController?acao=confirmar${operacao}" method="POST" name="frmManterPedido" >
             <table>            
                 <tr>
@@ -32,7 +32,7 @@ and open the template in the editor.
                         <td> DATA PEDIDO </td> <td><input type="text" name="data_2" value="${pedido.data_2}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td> HORA PEDIDO Pedido </td> <td> <input type="text" name="hora" value="${pedido.hora}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td> HORA PEDIDO </td> <td> <input type="text" name="hora" value="${pedido.hora}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
 
                     </tr>            
                     <tr>   

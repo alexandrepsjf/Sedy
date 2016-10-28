@@ -19,16 +19,16 @@ and open the template in the editor.
         <form action="ManterProdutoController?acao=confirmar${operacao}" method="POST" name="frmManterProduto" >
             <table>            
                 <tr> 
-                    <td colspan="2"> Cod. Produto </td><td><input type="text"  name= "id" value="${produto.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
+                    <td > COD. PRODUTO </td><td><input type="text"  name= "id" value="${produto.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td colspan="2"> Nome Produto </td><td><input type="text" name ="nome" value="${produto.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td >NOME PRODUTO </td><td><input type="text" name ="nome" value="${produto.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td colspan="2"> Unidade produto </td><td><input type="text" name="unidade" value="${produto.unidade}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td > UNIDADE DO PRODUTO </td><td><input type="text" name="unidade" value="${produto.unidade}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td colspan="2"> Preço produto </td><td><input type="text" name="valor" value="${produto.valor}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td > PREÇO DO PRODUTO </td><td><input type="text" name="valor" value="${produto.valor}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
             </table>
               <h3><button type="submit">Confirmar</button></h3>

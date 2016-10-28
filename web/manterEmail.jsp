@@ -18,41 +18,40 @@ and open the template in the editor.
         <form action="ManterEmailController?acao=confirmar${operacao}" method="post" name="frmManterEmail" >
             <table>            
                 <tr> 
-                    <td colspan="2"> Cod. Email </td><td><input type="text" name="id" value="${email.id}" size="15" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
+                    <td > COD. EMAIL </td><td><input type="text" name="id" value="${email.id}"  <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                     </tr>
 
                     <tr> 
-                        <td colspan="2">  Email </td><td><input type="text" name="email" value="${email.email}" size="15" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td >  EMAIL </td><td><input type="text" name="email" value="${email.email}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr> 
-                        <td colspan="2"> senha usuario </td><td><input type="text" name="senha" value="${email.senha}" size="15" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td > SENHA USUARIO </td><td><input type="text" name="senha" value="${email.senha}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
 
                     <tr> 
-                        <td colspan="2"> Autenticação </td><td><input type="text" name="autentica" value="${email.autentica}" size="15" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td > AUTENTICAÇÃO </td><td><input type="text" name="autentica" value="${email.autentica}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr> 
-                        <td colspan="2"> Servidor Saida </td><td><input type="text" name="servidorSaida" value="${email.servidorSaida}" size="15" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td > SERVIDOR SAIDA  </td><td><input type="text" name="servidorSaida" value="${email.servidorSaida}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr> 
-                        <td colspan="2"> Servidor Entrada </td><td><input type="text" name="servidorEntrada" value="${email.servidorEntrada}" size="15" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td > SERVIDOR ENTRADA </td><td><input type="text" name="servidorEntrada" value="${email.servidorEntrada}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>  
             </table>
-            <h3><button type="submit" >Confirmar</button></h3>          
-
+            <h3><button type="submit" >Confirmar</button></h3>
         </form>
-    <SCRIPT language="JavaScript">
-          
-            
+        <SCRIPT language="JavaScript">
+
+
             function campoNumerico(valor)
             {
                 var caracteresValidos = "0123456789";
                 var ehNumero = true;
                 var umCaracter;
-                for (i = 0; i < valor.length && ehNumero == true; i++) 
-                { 
-                    umCaracter = valor.charAt(i); 
-                    if (caracteresValidos.indexOf(umCaracter) == -1) 
+                for (i = 0; i < valor.length && ehNumero == true; i++)
+                {
+                    umCaracter = valor.charAt(i);
+                    if (caracteresValidos.indexOf(umCaracter) == -1)
                     {
                         ehNumero = false;
                     }
@@ -60,26 +59,26 @@ and open the template in the editor.
                 return ehNumero;
             }
 
-            function validarFormulario(form) { 
+            function validarFormulario(form) {
                 var mensagem;
                 mensagem = "";
-                if (form.txtCodEmail.value == ""){
+                if (form.txtCodEmail.value == "") {
                     mensagem = mensagem + "Informe o Código do email\n";
-                }                             
-                
-                if (!campoNumerico(form.txtCodEmail.value)){
+                }
+
+                if (!campoNumerico(form.txtCodEmail.value)) {
                     mensagem = mensagem + "Código do Email deve ser numérico\n";
                 }
-                                                
-                if (mensagem == ""){
+
+                if (mensagem == "") {
                     return true;
-                }else{
+                } else {
                     alert(mensagem);
                     return false;
-                }                
-                
-           }
-           
+                }
+
+            }
+
         </SCRIPT>            
     </body>
 </html>
