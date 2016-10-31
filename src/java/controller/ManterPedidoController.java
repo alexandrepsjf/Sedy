@@ -5,13 +5,22 @@
  */
 package controller;
 
+import dao.FormaPagamentoDAO;
+import dao.ProdutoDAO;
+import dao.TelefoneDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.FormaPagamento;
+import model.Produto;
+import model.Telefone;
 
 /**
  *
@@ -58,10 +67,21 @@ public class ManterPedidoController extends HttpServlet {
 
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         try {
+            List<Telefone> telefones = TelefoneDAO.obterTelefone();
+            List<Produto> produtos = ProdutoDAO.obterProduto();
+            List<FormaPagamento> formaPagamentos = FormaPagamentoDAO.obterFormaPagamento();
+            
+            request.setAttribute("telefones", telefones);
+            request.setAttribute("produtos", produtos);
+            request.setAttribute("formaPagamentos", formaPagamentos);
             request.setAttribute("operacao", "Incluir");
             RequestDispatcher view = request.getRequestDispatcher("/manterPedido.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ManterPedidoController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ManterPedidoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

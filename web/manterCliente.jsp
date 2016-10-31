@@ -27,13 +27,14 @@ and open the template in the editor.
                         <td> Cod. Cliente </td><td><input type="text" name="id" value="${cliente.id}"  <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>       
                     </tr>
                     <tr> 
-                        <td>(DDD)Telefone</td><td>
-                           <select name="optTel" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                            <option value="0" <c:if test="${cliente.telefone.telefone == null}"> selected</c:if>> </option>  
-                            <c:forEach items="${telefones}" var="cliente">
-                                <option value="${cliente.id}" <c:if test="${cliente.telefone.telefone == cliente.telefone}"> selected</c:if>>${cliente.telefone}</option>  
+                        <td>(DDD)Telefone</td>
+                    <td>                             
+                        <select>
+                            <option value="">Selecione</option>
+                            <c:forEach var="telefone" items="${telefones}">
+                                <option value="${telefone.id}"> ${telefone.telefone} </option>
                             </c:forEach>
-                        </select>                           
+                        </select>
                     </td>
                 </tr>
                 <tr> 
@@ -58,12 +59,15 @@ and open the template in the editor.
                     <td >CEP </td><td><input type="text" value="${cliente.cep}"></td>
                 </tr>
                 <tr>
-                    <td> Bairro </td><td> <select name="optTel" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                            <option value="0" <c:if test="${cliente.bairro.nome == null}"> selected</c:if>> </option>  
-                            <c:forEach items="${bairros}" var="bairro">
-                                <option value="${cliente.id}" <c:if test="${cliente.bairro.nome == cliente.bairro}"> selected</c:if>>${cliente.bairro}</option>  
+                    <td> Bairro </td>
+                    
+                    <td>                             
+                        <select>
+                            <option value="">Selecione</option>
+                            <c:forEach var="bairro" items="${bairros}">
+                                <option value="${bairro.id}"> ${bairro.nome} </option>
                             </c:forEach>
-                        </select>  
+                        </select>
                     </td>
                 </tr>               
                 <tr>

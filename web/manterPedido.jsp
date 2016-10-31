@@ -21,10 +21,13 @@ and open the template in the editor.
                     <td> COD. CLIENTE </td> <td> <input type="text"  name="id" value="${pedido.id}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>               
                     </tr>            
                     <tr>
-                        <td> TELEFONE DDD </td> <td> <select>                       
-                            </select>                
-                            <select>            
-
+                        <td> TELEFONE </td> 
+                        <td>                 
+                            <select>
+                                <option value="">Selecione</option>
+                                <c:forEach var="telefone" items="${telefones}">
+                                    <option value="${telefone.id}"> ${telefone.telefone} </option>
+                                </c:forEach>
                             </select>
                         </td>
                     </tr>
@@ -52,10 +55,11 @@ and open the template in the editor.
                 <tr>
                     <td> PRODUTO </td> 
                     <td>
-                        <select >            
-                            <option></option>
-                            <option></option>
-                            <option></option>                       
+                        <select>
+                            <option value="">Selecione</option>
+                            <c:forEach var="produto" items="${produtos}">
+                                <option value="${produto.id}"> ${produto.nome} </option>
+                            </c:forEach>
                         </select>
                     </td>
                 </tr>
@@ -66,8 +70,15 @@ and open the template in the editor.
                     <td> DESCONTO </td> <td><input type="text" ></td>
                 </tr>
                 <tr>                
-                    <td> FORMAS DE PGTO </td> <td> <select>                             
-                        </select> </td>
+                    <td> FORMAS DE PGTO </td> 
+                    <td>                             
+                        <select>
+                            <option value="">Selecione</option>
+                            <c:forEach var="formaPagamento" items="${formaPagamentos}">
+                                <option value="${formaPagamento.id}"> ${formaPagamento.forma} </option>
+                            </c:forEach>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <td> VALOR TOTAL </td> <td><input type="text" ></td>
