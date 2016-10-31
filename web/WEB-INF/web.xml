@@ -44,11 +44,10 @@
         <servlet-name>ManterBairroController</servlet-name>
         <servlet-class>controller.ManterBairroController</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>ManterClienteController</servlet-name>
         <servlet-class>controller.ManterClienteController</servlet-class>
     </servlet>
-   
     <servlet>
         <servlet-name>ManterFormaPagamentoController</servlet-name>
         <servlet-class>controller.ManterFormaPagamentoController</servlet-class>
@@ -72,6 +71,14 @@
     <servlet>
         <servlet-name>ManterPedidoController</servlet-name>
         <servlet-class>controller.ManterPedidoController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PesquisaTelefoneController</servlet-name>
+        <servlet-class>controller.PesquisaTelefoneController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManterTelefoneController</servlet-name>
+        <servlet-class>controller.ManterTelefoneController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaBairroController</servlet-name>
@@ -120,7 +127,7 @@
     <servlet-mapping>
         <servlet-name>ManterClienteController</servlet-name>
         <url-pattern>/ManterClienteController</url-pattern>
-    </servlet-mapping>   
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManterFormaPagamentoController</servlet-name>
         <url-pattern>/ManterFormaPagamentoController</url-pattern>
@@ -144,6 +151,14 @@
     <servlet-mapping>
         <servlet-name>ManterPedidoController</servlet-name>
         <url-pattern>/ManterPedidoController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PesquisaTelefoneController</servlet-name>
+        <url-pattern>/PesquisaTelefoneController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterTelefoneController</servlet-name>
+        <url-pattern>/ManterTelefoneController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

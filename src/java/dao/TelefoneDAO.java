@@ -6,6 +6,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,7 +16,7 @@ import model.Telefone;
 
 public class TelefoneDAO {
 
-    public static List<Telefone> obterTelefone() throws ClassNotFoundException, SQLException {
+    public static List<Telefone> obterTelefones() throws ClassNotFoundException, SQLException {
         Connection conexao = null;
         Statement comando = null;
         List<Telefone> telefones = new ArrayList<Telefone>();
@@ -51,4 +52,46 @@ public class TelefoneDAO {
 
         }
     }
-}
+
+    public static void gravar(Telefone telefone) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "insert into telefone(id,telefone,cliente_id) values(?,?,?)";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, telefone.getId());
+            comando.setString(2, telefone.getTelefone());
+            comando.setFloat(3, telefone.getIdCliente());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+       
+    }
+
+    public static Telefone obterTelefone(int id) throws ClassNotFoundException {
+         Connection conexao = null;
+        Statement comando = null;
+        Telefone telefone = new Telefone();
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("select*from telefone where id = " + id);
+            rs.first();
+           telefone.setId(rs.getInt("ID"));
+           telefone.setTelefone(rs.getString("telefone"));
+           telefone.setIdCliente(rs.getInt("cliente_id"));
+                        
+            
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+    return telefone;    
+    }  
+    }
+

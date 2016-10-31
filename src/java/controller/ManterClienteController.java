@@ -66,7 +66,7 @@ public class ManterClienteController extends HttpServlet {
 
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         try {
-            List<Telefone> telefones = TelefoneDAO.obterTelefone();
+            List<Telefone> telefones = TelefoneDAO.obterTelefones();
             List<Bairro> bairros = BairroDAO.obterBairros();
        
             request.setAttribute("telefones", telefones);
