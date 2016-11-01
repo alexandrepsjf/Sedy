@@ -42,10 +42,10 @@ public class ManterBairroController extends HttpServlet {
         }else{
                 if(acao.equals("prepararEditar")){
                     prepararEditar(request, response);
-                }}/*/*else{
+                }else{
                     if(acao.equals("confirmarEditar")){
-                        prepararIncluir(request, response);
-                     }else{
+                        confirmarEditar(request, response);
+                     }}/*/*else{
                         if(acao.equals("prepararExcluir")){
                             prepararIncluir(request, response);
                         }else{
@@ -58,7 +58,7 @@ public class ManterBairroController extends HttpServlet {
             }*/
 
     }
-
+    }
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Incluir");
@@ -82,7 +82,20 @@ public class ManterBairroController extends HttpServlet {
         }
 
     }
+public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String nome = request.getParameter("nome");
+        float taxa = Float.parseFloat(request.getParameter("taxa"));
+        try {
+            Bairro bairro = new Bairro(id, nome, taxa);
+            bairro.alterar();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaBairroController");
+            view.forward(request, response);
+        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
 
+        }
+
+    }
      public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Editar");

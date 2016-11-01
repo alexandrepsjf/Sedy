@@ -64,4 +64,8 @@ public class Bairro {
     public static Bairro obterBairro(int id) throws ClassNotFoundException, SQLException {
         return BairroDAO.obterBairro(id);
     }
+
+    public void alterar() throws SQLException, ClassNotFoundException {
+         BairroDAO.alterar(this);
+    }
 }
