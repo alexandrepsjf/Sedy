@@ -14,6 +14,8 @@ import java.util.List;
  * @author Sujajeb
  */
 public class Produto {
+
+    
     private int id;
     private String nome;
     private String unidade;
@@ -25,6 +27,9 @@ public class Produto {
         this.unidade = unidade;
         this.valor = valor;
     }
+
+    public Produto() {
+        }
     
     public void setNome(String nome){
         this.nome=nome;
@@ -52,10 +57,13 @@ public class Produto {
     public void setId(int id) {
         this.id = id;
     }
-    public static List<Produto> obterProduto() throws ClassNotFoundException, SQLException {
+    public static List<Produto> obterProdutos() throws ClassNotFoundException, SQLException {
         return ProdutoDAO.obterProduto();
     }
     public void gravar() throws SQLException, ClassNotFoundException{
         ProdutoDAO.gravar(this);
+    }
+    public static Produto obterProduto(int id) throws ClassNotFoundException, SQLException{
+        return ProdutoDAO.obterProduto(id);
     }
 }

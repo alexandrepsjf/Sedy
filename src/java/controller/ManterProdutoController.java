@@ -37,10 +37,10 @@ public class ManterProdutoController extends HttpServlet {
             prepararIncluir(request, response);
         } else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-            /* }else{
+             }else{
                 if(acao.equals("prepararEditar")){
-                    prepararIncluir(request, response);
-                }else{
+                    prepararEditar(request, response);
+                }/*else{
                     if(acao.equals("confirmarEditar")){
                         prepararIncluir(request, response);
                      }else{
@@ -79,6 +79,17 @@ public class ManterProdutoController extends HttpServlet {
             view.forward(request, response);
         } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
 
+        }
+    }
+         public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Editar");
+            int id = Integer.parseInt (request.getParameter("id"));
+            Produto produto = Produto.obterProduto(id);
+            request.setAttribute("produto",produto);
+            RequestDispatcher view = request.getRequestDispatcher("/manterProduto.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
         }
     }
 
