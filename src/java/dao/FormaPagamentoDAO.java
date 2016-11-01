@@ -20,7 +20,7 @@ import model.FormaPagamento;
 
 public class FormaPagamentoDAO {
 
-    public static List<FormaPagamento> obterFormaPagamento() throws ClassNotFoundException, SQLException {
+    public static List<FormaPagamento> obterFormasPagamento() throws ClassNotFoundException, SQLException {
         Connection conexao = null;
         Statement comando = null;
         List<FormaPagamento> formaspagamento = new ArrayList<FormaPagamento>();
@@ -69,5 +69,27 @@ public class FormaPagamentoDAO {
         } catch (SQLException e) {
             throw e;
         }
+    }
+
+        public static FormaPagamento obterFormaPagamento(int id) throws ClassNotFoundException, SQLException {
+        Connection conexao = null;
+        Statement comando = null;
+        FormaPagamento formapagamento = new FormaPagamento();
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("select*from forma_pgm where id = " + id);
+            rs.first();
+           formapagamento.setId(rs.getInt("ID"));
+           formapagamento.setForma(rs.getString("FORMA"));
+                        
+            
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+    return formapagamento;    
     }
 }

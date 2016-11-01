@@ -20,9 +20,9 @@ and open the template in the editor.
             <tr> 
                 <td> COD. FORMA DE PGTO </td><td><input name="id" type="text"  value="${formasPagamento.id}"<c:if test="${operacao != 'Incluir'}"> readonly </c:if>></td>
             </tr>
-
-            <td > NOME DA FORMA DE PGTO </td> <td><input name="nome" type="text"  value="${formasPagemento.nome}"<c:if test="${operacao == 'Excluir'}"> readonly </c:if>></td>
-        </tr>
+            <tr>
+            <td > NOME DA FORMA DE PGTO </td> <td><input name="forma" type="text"  value="${formasPagamento.forma}"<c:if test="${operacao == 'Excluir'}"> readonly </c:if>></td>
+            </tr>
     </table>
     <h3><button>Confirmar</button></h3>
         </form>

@@ -37,10 +37,10 @@ public class ManterFormaPagamentoController extends HttpServlet {
             prepararIncluir(request, response);
         } else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-            /* }else{
+             }else{
                 if(acao.equals("prepararEditar")){
-                    prepararIncluir(request, response);
-                }else{
+                    prepararEditar(request, response);
+                }/*else{
                     if(acao.equals("confirmarEditar")){
                         prepararIncluir(request, response);
                      }else{
@@ -64,6 +64,18 @@ public class ManterFormaPagamentoController extends HttpServlet {
             RequestDispatcher view = request.getRequestDispatcher("/manterFormaspgto.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
+        }
+    }
+    
+             public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Editar");
+            int id = Integer.parseInt (request.getParameter("id"));
+            FormaPagamento formapagamento = FormaPagamento.obterFormaPagamento(id);
+            request.setAttribute("formasPagamento",formapagamento);
+            RequestDispatcher view = request.getRequestDispatcher("/manterFormaspgto.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
         }
     }
 

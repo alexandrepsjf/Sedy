@@ -69,7 +69,7 @@ public class ManterPedidoController extends HttpServlet {
         try {
             List<Telefone> telefones = TelefoneDAO.obterTelefones();
             List<Produto> produtos = ProdutoDAO.obterProduto();
-            List<FormaPagamento> formaPagamentos = FormaPagamentoDAO.obterFormaPagamento();
+            List<FormaPagamento> formaPagamentos = FormaPagamentoDAO.obterFormasPagamento();
             
             request.setAttribute("telefones", telefones);
             request.setAttribute("produtos", produtos);

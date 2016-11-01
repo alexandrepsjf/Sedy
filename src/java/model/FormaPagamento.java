@@ -14,12 +14,17 @@ import java.util.List;
  * @author Sujajeb
  */
 public class FormaPagamento {
+
+   
     private String forma;    
     private int id;
     public FormaPagamento(int id,String forma ) {
         this.forma = forma;
         this.id = id;
     }
+
+    public FormaPagamento() {
+        }
     
 
     public String getForma() {
@@ -37,10 +42,13 @@ public class FormaPagamento {
     public void setId(int id) {
         this.id = id;
     }
-    public static List<FormaPagamento> obterFormaPagamento() throws ClassNotFoundException, SQLException {
-        return FormaPagamentoDAO.obterFormaPagamento();
+    public static List<FormaPagamento> obterFormasPagamento() throws ClassNotFoundException, SQLException {
+        return FormaPagamentoDAO.obterFormasPagamento();
     }
     public void gravar() throws SQLException, ClassNotFoundException{
         FormaPagamentoDAO.gravar(this);
     }
+     public static FormaPagamento obterFormaPagamento(int id)throws ClassNotFoundException, SQLException {
+         return FormaPagamentoDAO.obterFormaPagamento(id);
+     }
 }

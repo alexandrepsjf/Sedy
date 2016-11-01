@@ -26,8 +26,8 @@ and open the template in the editor.
                 <tr>
                     <td><c:out value="${formasPagamento.id}" /></td>
                     <td><c:out value="${formasPagamento.forma}" /></td>
-                    <td><a href="ManterFormaPagamentoController?acao=preparaEditar&id=<c:out value="${formasPagamento.id}"/>">Editar</a></td>
-                    <td><a href="ManterFormaPagamentoController?acao=preparaExcluir&id=<c:out value="${formasPagamento.id}"/>">Excluir</a></td>
+                    <td><a href="ManterFormaPagamentoController?acao=prepararEditar&id=<c:out value="${formasPagamento.id}"/>">Editar</a></td>
+                    <td><a href="ManterFormaPagamentoController?acao=prepararExcluir&id=<c:out value="${formasPagamento.id}"/>">Excluir</a></td>
                 </tr>
             </c:forEach>
         </table>
