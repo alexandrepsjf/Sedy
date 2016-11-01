@@ -70,4 +70,27 @@ public class FormaPagamentoDAO {
             throw e;
         }
     }
+
+    public static FormaPagamento obterFormapgto(int id) throws ClassNotFoundException, SQLException {
+        Connection conexao = null;
+        Statement comando = null;
+        FormaPagamento formaPagamento = new FormaPagamento();
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("select * from forma_pgm where id = " + id);
+            rs.first();
+           formaPagamento.setId(rs.getInt("ID"));
+           formaPagamento.setForma(rs.getString("FORMA"));
+           
+        
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+    return formaPagamento;    
+    }  
+
+    
 }

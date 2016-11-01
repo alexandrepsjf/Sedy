@@ -14,6 +14,9 @@ import java.util.List;
  * @author Sujajeb
  */
 public class FormaPagamento {
+    public static FormaPagamento obterFormaPagamento(int id) throws ClassNotFoundException, SQLException {
+        return FormaPagamentoDAO.obterFormapgto(id);
+    }
     private String forma;    
     private int id;
     public FormaPagamento(int id,String forma ) {
@@ -21,7 +24,9 @@ public class FormaPagamento {
         this.id = id;
     }
     
-
+    public FormaPagamento(){
+        
+    }
     public String getForma() {
         return forma;
     }
@@ -37,10 +42,13 @@ public class FormaPagamento {
     public void setId(int id) {
         this.id = id;
     }
-    public static List<FormaPagamento> obterFormaPagamento() throws ClassNotFoundException, SQLException {
+    public static List<FormaPagamento> obterFormasPagamento() throws ClassNotFoundException, SQLException {
         return FormaPagamentoDAO.obterFormaPagamento();
     }
     public void gravar() throws SQLException, ClassNotFoundException{
         FormaPagamentoDAO.gravar(this);
+    }
+    public static FormaPagamento obterFormapgto(int id) throws ClassNotFoundException, SQLException {
+        return FormaPagamentoDAO.obterFormapgto(id);
     }
 }

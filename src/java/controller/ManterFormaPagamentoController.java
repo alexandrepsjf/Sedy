@@ -8,13 +8,14 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.FormaPagamento;
-
 /**
  *
  * @author Sujajeb
@@ -37,10 +38,10 @@ public class ManterFormaPagamentoController extends HttpServlet {
             prepararIncluir(request, response);
         } else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-            /* }else{
+             }else{
                 if(acao.equals("prepararEditar")){
-                    prepararIncluir(request, response);
-                }else{
+                    prepararEditar(request, response);
+                }/*else{
                     if(acao.equals("confirmarEditar")){
                         prepararIncluir(request, response);
                      }else{
@@ -66,7 +67,31 @@ public class ManterFormaPagamentoController extends HttpServlet {
         } catch (ServletException | IOException ex) {
         }
     }
-
+public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response){
+        int id = Integer.parseInt(request.getParameter("id"));
+        String forma = request.getParameter("nome");
+        
+       
+       try{
+            FormaPagamento formapagamento = new FormaPagamento(id, forma);
+            formapagamento.gravar();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaFormaPagamentoController");
+            view.forward(request,response);
+       }catch(SQLException | IOException | ClassNotFoundException | ServletException ex){            
+        }
+        
+    }  
+    public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Editar");
+            int id = Integer.parseInt (request.getParameter("id"));
+            FormaPagamento Formapgto = FormaPagamento.obterFormapgto(id);
+            request.setAttribute("formaPagamento",Formapgto);
+            RequestDispatcher view = request.getRequestDispatcher("/manterFormaspgto.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
+        }        
+}
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -105,20 +130,5 @@ public class ManterFormaPagamentoController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-            public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response){
-        int id = Integer.parseInt(request.getParameter("id"));
-        String forma = request.getParameter("nome");
-        
-       
-       try{
-            FormaPagamento formapagamento = new FormaPagamento(id, forma);
-            formapagamento.gravar();
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaFormaPagamentoController");
-            view.forward(request,response);
-       }catch(SQLException | IOException | ClassNotFoundException | ServletException ex){            
-        }
-        
-    }  
 
 }
