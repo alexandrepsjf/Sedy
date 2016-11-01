@@ -91,4 +91,22 @@ public class BairroDAO {
         }
     return bairro;    
     }  
-}
+
+    public static void alterar(Bairro bairro) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "update bairro set bairro=? , taxa=? where id=? ";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setString(1, bairro.getNome());
+            comando.setFloat(2, bairro.getTaxa());
+            comando.setInt(3, bairro.getId());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+    }
+

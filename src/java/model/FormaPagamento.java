@@ -26,7 +26,7 @@ public class FormaPagamento {
     public FormaPagamento() {
         }
     
-
+ 
     public String getForma() {
         return forma;
     }
