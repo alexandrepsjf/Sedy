@@ -110,7 +110,7 @@ public class BairroDAO {
     }
     public void excluir (Bairro bairro)throws SQLException, ClassNotFoundException {
         Connection conexao = null;
-        Statement comando = null;
+        
     try{
         conexao = BD.getConexao();
             String sql = "delete bairro set bairro=? , taxa=? where id=? ";
