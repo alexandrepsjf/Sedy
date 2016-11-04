@@ -108,16 +108,14 @@ public class BairroDAO {
             throw e;
         }
     }
-    public void excluir (Bairro bairro)throws SQLException, ClassNotFoundException {
+    public static void excluir (Bairro bairro)throws SQLException, ClassNotFoundException {
         Connection conexao = null;
         
     try{
         conexao = BD.getConexao();
-            String sql = "delete bairro set bairro = ? , taxa = ? where id = ? ";
+            String sql = "delete from bairro  where id = ? ";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setString(1, bairro.getNome());
-            comando.setFloat(2, bairro.getTaxa());
-            comando.setInt(3, bairro.getId());
+            comando.setInt(1, bairro.getId());
             comando.execute();
             comando.close();
             conexao.close();

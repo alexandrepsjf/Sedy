@@ -45,10 +45,10 @@ public class ManterClienteController extends HttpServlet {
              }else{
                 if(acao.equals("prepararEditar")){
                     prepararEditar(request, response);
-                }/*else{
+                }else{
                     if(acao.equals("confirmarEditar")){
                         prepararIncluir(request, response);
-                     }else{
+                     }/*else{
                         if(acao.equals("prepararExcluir")){
                             prepararIncluir(request, response);
                         }else{
@@ -63,7 +63,7 @@ public class ManterClienteController extends HttpServlet {
         }
 
     }
-
+    }
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             List<Telefone> telefones = TelefoneDAO.obterTelefones();

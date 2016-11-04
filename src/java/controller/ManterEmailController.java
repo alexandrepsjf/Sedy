@@ -29,21 +29,18 @@ public class ManterEmailController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String acao = request.getParameter("acao");
-        if(acao.equals("prepararIncluir")){
+        if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
-        }else{
-            if(acao.equals("confirmarIncluir")){
-               confirmarIncluir(request, response);
-            }else{
-                if(acao.equals("prepararEditar")){
-                    prepararEditar(request, response);
-                }}/*else{
-                    if(acao.equals("confirmarEditar")){
-                        prepararIncluir(request, response);
-                     }else{
+        } else if (acao.equals("confirmarIncluir")) {
+            confirmarIncluir(request, response);
+        } else if (acao.equals("prepararEditar")) {
+            prepararEditar(request, response);
+        } else if (acao.equals("confirmarEditar")) {
+            confirmarEditar(request, response);
+        }/*else{
                         if(acao.equals("prepararExcluir")){
                             prepararIncluir(request, response);
                         }else{
@@ -54,49 +51,48 @@ public class ManterEmailController extends HttpServlet {
                     }
                 }
             }*/
-                }
-                
-        }
-    
 
-    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response){
-        try{
-            request.setAttribute("operacao","Incluir");
+    }
+
+    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Incluir");
             RequestDispatcher view = request.getRequestDispatcher("/manterEmail.jsp");
             view.forward(request, response);
-        }catch(ServletException | IOException ex){            
+        } catch (ServletException | IOException ex) {
         }
-        }
-    
-        public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response){
+    }
+
+    public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         String email2 = request.getParameter("email");
         String senha = request.getParameter("senha");
         String autentica = request.getParameter("autentica");
         String servidorSaida = request.getParameter("servidorSaida");
         String servidorEntrada = request.getParameter("servidorEntrada");
-       
-       try{
-            Email email = new Email(id,email2,senha, autentica, servidorSaida, servidorEntrada);
+
+        try {
+            Email email = new Email(id, email2, senha, autentica, servidorSaida, servidorEntrada);
             email.gravar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaEmailController");
-            view.forward(request,response);
-       }catch(SQLException | IOException | ClassNotFoundException | ServletException ex){            
+            view.forward(request, response);
+        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
         }
-        
-    }        
-       public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+
+    }
+
+    public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Editar");
-            int id = Integer.parseInt (request.getParameter("id"));
+            int id = Integer.parseInt(request.getParameter("id"));
             Email email = Email.obterEmail(id);
-            request.setAttribute("email",email);        
+            request.setAttribute("email", email);
             RequestDispatcher view = request.getRequestDispatcher("/manterEmail.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
         }
-    }        
-            
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -136,6 +132,22 @@ public class ManterEmailController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
- 
+    private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String email2 = request.getParameter("email");
+        String senha = request.getParameter("senha");
+        String autentica = request.getParameter("autentica");
+        String servidorSaida = request.getParameter("servidorSaida");
+        String servidorEntrada = request.getParameter("servidorEntrada");
+
+        try {
+            Email email = new Email(id, email2, senha, autentica, servidorSaida, servidorEntrada);
+            email.alterar();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaEmailController");
+            view.forward(request, response);
+        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
+        }
+
+    }
 
 }

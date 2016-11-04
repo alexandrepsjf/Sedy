@@ -37,13 +37,11 @@ public class ManterNivelController extends HttpServlet {
             prepararIncluir(request, response);
         } else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-          }else{
-                if(acao.equals("prepararEditar")){
-                    prepararEditar(request, response);
-                }   /*else{
-                    if(acao.equals("confirmarEditar")){
-                        prepararIncluir(request, response);
-                     }else{
+        } else if (acao.equals("prepararEditar")) {
+            prepararEditar(request, response);
+        } else if (acao.equals("confirmarEditar")) {
+            confirmarEditar(request, response);
+        } /*else{
                         if(acao.equals("prepararExcluir")){
                             prepararIncluir(request, response);
                         }else{
@@ -54,7 +52,6 @@ public class ManterNivelController extends HttpServlet {
                     }
                 }
             }*/
-        }
     }
 
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
@@ -69,16 +66,52 @@ public class ManterNivelController extends HttpServlet {
     public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         String nome = request.getParameter("nome");
-        int checkNivel,cliente,pedido,ligacaoRecebida,configuracao,usuario,relatorio,formaPagamento,produto;
-        if(request.getParameter("nivel")==null) { checkNivel=0;} else { checkNivel=1;}
-        if(request.getParameter("cliente")==null) { cliente=0;} else { cliente=1;}
-        if(request.getParameter("pedido")==null) { pedido=0;} else { pedido=1;}
-        if(request.getParameter("ligacaoRecebida")==null) { ligacaoRecebida=0;} else { ligacaoRecebida=1;}
-        if(request.getParameter("configuracao")==null) { configuracao=0;} else { configuracao=1;}
-        if(request.getParameter("usuario")==null) { usuario=0;} else { usuario=1;}
-        if(request.getParameter("relatorio")==null) { relatorio=0;} else { relatorio=1;}
-        if(request.getParameter("formaPagamento")==null) { formaPagamento=0;} else { formaPagamento=1;}
-        if(request.getParameter("produto")==null) { produto=0;} else { produto=1;}
+        int checkNivel, cliente, pedido, ligacaoRecebida, configuracao, usuario, relatorio, formaPagamento, produto;
+        if (request.getParameter("nivel") == null) {
+            checkNivel = 0;
+        } else {
+            checkNivel = 1;
+        }
+        if (request.getParameter("cliente") == null) {
+            cliente = 0;
+        } else {
+            cliente = 1;
+        }
+        if (request.getParameter("pedido") == null) {
+            pedido = 0;
+        } else {
+            pedido = 1;
+        }
+        if (request.getParameter("ligacaoRecebida") == null) {
+            ligacaoRecebida = 0;
+        } else {
+            ligacaoRecebida = 1;
+        }
+        if (request.getParameter("configuracao") == null) {
+            configuracao = 0;
+        } else {
+            configuracao = 1;
+        }
+        if (request.getParameter("usuario") == null) {
+            usuario = 0;
+        } else {
+            usuario = 1;
+        }
+        if (request.getParameter("relatorio") == null) {
+            relatorio = 0;
+        } else {
+            relatorio = 1;
+        }
+        if (request.getParameter("formaPagamento") == null) {
+            formaPagamento = 0;
+        } else {
+            formaPagamento = 1;
+        }
+        if (request.getParameter("produto") == null) {
+            produto = 0;
+        } else {
+            produto = 1;
+        }
         try {
             Nivel nivel = new Nivel(id, nome, configuracao, usuario, checkNivel, produto, relatorio, formaPagamento, ligacaoRecebida, pedido, cliente);
             nivel.gravar();
@@ -134,11 +167,71 @@ public class ManterNivelController extends HttpServlet {
             request.setAttribute("operacao", "Editar");
             int id = Integer.parseInt(request.getParameter("id"));
             Nivel nivel = Nivel.obterNivel(id);
-            request.setAttribute("nivel",nivel);
-               RequestDispatcher view = request.getRequestDispatcher("/manterNivel.jsp");
+            request.setAttribute("nivel", nivel);
+            RequestDispatcher view = request.getRequestDispatcher("/manterNivel.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException | ClassNotFoundException ex) {
         }
+    }
+
+    private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
+         int id = Integer.parseInt(request.getParameter("id"));
+        String nome = request.getParameter("nome");
+        int checkNivel, cliente, pedido, ligacaoRecebida, configuracao, usuario, relatorio, formaPagamento, produto;
+        if (request.getParameter("nivel") == null) {
+            checkNivel = 0;
+        } else {
+            checkNivel = 1;
+        }
+        if (request.getParameter("cliente") == null) {
+            cliente = 0;
+        } else {
+            cliente = 1;
+        }
+        if (request.getParameter("pedido") == null) {
+            pedido = 0;
+        } else {
+            pedido = 1;
+        }
+        if (request.getParameter("ligacaoRecebida") == null) {
+            ligacaoRecebida = 0;
+        } else {
+            ligacaoRecebida = 1;
+        }
+        if (request.getParameter("configuracao") == null) {
+            configuracao = 0;
+        } else {
+            configuracao = 1;
+        }
+        if (request.getParameter("usuario") == null) {
+            usuario = 0;
+        } else {
+            usuario = 1;
+        }
+        if (request.getParameter("relatorio") == null) {
+            relatorio = 0;
+        } else {
+            relatorio = 1;
+        }
+        if (request.getParameter("formaPagamento") == null) {
+            formaPagamento = 0;
+        } else {
+            formaPagamento = 1;
+        }
+        if (request.getParameter("produto") == null) {
+            produto = 0;
+        } else {
+            produto = 1;
+        }
+        try {
+            Nivel nivel = new Nivel(id, nome, configuracao, usuario, checkNivel, produto, relatorio, formaPagamento, ligacaoRecebida, pedido, cliente);
+            nivel.alterar();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaNivelController");
+            view.forward(request, response);
+        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
+
+        }
+
     }
 
 }

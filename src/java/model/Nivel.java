@@ -145,4 +145,8 @@ public class Nivel {
       public void gravar() throws SQLException, ClassNotFoundException{
         NivelDAO.gravar(this);
     }
+
+    public void alterar() throws ClassNotFoundException, SQLException {
+         NivelDAO.alterar(this);
+    }
 }

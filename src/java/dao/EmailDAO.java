@@ -27,12 +27,12 @@ public class EmailDAO {
             ResultSet rs = comando.executeQuery("select*from email");
             while (rs.next()) {
                 Email email = new Email(rs.getInt("ID"),
-                rs.getString("EMAIL"),
-                rs.getString("SENHA"),
-                rs.getString("AUTENTICA"),
-                rs.getString("servidorSaida"),
-                rs.getString("servidorEntrada"));
-               emails.add(email);
+                        rs.getString("EMAIL"),
+                        rs.getString("SENHA"),
+                        rs.getString("AUTENTICA"),
+                        rs.getString("servidorSaida"),
+                        rs.getString("servidorEntrada"));
+                emails.add(email);
             }
 
         } catch (SQLException e) {
@@ -56,7 +56,7 @@ public class EmailDAO {
         }
     }
 
-        public static void gravar(Email email) throws SQLException, ClassNotFoundException {
+    public static void gravar(Email email) throws SQLException, ClassNotFoundException {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
@@ -85,18 +85,37 @@ public class EmailDAO {
             comando = conexao.createStatement();
             ResultSet rs = comando.executeQuery("select*from email where id = " + id);
             rs.first();
-           email.setId(rs.getInt("ID"));
-           email.setEmail(rs.getString("email"));
-           email.setSenha(rs.getString("senha"));
-           email.setAutentica(rs.getString("autentica"));             
-           email.setServidorSaida(rs.getString("servidorSaida"));
-           email.setServidorEntrada(rs.getString("servidorEntrada"));
+            email.setId(rs.getInt("ID"));
+            email.setEmail(rs.getString("email"));
+            email.setSenha(rs.getString("senha"));
+            email.setAutentica(rs.getString("autentica"));
+            email.setServidorSaida(rs.getString("servidorSaida"));
+            email.setServidorEntrada(rs.getString("servidorEntrada"));
 
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             fecharConexao(conexao, comando);
         }
-    return email;    
+        return email;
     }
-}
+
+    public static void alterar(Email email) throws ClassNotFoundException, SQLException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = " update email set email = ?,  senha = ?, autentica = ? , servidorSaida = ? , servidorEntrada = ?  where id = ? ";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setString(1, email.getEmail());
+            comando.setString(2, email.getSenha());
+            comando.setString(3, email.getAutentica());
+            comando.setString(4, email.getServidorSaida());
+            comando.setString(5, email.getServidorEntrada());
+            comando.setInt(6, email.getId());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }}

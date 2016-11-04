@@ -50,7 +50,7 @@ public class ManterBairroController extends HttpServlet {
                             prepararExcluir(request, response);
                         }else{
                             if(acao.equals("confirmarExcluir")){
-                                 prepararExcluir(request, response);
+                                 confirmarExcluir(request, response);
                             }
                         }
                     }
@@ -114,7 +114,7 @@ public void confirmarEditar(HttpServletRequest request, HttpServletResponse resp
         float taxa = Float.parseFloat(request.getParameter("taxa"));
         try {
             Bairro bairro = new Bairro(id, nome, taxa);
-            bairro.alterar();
+            bairro.excluir();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaBairroController");
             view.forward(request, response);
         } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {

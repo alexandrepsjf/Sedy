@@ -109,4 +109,29 @@ public class NivelDAO {
         }
         return nivel;
     }
+
+    public static void alterar(Nivel nivel) throws ClassNotFoundException, SQLException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "update  `nivel`set `NOME` = ? , `CONFIGURACAO` = ? , `USUARIO` = ? , `NIVEL` = ? , `PRODUTO` = ? , `RELATORIO` = ? , `FORMA_PGM` = ? , `LIGACAO_RECEBIDA` = ? , `PEDIDO` = ? , `CLIENTE` = ? where id = ? ";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setString(1, nivel.getNome());
+            comando.setInt(2, nivel.getConfiguracao());
+            comando.setInt(7, nivel.getFormaPagamento());
+            comando.setInt(8, nivel.getLigacaoRecebida());
+            comando.setInt(4, nivel.getNivel());
+            comando.setInt(9, nivel.getPedido());
+            comando.setInt(5, nivel.getProduto());
+            comando.setInt(3, nivel.getUsuario());
+            comando.setInt(10, nivel.getCliente());
+            comando.setInt(6, nivel.getRelatorio());
+            comando.setInt(11, nivel.getId());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
 }

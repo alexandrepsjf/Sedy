@@ -6,6 +6,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -73,6 +74,25 @@ public class UsuarioDAO {
             }
         } catch (SQLException e) {
 
+        }
+    }
+
+    public static void gravar(Usuario usuario) throws ClassNotFoundException, SQLException {
+         Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "insert into bairro(id,usuario, senha,login,nivel_id) values(?,?,?,?,?)";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, usuario.getId());
+            comando.setString(3, usuario.getSenha());
+            comando.setString(4, usuario.getLogin());
+            comando.setString(2, usuario.getUsuario());
+            comando.setInt(5, usuario.getIdNivel());           
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
         }
     }
 }

@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Nivel;
+import model.Usuario;
 
 /**
  *
@@ -43,13 +44,13 @@ public class ManterUsuarioController extends HttpServlet {
             prepararIncluir(request, response);
         } else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-            /* }else{
+            }else{
                 if(acao.equals("prepararEditar")){
                     prepararIncluir(request, response);
                 }else{
                     if(acao.equals("confirmarEditar")){
-                        prepararIncluir(request, response);
-                     }else{
+                        confirmarEditar(request, response);
+                     }/* else{
                         if(acao.equals("prepararExcluir")){
                             prepararIncluir(request, response);
                         }else{
@@ -63,7 +64,7 @@ public class ManterUsuarioController extends HttpServlet {
 
         }
     }
-
+    }
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             
@@ -74,11 +75,8 @@ public class ManterUsuarioController extends HttpServlet {
             RequestDispatcher view = request.getRequestDispatcher("/manterUsuario.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ManterUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ManterUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
-            
         }
     }
 
@@ -122,6 +120,23 @@ public class ManterUsuarioController extends HttpServlet {
     }// </editor-fold>
 
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String usuarioNome = request.getParameter("usuario");
+        String senha = request.getParameter("senha");
+        String login = request.getParameter("login");
+        int idNivel = Integer.parseInt(request.getParameter("idNivel"));
+       
+        try {
+            Usuario usuario = new Usuario(id, usuarioNome,login, senha,null,idNivel );
+            usuario.gravar();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaBairroController");
+            view.forward(request, response);
+        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
+
+        }
+    }
+
+    private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

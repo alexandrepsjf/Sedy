@@ -69,7 +69,7 @@ public class Bairro {
          BairroDAO.alterar(this);
     }
     public void excluir() throws SQLException, ClassNotFoundException {
-         BairroDAO.alterar(this);
+         BairroDAO.excluir(this);
     }
     
 }

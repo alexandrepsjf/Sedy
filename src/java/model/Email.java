@@ -95,5 +95,9 @@ public class Email {
    public static Email obterEmail(int id) throws ClassNotFoundException, SQLException {
         return EmailDAO.obterEmail(id);
     }
+
+    public void alterar() throws ClassNotFoundException, SQLException {
+         EmailDAO.alterar(this);
+    }
 }
     
