@@ -47,10 +47,10 @@ public class ManterBairroController extends HttpServlet {
                         confirmarEditar(request, response);
                      }else{
                         if(acao.equals("prepararExcluir")){
-                            prepararIncluir(request, response);
+                            prepararExcluir(request, response);
                         }else{
                             if(acao.equals("confirmarExcluir")){
-                                 prepararIncluir(request, response);
+                                 prepararExcluir(request, response);
                             }
                         }
                     }
