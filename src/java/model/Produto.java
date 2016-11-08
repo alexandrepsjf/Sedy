@@ -66,4 +66,7 @@ public class Produto {
     public static Produto obterProduto(int id) throws ClassNotFoundException, SQLException{
         return ProdutoDAO.obterProduto(id);
     }
+        public void excluir() throws SQLException, ClassNotFoundException {
+         ProdutoDAO.excluir(this);
+    }
 }

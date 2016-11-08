@@ -134,4 +134,19 @@ public class NivelDAO {
             throw e;
         }
     }
+           public static void excluir (Nivel nivel)throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        
+    try{
+        conexao = BD.getConexao();
+            String sql = "delete from nivel  where id = ? ";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, nivel.getId());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
 }

@@ -118,4 +118,21 @@ public class EmailDAO {
         } catch (SQLException e) {
             throw e;
         }
-    }}
+    }
+        public static void excluir (Email email)throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        
+    try{
+        conexao = BD.getConexao();
+            String sql = "delete from email  where id = ? ";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, email.getId());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
+}

@@ -41,17 +41,11 @@ public class ManterNivelController extends HttpServlet {
             prepararEditar(request, response);
         } else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
-        } /*else{
-                        if(acao.equals("prepararExcluir")){
-                            prepararIncluir(request, response);
-                        }else{
-                            if(acao.equals("confirmarExcluir")){
-                                 prepararIncluir(request, response);
-                            }
-                        }
-                    }
-                }
-            }*/
+        } else if (acao.equals("prepararExcluir")) {
+            prepararExcluir(request, response);
+        } else if (acao.equals("confirmarExcluir")) {
+            confirmarExcluir(request, response);
+        }
     }
 
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
@@ -175,7 +169,7 @@ public class ManterNivelController extends HttpServlet {
     }
 
     private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
-         int id = Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("id"));
         String nome = request.getParameter("nome");
         int checkNivel, cliente, pedido, ligacaoRecebida, configuracao, usuario, relatorio, formaPagamento, produto;
         if (request.getParameter("nivel") == null) {
@@ -233,5 +227,74 @@ public class ManterNivelController extends HttpServlet {
         }
 
     }
+public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Excluir");
+            int id = Integer.parseInt(request.getParameter("id"));
+            Nivel nivel = Nivel.obterNivel(id);
+            request.setAttribute("nivel", nivel);
+            RequestDispatcher view = request.getRequestDispatcher("/manterNivel.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException | ClassNotFoundException ex) {
+        }
+    }
+    public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String nome = request.getParameter("nome");
+        int checkNivel, cliente, pedido, ligacaoRecebida, configuracao, usuario, relatorio, formaPagamento, produto;
+        if (request.getParameter("nivel") == null) {
+            checkNivel = 0;
+        } else {
+            checkNivel = 1;
+        }
+        if (request.getParameter("cliente") == null) {
+            cliente = 0;
+        } else {
+            cliente = 1;
+        }
+        if (request.getParameter("pedido") == null) {
+            pedido = 0;
+        } else {
+            pedido = 1;
+        }
+        if (request.getParameter("ligacaoRecebida") == null) {
+            ligacaoRecebida = 0;
+        } else {
+            ligacaoRecebida = 1;
+        }
+        if (request.getParameter("configuracao") == null) {
+            configuracao = 0;
+        } else {
+            configuracao = 1;
+        }
+        if (request.getParameter("usuario") == null) {
+            usuario = 0;
+        } else {
+            usuario = 1;
+        }
+        if (request.getParameter("relatorio") == null) {
+            relatorio = 0;
+        } else {
+            relatorio = 1;
+        }
+        if (request.getParameter("formaPagamento") == null) {
+            formaPagamento = 0;
+        } else {
+            formaPagamento = 1;
+        }
+        if (request.getParameter("produto") == null) {
+            produto = 0;
+        } else {
+            produto = 1;
+        }
+        try {
+            Nivel nivel = new Nivel(id, nome, checkNivel, cliente, pedido, ligacaoRecebida,configuracao,usuario,relatorio,formaPagamento,produto);
+            nivel.excluir();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaNivelController");
+            view.forward(request, response);
+        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
 
+        }
+
+    }
 }
