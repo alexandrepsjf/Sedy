@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.FormaPagamento;
+
 /**
  *
  * @author Sujajeb
@@ -38,24 +39,14 @@ public class ManterFormaPagamentoController extends HttpServlet {
             prepararIncluir(request, response);
         } else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-             }else{
-                if(acao.equals("prepararEditar")){
-                    prepararEditar(request, response);
-                }/*else{
-                    if(acao.equals("confirmarEditar")){
-                        prepararIncluir(request, response);
-                     }else{
-                        if(acao.equals("prepararExcluir")){
-                            prepararIncluir(request, response);
-                        }else{
-                            if(acao.equals("confirmarExcluir")){
-                                 prepararIncluir(request, response);
-                            }
-                        }
-                    }
-                }
-            }*/
-
+        } else if (acao.equals("prepararEditar")) {
+            prepararEditar(request, response);
+        } else if (acao.equals("confirmarEditar")) {
+            confirmarEditar(request, response);
+        } else if (acao.equals("prepararExcluir")) {
+            prepararExcluir(request, response);
+        } else if (acao.equals("confirmarExcluir")) {
+            confirmarExcluir(request, response);
         }
     }
 
@@ -67,27 +58,25 @@ public class ManterFormaPagamentoController extends HttpServlet {
         } catch (ServletException | IOException ex) {
         }
     }
-        public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+
+    public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         String forma = request.getParameter("forma");
-        
         try {
             FormaPagamento formapagamento = new FormaPagamento(id, forma);
             formapagamento.gravar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaFormaPagamentoController");
             view.forward(request, response);
         } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
-
         }
-
     }
-    
-             public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+
+    public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Editar");
-            int id = Integer.parseInt (request.getParameter("id"));
+            int id = Integer.parseInt(request.getParameter("id"));
             FormaPagamento formapagamento = FormaPagamento.obterFormaPagamento(id);
-            request.setAttribute("formasPagamento",formapagamento);
+            request.setAttribute("formasPagamento", formapagamento);
             RequestDispatcher view = request.getRequestDispatcher("/manterFormaspgto.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
@@ -132,5 +121,44 @@ public class ManterFormaPagamentoController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String forma = request.getParameter("forma");
+        try {
+            FormaPagamento formapagamento = new FormaPagamento(id, forma);
+            formapagamento.excluir();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaFormaPagamentoController");
+            view.forward(request, response);
+        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
+
+        }
+
+    }
+
+    private void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Excluir");
+            int id = Integer.parseInt(request.getParameter("id"));
+            FormaPagamento formapagamento = FormaPagamento.obterFormaPagamento(id);
+            request.setAttribute("formasPagamento", formapagamento);
+            RequestDispatcher view = request.getRequestDispatcher("/manterFormaspgto.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
+        }
+    }
+
+    private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String forma = request.getParameter("forma");
+        try {
+            FormaPagamento formapagamento = new FormaPagamento(id, forma);
+            formapagamento.alterar();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaFormaPagamentoController");
+            view.forward(request, response);
+        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
+
+        }
+    }
 
 }

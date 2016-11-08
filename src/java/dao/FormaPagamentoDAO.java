@@ -92,4 +92,36 @@ public class FormaPagamentoDAO {
         }
     return formapagamento;    
     }
+
+    public static void excluir(FormaPagamento formapagamento) throws ClassNotFoundException, SQLException {
+       Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "delete from forma_pgm where id = ? ";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, formapagamento.getId());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
+    public static void alterar(FormaPagamento formapagamento) throws ClassNotFoundException, SQLException {
+       Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "update forma_pgm set  forma = ? where id = ?";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+           comando.setInt(2, formapagamento.getId());
+            comando.setString(1, formapagamento.getForma());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+   
 }

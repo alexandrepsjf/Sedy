@@ -51,4 +51,14 @@ public class FormaPagamento {
      public static FormaPagamento obterFormaPagamento(int id)throws ClassNotFoundException, SQLException {
          return FormaPagamentoDAO.obterFormaPagamento(id);
      }
+
+    public void excluir() throws ClassNotFoundException, SQLException {
+        FormaPagamentoDAO.excluir(this);
+    }
+
+    public void alterar() throws ClassNotFoundException, SQLException {
+        FormaPagamentoDAO.alterar(this);
+    }
+
+   
 }
