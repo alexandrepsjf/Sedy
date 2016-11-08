@@ -149,4 +149,7 @@ public class Nivel {
     public void alterar() throws ClassNotFoundException, SQLException {
          NivelDAO.alterar(this);
     }
+        public void excluir() throws SQLException, ClassNotFoundException {
+         NivelDAO.excluir(this);
+    }
 }

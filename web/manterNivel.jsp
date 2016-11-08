@@ -24,7 +24,7 @@ and open the template in the editor.
                         <td > NOME DO NÍVEL</td><td><input type="text"   name="nome"  value="${nivel.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td><input  type="checkbox" id="1" name="nivel" value="${nivel.nivel}"  <c:if test="${operacao == 'Editar'}&& ${nivel.nivel}==null"> checked</c:if> >NIVEL</td>
+                        <td><input  type="checkbox" id="1" name="nivel" value="${nivel.nivel}" <c:if test="${operacao == 'Excluir'}"> disabled</c:if> >NIVEL</td>
                     <td> <input  type="checkbox" id="2" name="relatorio" value="${nivel.relatorio}" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>RELATORIO</td>
                     <td><input checked   type="checkbox" id="3" name="ligacaoRecebida" value="${nivel.ligacaoRecebida}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>LIGACAO RECEBIDA</td>
                 </tr>

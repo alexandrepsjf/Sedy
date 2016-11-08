@@ -99,5 +99,8 @@ public class Email {
     public void alterar() throws ClassNotFoundException, SQLException {
          EmailDAO.alterar(this);
     }
+    public void excluir() throws SQLException, ClassNotFoundException {
+         EmailDAO.excluir(this);
+    }
 }
     

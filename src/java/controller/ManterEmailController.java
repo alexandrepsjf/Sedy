@@ -40,18 +40,11 @@ public class ManterEmailController extends HttpServlet {
             prepararEditar(request, response);
         } else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
-        }/*else{
-                        if(acao.equals("prepararExcluir")){
-                            prepararIncluir(request, response);
-                        }else{
-                            if(acao.equals("confirmarExcluir")){
-                                 prepararIncluir(request, response);
-                            }
-                        }
-                    }
-                }
-            }*/
-
+        } else if (acao.equals("prepararExcluir")) {
+            prepararExcluir(request, response);
+        } else if (acao.equals("confirmarExcluir")) {
+            confirmarExcluir(request, response);
+        }
     }
 
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
@@ -149,5 +142,32 @@ public class ManterEmailController extends HttpServlet {
         }
 
     }
+public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Excluir");
+            int id = Integer.parseInt(request.getParameter("id"));
+            Email email = Email.obterEmail(id);
+            request.setAttribute("email", email);
+            RequestDispatcher view = request.getRequestDispatcher("/manterEmail.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
+        }
+    }
+    public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String email2 = request.getParameter("email");
+        String senha = request.getParameter("senha");
+        String autentica = request.getParameter("autentica");
+        String servidorSaida = request.getParameter("servidorSaida");
+        String servidorEntrada = request.getParameter("servidorEntrada");
+        try {
+            Email email = new Email(id, email2, senha, autentica, servidorSaida, servidorEntrada);
+            email.excluir();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaEmailController");
+            view.forward(request, response);
+        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
 
+        }
+
+    }
 }

@@ -39,26 +39,22 @@ public class ManterBairroController extends HttpServlet {
             prepararIncluir(request, response);
         } else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-        }else{{
-                if(acao.equals("prepararEditar")){
+        } else {
+            {
+                if (acao.equals("prepararEditar")) {
                     prepararEditar(request, response);
-                }else{
-                    if(acao.equals("confirmarEditar")){
-                        confirmarEditar(request, response);
-                     }else{
-                        if(acao.equals("prepararExcluir")){
-                            prepararExcluir(request, response);
-                        }else{
-                            if(acao.equals("confirmarExcluir")){
-                                 confirmarExcluir(request, response);
-                            }
-                        }
-                    }
+                } else if (acao.equals("confirmarEditar")) {
+                    confirmarEditar(request, response);
+                } else if (acao.equals("prepararExcluir")) {
+                    prepararExcluir(request, response);
+                } else if (acao.equals("confirmarExcluir")) {
+                    confirmarExcluir(request, response);
                 }
             }
 
+        }
     }
-    }
+
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Incluir");
@@ -82,7 +78,8 @@ public class ManterBairroController extends HttpServlet {
         }
 
     }
-public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
+
+    public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         String nome = request.getParameter("nome");
         float taxa = Float.parseFloat(request.getParameter("taxa"));
@@ -96,19 +93,20 @@ public void confirmarEditar(HttpServletRequest request, HttpServletResponse resp
         }
 
     }
-     public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+
+    public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Editar");
-            int id = Integer.parseInt (request.getParameter("id"));
+            int id = Integer.parseInt(request.getParameter("id"));
             Bairro bairro = Bairro.obterBairro(id);
-            request.setAttribute("bairro",bairro);
+            request.setAttribute("bairro", bairro);
             RequestDispatcher view = request.getRequestDispatcher("/manterBairros.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
         }
     }
-    
-     public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
+
+    public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         String nome = request.getParameter("nome");
         float taxa = Float.parseFloat(request.getParameter("taxa"));
@@ -122,18 +120,19 @@ public void confirmarEditar(HttpServletRequest request, HttpServletResponse resp
         }
 
     }
-     public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
+
+    public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Excluir");
-            int id = Integer.parseInt (request.getParameter("id"));
+            int id = Integer.parseInt(request.getParameter("id"));
             Bairro bairro = Bairro.obterBairro(id);
-            request.setAttribute("bairro",bairro);
+            request.setAttribute("bairro", bairro);
             RequestDispatcher view = request.getRequestDispatcher("/manterBairros.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
         }
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
