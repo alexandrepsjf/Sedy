@@ -30,6 +30,12 @@ public class Usuario {
         this.idNivel = idNivel;
     }
 
+    public Usuario() {
+    }
+
+    
+
+    
    
     public String getUsuario() {
         return usuario;
@@ -78,11 +84,21 @@ public class Usuario {
     public void setIdNivel(int idNivel) {
         this.idNivel = idNivel;
     }
-     public static List<Usuario> obterUsuario() throws ClassNotFoundException, SQLException {
+     public static List<Usuario> obterUsuarios() throws ClassNotFoundException, SQLException {
         return UsuarioDAO.obterUsuarios();
     }
 
     public void gravar() throws ClassNotFoundException, SQLException {
         UsuarioDAO.gravar(this);
+    }
+    public static Usuario obterUsuario(int id) throws ClassNotFoundException, SQLException {
+        return UsuarioDAO.obterUsuario(id);
+    }
+
+    public void alterar() throws SQLException, ClassNotFoundException {
+         UsuarioDAO.alterar(this);
+    }
+    public void excluir() throws SQLException, ClassNotFoundException {
+         UsuarioDAO.excluir(this);
     }
 }

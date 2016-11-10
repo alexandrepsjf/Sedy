@@ -95,4 +95,70 @@ public class UsuarioDAO {
             throw e;
         }
     }
+
+    /**
+     *
+     * @param id
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
+    public static Usuario obterUsuarios(int id) throws ClassNotFoundException, SQLException {
+        Connection conexao = null;
+        Statement comando = null;
+        Usuario usuario = new Usuario();
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("select*from bairro where id = " + id);
+            rs.first();
+           usuario.setId(rs.getInt("ID"));
+           usuario.setUsuario(rs.getString("USUARIO"));
+           usuario.setSenha(rs.getString("SENHA"));
+           usuario.setLogin(rs.getString("LOGIN"));
+           usuario.setIdNivel(rs.getInt("NIVEL"));
+                        
+            
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+    return usuario;    
+    }  
+
+    public static void alterar(Usuario usuario) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "update usuario set usuario = ? , senha = ? , login = ? , nivel = ?,  where id = ? ";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setString(1, usuario.getUsuario());
+            comando.setString(2, usuario.getSenha());
+            comando.setString(3, usuario.getLogin());
+            comando.setInt(4, usuario.getIdNivel());
+            comando.setInt(5, usuario.getId());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+    public static void excluir (Usuario usuario)throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        
+    try{
+        conexao = BD.getConexao();
+            String sql = "delete from usuario  where id = ? ";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, usuario.getId());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
 }

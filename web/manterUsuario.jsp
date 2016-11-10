@@ -15,7 +15,7 @@ and open the template in the editor.
     </head>
     <body>
         <div><h1>Usuario -  ${operacao}</h1></div>
-        <form action="ManterBairroController?acao=confirmar${operacao}" method="POST" name="frmManterBairro">
+        <form action="ManterUsuarioController?acao=confirmar${operacao}" method="POST" name="frmManterUsuario">
             <table>            
                 <tr> 
                     <td > COD. USUARIO </td><td><input type="text"  name="id" value="${usuario.id}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
