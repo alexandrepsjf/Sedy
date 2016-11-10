@@ -5,6 +5,7 @@
  */
 package controller;
 
+
 import dao.BairroDAO;
 import dao.TelefoneDAO;
 import java.io.IOException;
@@ -18,7 +19,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Bairro;
+import model.Cliente;
 import model.Telefone;
+
 
 /**
  *
@@ -42,29 +45,19 @@ public class ManterClienteController extends HttpServlet {
             prepararIncluir(request, response);
         } else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-             }else{
-                if(acao.equals("prepararEditar")){
-                    prepararEditar(request, response);
-                }else{
-                    if(acao.equals("confirmarEditar")){
-                        prepararIncluir(request, response);
-                     }/*else{
-                        if(acao.equals("prepararExcluir")){
-                            prepararIncluir(request, response);
-                        }else{
-                            if(acao.equals("confirmarExcluir")){
-                                 prepararIncluir(request, response);
-                            }
-                        }
-                    }
-                }
-            }*/
+        } else if (acao.equals("prepararEditar")) {
+            prepararEditar(request, response);
+        }/* else if (acao.equals("confirmarEditar")) {
+            confirmarEditar(request, response);
+        } else if (acao.equals("prepararExcluir")) {
+            prepararExcluir(request, response);
+        } else if (acao.equals("confirmarExcluir")) {
+            confirmarExcluir(request, response);
+        }*/
 
-        }
-
-    }
-    }
-    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
+    
+}
+public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             List<Telefone> telefones = TelefoneDAO.obterTelefones();
             List<Bairro> bairros = BairroDAO.obterBairros();
@@ -74,11 +67,17 @@ public class ManterClienteController extends HttpServlet {
             request.setAttribute("operacao", "Incluir");
             RequestDispatcher view = request.getRequestDispatcher("/manterCliente.jsp");
             view.forward(request, response);
-        } catch (ServletException | IOException ex) {
+        
+
+} catch (ServletException | IOException ex) {
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ManterClienteController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ManterClienteController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManterClienteController.class
+.getName()).log(Level.SEVERE, null, ex);
+        
+
+} catch (SQLException ex) {
+            Logger.getLogger(ManterClienteController.class
+.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -92,7 +91,7 @@ public class ManterClienteController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -106,7 +105,7 @@ public class ManterClienteController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -117,16 +116,40 @@ public class ManterClienteController extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+        public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 
-    private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String nome = request.getParameter("nome");
+        String rua = request.getParameter("rua");
+        String numero = request.getParameter("numero");
+        String cep = request.getParameter("cep");
+        String dataCadastro = request.getParameter("data_cadastro");
+        String horaCadastro = request.getParameter("hora_cadastro");
+        String email = request.getParameter("email");
+        String referenciaEndereco = request.getParameter("referencia");       
+        int idBairro = Integer.parseInt(request.getParameter("bairrocliente"));
+        //cliente.setBairro(cliente.getBairro());
+        try {
+            Cliente cliente = new Cliente(id, nome,  rua,numero, cep, dataCadastro, horaCadastro, email, referenciaEndereco, null, idBairro);            
+            cliente.gravar();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaClienteController");
+            view.forward(request, response);
+        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
+        }
     }
-
-    private void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Editar");
+            int id = Integer.parseInt(request.getParameter("id"));
+            Cliente cliente = Cliente.obterCliente(id);
+            request.setAttribute("cliente", cliente);
+            RequestDispatcher view = request.getRequestDispatcher("/manterCliente.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
+        }
     }
 
 }

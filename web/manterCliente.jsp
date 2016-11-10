@@ -44,7 +44,7 @@ and open the template in the editor.
                         <td >Email </td><td><input type="text" name="email" value="${cliente.email}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td>Logradouro </td><td><input type="text" name ="logradouro" value="${cliente.logradouro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td>Logradouro </td><td><input type="text" name ="rua" value="${cliente.logradouro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
                         <td>Numero </td><td><input type="text" name="numero" value="${cliente.numero}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
@@ -56,13 +56,13 @@ and open the template in the editor.
                     <td>Compl.</td><td><input type="text" name="complemento" value="${cliente.complemento}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr > 
-                    <td >CEP </td><td><input type="text" value="${cliente.cep}"></td>
+                    <td >CEP </td><td><input type="text" name="cep" value="${cliente.cep}"></td>
                 </tr>
                 <tr>
                     <td> Bairro </td>
                     
                     <td>                             
-                        <select>
+                        <select name="bairrocliente">
                             <option value="">Selecione</option>
                             <c:forEach var="bairro" items="${bairros}">
                                 <option value="${bairro.id}"> ${bairro.nome} </option>
@@ -80,7 +80,7 @@ and open the template in the editor.
             </table>
             <h3><button type="submit">Confirmar</button></h3>
         </form>
-                    <SCRIPT language="JavaScript">
+                    <!--SCRIPT language="JavaScript">
             <!--
             
             function campoNumerico(valor)

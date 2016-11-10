@@ -21,21 +21,26 @@ public class Cliente {
     private String cep;    
     private String dataCadastro;
     private String email;
+    private String horaCadastro;
     private String referenciaEndereco;
     private Bairro bairro;
     private int idBairro;
-public Cliente(int id, String nome, String rua, String numero, String cep, String dataCadastro, String email, String referenciaEndereco, Bairro bairro, int idBairro) {
+public Cliente(int id, String nome, String rua, String numero, String cep, String dataCadastro, String horaCadastro, String email, String referenciaEndereco, Bairro bairro, int idBairro) {
         this.id = id;
         this.nome = nome;
         this.rua = rua;
         this.numero = numero;
         this.cep = cep;
         this.dataCadastro = dataCadastro;
+        this.horaCadastro = horaCadastro;
         this.email = email;
         this.referenciaEndereco = referenciaEndereco;
         this.bairro = bairro;
         this.idBairro = idBairro;
     }
+
+    public Cliente() {
+         }
 
     public int getId() {
         return id;
@@ -97,11 +102,21 @@ public Cliente(int id, String nome, String rua, String numero, String cep, Strin
         return referenciaEndereco;
     }
 
+    public String getHoraCadastro() {
+        return horaCadastro;
+    }
+
+    public void setHoraCadastro(String horaCadastro) {
+        this.horaCadastro = horaCadastro;
+    }
     public void setReferenciaEndereco(String referenciaEndereco) {
         this.referenciaEndereco = referenciaEndereco;
     }
 
-    public Bairro getBairro() {
+    public Bairro getBairro() throws ClassNotFoundException, SQLException {
+        if((bairro == null)&&(idBairro != 0)){
+        bairro= Bairro.obterBairro(idBairro);
+    }
         return bairro;
     }
 
@@ -119,6 +134,10 @@ public Cliente(int id, String nome, String rua, String numero, String cep, Strin
     public static List<Cliente> obterClientes() throws ClassNotFoundException, SQLException {
         return ClienteDAO.obterClientes();
     }
-    
-    
+     public void gravar() throws SQLException, ClassNotFoundException{
+        ClienteDAO.gravar(this);
+    }
+    public static Cliente obterCliente(int id) throws ClassNotFoundException, SQLException {
+        return ClienteDAO.obterCliente(id);
+    }
 }
