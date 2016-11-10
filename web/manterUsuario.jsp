@@ -25,7 +25,7 @@ and open the template in the editor.
                         <td > NIVEL USUARIO </td>
 
                         <td>
-                            <select name="pergunta1" class="usuario">
+                            <select name="idNivel" class="usuario">
                                 <option value="">Selecione</option>
                             <c:forEach var="nivel" items="${niveis}">
                                 <option value="${nivel.id}"> ${nivel.nome} </option>
@@ -34,6 +34,9 @@ and open the template in the editor.
                 </tr>
                 <tr> 
                     <td >NOME USUARIO </td><td><input type="text" name="nome" value="${usuario.nome}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    </tr>
+                                    <tr> 
+                    <td >LOGIN USUARIO </td><td><input type="text" name="login" value="${usuario.login}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr> 
                         <td > SENHA DE USUARIO </td><td><input type="password" name="senha1" value="${usuario.senha}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>

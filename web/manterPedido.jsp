@@ -40,7 +40,7 @@ and open the template in the editor.
                     </tr>            
                     <tr>   
 
-                        <td > NOME </td> <td><input type="text" name="nome" value="${pedido.nome}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td > NOME CLIENTE </td> <td><input type="text" name="nome" value="${pedido.nome}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
                         <td> OBSERVAÇÃO </td> <td> <input type="text" name="obs" value="${pedido.observacao}">    </td>
@@ -55,24 +55,19 @@ and open the template in the editor.
                 <tr>
                     <td> PRODUTO </td> 
                     <td>
-                        <select>
-                            <option value="">Selecione</option>
+                        <select  onclick="addProduto(this)">
+                            <option value="" >Selecione</option>
                             <c:forEach var="produto" items="${produtos}">
-                                <option value="${produto.id}"> ${produto.nome} </option>
+                                <option value="${produto.id}" onclick="addProduto(this)"> ${produto.nome} </option>
                             </c:forEach>
                         </select>
                     </td>
-                </tr>
-                <tr>
-                    <td> VALOR </td> <td><input type="text" ></td>
-                </tr>
-                <tr>
-                    <td> DESCONTO </td> <td><input type="text" ></td>
-                </tr>
+                </tr>        
+                
                 <tr>                
                     <td> FORMAS DE PGTO </td> 
                     <td>                             
-                        <select>
+                        <select name="teste">
                             <option value="">Selecione</option>
                             <c:forEach var="formaPagamento" items="${formaPagamentos}">
                                 <option value="${formaPagamento.id}"> ${formaPagamento.forma} </option>
@@ -95,12 +90,16 @@ and open the template in the editor.
             </table>
             <h3><button type="submit">Confirmar</button></h3>
         </form>       
-        <table>
+        <table id="tabelaProdutos">
             <tr><td>COD</td><td>QTDE</td><td>PRODUTO</td><td>V.UNIT</td><td>V.TOTAL</td><td>OBS.</td><td>EDITAR</td></tr>
         </table>
         <SCRIPT language="JavaScript">
                <!--
-            
+            function addProduto(produto){
+                 alert(produto.name);
+                alert(produto.options[2].valueOf().toString()));
+                
+            }
             function campoNumerico(valor)
             {
                 var caracteresValidos = "0123456789";

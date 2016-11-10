@@ -28,7 +28,7 @@ public class UsuarioDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select*from usuario");
+            ResultSet rs = comando.executeQuery("select * from usuario");
             while (rs.next()) {
                 Usuario usuario = new Usuario(rs.getInt("ID"), rs.getString("USUARIO"), rs.getString("SENHA"), rs.getString("LOGIN"), null, 0);
                 usuario.setIdNivel(rs.getInt("NIVEL_ID"));
@@ -81,7 +81,7 @@ public class UsuarioDAO {
          Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "insert into bairro(id,usuario, senha,login,nivel_id) values(?,?,?,?,?)";
+            String sql = "insert into usuario(id,usuario, senha,login,nivel_id) values(?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, usuario.getId());
             comando.setString(3, usuario.getSenha());
@@ -103,30 +103,7 @@ public class UsuarioDAO {
      * @throws ClassNotFoundException
      * @throws SQLException
      */
-    public static Usuario obterUsuarios(int id) throws ClassNotFoundException, SQLException {
-        Connection conexao = null;
-        Statement comando = null;
-        Usuario usuario = new Usuario();
-        try {
-            conexao = BD.getConexao();
-            comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select*from bairro where id = " + id);
-            rs.first();
-           usuario.setId(rs.getInt("ID"));
-           usuario.setUsuario(rs.getString("USUARIO"));
-           usuario.setSenha(rs.getString("SENHA"));
-           usuario.setLogin(rs.getString("LOGIN"));
-           usuario.setIdNivel(rs.getInt("NIVEL"));
-                        
-            
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            fecharConexao(conexao, comando);
-        }
-    return usuario;    
-    }  
+    
 
     public static void alterar(Usuario usuario) throws SQLException, ClassNotFoundException {
         Connection conexao = null;

@@ -52,10 +52,10 @@ public class ManterUsuarioController extends HttpServlet {
                         confirmarEditar(request, response);
                      }else{
                         if(acao.equals("prepararExcluir")){
-                            prepararIncluir(request, response);
+                            prepararExcluir(request, response);
                         }else{
                             if(acao.equals("confirmarExcluir")){
-                                 prepararIncluir(request, response);
+                                 confirmarExcluir(request, response);
                             }
                         }
                     }
@@ -70,8 +70,7 @@ public class ManterUsuarioController extends HttpServlet {
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             
-            List<Nivel> niveis = NivelDAO.obterNiveis();
-            
+            List<Nivel> niveis = NivelDAO.obterNiveis();            
             request.setAttribute("operacao", "Incluir");
             request.setAttribute("niveis", niveis);
             RequestDispatcher view = request.getRequestDispatcher("/manterUsuario.jsp");
@@ -83,7 +82,7 @@ public class ManterUsuarioController extends HttpServlet {
     }
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
-        String usuarioNome = request.getParameter("usuario");
+        String usuarioNome = request.getParameter("nome");
         String senha = request.getParameter("senha");
         String login = request.getParameter("login");
         int idNivel = Integer.parseInt(request.getParameter("idNivel"));
