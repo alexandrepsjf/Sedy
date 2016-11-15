@@ -35,38 +35,27 @@ public class ManterUsuarioController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+        protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-        
         String acao = request.getParameter("acao");
         if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
         } else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-            }else{
-                if(acao.equals("prepararEditar")){
-                    prepararIncluir(request, response);
-                }else{
-                    if(acao.equals("confirmarEditar")){
-                        confirmarEditar(request, response);
-                     }else{
-                        if(acao.equals("prepararExcluir")){
-                            prepararExcluir(request, response);
-                        }else{
-                            if(acao.equals("confirmarExcluir")){
-                                 confirmarExcluir(request, response);
-                            }
-                        }
-                    }
+        } else {
+            {
+                if (acao.equals("prepararEditar")) {
+                    prepararEditar(request, response);
+                } else if (acao.equals("confirmarEditar")) {
+                    confirmarEditar(request, response);
+                } else if (acao.equals("prepararExcluir")) {
+                    prepararExcluir(request, response);
+                } else if (acao.equals("confirmarExcluir")) {
+                    confirmarExcluir(request, response);
                 }
             }
-
         }
-
-    
-    
-
+    }
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             
@@ -116,13 +105,14 @@ public class ManterUsuarioController extends HttpServlet {
      public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Editar");
-            int id = Integer.parseInt (request.getParameter("id"));
+            int id = Integer.parseInt(request.getParameter("id"));
             Usuario usuario = Usuario.obterUsuario(id);
-            request.setAttribute("usuario",usuario);
+            request.setAttribute("usuario", usuario);
             RequestDispatcher view = request.getRequestDispatcher("/manterUsuario.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
         }
+    
     }
     
      public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
