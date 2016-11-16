@@ -37,9 +37,8 @@ public class PesquisaUsuarioController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
           try {
                       
-           request.setAttribute("usuario", Usuario.obterUsuarios());
-           RequestDispatcher view = 
-                    request.getRequestDispatcher("/pesquisaUsuario.jsp");
+           request.setAttribute("usuarios", Usuario.obterUsuarios());
+           RequestDispatcher view = request.getRequestDispatcher("/pesquisaUsuario.jsp");
            view.forward(request,response);
         
         }catch (ClassNotFoundException ex){

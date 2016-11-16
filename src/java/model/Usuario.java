@@ -15,15 +15,15 @@ import java.util.List;
  */
 public class Usuario {
     private int id;
-    private String usuario;
+    private String nome;
     private String senha;
     private String login;
     private Nivel nivel;
     private int idNivel;
 
-    public Usuario(int id, String usuario, String senha, String login, Nivel nivel, int idNivel) {
+    public Usuario(int id, String nome, String senha, String login, Nivel nivel, int idNivel) {
         this.id = id;
-        this.usuario = usuario;
+        this.nome = nome;
         this.senha = senha;
         this.login = login;
         this.nivel = nivel;
@@ -33,12 +33,12 @@ public class Usuario {
     public Usuario() {
     }    
    
-    public String getUsuario() {
-        return usuario;
+    public String getNome() {
+        return nome;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getSenha() {

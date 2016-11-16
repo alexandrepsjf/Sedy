@@ -35,31 +35,29 @@ public class ManterUsuarioController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-        protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
+
         String acao = request.getParameter("acao");
         if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
         } else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-        } else {
-            {
-                if (acao.equals("prepararEditar")) {
-                    prepararEditar(request, response);
-                } else if (acao.equals("confirmarEditar")) {
-                    confirmarEditar(request, response);
-                } else if (acao.equals("prepararExcluir")) {
-                    prepararExcluir(request, response);
-                } else if (acao.equals("confirmarExcluir")) {
-                    confirmarExcluir(request, response);
-                }
-            }
+        } else if (acao.equals("prepararEditar")) {
+            prepararEditar(request, response);
+        } else if (acao.equals("confirmarEditar")) {
+            confirmarEditar(request, response);
+        } else if (acao.equals("prepararExcluir")) {
+            prepararExcluir(request, response);
+        } else if (acao.equals("confirmarExcluir")) {
+            confirmarExcluir(request, response);
         }
     }
+
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         try {
-            
-            List<Nivel> niveis = NivelDAO.obterNiveis();            
+
+            List<Nivel> niveis = NivelDAO.obterNiveis();
             request.setAttribute("operacao", "Incluir");
             request.setAttribute("niveis", niveis);
             RequestDispatcher view = request.getRequestDispatcher("/manterUsuario.jsp");
@@ -69,15 +67,16 @@ public class ManterUsuarioController extends HttpServlet {
             Logger.getLogger(ManterUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         String usuarioNome = request.getParameter("nome");
         String senha = request.getParameter("senha");
         String login = request.getParameter("login");
         int idNivel = Integer.parseInt(request.getParameter("idNivel"));
-       
+
         try {
-            Usuario usuario = new Usuario(id, usuarioNome,login, senha,null,idNivel );
+            Usuario usuario = new Usuario(id, usuarioNome, login, senha, null, idNivel);
             usuario.gravar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaUsuarioController");
             view.forward(request, response);
@@ -88,12 +87,12 @@ public class ManterUsuarioController extends HttpServlet {
 
     public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
-        String usuario2 = request.getParameter("usuario");
+        String usuario2 = request.getParameter("nome");
         String senha = request.getParameter("senha");
         String login = request.getParameter("login");
         int idNivel = Integer.parseInt(request.getParameter("idNivel"));
         try {
-            Usuario usuario = new Usuario( id, usuario2 ,senha, login ,null, idNivel );
+            Usuario usuario = new Usuario(id, usuario2, senha, login, null, idNivel);
             usuario.alterar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaUsuarioController");
             view.forward(request, response);
@@ -102,8 +101,11 @@ public class ManterUsuarioController extends HttpServlet {
         }
 
     }
-     public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+
+    public void prepararEditar(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException {
         try {
+            List<Nivel> niveis = NivelDAO.obterNiveis();
+            request.setAttribute("niveis", niveis);
             request.setAttribute("operacao", "Editar");
             int id = Integer.parseInt(request.getParameter("id"));
             Usuario usuario = Usuario.obterUsuario(id);
@@ -112,17 +114,16 @@ public class ManterUsuarioController extends HttpServlet {
             view.forward(request, response);
         } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
         }
-    
     }
-    
-     public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
+
+    public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
-        String usuario2 = request.getParameter("usuario");
+        String usuario2 = request.getParameter("nome");
         String senha = request.getParameter("senha");
         String login = request.getParameter("login");
-        int idNivel = Integer.parseInt(request.getParameter("idNivel"));
+        int idNivel = 0;
         try {
-            Usuario usuario = new Usuario( id, usuario2 ,senha, login ,null, idNivel );
+            Usuario usuario = new Usuario(id, usuario2, senha, login, null, idNivel);
             usuario.excluir();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaUsuarioController");
             view.forward(request, response);
@@ -131,12 +132,15 @@ public class ManterUsuarioController extends HttpServlet {
         }
 
     }
-     public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
+
+    public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
         try {
+            List<Nivel> niveis = NivelDAO.obterNiveis();
+            request.setAttribute("niveis", niveis);
             request.setAttribute("operacao", "Excluir");
-            int id = Integer.parseInt (request.getParameter("id"));
+            int id = Integer.parseInt(request.getParameter("id"));
             Usuario usuario = Usuario.obterUsuario(id);
-            request.setAttribute("usuario",usuario);
+            request.setAttribute("usuario", usuario);
             RequestDispatcher view = request.getRequestDispatcher("/manterUsuario.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
@@ -155,7 +159,13 @@ public class ManterUsuarioController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ManterUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ManterUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -169,7 +179,13 @@ public class ManterUsuarioController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ManterUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ManterUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

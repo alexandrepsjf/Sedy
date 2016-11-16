@@ -86,7 +86,7 @@ public class UsuarioDAO {
             comando.setInt(1, usuario.getId());
             comando.setString(3, usuario.getSenha());
             comando.setString(4, usuario.getLogin());
-            comando.setString(2, usuario.getUsuario());
+            comando.setString(2, usuario.getNome());
             comando.setInt(5, usuario.getIdNivel());           
             comando.execute();
             comando.close();
@@ -98,8 +98,7 @@ public class UsuarioDAO {
 
     /**
      *
-     * @param id
-     * @return
+     *
      * @throws ClassNotFoundException
      * @throws SQLException
      */
@@ -109,9 +108,9 @@ public class UsuarioDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "update usuario set usuario = ? , senha = ? , login = ? , nivel = ?,  where id = ? ";
+            String sql = "update usuario set usuario = ? , senha = ? , login = ? , nivel_id = ?  where id = ? ";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setString(1, usuario.getUsuario());
+            comando.setString(1, usuario.getNome());
             comando.setString(2, usuario.getSenha());
             comando.setString(3, usuario.getLogin());
             comando.setInt(4, usuario.getIdNivel());

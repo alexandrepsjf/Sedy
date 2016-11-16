@@ -25,10 +25,10 @@ and open the template in the editor.
                         <td > NIVEL USUARIO </td>
 
                         <td>
-                            <select name="idNivel" class="usuario">
+                            <select name="idNivel" class="usuario"  <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                                 <option value="">Selecione</option>
                             <c:forEach var="nivel" items="${niveis}">
-                                <option value="${nivel.id}"> ${nivel.nome} </option>
+                                <option value="${nivel.id}" <c:if test="${usuario.idNivel == nivel.id}"> selected</c:if>> ${nivel.nome} </option>
                             </c:forEach>
                         </select>
                 </tr>
