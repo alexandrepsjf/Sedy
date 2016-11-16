@@ -68,7 +68,7 @@ public class ManterPedidoController extends HttpServlet {
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             List<Telefone> telefones = TelefoneDAO.obterTelefones();
-            List<Produto> produtos = ProdutoDAO.obterProduto();
+            List<Produto> produtos = ProdutoDAO.obterProdutos();
             List<FormaPagamento> formaPagamentos = FormaPagamentoDAO.obterFormasPagamento();
             
             request.setAttribute("telefones", telefones);

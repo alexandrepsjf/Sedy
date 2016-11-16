@@ -20,7 +20,7 @@ import model.Produto;
  */
 public class ProdutoDAO {
 
-    public static List<Produto> obterProduto() throws ClassNotFoundException, SQLException {
+    public static List<Produto> obterProdutos() throws ClassNotFoundException, SQLException {
         Connection conexao = null;
         Statement comando = null;
         List<Produto> produtos = new ArrayList<Produto>();
@@ -64,7 +64,7 @@ public class ProdutoDAO {
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, produto.getId());
             comando.setString(2, produto.getNome());
-            comando.setString(3,produto.getUnidade());
+            comando.setString(3, produto.getUnidade());
             comando.setFloat(4, produto.getValor());
             comando.execute();
             comando.close();
@@ -73,8 +73,8 @@ public class ProdutoDAO {
             throw e;
         }
     }
-    
-        public static Produto obterProduto(int id) throws ClassNotFoundException, SQLException {
+
+    public static Produto obterProduto(int id) throws ClassNotFoundException, SQLException {
         Connection conexao = null;
         Statement comando = null;
         Produto produto = new Produto();
@@ -83,25 +83,24 @@ public class ProdutoDAO {
             comando = conexao.createStatement();
             ResultSet rs = comando.executeQuery("select*from produto where id = " + id);
             rs.first();
-           produto.setId(rs.getInt("ID"));
-           produto.setNome(rs.getString("NOME"));
-           produto.setUnidade(rs.getString("UNIDADE"));
-           produto.setValor(rs.getFloat("VALOR"));
-                        
-            
+            produto.setId(rs.getInt("ID"));
+            produto.setNome(rs.getString("NOME"));
+            produto.setUnidade(rs.getString("UNIDADE"));
+            produto.setValor(rs.getFloat("VALOR"));
 
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             fecharConexao(conexao, comando);
         }
-    return produto;    
-    }  
-             public static void excluir (Produto produto)throws SQLException, ClassNotFoundException {
+        return produto;
+    }
+
+    public static void excluir(Produto produto) throws SQLException, ClassNotFoundException {
         Connection conexao = null;
-        
-    try{
-        conexao = BD.getConexao();
+
+        try {
+            conexao = BD.getConexao();
             String sql = "delete from produto  where id = ? ";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, produto.getId());
@@ -111,10 +110,24 @@ public class ProdutoDAO {
         } catch (SQLException e) {
             throw e;
         }
-    }  
-        
+    }
+
+    public static void alterar(Produto produto) throws ClassNotFoundException, SQLException {
+        Connection conexao = null;
+        conexao = BD.getConexao();
+        try {            
+            String sql = "update produto set nome=?, unidade=?, valor=?  where id = ? ";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setString(1, produto.getNome());
+            comando.setString(2, produto.getUnidade());
+            comando.setFloat(3, produto.getValor());
+            comando.setInt(4, produto.getId());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
 }
-
-  
-
-

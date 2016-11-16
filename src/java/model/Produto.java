@@ -58,7 +58,7 @@ public class Produto {
         this.id = id;
     }
     public static List<Produto> obterProdutos() throws ClassNotFoundException, SQLException {
-        return ProdutoDAO.obterProduto();
+        return ProdutoDAO.obterProdutos();
     }
     public void gravar() throws SQLException, ClassNotFoundException{
         ProdutoDAO.gravar(this);
@@ -68,5 +68,9 @@ public class Produto {
     }
         public void excluir() throws SQLException, ClassNotFoundException {
          ProdutoDAO.excluir(this);
+    }
+
+    public void alterar() throws ClassNotFoundException, SQLException {
+        ProdutoDAO.alterar(this);
     }
 }
