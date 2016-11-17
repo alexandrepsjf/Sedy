@@ -7,7 +7,6 @@ package controller;
 
 import dao.FormaPagamentoDAO;
 import dao.ProdutoDAO;
-import dao.TelefoneDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -21,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 import model.FormaPagamento;
 import model.Pedido;
 import model.Produto;
-import model.Telefone;
 
 /**
  *
@@ -59,9 +57,9 @@ public class ManterPedidoController extends HttpServlet {
 
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         try {
-                       List<Produto> produtos = ProdutoDAO.obterProdutos();
+            List<Produto> produtos = ProdutoDAO.obterProdutos();
             List<FormaPagamento> formaPagamentos = FormaPagamentoDAO.obterFormasPagamento();
-                       request.setAttribute("produtos", produtos);
+            request.setAttribute("produtos", produtos);
             request.setAttribute("formaPagamentos", formaPagamentos);
             request.setAttribute("operacao", "Incluir");
             RequestDispatcher view = request.getRequestDispatcher("/manterPedido.jsp");
@@ -90,7 +88,7 @@ public class ManterPedidoController extends HttpServlet {
         int idFrmPgto = Integer.parseInt(request.getParameter("idFrmPgto"));
         float total = Float.parseFloat(request.getParameter("total"));
         try {
-            Pedido pedido = new Pedido( id,  hora,  data_2,  total,   null,  idCliente,  null,  idUsuario,  null,  idFrmPgto);
+            Pedido pedido = new Pedido(id, hora, data_2, total, null, idCliente, null, idUsuario, null, idFrmPgto);
             pedido.gravar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaPedidoController");
             view.forward(request, response);
@@ -101,7 +99,27 @@ public class ManterPedidoController extends HttpServlet {
     }
 
     private void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            List<Produto> produtos = ProdutoDAO.obterProdutos();
+            List<FormaPagamento> formaPagamentos = FormaPagamentoDAO.obterFormasPagamento();
+            request.setAttribute("produtos", produtos);
+            request.setAttribute("formaPagamentos", formaPagamentos);
+            int id = Integer.parseInt(request.getParameter("id"));
+            Pedido pedido = Pedido.obterPedido(id);
+            request.setAttribute("operacao", "Editar");
+            request.setAttribute("pedido", pedido);
+            RequestDispatcher view = request.getRequestDispatcher("/manterPedido.jsp");
+            view.forward(request, response);
+
+        } catch (ServletException | IOException ex) {
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ManterPedidoController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ManterPedidoController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {

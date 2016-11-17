@@ -6,6 +6,7 @@
 package model;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,14 +15,12 @@ import java.util.List;
  */
 public class ListaProdutos {
 
-    public static void add(List<ListaProdutos> listaProdutos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     private int quantitade;
-    private String obs;
+    private int idPedido;
+    private int idProduto;
+    private Produto produto;
 
-    public ListaProdutos(int aInt, int aInt0, Object object, int i, int aInt1, Object object0, int i0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ListaProdutos() {
     }
 
     public int getQuantitade() {
@@ -32,22 +31,29 @@ public class ListaProdutos {
         this.quantitade = quantitade;
     }
 
-    public String getObs() {
-        return obs;
+    public int getIdPedido() {
+        return idPedido;
     }
 
-    public void setObs(String obs) {
-        this.obs = obs;
+    public void setIdPedido(int idPedido) {
+        this.idPedido = idPedido;
     }
 
-    public void setIdPedido(int aInt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int getIdProduto() {
+        return idProduto;
     }
 
-    public void setIdProduto(int aInt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setIdProduto(int idProduto) {
+        this.idProduto = idProduto;
     }
-     public static List<ListaProdutos> obterListaProdutos() throws ClassNotFoundException, SQLException {
-        return ListaProdutos.obterListaProdutos();
+
+    public Produto getProduto() throws ClassNotFoundException, SQLException {
+         if((this.produto == null)&&(this.idProduto != 0)){
+        produto= Produto.obterProduto(this.idProduto);
+    }
+        return produto;
+    }
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 }

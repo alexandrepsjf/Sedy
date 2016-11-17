@@ -83,4 +83,32 @@ public class PedidoDAO {
         }
     }
 
+    public static Pedido obterPedido(int id) throws ClassNotFoundException, SQLException {
+        Connection conexao = null;
+        Statement comando = null;
+        Pedido pedido = new Pedido();
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("select*from pedido where id = " + id );
+            rs.first();
+            pedido.setId(rs.getInt("ID"));
+            pedido.setHora(rs.getString("HORA"));
+            pedido.setData_2(rs.getString("DATA_2"));
+            pedido.setTotal(rs.getFloat("TOTAL"));
+            pedido.setIdCliente(rs.getInt("CLIENTE_ID"));
+            pedido.setIdUsuario(rs.getInt("USUARIO_ID"));
+            pedido.setIdFormaPgto(rs.getInt("FORMA_PGM_ID"));
+            pedido.setCliente(pedido.getCliente());
+            pedido.setFormaPgto(pedido.getFormaPgto());
+            pedido.setUsuario(pedido.getUsuario());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return pedido;
+
+    }
 }

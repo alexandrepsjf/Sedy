@@ -1,21 +1,21 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<%-- 
+    Document   : listaProdutos
+    Created on : 17/11/2016, 15:07:45
+    Author     : Alexandre
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
-<%@page contentType="text/html" pageEncoding="utf-8"%>  
 <html>
     <head>
-        <title>cliente</title>
+        <title>Lista de produtos</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div><h1>Pedido -  ${operacao}</h1></div>
-        <form action="ManterPedidoController?acao=confirmar${operacao}" method="POST" name="frmManterPedido" >
+        <div><h1>LIsta produtos -  ${operacao}</h1></div>
+        <form action="ManterListaProdutosController?acao=confirmar${operacao}" method="POST" name="frmManterListaProdutos" >
             <table>  
                 <tr>
                     <td> COD. USUARIO </td> <td> <input type="text"  name="idUsuario" value="${pedido.idUsuario}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>               
@@ -93,49 +93,5 @@ and open the template in the editor.
         <table id="tabelaProdutos">
             <tr><td>COD</td><td>QTDE</td><td>PRODUTO</td><td>V.UNIT</td><td>V.TOTAL</td><td>OBS.</td><td>EDITAR</td></tr>
         </table>
-        <SCRIPT language="JavaScript">
-               <!--
-            function addProduto(produto){
-                 alert(produto.name);
-                alert(produto.options[2].valueOf().toString()));
-                
-            }
-            function campoNumerico(valor)
-            {
-                var caracteresValidos = "0123456789";
-                var ehNumero = true;
-                var umCaracter;
-                for (i = 0; i < valor.length && ehNumero == true; i++)
-                {
-                    umCaracter = valor.charAt(i);
-                    if (caracteresValidos.indexOf(umCaracter) == -1)
-                    {
-                        ehNumero = false;
-                    }
-                }
-                return ehNumero;
-            }
-
-            function validarFormulario(form) {
-                var mensagem;
-                mensagem = "";
-                if (form.txtCodPedido.value == "") {
-                    mensagem = mensagem + "Informe o Código do Pedido\n";
-                }
-
-                if (!campoNumerico(form.txtCodPedido.value)) {
-                    mensagem = mensagem + "Código do Pedido deve ser numérico\n";
-                }
-
-                if (mensagem == "") {
-                    return true;
-                } else {
-                    alert(mensagem);
-                    return false;
-                }
-
-            }
-            //-->
-        </SCRIPT>            
-    </body>    
+    </body>
 </html>

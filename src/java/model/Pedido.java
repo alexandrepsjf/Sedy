@@ -14,7 +14,7 @@ import java.util.List;
  * @author Sujajeb
  */
 public class Pedido {
-
+    
     private int id;
     private String hora;
     private String data_2;
@@ -133,7 +133,9 @@ public class Pedido {
 public static List<Pedido> obterPedidos() throws ClassNotFoundException, SQLException {
         return PedidoDAO.obterPedidos();
     }
-
+public static Pedido obterPedido(int id) throws ClassNotFoundException, SQLException {
+        return PedidoDAO.obterPedido(id);
+}
     public void gravar() throws SQLException, ClassNotFoundException {
          PedidoDAO.gravar(this);
     }
