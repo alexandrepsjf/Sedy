@@ -24,16 +24,24 @@ public class ClienteDAO {
         Connection conexao = null;
         Statement comando = null;
         List<Cliente> clientes = new ArrayList<Cliente>();
-
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
             ResultSet rs = comando.executeQuery("select*from cliente");
             while (rs.next()) {
-                Cliente cliente = new Cliente(rs.getInt("id"),
-                        rs.getString("NOME"), rs.getString("RUA"), rs.getString("NUMERO"), rs.getString("CEP"),
-                        rs.getString("DATA_CADASTRO"),rs.getString("hora_CADASTRO"), rs.getString("EMAIL"), rs.getString("REFERENCIA_ENDERECO"), null, 0);
-                cliente.setIdBairro(rs.getInt("BAIRRO_ID"));
+                Cliente cliente = new Cliente(
+                        rs.getInt("id"),
+                        rs.getString("NOME"),
+                        rs.getString("RUA"),
+                        rs.getString("NUMERO"),
+                        rs.getString("CEP"),
+                        rs.getString("DATA_CADASTRO"),
+                        rs.getString("hora_CADASTRO"),
+                        rs.getString("EMAIL"),
+                        rs.getString("REFERENCIA_ENDERECO"),
+                        null, 
+                        rs.getInt("BAIRRO_ID"));
+                cliente.setBairro(cliente.getBairro());                
                 clientes.add(cliente);
             }
 
@@ -48,7 +56,7 @@ public class ClienteDAO {
     public static Cliente obterCliente(int id) throws ClassNotFoundException, SQLException {
         Connection conexao = null;
         Statement comando = null;
-        Cliente cliente = new Cliente();
+        Cliente cliente = new Cliente();        
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
@@ -60,10 +68,11 @@ public class ClienteDAO {
             cliente.setNumero(rs.getString("NUMERO"));
             cliente.setCep(rs.getString("CEP"));
             cliente.setDataCadastro(rs.getString("DATA_CADASTRO"));
+            cliente.setDataCadastro(rs.getString("HORA_CADASTRO"));
             cliente.setEmail(rs.getString("EMAIL"));
             cliente.setReferenciaEndereco(rs.getString("REFERENCIA_ENDERECO"));
-            cliente.setBairro(cliente.getBairro());
             cliente.setIdBairro(rs.getInt("BAIRRO_ID"));
+            cliente.setBairro(cliente.getBairro());
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -86,8 +95,9 @@ public class ClienteDAO {
         }
     }
 
-        public static void gravar(Cliente cliente) throws SQLException, ClassNotFoundException {
+    public static void gravar(Cliente cliente) throws SQLException, ClassNotFoundException {
         Connection conexao = null;
+            
         try {
             conexao = BD.getConexao();
             String sql = "insert into cliente(id,nome,rua, numero, cep, data_cadastro, hora_cadastro, email, referencia_endereco, bairro_id) values(?,?,?,?,?,?,?,?,?,?)";
@@ -102,8 +112,31 @@ public class ClienteDAO {
             comando.setString(8, cliente.getEmail());
             comando.setString(9, cliente.getReferenciaEndereco());
             comando.setInt(10, cliente.getIdBairro());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
+    public static void alterar(Cliente cliente) throws ClassNotFoundException, SQLException {
+        Connection conexao = null;
             
-            
+        try {
+            conexao = BD.getConexao();
+            String sql = "update cliente set nome=?,rua=?, numero=?, cep=?, data_cadastro=?, hora_cadastro=?, email=?, referencia_endereco=?, bairro_id=? where id=?";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+                        comando.setString(1, cliente.getNome());
+            comando.setString(2, cliente.getRua());
+            comando.setString(3, cliente.getNumero());
+            comando.setString(4, cliente.getCep());
+            comando.setString(5, cliente.getDataCadastro());
+            comando.setString(6, cliente.getHoraCadastro());
+            comando.setString(7, cliente.getEmail());
+            comando.setString(8, cliente.getReferenciaEndereco());
+            comando.setInt(9, cliente.getIdBairro());
+            comando.setInt(10, cliente.getId());
             comando.execute();
             comando.close();
             conexao.close();

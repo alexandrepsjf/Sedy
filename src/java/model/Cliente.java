@@ -114,8 +114,8 @@ public Cliente(int id, String nome, String rua, String numero, String cep, Strin
     }
 
     public Bairro getBairro() throws ClassNotFoundException, SQLException {
-        if((bairro == null)&&(idBairro != 0)){
-        bairro= Bairro.obterBairro(idBairro);
+        if((this.bairro == null)&&(this.idBairro != 0)){
+        bairro= Bairro.obterBairro(this.idBairro);
     }
         return bairro;
     }
@@ -139,5 +139,9 @@ public Cliente(int id, String nome, String rua, String numero, String cep, Strin
     }
     public static Cliente obterCliente(int id) throws ClassNotFoundException, SQLException {
         return ClienteDAO.obterCliente(id);
+    }
+
+    public void alterar() throws ClassNotFoundException, SQLException {
+         ClienteDAO.alterar(this);
     }
 }

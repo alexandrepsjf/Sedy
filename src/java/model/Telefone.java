@@ -18,38 +18,19 @@ public class Telefone {
    
 
     private int id;
-    private String telefone;
-    private Cliente cliente ;
+    private String numero;
     private int idCliente;
 
-    public Telefone(int id, String telefone, Cliente cliente, int idCliente) {
+    public Telefone(int id, String telefone,  int idCliente) {
         this.id = id;
-        this.telefone = telefone;
-        this.cliente = cliente;
+        this.numero = telefone;        
         this.idCliente = idCliente;
     }
-
-    public Telefone(int id, String telCliente, int idCliente) {
-        this.id=id;
-        this.idCliente=idCliente;
-        this.telefone=telCliente;
+    
+    public Telefone() {        
     }
-
-    public Telefone() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-  
-
-    public int getId() {
+    
+     public int getId() {
         return id;
     }
 
@@ -57,12 +38,12 @@ public class Telefone {
         this.id = id;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getNumero() {
+        return numero;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
     public int getIdCliente() {
@@ -80,6 +61,10 @@ public class Telefone {
     }
     public void gravar() throws SQLException, ClassNotFoundException {
         TelefoneDAO.gravar(this);
+    }
+
+    public void alterar() throws ClassNotFoundException, SQLException {
+       TelefoneDAO.alterar(this);
     }
 
 }

@@ -24,7 +24,7 @@ and open the template in the editor.
             <c:forEach items="${pedidos}" var="pedido">
                 <tr>
                     <td ><c:out value="${pedido.id}" /> </td>
-                    <td ><c:out value="${pedido.cliente}" /> </td>
+                    <td ><c:out value="${pedido.cliente.nome}" /> </td>
                     <td ><a href="ManterPedidoController?acao=prepararEditar&id=<c:out value="${pedido.id}" /> " >Editar</a></td>
                     <td ><a href="ManterPedidoController?acao=prepararExcluir&id=<c:out value="${pedido.id}" /> " >Excluir</a></td>
                 </tr>
