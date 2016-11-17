@@ -39,9 +39,9 @@ public class ClienteDAO {
                         rs.getString("hora_CADASTRO"),
                         rs.getString("EMAIL"),
                         rs.getString("REFERENCIA_ENDERECO"),
-                        null, 
+                        null,
                         rs.getInt("BAIRRO_ID"));
-                cliente.setBairro(cliente.getBairro());                
+                cliente.setBairro(cliente.getBairro());
                 clientes.add(cliente);
             }
 
@@ -56,7 +56,7 @@ public class ClienteDAO {
     public static Cliente obterCliente(int id) throws ClassNotFoundException, SQLException {
         Connection conexao = null;
         Statement comando = null;
-        Cliente cliente = new Cliente();        
+        Cliente cliente = new Cliente();
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
@@ -68,7 +68,7 @@ public class ClienteDAO {
             cliente.setNumero(rs.getString("NUMERO"));
             cliente.setCep(rs.getString("CEP"));
             cliente.setDataCadastro(rs.getString("DATA_CADASTRO"));
-            cliente.setDataCadastro(rs.getString("HORA_CADASTRO"));
+            cliente.setHoraCadastro(rs.getString("HORA_CADASTRO"));
             cliente.setEmail(rs.getString("EMAIL"));
             cliente.setReferenciaEndereco(rs.getString("REFERENCIA_ENDERECO"));
             cliente.setIdBairro(rs.getInt("BAIRRO_ID"));
@@ -97,7 +97,7 @@ public class ClienteDAO {
 
     public static void gravar(Cliente cliente) throws SQLException, ClassNotFoundException {
         Connection conexao = null;
-            
+
         try {
             conexao = BD.getConexao();
             String sql = "insert into cliente(id,nome,rua, numero, cep, data_cadastro, hora_cadastro, email, referencia_endereco, bairro_id) values(?,?,?,?,?,?,?,?,?,?)";
@@ -122,12 +122,12 @@ public class ClienteDAO {
 
     public static void alterar(Cliente cliente) throws ClassNotFoundException, SQLException {
         Connection conexao = null;
-            
+
         try {
             conexao = BD.getConexao();
             String sql = "update cliente set nome=?,rua=?, numero=?, cep=?, data_cadastro=?, hora_cadastro=?, email=?, referencia_endereco=?, bairro_id=? where id=?";
             PreparedStatement comando = conexao.prepareStatement(sql);
-                        comando.setString(1, cliente.getNome());
+            comando.setString(1, cliente.getNome());
             comando.setString(2, cliente.getRua());
             comando.setString(3, cliente.getNumero());
             comando.setString(4, cliente.getCep());
@@ -137,6 +137,21 @@ public class ClienteDAO {
             comando.setString(8, cliente.getReferenciaEndereco());
             comando.setInt(9, cliente.getIdBairro());
             comando.setInt(10, cliente.getId());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
+    public static void excluir(Cliente cliente) throws ClassNotFoundException, SQLException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "delete from  cliente  where id=?";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, cliente.getId());
             comando.execute();
             comando.close();
             conexao.close();

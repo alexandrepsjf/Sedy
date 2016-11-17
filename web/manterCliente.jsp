@@ -18,22 +18,21 @@ and open the template in the editor.
         <form action="ManterClienteController?acao=confirmar${operacao}" method="post" name="frmManterCliente" >
             <table> 
                 <tr> 
-                <tr > 
                     <td> Cod. Cliente </td><td><input type="text" name="id" value="${cliente.id}"  <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>       
                     </tr>
-                    <td >Data cadastro </td><td><input type="text" name="data_cadastro"  value="${cliente.data_cadastro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <tr>
+                        <td>Data cadastro </td><td><input type="text" name="data_cadastro"  value="${cliente.dataCadastro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>           
                     <tr >
-                        <td>Hora cadastro </td><td><input type="text" name="hora_cadastro"  value="${cliente.hora_cadastro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td>Hora cadastro </td><td><input type="text" name="hora_cadastro"  value="${cliente.horaCadastro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
-
                     <tr> 
                         <td>(DDD)Telefone</td>
                         <td>                             
                             <select name="telefonesCliente" <c:if test="${operacao == 'Incluir'}"> disabled</c:if>>
                                 <option value="">Selecione</option>
                             <c:forEach var="telefone" items="${telefones}">
-                                <option value="${telefone.id}"> ${telefone.numero} </option>
+                                <option value="${telefone.id}" <c:if test="${telefone.idCliente == cliente.id}"> selected</c:if>> ${telefone.numero} </option>
                             </c:forEach>
                         </select>
                     </td>
@@ -57,7 +56,7 @@ and open the template in the editor.
                         <td>Numero </td><td><input type="text" name="numero" value="${cliente.numero}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr> 
                     <tr>
-                        <td>Referência </td><td><input type="text" name ="referencia" value="${cliente.referencia}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td>Referência </td><td><input type="text" name ="referencia" value="${cliente.referenciaEndereco}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>                
                     <tr > 
                         <td >CEP </td><td><input type="text" name="cep" value="${cliente.cep}"></td>
@@ -68,17 +67,16 @@ and open the template in the editor.
                         <select name="bairrocliente">
                             <option value="">Selecione</option>
                             <c:forEach var="bairro" items="${bairros}">
-                                <option value="${bairro.id}"> ${bairro.nome} </option>
+                                <option value="${bairro.id}" <c:if test="${cliente.idBairro == bairro.id}"> selected</c:if>> ${bairro.nome} </option>
                             </c:forEach>
                         </select>
                     </td>
-                </tr>      
+                </tr>     
 
             </table>
             <h3><button type="submit">Confirmar</button></h3>
         </form>
-        <!--SCRIPT language="JavaScript">
-        <!--
+        <!--SCRIPT language="JavaScript">      
 
 function campoNumerico(valor)
 {

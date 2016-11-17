@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.FormaPagamento;
+import model.Pedido;
 import model.Produto;
 import model.Telefone;
 
@@ -44,48 +45,78 @@ public class ManterPedidoController extends HttpServlet {
             prepararIncluir(request, response);
         } else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-            /*}else{
-                if(acao.equals("prepararEditar")){
-                    prepararIncluir(request, response);
-                }else{
-                    if(acao.equals("confirmarEditar")){
-                        prepararIncluir(request, response);
-                     }else{
-                        if(acao.equals("prepararExcluir")){
-                            prepararIncluir(request, response);
-                        }else{
-                            if(acao.equals("confirmarExcluir")){
-                                 prepararIncluir(request, response);
-                            }
-                        }
-                    }
-                }
-            }*/
-
+        } else if (acao.equals("prepararEditar")) {
+            prepararEditar(request, response);
+        } else if (acao.equals("confirmarEditar")) {
+            confirmarEditar(request, response);
+        } else if (acao.equals("prepararExcluir")) {
+            prepararExcluir(request, response);
+        } else if (acao.equals("confirmarExcluir")) {
+            confirmarExcluir(request, response);
         }
+
     }
 
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         try {
-            List<Telefone> telefones = TelefoneDAO.obterTelefones();
-            List<Produto> produtos = ProdutoDAO.obterProdutos();
+                       List<Produto> produtos = ProdutoDAO.obterProdutos();
             List<FormaPagamento> formaPagamentos = FormaPagamentoDAO.obterFormasPagamento();
-            
-            request.setAttribute("telefones", telefones);
-            request.setAttribute("produtos", produtos);
+                       request.setAttribute("produtos", produtos);
             request.setAttribute("formaPagamentos", formaPagamentos);
             request.setAttribute("operacao", "Incluir");
             RequestDispatcher view = request.getRequestDispatcher("/manterPedido.jsp");
             view.forward(request, response);
+
         } catch (ServletException | IOException ex) {
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ManterPedidoController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManterPedidoController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+
         } catch (SQLException ex) {
-            Logger.getLogger(ManterPedidoController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManterPedidoController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        //String nome = request.getParameter("nome");
+        //int idTelefone = Integer.parseInt(request.getParameter("idTelefone"));
+        String data_2 = request.getParameter("data_2");
+        String hora = request.getParameter("hora");
+        int idCliente = Integer.parseInt(request.getParameter("idCliente"));
+        int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+        //String obs = request.getParameter("obs");
+        int idFrmPgto = Integer.parseInt(request.getParameter("idFrmPgto"));
+        float total = Float.parseFloat(request.getParameter("total"));
+        try {
+            Pedido pedido = new Pedido( id,  hora,  data_2,  total,   null,  idCliente,  null,  idUsuario,  null,  idFrmPgto);
+            pedido.gravar();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaPedidoController");
+            view.forward(request, response);
+        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
+
+        }
+
+    }
+
+    private void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -123,9 +154,5 @@ public class ManterPedidoController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }

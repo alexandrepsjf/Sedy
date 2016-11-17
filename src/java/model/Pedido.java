@@ -19,7 +19,6 @@ public class Pedido {
     private String hora;
     private String data_2;
     private float total;
-    private String telefone;
     private Cliente cliente;
     private int idCliente;
     private Usuario usuario;
@@ -27,29 +26,20 @@ public class Pedido {
     private FormaPagamento formaPgto;
     private int idFormaPgto;
 
-    public Pedido(int id, String hora, String data, float total, String telefone, Cliente cliente, int idCliente, Usuario usuario, int idUsuario, FormaPagamento formaPgto, int idFormaPgto) {
+    public Pedido(int id, String hora, String data, float total,  Cliente cliente, int idCliente, Usuario usuario, int idUsuario, FormaPagamento formaPgto, int idFormaPgto) {
         this.id = id;
         this.hora = hora;
         this.data_2 = data;
-        this.total = total;
-        this.telefone = telefone;
+        this.total = total;        
         this.cliente = cliente;
         this.idCliente = idCliente;
         this.usuario = usuario;
         this.idUsuario = idUsuario;
         this.formaPgto = formaPgto;
-        this.idFormaPgto=idFormaPgto;
-        
+        this.idFormaPgto=idFormaPgto;        
     }
-
-    public Pedido(int id, String hora, int idCliente, int idUsuario, int idFormaPgto, String data_2, float total) {
-        this.id = id;
-        this.hora = hora;
-        this.data_2 = data_2;
-        this.total = total;
-        this.idCliente = idCliente;
-        this.idUsuario = idUsuario;
-        this.idFormaPgto = idFormaPgto;
+    public Pedido() {
+       
     }
 
     public int getId() {
@@ -83,19 +73,14 @@ public class Pedido {
     public void setTotal(float total) {
         this.total = total;
     }
-
-    public String getTelefone() {
-        return telefone;
+  
+    public Cliente getCliente() throws ClassNotFoundException, SQLException {
+         if((this.cliente == null)&&(this.idCliente != 0)){
+        cliente= Cliente.obterCliente(this.idCliente);        
     }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+         return cliente;
     }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
+    
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
@@ -108,7 +93,10 @@ public class Pedido {
         this.idCliente = idCliente;
     }
 
-    public Usuario getUsuario() {
+    public Usuario getUsuario() throws ClassNotFoundException, SQLException {
+         if((this.usuario == null)&&(this.idUsuario != 0)){
+        usuario= Usuario.obterUsuario(this.idUsuario);        
+    }
         return usuario;
     }
 
@@ -124,7 +112,10 @@ public class Pedido {
         this.idUsuario = idUsuario;
     }
 
-    public FormaPagamento getFormaPgto() {
+    public FormaPagamento getFormaPgto() throws ClassNotFoundException, SQLException {
+         if((this.formaPgto == null)&&(this.idFormaPgto != 0)){
+        formaPgto= FormaPagamento.obterFormaPagamento(this.idFormaPgto);        
+    }        
         return formaPgto;
     }
 
@@ -141,5 +132,9 @@ public class Pedido {
     }
 public static List<Pedido> obterPedidos() throws ClassNotFoundException, SQLException {
         return PedidoDAO.obterPedidos();
+    }
+
+    public void gravar() throws SQLException, ClassNotFoundException {
+         PedidoDAO.gravar(this);
     }
 }

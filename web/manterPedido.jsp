@@ -16,31 +16,31 @@ and open the template in the editor.
     <body>
         <div><h1>Pedido -  ${operacao}</h1></div>
         <form action="ManterPedidoController?acao=confirmar${operacao}" method="POST" name="frmManterPedido" >
-            <table>            
+            <table>  
                 <tr>
-                    <td> COD. CLIENTE </td> <td> <input type="text"  name="id" value="${pedido.id}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>               
-                    </tr>            
+                    <td> COD. USUARIO </td> <td> <input type="text"  name="idUsuario" value="${pedido.idUsuario}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>               
+                    </tr> 
                     <tr>
-                        <td> TELEFONE </td> 
-                        <td>                 
-                            <select>
-                                <option value="">Selecione</option>
-                                <c:forEach var="telefone" items="${telefones}">
-                                    <option value="${telefone.id}"> ${telefone.telefone} </option>
-                                </c:forEach>
-                            </select>
-                        </td>
-                    </tr>
+                    <td> NOME USUARIO </td> <td> <input type="text"  name="nomeUsuario" value="${pedido.usuario.nome}"<c:if test="${operacao != 'teste'}"> readonly</c:if>></td>               
+                    </tr>  
+                <tr>
+                    <td> COD. PEDIDO </td> <td> <input type="text"  name="id" value="${pedido.id}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>               
+                    </tr>   
+                    
                     <tr>
                         <td> DATA PEDIDO </td> <td><input type="text" name="data_2" value="${pedido.data_2}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
                         <td> HORA PEDIDO </td> <td> <input type="text" name="hora" value="${pedido.hora}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
 
-                    </tr>            
+                    </tr>  
                     <tr>   
 
-                        <td > NOME CLIENTE </td> <td><input type="text" name="nome" value="${pedido.nome}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td > Cod. CLIENTE </td> <td><input type="text" name="idCliente" value="${pedido.cliente.id}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    </tr>
+                    <tr>   
+
+                        <td > NOME CLIENTE </td> <td><input type="text" name="nome" value="${pedido.cliente.nome}"<c:if test="${operacao != 'teste'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
                         <td> OBSERVAÇÃO </td> <td> <input type="text" name="obs" value="${pedido.observacao}">    </td>
@@ -67,7 +67,7 @@ and open the template in the editor.
                 <tr>                
                     <td> FORMAS DE PGTO </td> 
                     <td>                             
-                        <select name="teste">
+                        <select name="idFrmPgto">
                             <option value="">Selecione</option>
                             <c:forEach var="formaPagamento" items="${formaPagamentos}">
                                 <option value="${formaPagamento.id}"> ${formaPagamento.forma} </option>
@@ -76,7 +76,7 @@ and open the template in the editor.
                     </td>
                 </tr>
                 <tr>
-                    <td> VALOR TOTAL </td> <td><input type="text" ></td>
+                    <td> VALOR TOTAL </td> <td><input type="text" value="${produto.total}"></td>
                 </tr>
                 <tr>
                     <td> DESCONTO </td> <td> <input type="text"></td>

@@ -144,4 +144,8 @@ public Cliente(int id, String nome, String rua, String numero, String cep, Strin
     public void alterar() throws ClassNotFoundException, SQLException {
          ClienteDAO.alterar(this);
     }
+
+    public void excluir() throws ClassNotFoundException, SQLException {
+         ClienteDAO.excluir(this);
+    }
 }
