@@ -5,8 +5,8 @@
  */
 package model;
 
+import dao.ListaProdutosDAO;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,12 +15,29 @@ import java.util.List;
  */
 public class ListaProdutos {
 
+    private int id;
     private int quantitade;
     private int idPedido;
     private int idProduto;
     private Produto produto;
 
     public ListaProdutos() {
+    }
+
+    public ListaProdutos(int id, int quantitade, int idPedido, int idProduto) {
+        this.id = id;
+        this.quantitade = quantitade;
+        this.idPedido = idPedido;
+        this.idProduto = idProduto;
+
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getQuantitade() {
@@ -48,12 +65,30 @@ public class ListaProdutos {
     }
 
     public Produto getProduto() throws ClassNotFoundException, SQLException {
-         if((this.produto == null)&&(this.idProduto != 0)){
-        produto= Produto.obterProduto(this.idProduto);
-    }
+        if ((this.produto == null) && (this.idProduto != 0)) {
+            produto = Produto.obterProduto(this.idProduto);
+        }
         return produto;
     }
+
     public void setProduto(Produto produto) {
         this.produto = produto;
+    }
+     public static List<ListaProdutos> obterListasProdutos() throws ClassNotFoundException, SQLException {
+        return ListaProdutosDAO.obterListasProdutos();
+    }
+     public void gravar() throws SQLException, ClassNotFoundException{
+        ListaProdutosDAO.gravar(this);
+    }
+    public static ListaProdutos obterListaProdutos(int id) throws ClassNotFoundException, SQLException {
+        return ListaProdutosDAO.obterListaProdutos(id);
+    }
+
+    public void alterar() throws ClassNotFoundException, SQLException {
+         ListaProdutosDAO.alterar(this);
+    }
+
+    public void excluir() throws ClassNotFoundException, SQLException {
+         ListaProdutosDAO.excluir(this);
     }
 }

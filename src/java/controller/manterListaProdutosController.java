@@ -5,8 +5,6 @@
  */
 package controller;
 
-import dao.FormaPagamentoDAO;
-import dao.ListaProdutosDAO;
 import dao.ProdutoDAO;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -18,8 +16,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.FormaPagamento;
-import model.ListaProdutos;
 import model.Pedido;
 import model.Produto;
 
@@ -27,19 +23,10 @@ import model.Produto;
  *
  * @author Alexandre
  */
-public class ManterPedidoController extends HttpServlet {
+public class manterListaProdutosController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, SQLException {
         String acao = request.getParameter("acao");
         if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
@@ -54,18 +41,16 @@ public class ManterPedidoController extends HttpServlet {
         } else if (acao.equals("confirmarExcluir")) {
             confirmarExcluir(request, response);
         }
+
     }
 
-    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
+    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         try {
-            List<Produto> produtos = ProdutoDAO.obterProdutos();
-            List<FormaPagamento> formaPagamentos = FormaPagamentoDAO.obterFormasPagamento();
+            List<Produto> produtos = ProdutoDAO.obterProdutos();           
             request.setAttribute("produtos", produtos);
-            request.setAttribute("formaPagamentos", formaPagamentos);
             request.setAttribute("operacao", "Incluir");
             RequestDispatcher view = request.getRequestDispatcher("/manterPedido.jsp");
             view.forward(request, response);
-
         } catch (ServletException | IOException ex) {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ManterPedidoController.class
@@ -79,18 +64,13 @@ public class ManterPedidoController extends HttpServlet {
 
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
-        //String nome = request.getParameter("nome");
-        //int idTelefone = Integer.parseInt(request.getParameter("idTelefone"));
-        String data_2 = request.getParameter("data_2");
-        String hora = request.getParameter("hora");
-        int idCliente = Integer.parseInt(request.getParameter("idCliente"));
+         int idCliente = Integer.parseInt(request.getParameter("idCliente"));
         int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
-        //String obs = request.getParameter("obs");
         int idFrmPgto = Integer.parseInt(request.getParameter("idFrmPgto"));
         float total = Float.parseFloat(request.getParameter("total"));
         try {
-            Pedido pedido = new Pedido(id, hora, data_2, total, null, idCliente, null, idUsuario, null, idFrmPgto);
-            pedido.gravar();
+            ListaProdutos listaProdutos = new PeListaProdutos(id, );
+            listaProdutos.gravar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaPedidoController");
             view.forward(request, response);
         } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
@@ -102,10 +82,8 @@ public class ManterPedidoController extends HttpServlet {
     private void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
         try {
             List<Produto> produtos = ProdutoDAO.obterProdutos();
-            List<FormaPagamento> formaPagamentos = FormaPagamentoDAO.obterFormasPagamento();
-            request.setAttribute("produtos", produtos);
-            request.setAttribute("formaPagamentos", formaPagamentos);
-            int id = Integer.parseInt(request.getParameter("id"));
+                       request.setAttribute("produtos", produtos);
+                        int id = Integer.parseInt(request.getParameter("id"));
             Pedido pedido = Pedido.obterPedido(id);
             request.setAttribute("operacao", "Editar");
             request.setAttribute("pedido", pedido);

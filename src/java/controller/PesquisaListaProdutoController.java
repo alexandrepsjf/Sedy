@@ -35,14 +35,9 @@ public class PesquisaListaProdutoController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            request.setAttribute("listaProdutos", ListaProdutos.obterListaProdutos());
-            RequestDispatcher view = request.getRequestDispatcher("/pesquisaListaProduto.jsp");
-            view.forward(request, response);
-        }
-        catch (ClassNotFoundException ex){
-        
-    }
+        request.setAttribute("listaProdutos", ListaProdutos.obterListaProdutos(id));
+        RequestDispatcher view = request.getRequestDispatcher("/pesquisaListaProduto.jsp");
+        view.forward(request, response);
 }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

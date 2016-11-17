@@ -18,13 +18,11 @@
         <form action="ManterListaProdutosController?acao=confirmar${operacao}" method="POST" name="frmManterListaProdutos" >
             <table>  
                 <tr>
-                    <td> COD. USUARIO </td> <td> <input type="text"  name="idUsuario" value="${pedido.idUsuario}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>               
+                    <td> COD. LISTA DE PRODUTOS </td> <td> <input type="text"  name="idUsuario" value="${lista.id}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>               
                     </tr> 
-                    <tr>
-                    <td> NOME USUARIO </td> <td> <input type="text"  name="nomeUsuario" value="${pedido.usuario.nome}"<c:if test="${operacao != 'teste'}"> readonly</c:if>></td>               
-                    </tr>  
+                      
                 <tr>
-                    <td> COD. PEDIDO </td> <td> <input type="text"  name="id" value="${pedido.id}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>               
+                    <td> COD. PEDIDO </td> <td> <input type="text"  name="id" value="${lista.idPedido}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>               
                     </tr>   
                     
                     <tr>
