@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class TratamentoExcecao extends HttpServlet {
 
+    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,7 +42,7 @@ public class TratamentoExcecao extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String titulo = "informação de Exceção";
-            String = tipoDocto= "<!doctype html public \"-//w3c//dtd html 4.0 transitional//en\">n";
+            String  tipoDocto= "<!doctype html public \"-//w3c//dtd html 4.0 transitional//en\">n";
             /* TODO output your page here. You may use following sample code. */
             out.println(tipoDocto+"<html>\n <head><tittle>"+titulo+"</title></head>\n<body>");
             out.println("<h2>Informação sobre exceção </h2>");
