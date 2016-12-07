@@ -30,8 +30,7 @@ and open the template in the editor.
             <h3><button type="submit" >Confirmar</button></h3>
         </form>
                 <SCRIPT language="JavaScript">
-            <!--
-            
+                        
             function campoNumerico(valor)
             {
                 var caracteresValidos = "0123456789";
@@ -54,7 +53,7 @@ and open the template in the editor.
                 if (form.txtCodBairro.value == ""){
                     mensagem = mensagem + "Informe o Código do Bairro\n";
                 }                             
-                if (form.txtTaxa.value == "$"){
+                if (form.txtTaxa.value == ""){
                     mensagem = mensagem + "Informe o Taxa do Bairro\n";
                 }
                 if (!campoNumerico(form.txtCodBairro.value)){
@@ -71,7 +70,7 @@ and open the template in the editor.
                 }                
                 
            }
-            //-->
+            
         </SCRIPT>
     </body>
 </html>

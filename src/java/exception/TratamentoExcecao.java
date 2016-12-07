@@ -31,26 +31,26 @@ public class TratamentoExcecao extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Exception excecao = (Exception)
+        Exception excecao=(Exception)
                 request.getAttribute("javax.servelt.error.exception");
-        Integer codigoStatus = (Integer)
+        Integer codigoStatus=(Integer)
                 request.getAttribute("javax.servelt.error.status_code");
-        String nomeServelt = (String)
+        String nomeServelt=(String)
                 request.getAttribute("javax.servelt.error.servelt_name");
-        String uriRequisicao = (String)
+        String uriRequisicao=(String)
                 request.getAttribute("javax.error.request_uri");
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html");
         try (PrintWriter out = response.getWriter()) {
-            String titulo = "informação de Exceção";
-            String  tipoDocto= "<!doctype html public \"-//w3c//dtd html 4.0 transitional//en\">n";
+            String titulo = "<h1>informação de Exceção<h1>";
+            String tipoDocto= "<!doctype html public\"-//w3c//dtd html 4.0 transitional//en\">";
             /* TODO output your page here. You may use following sample code. */
-            out.println(tipoDocto+"<html>\n <head><tittle>"+titulo+"</title></head>\n<body>");
+            out.println(tipoDocto+"<html><head><tittle>"+titulo+"</title></head>\n<body>");
             out.println("<h2>Informação sobre exceção </h2>");
-            out.println("Codigo do Status :" +codigoStatus+"</br></br>");
-            out.println("Nome do Servelt :" +nomeServelt+"</br></br>");           
-            out.println("Tipo de Exceção :" +excecao.getClass().getName()+"</br></br>");
-            out.println("URI da requisição :" +uriRequisicao+"</br></br>");
-            out.println("Mensagem :" +excecao.getMessage()+"</br></br>");
+            out.println("Codigo do Status:"+codigoStatus+"</br></br>");
+            out.println("Nome do Servelt:"+nomeServelt+"</br></br>");           
+            out.println("Tipo de Exceção:"+excecao.getClass().getName()+"</br></br>");
+            out.println("URI da requisição:"+uriRequisicao+"</br></br>");
+            out.println("Mensagem :"+excecao.getMessage()+"</br></br>");
             out.println("</body>");
             out.println("</html>");
         }
