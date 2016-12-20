@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import model.Cliente;
 import model.ListaProdutos;
 
 /**
@@ -20,22 +19,22 @@ import model.ListaProdutos;
  */
 public class ListaProdutosDAO {
 
-    public static List<ListaProdutos> obterListasProdutos(id) throws ClassNotFoundException, SQLException {
+    public static List<ListaProdutos> obterListaProdutos(int id) throws ClassNotFoundException, SQLException {
         Connection conexao = null;
         Statement comando = null;
-        List<ListaProdutos> listasProdutos = new ArrayList<ListaProdutos>();
+        List<ListaProdutos> listaProdutos = new ArrayList<ListaProdutos>();
 
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select*from ListaProdutos where id="+id);
+            ResultSet rs = comando.executeQuery("select*from ListaProdutos where pedido_id="+id);
             while (rs.next()) {
-                ListaProdutos listaProdutos = new ListaProdutos(rs.getInt("ID"), rs.getInt("pedido_id"), rs.getInt("produto_id"), rs.getInt("QUANTIDADE"));
-                listaProdutos.setIdPedido(rs.getInt("PEDIDO_ID"));
-                listaProdutos.setIdProduto(rs.getInt("PRODUTO_ID"));
-                listaProdutos.setId(rs.getInt("ID"));
-                listaProdutos.setProduto(listaProdutos.getProduto());
-                listasProdutos.add(listaProdutos);
+                ListaProdutos listaProduto = new ListaProdutos(rs.getInt("ID"), rs.getInt("pedido_id"), rs.getInt("produto_id"), rs.getInt("QUANTIDADE"));
+                listaProduto.setIdPedido(rs.getInt("PEDIDO_ID"));
+                listaProduto.setIdProduto(rs.getInt("PRODUTO_ID"));
+                listaProduto.setId(rs.getInt("ID"));
+                listaProduto.setProduto(listaProduto.getProduto());
+                listaProdutos.add(listaProduto);
             }
 
         } catch (SQLException e) {
@@ -43,7 +42,7 @@ public class ListaProdutosDAO {
         } finally {
             fecharConexao(conexao, comando);
         }
-        return listasProdutos;
+        return listaProdutos;
     }
     
 
@@ -60,15 +59,11 @@ public class ListaProdutosDAO {
         }
     }
 
-    public static List<ListaProdutos> obterListaProdutos() {
+    public static ListaProdutos obterListaProduto(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public static void gravar(ListaProdutos aThis) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public static Cliente obterCliente(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -79,12 +74,5 @@ public class ListaProdutosDAO {
     public static void excluir(ListaProdutos aThis) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    public static List<ListaProdutos> obterListasProdutos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public static ListaProdutos obterListaProdutos(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+  
 }

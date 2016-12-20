@@ -5,9 +5,11 @@
  */
 package controller;
 
+import dao.ClienteDAO;
 import dao.FormaPagamentoDAO;
 import dao.ListaProdutosDAO;
 import dao.ProdutoDAO;
+import dao.UsuarioDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -18,10 +20,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Cliente;
 import model.FormaPagamento;
 import model.ListaProdutos;
 import model.Pedido;
 import model.Produto;
+import model.Usuario;
 
 /**
  *
@@ -60,6 +64,10 @@ public class ManterPedidoController extends HttpServlet {
         try {
             List<Produto> produtos = ProdutoDAO.obterProdutos();
             List<FormaPagamento> formaPagamentos = FormaPagamentoDAO.obterFormasPagamento();
+            List<Usuario> usuarios = UsuarioDAO.obterUsuarios();
+            List<Cliente> clientes = ClienteDAO.obterClientes();
+            request.setAttribute("clientes", clientes);
+            request.setAttribute("usuarios", usuarios);
             request.setAttribute("produtos", produtos);
             request.setAttribute("formaPagamentos", formaPagamentos);
             request.setAttribute("operacao", "Incluir");
@@ -101,25 +109,26 @@ public class ManterPedidoController extends HttpServlet {
 
     private void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
         try {
+            int id = Integer.parseInt(request.getParameter("id"));
             List<Produto> produtos = ProdutoDAO.obterProdutos();
             List<FormaPagamento> formaPagamentos = FormaPagamentoDAO.obterFormasPagamento();
+            List<Usuario> usuarios = UsuarioDAO.obterUsuarios();
+            List<Cliente> clientes = ClienteDAO.obterClientes();
+            Pedido pedido = Pedido.obterPedido(id);
+            request.setAttribute("clientes", clientes);
+            request.setAttribute("usuarios", usuarios);
             request.setAttribute("produtos", produtos);
             request.setAttribute("formaPagamentos", formaPagamentos);
-            int id = Integer.parseInt(request.getParameter("id"));
-            Pedido pedido = Pedido.obterPedido(id);
             request.setAttribute("operacao", "Editar");
             request.setAttribute("pedido", pedido);
             RequestDispatcher view = request.getRequestDispatcher("/manterPedido.jsp");
             view.forward(request, response);
 
         } catch (ServletException | IOException ex) {
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ManterPedidoController.class
                     .getName()).log(Level.SEVERE, null, ex);
 
-        } catch (SQLException ex) {
-            Logger.getLogger(ManterPedidoController.class
-                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 

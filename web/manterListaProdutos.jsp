@@ -13,83 +13,62 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body>
-        <div><h1>LIsta produtos -  ${operacao}</h1></div>
+    <body >
+        <div><h1>Lista produtos -  ${operacao}</h1></div>
         <form action="ManterListaProdutosController?acao=confirmar${operacao}" method="POST" name="frmManterListaProdutos" >
             <table>  
                 <tr>
-                    <td> COD. LISTA DE PRODUTOS </td> <td> <input type="text"  name="idUsuario" value="${lista.id}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>               
-                    </tr> 
-                      
-                <tr>
-                    <td> COD. PEDIDO </td> <td> <input type="text"  name="id" value="${lista.idPedido}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>               
-                    </tr>   
-                    
+                    <td> COD. LISTA DE PRODUTOS </td> <td> <input type="text"  name="id" value="${listaProdutos.id}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>               
+                    </tr>                       
                     <tr>
-                        <td> DATA PEDIDO </td> <td><input type="text" name="data_2" value="${pedido.data_2}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td> COD. PEDIDO </td> <td> <input type="text"  name="idPedido" value="${listaProdutos.idPedido}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>               
+                    </tr>
+                    <tr> 
+                        <td > NOME CLIENTE </td> <td><input type="text" name="nome" value="${pedido.cliente.nome}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td> HORA PEDIDO </td> <td> <input type="text" name="hora" value="${pedido.hora}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-
-                    </tr>  
-                    <tr>   
-
-                        <td > Cod. CLIENTE </td> <td><input type="text" name="idCliente" value="${pedido.cliente.id}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                    </tr>
-                    <tr>   
-
-                        <td > NOME CLIENTE </td> <td><input type="text" name="nome" value="${pedido.cliente.nome}"<c:if test="${operacao != 'teste'}"> readonly</c:if>></td>
-                    </tr>
+                        <td> QUANTIDADE </td> <td><input type="text" id="qtd" name="qtd"> 
+                        </td>
                     <tr>
-                        <td> OBSERVAÇÃO </td> <td> <input type="text" name="obs" value="">    </td>
-                </tr>
-                <tr>
-                    <!--REAVALIAR SITUAÇÃO DOS CAMPOS ABAIXO DE UMA FORMA QUE PODEMOS TRABALHAR DE UMA FORMA CERTA -->
-                    <td > COD.PRODUTO </td> <td><input type="text" ></td>
-                </tr>
-                <tr>
-                    <td> QUANTIDADE </td> <td><input type="number" name="qtd" min="1" max="10" > 
-                    </td>
-                <tr>
-                    <td> PRODUTO </td> 
-                    <td>
-                        <select  onclick="addProduto(this)">
-                            <option value="" >Selecione</option>
+                        <td> PRODUTO </td> 
+                        <td>
+                            <select  id="listaProdutos">
+                                <option value="" >Selecione</option>
                             <c:forEach var="produto" items="${produtos}">
                                 <option value="${produto.id}" onclick="addProduto(this)"> ${produto.nome} </option>
                             </c:forEach>
-                        </select>
+                        </select><input type="button" name="botao-ok" value="ADD"  onclick="addProduto();">
                     </td>
-                </tr>        
-                
-                <tr>                
-                    <td> FORMAS DE PGTO </td> 
-                    <td>                             
-                        <select name="idFrmPgto">
-                            <option value="">Selecione</option>
-                            <c:forEach var="formaPagamento" items="${formaPagamentos}">
-                                <option value="${formaPagamento.id}" <c:if test="${usuario.idNivel == nivel.id}"> selected</c:if>> ${formaPagamento.forma} </option>
-                            </c:forEach>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td> VALOR TOTAL </td> <td><input type="text" value="${pedido.total}"></td>
-                </tr>
-                <tr>
-                    <td> DESCONTO </td> <td> <input type="text"></td>
-                </tr>
-                <tr>
-                    <td> VALOR PAGO </td> <td><input type="text" ></td>
-                </tr>
-                <tr>
-                    <td> TROCO </td> <td><input type="text" ></td>                
-                </tr>
+                </tr>                         
             </table>
-            <h3><button type="submit">Confirmar</button></h3>
+                    <h3><button type="submit" onclick="addProduto();">Confirmar</button></h3>
         </form>       
         <table id="tabelaProdutos">
             <tr><td>COD</td><td>QTDE</td><td>PRODUTO</td><td>V.UNIT</td><td>V.TOTAL</td><td>OBS.</td><td>EDITAR</td></tr>
         </table>
+        <script>
+            function addProduto() {
+                alert("teste");
+                var qtd = document.getElementById("qtd").value;
+                if (qtd != "") {
+                    var combobox = document.getElementById("listaProdutos");
+                    var i = combobox.selectedIndex;
+                    var texto = document.getElementById("listaProdutos").options[i].text;
+                    var index = document.getElementById("listaProdutos").options[i].value;
+            <c:forEach var="produto" items="${produtos}">
+                    cod = ${produto.id};
+                    if (cod == index) {
+                        var valor = ${produto.valor};
+                        var nome = "${produto.nome}";
+                    }
+            </c:forEach>
+                    var pedido = document.getElementById("tabela").innerHTML;
+                    document.getElementById("tabela").innerHTML = pedido + "<tr><td>" + cod + "</td><td>" + qtd + "</td><td>" + nome + "</td><td>" + valor + "</td><td>" + (qtd * valor) + "</td></tr>";
+                    document.getElementById("qtd").value = "";
+                } else {
+                    alert("Digite uma quantidade");
+                }
+            }
+        </script>
     </body>
 </html>

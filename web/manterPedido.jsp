@@ -18,65 +18,60 @@ and open the template in the editor.
         <form action="ManterPedidoController?acao=confirmar${operacao}" method="POST" name="frmManterPedido" >
             <table>  
                 <tr>
-                    <td> COD. USUARIO </td> <td> <input type="text"  name="idUsuario" value="${pedido.idUsuario}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>               
-                    </tr> 
-                    <tr>
-                        <td> NOME USUARIO </td> <td> <input type="text"  name="nomeUsuario" value="${pedido.usuario.nome}"<c:if test="${operacao != 'teste'}"> readonly</c:if>></td>               
-                    </tr>  
-                    <tr>
-                        <td> COD. PEDIDO </td> <td> <input type="text"  name="id" value="${pedido.id}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>               
-                    </tr>  
-
+                    <td> USUARIO</td><td>
+                        <select name="idUsuario" id="usuarios" <c:if test="${operacao != 'Incluir'}"> disabled</c:if>>
+                                <option value="" >Selecione</option>
+                            <c:forEach var="usuario" items="${usuarios}">
+                                <option value="${usuario.id}" <c:if test="${pedido.idUsuario == usuario.id}"> selected</c:if> >  ${usuario.nome} </option>
+                            </c:forEach>
+                        </select>  </td>                              
+                </tr>                     
+                <tr>
+                    <td> COD. PEDIDO </td> <td> <input type="text"  name="id" value="${pedido.id}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>               
+                    </tr>
                     <tr>
                         <td> DATA PEDIDO </td> <td><input type="text" name="data_2" value="${pedido.data_2}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
                         <td> HORA PEDIDO </td> <td> <input type="text" name="hora" value="${pedido.hora}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-
-                    </tr>  
-                    <tr>   
-
-                        <td > Cod. CLIENTE </td> <td><input type="text" name="idCliente" value="${pedido.cliente.id}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                    </tr>
-                    <tr>   
-
-                        <td > NOME CLIENTE </td> <td><input type="text" name="nome" value="${pedido.cliente.nome}"<c:if test="${operacao != 'teste'}"> readonly</c:if>></td>
-                    </tr>
+                    </tr> 
                     <tr>
-                        <td> OBSERVAÇÃO </td> <td> <input type="text" name="obs" value="">    </td>
-                    </tr>
-                    <tr>
-                        <!--REAVALIAR SITUAÇÃO DOS CAMPOS ABAIXO DE UMA FORMA QUE PODEMOS TRABALHAR DE UMA FORMA CERTA -->
-                        <td > COD.PRODUTO </td> <td><input type="text" ></td>
-                    </tr>
-                    <tr>
-                        <td> QUANTIDADE </td> <td><input type="number" name="qtd" min="1" max="10" > 
-                        </td>
-                    <tr>
-                        <td> PRODUTOS </td> 
-                        <td>
-                            <select>
+                        <td>CLIENTE</td><td>
+                            <select name="idCliente" id="clientes" <c:if test="${operacao != 'Incluir'}"> disabled</c:if>>
                                 <option value="" >Selecione</option>
+                            <c:forEach var="cliente" items="${clientes}">
+                                <option value="${cliente.id}" <c:if test="${pedido.idCliente == cliente.id}"> selected</c:if> >  ${cliente.nome} </option>
+                            </c:forEach>
+                        </select>
+                </tr>  
+
+                <!--tr>
+                    <td> QUANTIDADE </td> <td><input type="text" name="qtd" id="qtd"  > 
+                    </td>
+                <tr>
+                    <td> PRODUTOS </td> 
+                    <td>
+                        <select name="listaProdutos" id="listaProdutos">
+                            <option value="" >Selecione</option>
                             <c:forEach var="produto" items="${produtos}">
                                 <option value="${produto.id}" >  ${produto.nome} </option>
                             </c:forEach>
-                        </select><input type="button" name="botao-ok" value="ADD" onclick="addProduto();">
-                        </td>
-                </tr>        
-
+                        </select><input type="button" name="botao-ok" value="ADD"  onclick="addProduto();">
+                    </td>
+                </tr--> 
                 <tr>                
                     <td> FORMAS DE PGTO </td> 
                     <td>                             
                         <select name="idFrmPgto">
                             <option value="">Selecione</option>
                             <c:forEach var="formaPagamento" items="${formaPagamentos}">
-                                <option value="${formaPagamento.id}" <c:if test="${usuario.idNivel == nivel.id}"> selected</c:if>> ${formaPagamento.forma} </option>
+                                <option value="${formaPagamento.id}" <c:if test="${pedido.idFormaPgto == formaPagamento.id}"> selected</c:if>> ${formaPagamento.forma} </option>
                             </c:forEach>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <td> VALOR TOTAL </td> <td><input type="text" id="teste"  value="${pedido.total}" ></td>
+                    <td> VALOR TOTAL </td> <td><input type="text" id="teste" name="total" value="${pedido.total}" ></td>
                 </tr>
                 <tr>
                     <td> DESCONTO </td> <td> <input type="text"></td>
@@ -90,7 +85,8 @@ and open the template in the editor.
             </table>
             <h5><button type="submit">Confirmar</button></h5>
         </form>
-        <!--form action="ManterListaProdutosController?acao=prepararIncluir" method="POST">
+        <!--h3><a href="ManterListaProdutosController?acao=prepararIncluir">Lista de produtos</a></h3>
+        <form action="ManterListaProdutosController?acao=prepararIncluir" method="POST">
             <h5> <input type="submit" name="btnIncluir" value="Incluir Produto"></h5> 
         </form>
         <form action="ManterListaProdutosController?acao=prepararEditar" method="POST">
@@ -100,10 +96,10 @@ and open the template in the editor.
             <h5> <input type="submit" name="btnIncluir" value="Excluir Produto"></h5> 
         </form-->
         <table id="tabela">
-            <tr><td>COD</td><td>QTDE</td><td>PRODUTO</td><td>V.UNIT</td><td>V.TOTAL</td><td>OBS.</td><td>EDITAR</td></tr>
+            <tr><td>COD</td><td>QTDE</td><td>PRODUTO</td><td>V.UNIT</td><td>V.TOTAL</td></tr>
         </table>
         <SCRIPT language="JavaScript">
-            function add(produto) {
+            function add() {
                 alert("produto");
                 /*
                  id = produto.id;
@@ -128,12 +124,27 @@ and open the template in the editor.
                  */}
 
             function addProduto() {
-                alert("produto.id");
-                 pedido = document.getElementById("tabela").innerHTML;
-                document.getElementById("tabela").innerHTML = pedido+ "<tr><td>COD</td><td>QTDE</td><td>PRODUTO</td><td>V.UNIT</td><td>V.TOTAL</td><td>OBS.</td><td>EDITAR</td></tr>";
-
-
+                var qtd = document.getElementById("qtd").value;
+                if (qtd != "") {
+                    var combobox = document.getElementById("listaProdutos");
+                    var i = combobox.selectedIndex;
+                    var texto = document.getElementById("listaProdutos").options[i].text;
+                    var index = document.getElementById("listaProdutos").options[i].value;
+            <c:forEach var="produto" items="${produtos}">
+                    cod = ${produto.id};
+                    if (cod == index) {
+                        var valor = ${produto.valor};
+                        var nome = "${produto.nome}";
+                    }
+            </c:forEach>
+                    var pedido = document.getElementById("tabela").innerHTML;
+                    document.getElementById("tabela").innerHTML = pedido + "<tr><td>" + cod + "</td><td>" + qtd + "</td><td>" + nome + "</td><td>" + valor + "</td><td>" + (qtd * valor) + "</td></tr>";
+                    document.getElementById("qtd").value = "";
+                } else {
+                    alert("Digite uma quantidade");
+                }
             }
+
             function campoNumerico(valor)
             {
                 var caracteresValidos = "0123456789";

@@ -15,6 +15,8 @@ import java.util.List;
  */
 public class ListaProdutos {
 
+   
+
     private int id;
     private int quantitade;
     private int idPedido;
@@ -74,14 +76,14 @@ public class ListaProdutos {
     public void setProduto(Produto produto) {
         this.produto = produto;
     }
-     public static List<ListaProdutos> obterListasProdutos() throws ClassNotFoundException, SQLException {
-        return ListaProdutosDAO.obterListasProdutos();
+     public static List<ListaProdutos> obterListaProdutos(int id) throws ClassNotFoundException, SQLException {
+        return ListaProdutosDAO.obterListaProdutos(id);
     }
      public void gravar() throws SQLException, ClassNotFoundException{
         ListaProdutosDAO.gravar(this);
     }
-    public static ListaProdutos obterListaProdutos(int id) throws ClassNotFoundException, SQLException {
-        return ListaProdutosDAO.obterListaProdutos(id);
+    public static ListaProdutos obterListaProduto(int id) throws ClassNotFoundException, SQLException {
+        return ListaProdutosDAO.obterListaProduto(id);
     }
 
     public void alterar() throws ClassNotFoundException, SQLException {

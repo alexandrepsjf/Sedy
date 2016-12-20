@@ -1,8 +1,4 @@
-<%-- 
-    Document   : pesquisaListaProdutos
-    Created on : 17/11/2016, 15:13:38
-    Author     : Alexandre
---%>
+
 
 <!DOCTYPE html>
 <!--
@@ -15,12 +11,12 @@ and open the template in the editor.
 <%@page contentType="text/html" pageEncoding="utf-8"%>  
 <html>
     <head>
-        <title>Pesquisa de Produtos</title>
+        <title>Pesquisa Lista de Produtos</title>
         <meta http-equiv="content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div><h1>Pesquisa de Produtos</h1></div>
+        <div><h1>Pesquisa Lista de Produtos</h1></div>
         <table border="1">            
             <tr> 
                 <th>Código Produto</th>

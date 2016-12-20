@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.io.IOException;
@@ -15,13 +10,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Cliente;
 import model.ListaProdutos;
+import model.Produto;
 
 /**
  *
  * @author mateu
  */
-public class PesquisaListaProdutoController extends HttpServlet {
+public class PesquisaListaProdutosController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,14 +28,24 @@ public class PesquisaListaProdutoController extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setAttribute("listaProdutos", ListaProdutos.obterListaProdutos(id));
-        RequestDispatcher view = request.getRequestDispatcher("/pesquisaListaProduto.jsp");
-        view.forward(request, response);
-}
+        
+        try {
+            
+        int id = Integer.parseInt(request.getParameter("id"));
+            request.setAttribute("listaProdutos", ListaProdutos.obterListaProdutos(id));
+            request.setAttribute("produtos", Produto.obterProdutos());           
+            RequestDispatcher view = request.getRequestDispatcher("/pesquisaListaProdutos.jsp");
+            view.forward(request, response);
+        } catch (ClassNotFoundException ex) {
+
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -54,8 +61,8 @@ public class PesquisaListaProdutoController extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(PesquisaListaProdutoController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(PesquisaListaProdutosController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -72,8 +79,8 @@ public class PesquisaListaProdutoController extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(PesquisaListaProdutoController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(PesquisaListaProdutosController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

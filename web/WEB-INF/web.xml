@@ -25,10 +25,6 @@
         <servlet-class>controller.PesquisaUsuarioController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>PesquisaListaProduto</servlet-name>
-        <servlet-class>controller.PesquisaListaProdutoController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>PesquisaNivelController</servlet-name>
         <servlet-class>controller.PesquisaNivelController</servlet-class>
     </servlet>
@@ -39,6 +35,10 @@
     <servlet>
         <servlet-name>PesquisaProdutoController</servlet-name>
         <servlet-class>controller.PesquisaProdutoController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PesquisaListaProdutosController</servlet-name>
+        <servlet-class>controller.PesquisaListaProdutosController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ManterBairroController</servlet-name>
@@ -81,8 +81,12 @@
         <servlet-class>controller.ManterTelefoneController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>manterListaProdutosController</servlet-name>
-        <servlet-class>controller.manterListaProdutosController</servlet-class>
+        <servlet-name>ManterListaProdutosController</servlet-name>
+        <servlet-class>controller.ManterListaProdutosController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TratamentoExcecao</servlet-name>
+        <servlet-class>exception.TratamentoExcecao</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaBairroController</servlet-name>
@@ -109,10 +113,6 @@
         <url-pattern>/PesquisaUsuarioController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>PesquisaListaProduto</servlet-name>
-        <url-pattern>/PesquisaListaProduto</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>PesquisaNivelController</servlet-name>
         <url-pattern>/PesquisaNivelController</url-pattern>
     </servlet-mapping>
@@ -123,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>PesquisaProdutoController</servlet-name>
         <url-pattern>/PesquisaProdutoController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PesquisaListaProdutosController</servlet-name>
+        <url-pattern>/PesquisaListaProdutosController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManterBairroController</servlet-name>
@@ -165,8 +169,12 @@
         <url-pattern>/ManterTelefoneController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>manterListaProdutosController</servlet-name>
-        <url-pattern>/manterListaProdutosController</url-pattern>
+        <servlet-name>ManterListaProdutosController</servlet-name>
+        <url-pattern>/ManterListaProdutosController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TratamentoExcecao</servlet-name>
+        <url-pattern>/TratamentoExcecao</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
