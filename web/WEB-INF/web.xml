@@ -79,7 +79,7 @@
     <servlet>
         <servlet-name>ManterTelefoneController</servlet-name>
         <servlet-class>controller.ManterTelefoneController</servlet-class>
-    </servlet>
+    </servlet>   
     <servlet>
         <servlet-name>ManterListaProdutosController</servlet-name>
         <servlet-class>controller.ManterListaProdutosController</servlet-class>
@@ -88,10 +88,7 @@
         <servlet-name>TratamentoExcecao</servlet-name>
         <servlet-class>exception.TratamentoExcecao</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>TratamentoExcecao</servlet-name>
-        <servlet-class>exception.TratamentoExcecao</servlet-class>
-    </servlet>
+
     <servlet-mapping>
         <servlet-name>PesquisaBairroController</servlet-name>
         <url-pattern>/PesquisaBairroController</url-pattern>
@@ -171,7 +168,7 @@
     <servlet-mapping>
         <servlet-name>ManterTelefoneController</servlet-name>
         <url-pattern>/ManterTelefoneController</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>    
     <servlet-mapping>
         <servlet-name>ManterListaProdutosController</servlet-name>
         <url-pattern>/ManterListaProdutosController</url-pattern>
@@ -180,10 +177,7 @@
         <servlet-name>TratamentoExcecao</servlet-name>
         <url-pattern>/TratamentoExcecao</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>TratamentoExcecao</servlet-name>
-        <url-pattern>/TratamentoExcecao</url-pattern>
-    </servlet-mapping>
+
     <session-config>
         <session-timeout>
             30
