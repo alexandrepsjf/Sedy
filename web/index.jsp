@@ -9,17 +9,21 @@ and open the template in the editor.
         <title>Tela de pesquisa</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="stylesheet" href="css.css">   
     </head>
-    <body>
-        <div><h1>Selecione uma opção:</h1></div>
-        <div><h3><a href="PesquisaPedidoController">Pedidos</a></h3>
-        <h3><a href="PesquisaClienteController">Clientes</a></h3>
-        <h3><a href="PesquisaBairroController">Bairros</a></h3>
-        <h3><a href="PesquisaUsuarioController">Usuarios</a></h3>
-        <h3><a href="PesquisaEmailController">Email</a></h3>
-        <h3><a href="PesquisaNivelController">Nivel</a></h3>
-        <h3><a href="PesquisaProdutoController">Produtos</a></h3>
-        <h3><a href="PesquisaFormaPagamentoController">Formas de Pagamento</a></h3>
+    <body class="logo">
+        <div class="title"><h1>Selecione uma opção:</h1></div>
+        <div >
+            
+        <a href="PesquisaPedidoController"><button>Pedidos</button></a>
+            <a href="PesquisaListaProdutosController"><button>Lista Produtos</button></a>
+            <a href="PesquisaClienteController"><button>Clientes</button></a>
+           <a href="PesquisaBairroController"><button>Bairros</button></a>
+            <a href="PesquisaUsuarioController"><button>Usuarios</button></a>
+         <a href="PesquisaEmailController">   <button>Email</button></a>
+           <a href="PesquisaNivelController"> <button>Nivel</button></a>
+            <a href="PesquisaProdutoController"><button>Produtos</button></a>
+           <a href="PesquisaFormaPagamentoController"> <button>Formas de Pagamento</button></a>
         </div>
     </body>
 </html>

@@ -10,7 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Cliente;
 import model.ListaProdutos;
 import model.Produto;
 
@@ -35,10 +34,8 @@ public class PesquisaListaProdutosController extends HttpServlet {
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         
-        try {
-            
-        int id = Integer.parseInt(request.getParameter("id"));
-            request.setAttribute("listaProdutos", ListaProdutos.obterListaProdutos(id));
+        try {            
+                   request.setAttribute("listaProdutos", ListaProdutos.obterListaProdutos());
             request.setAttribute("produtos", Produto.obterProdutos());           
             RequestDispatcher view = request.getRequestDispatcher("/pesquisaListaProdutos.jsp");
             view.forward(request, response);

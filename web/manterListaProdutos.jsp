@@ -19,14 +19,8 @@
             <table>  
                 <tr>
                     <td> COD. LISTA DE PRODUTOS </td> <td> <input type="text"  name="id" value="${listaProdutos.id}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>               
-                    </tr>                       
-                    <tr>
-                        <td> COD. PEDIDO </td> <td> <input type="text"  name="idPedido" value="${listaProdutos.idPedido}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>               
-                    </tr>
-                    <tr> 
-                        <td > NOME CLIENTE </td> <td><input type="text" name="nome" value="${pedido.cliente.nome}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
-                    </tr>
-                    <tr>
+                    </tr>       
+                   <tr>
                         <td> QUANTIDADE </td> <td><input type="text" id="qtd" name="qtd"> 
                         </td>
                     <tr>

@@ -90,7 +90,7 @@ public class PedidoDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select*from pedido where id = " + id );
+            ResultSet rs = comando.executeQuery("select*from pedido where id = " + id);
             rs.first();
             pedido.setId(rs.getInt("ID"));
             pedido.setHora(rs.getString("HORA"));
@@ -111,4 +111,37 @@ public class PedidoDAO {
         return pedido;
 
     }
+
+    public static void alterar(Pedido pedido) throws ClassNotFoundException, SQLException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "update pedido set data_2=?,hora=?,forma_pgm_id=?,total=? where id =?";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(5, pedido.getId());
+            comando.setString(1, pedido.getData_2());
+            comando.setString(2, pedido.getHora());
+            comando.setInt(3, pedido.getIdFormaPgto());
+            comando.setFloat(4, pedido.getTotal());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
+    public static void excluir(Pedido pedido) throws ClassNotFoundException, SQLException {
+ Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "delete from pedido  where id = ?";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, pedido.getId());            
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }    }
 }

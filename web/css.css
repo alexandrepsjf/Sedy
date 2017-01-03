@@ -1,0 +1,85 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 03/01/2017, 09:06:36
+    Author     : Alexandre
+*/
+body{
+    text-align: center;
+    background-color: #8FBC8F;
+
+}
+.table{
+    color:#4682B4;
+    font-style: italic;
+    font-family: monospace;
+    font-size: 20px;
+    align-items: center;
+    text-transform: uppercase;
+    text-shadow: 1px 2px #000000;
+    color: rgb(255,250,255);
+    text-align:center; 
+    border-collapse: collapse;
+   
+}
+
+table, th , td {
+    border: 2px solid black; 
+     padding-left:  5px;
+     padding-right: 2px;
+     padding-bottom: 10px;
+}
+td a{
+    color: #EEDD82;
+}
+th{
+    font-size: 25px;
+    color: #000000;
+    text-shadow: 1px 2px #FFFFFF;
+}
+
+tr:nth-child(even){background-color: #E0FFFF}
+tr:hover {background-color: #00FFFF}
+
+.logo{
+    text-align: center;
+    background-color: #8FBC8F;
+    background-image: url("img/HOME.png")  ;
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+    background-position-y: -7%;
+    background-size: 80%;
+}
+.title{
+    font-family: impact,monospace;
+    text-transform: uppercase;
+
+}
+button {
+    color:#556B2F;
+    font-style: italic;
+    font-family: monospace;
+    font-size: 20px;
+    align-items: center;
+    text-transform: uppercase;
+}
+.search{
+    font-family: monospace;
+        background-image: url("img/HOME.png");
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+    background-position-y: 300px;
+    background-size: 30%;
+
+}
+input{
+    color:#556B2F;
+    font-style: italic;
+    font-family: monospace;
+    font-size: 20px;
+    align-content: flex-start;
+    text-transform: uppercase;
+}

@@ -87,13 +87,10 @@ public class ManterPedidoController extends HttpServlet {
 
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
-        //String nome = request.getParameter("nome");
-        //int idTelefone = Integer.parseInt(request.getParameter("idTelefone"));
         String data_2 = request.getParameter("data_2");
         String hora = request.getParameter("hora");
         int idCliente = Integer.parseInt(request.getParameter("idCliente"));
         int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
-        //String obs = request.getParameter("obs");
         int idFrmPgto = Integer.parseInt(request.getParameter("idFrmPgto"));
         float total = Float.parseFloat(request.getParameter("total"));
         try {
@@ -133,15 +130,61 @@ public class ManterPedidoController extends HttpServlet {
     }
 
     private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int id = Integer.parseInt(request.getParameter("id"));
+        String data_2 = request.getParameter("data_2");
+        String hora = request.getParameter("hora"); 
+        
+        int idFrmPgto = Integer.parseInt(request.getParameter("idFrmPgto"));
+        float total = Float.parseFloat(request.getParameter("total"));
+        try {
+            Pedido pedido = new Pedido(id, hora, data_2, total, null, 0, null, 0, null, idFrmPgto);
+            pedido.alterar();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaPedidoController");
+            view.forward(request, response);
+        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
+
+        }
+
     }
 
     private void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            List<Produto> produtos = ProdutoDAO.obterProdutos();
+            List<FormaPagamento> formaPagamentos = FormaPagamentoDAO.obterFormasPagamento();
+            List<Usuario> usuarios = UsuarioDAO.obterUsuarios();
+            List<Cliente> clientes = ClienteDAO.obterClientes();
+            Pedido pedido = Pedido.obterPedido(id);
+            request.setAttribute("clientes", clientes);
+            request.setAttribute("usuarios", usuarios);
+            request.setAttribute("produtos", produtos);
+            request.setAttribute("formaPagamentos", formaPagamentos);
+            request.setAttribute("operacao", "Excluir");
+            request.setAttribute("pedido", pedido);
+            RequestDispatcher view = request.getRequestDispatcher("/manterPedido.jsp");
+            view.forward(request, response);
+
+        } catch (ServletException | IOException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ManterPedidoController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+
+        }    }
 
     private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int id = Integer.parseInt(request.getParameter("id"));
+        String data_2 = request.getParameter("data_2");
+        String hora = request.getParameter("hora");         
+        int idFrmPgto = Integer.parseInt(request.getParameter("idFrmPgto"));
+        float total = Float.parseFloat(request.getParameter("total"));
+        try {
+            Pedido pedido = new Pedido(id, hora, data_2, total, null, 0, null, 0, null, idFrmPgto);
+            pedido.excluir();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaPedidoController");
+            view.forward(request, response);
+        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
+
+        }
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
