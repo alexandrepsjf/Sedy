@@ -13,8 +13,9 @@ and open the template in the editor.
         <title>Cliente</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css.css">
     </head>
-    <body>
+    <body class="keep">
         <div><h1>Cliente -  ${operacao}</h1></div>
         <form action="ManterClienteController?acao=confirmar${operacao}" method="post" name="frmManterCliente" onsubmit="return validarFormulario(this)" >
             <table> 
@@ -75,76 +76,80 @@ and open the template in the editor.
                 </tr>     
 
             </table>
-            <h3><button type="submit" >Confirmar</button></h3>
+            <div class="footer">
+                <button  type="submit" >Confirmar</button>
+            </div>
         </form>
-       <SCRIPT language="JavaScript">
-               <!--         
-            function campoNumerico(valor)
+        <div class="logoSearch">            
+        </div>        </form>
+    <SCRIPT language="JavaScript">
+        <!--         
+         function campoNumerico(valor)
+        {
+            var caracteresValidos = "0123456789";
+            var ehNumero = true;
+            var umCaracter;
+            for (i = 0; i < valor.length && ehNumero === true; i++)
             {
-                var caracteresValidos = "0123456789";
-                var ehNumero = true;
-                var umCaracter;
-                for (i = 0; i < valor.length && ehNumero === true; i++) 
-                { 
-                    umCaracter = valor.charAt(i); 
-                    if (caracteresValidos.indexOf(umCaracter) === -1) 
-                    {
-                        ehNumero = false;
-                    }
+                umCaracter = valor.charAt(i);
+                if (caracteresValidos.indexOf(umCaracter) === -1)
+                {
+                    ehNumero = false;
                 }
-                return ehNumero;
+            }
+            return ehNumero;
+        }
+
+        function validarFormulario(form) {
+            var mensagem;
+            mensagem = "";
+            if (form.id.value === "") {
+                mensagem = mensagem + "Informe o CÓDIGO DO CLIENTE \n";
+            }
+            if (form.data_cadastro.value === "") {
+                mensagem = mensagem + "Informe A DATA DO CLIENTE \n";
+            }
+            if (form.data_cadastro.value === "") {
+                mensagem = mensagem + "Informe A HORA DO CLIENTE \n";
+            }
+            if (form.addTelefone.value === "") {
+                mensagem = mensagem + "Informe TELEFONE DO CLIENTE \n";
+            }
+            if (form.numero.value === "") {
+                mensagem = mensagem + "Informe NUMERO DO CLIENTE \n";
+            }
+            if (form.cep.value === "") {
+                mensagem = mensagem + "Informe CEP DO CLIENTE \n";
             }
 
-            function validarFormulario(form){ 
-                var mensagem;
-                mensagem = "";
-                if (form.id.value === ""){
-                    mensagem = mensagem + "Informe o CÓDIGO DO CLIENTE \n";
-                }
-                if (form.data_cadastro.value === ""){
-                    mensagem = mensagem + "Informe A DATA DO CLIENTE \n";
-                }
-                if (form.data_cadastro.value === ""){
-                    mensagem = mensagem + "Informe A HORA DO CLIENTE \n";
-                }
-                if (form.addTelefone.value === ""){
-                    mensagem = mensagem + "Informe TELEFONE DO CLIENTE \n";
-                }
-                if (form.numero.value === ""){
-                    mensagem = mensagem + "Informe NUMERO DO CLIENTE \n";
-                }
-                if (form.cep.value === ""){
-                    mensagem = mensagem + "Informe CEP DO CLIENTE \n";
-                }
-                
-                if (!campoNumerico(form.id.value)){
-                    mensagem = mensagem + "CÓDIGO DO CLIENTE deve ser numérico\n";
-                }
-                if (!campoNumerico(form.data_cadastro.value)){
-                    mensagem = mensagem + "DATA DO CLIENTE deve ser numérico\n";
-                }
-                if (!campoNumerico(form.hora_cadastro.value)){
-                    mensagem = mensagem + "HORA DO CLIENTE deve ser numérico\n";
-                }
-                if (!campoNumerico(form.addTelefone.value)){
-                    mensagem = mensagem + "TELEFONE DO CLIENTE deve ser numérico\n";
-                }
-                if (!campoNumerico(form.numero.value)){
-                    mensagem = mensagem + "NUMERO DO CLIENTE deve ser numérico\n";
-                }
-                if (!campoNumerico(form.cep.value)){
-                    mensagem = mensagem + "CEP DO CLIENTE deve ser numérico\n";
-                }
-                       
-                if (mensagem === ""){
-                    return true;
-                }else{
-                    alert(mensagem);
-                    return false;
-                }                
-                
-           }
-            //-->
-        </SCRIPT>
-    </body>
+            if (!campoNumerico(form.id.value)) {
+                mensagem = mensagem + "CÓDIGO DO CLIENTE deve ser numérico\n";
+            }
+            if (!campoNumerico(form.data_cadastro.value)) {
+                mensagem = mensagem + "DATA DO CLIENTE deve ser numérico\n";
+            }
+            if (!campoNumerico(form.hora_cadastro.value)) {
+                mensagem = mensagem + "HORA DO CLIENTE deve ser numérico\n";
+            }
+            if (!campoNumerico(form.addTelefone.value)) {
+                mensagem = mensagem + "TELEFONE DO CLIENTE deve ser numérico\n";
+            }
+            if (!campoNumerico(form.numero.value)) {
+                mensagem = mensagem + "NUMERO DO CLIENTE deve ser numérico\n";
+            }
+            if (!campoNumerico(form.cep.value)) {
+                mensagem = mensagem + "CEP DO CLIENTE deve ser numérico\n";
+            }
+
+            if (mensagem === "") {
+                return true;
+            } else {
+                alert(mensagem);
+                return false;
+            }
+
+        }
+        //-->
+    </SCRIPT>
+</body>
 </html>

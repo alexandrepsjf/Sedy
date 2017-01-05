@@ -9,31 +9,35 @@ and open the template in the editor.
 <%@page contentType="text/html" pageEncoding="utf-8"%> 
 <html>
     <head>
-        
+
         <title>Cliente</title>
-        <meta charset="UTF-8">
+        <meta http-equiv="content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css.css">
     </head>
-    <body>
-        <div><h1>Cliente</h1></div>
-        <table border="1"> 
-            <tr> 
+    <body class="search">
+        <div class="title"><h1>Cliente</h1></div>
+        <table  class="table">             <tr> 
                 <th>Cod Cliente</th>
                 <th>Nome Cliente</th>
                 <th colspan =2>Ação</th>
             </tr>
             <c:forEach items="${clientes}" var="cliente">
-            <tr> 
-                <td><c:out value="${cliente.id}"/></td>
-                <td><c:out value="${cliente.nome}"/></td>
-                <td><a href="ManterClienteController?acao=prepararEditar&id=<c:out value="${cliente.id}"/>">Editar</a></td>
-                <td><a href="ManterClienteController?acao=prepararExcluir&id=<c:out value="${cliente.id}"/>">Excluir</a></td>
-                
-            </tr>
+                <tr> 
+                    <td><c:out value="${cliente.id}"/></td>
+                    <td><c:out value="${cliente.nome}"/></td>
+                    <td><a href="ManterClienteController?acao=prepararEditar&id=<c:out value="${cliente.id}"/>">Editar</a></td>
+                    <td><a href="ManterClienteController?acao=prepararExcluir&id=<c:out value="${cliente.id}"/>">Excluir</a></td>
+
+                </tr>
             </c:forEach>        
         </table>
-        <form action="ManterClienteController?acao=prepararIncluir" method="post">
-            <input type="submit" name="btnIncluir" value="Incluir">
-        </form>
+        <div class="footer">
+
+            <form action="ManterClienteController?acao=prepararIncluir" method="post">
+                <input type="submit" name="btnIncluir" value="Incluir">
+            </form></div>
+        <div class="logoSearch">            
+        </div>
     </body>
 </html>

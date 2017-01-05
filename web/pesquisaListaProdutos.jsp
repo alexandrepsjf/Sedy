@@ -14,11 +14,11 @@ and open the template in the editor.
         <title>Pesquisa Lista de Produtos</title>
         <meta http-equiv="content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css.css">
     </head>
-    <body>
-        <div><h1>Pesquisa Lista de Produtos</h1></div>
-        <table border="1">            
-            <tr> 
+    <body class="search">
+        <div class="title"><h1>Pesquisa Lista de Produtos</h1></div>
+        <table  class="table">             <tr> 
                 <th>Código Produto</th>
                 <th>Nome</th>
                 <th colspan =2>Ação</th>                                
@@ -31,9 +31,12 @@ and open the template in the editor.
                 </tr>
             </c:forEach>
         </table>
-        <form action="ManterListaProdutosController?acao=prepararIncluir" method="POST">
-            <input type="submit" name="btnIncluir" value="Incluir">
-        </form>
+        <div class="footer">
+            <form action="ManterListaProdutosController?acao=prepararIncluir" method="POST">
+                <input type="submit" name="btnIncluir" value="Incluir">
+            </form></div>
+        <div class="logoSearch">            
+        </div>
     </body>
 </html>
 

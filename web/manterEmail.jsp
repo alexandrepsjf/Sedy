@@ -10,10 +10,11 @@ and open the template in the editor.
 <html>
     <head>
         <title>Email</title>
-        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css.css">
     </head>
-    <body>
+    <body class="keep">
         <div><h1>Email - ${operacao}</h1></div>
         <form action="ManterEmailController?acao=confirmar${operacao}" method="post" name="frmManterEmail" onsubmit="return validarFormulario(this)" >
             <table>            
@@ -38,47 +39,51 @@ and open the template in the editor.
                         <td > SERVIDOR ENTRADA </td><td><input type="text" name="servidorEntrada" value="${email.servidorEntrada}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>  
             </table>
-            <h3><button type="submit" >Confirmar</button></h3>
+            <div class="footer">
+                <button  type="submit" >Confirmar</button>
+            </div>
         </form>
-        <SCRIPT language="JavaScript">
+        <div class="logoSearch">            
+        </div>        </form>
+    <SCRIPT language="JavaScript">
 
 
-            function campoNumerico(valor)
+        function campoNumerico(valor)
+        {
+            var caracteresValidos = "0123456789";
+            var ehNumero = true;
+            var umCaracter;
+            for (i = 0; i < valor.length && ehNumero == true; i++)
             {
-                var caracteresValidos = "0123456789";
-                var ehNumero = true;
-                var umCaracter;
-                for (i = 0; i < valor.length && ehNumero == true; i++)
+                umCaracter = valor.charAt(i);
+                if (caracteresValidos.indexOf(umCaracter) == -1)
                 {
-                    umCaracter = valor.charAt(i);
-                    if (caracteresValidos.indexOf(umCaracter) == -1)
-                    {
-                        ehNumero = false;
-                    }
+                    ehNumero = false;
                 }
-                return ehNumero;
+            }
+            return ehNumero;
+        }
+
+        function validarFormulario(form) {
+            var mensagem;
+            mensagem = "";
+            if (form.id.value == "") {
+                mensagem = mensagem + "Informe o Código do email\n";
             }
 
-            function validarFormulario(form) {
-                var mensagem;
-                mensagem = "";
-                if (form.id.value == "") {
-                    mensagem = mensagem + "Informe o Código do email\n";
-                }
-
-                if (!campoNumerico(form.id.value)) {
-                    mensagem = mensagem + "Código do Email deve ser numérico\n";
-                }
-
-                if (mensagem == "") {
-                    return true;
-                } else {
-                    alert(mensagem);
-                    return false;
-                }
-
+            if (!campoNumerico(form.id.value)) {
+                mensagem = mensagem + "Código do Email deve ser numérico\n";
             }
 
-        </SCRIPT>            
-    </body>
+            if (mensagem == "") {
+                return true;
+            } else {
+                alert(mensagem);
+                return false;
+            }
+
+        }
+
+    </SCRIPT>            
+</body>
 </html>

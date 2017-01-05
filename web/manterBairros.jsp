@@ -28,11 +28,11 @@ and open the template in the editor.
                         <td > TAXA DE ENTREGA </td><td><input type="text" name="taxa" value="${bairro.taxa}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
             </table>
-            <div class="footer">
-                <button  type="submit" >Confirmar</button>
-            </div>
+                <div class="footer">
+                    <button  type="submit" >Confirmar</button>
+                </div>
         </form>
-                 <div class="logoSearch">            
+        <div class="logoSearch">            
         </div>
         <SCRIPT language="JavaScript">
             <!--         
