@@ -16,6 +16,8 @@ and open the template in the editor.
     </head>
     <body class="search">
         <div class="title"><h1>Pesquisa de Bairros</h1></div>
+         <div class="logoSearch">            
+        </div>
         <table  class="table">            
             <tr> 
                 <th>Código Bairro</th>
@@ -37,7 +39,6 @@ and open the template in the editor.
             <input  type="submit" name="btnIncluir" value="Incluir">
         </form>
         </div>
-        <div class="logoSearch">            
-        </div>
+       
     </body>
 </html>

@@ -12,14 +12,14 @@ body{
     background-color: #8FBC8F;
 
 }
-.table{
+table{
     color:#4682B4;
     font-style: italic;
     font-family: monospace;
     font-size: 20px;
     align-items: center;
     text-transform: uppercase;
-    text-shadow: 1px 2px #000000;
+    text-shadow: 1px 1px #FFFFFF;
     color: rgb(255,250,255);
     text-align:center; 
     border-collapse: collapse;
@@ -32,6 +32,7 @@ body{
     margin-left: 220px;
 }
 table, th , td {
+    color: #000000;
     border: 2px solid black; 
     padding-left:  5px;
     padding-right: 2px;
@@ -39,6 +40,7 @@ table, th , td {
 }
 td a{
     color: #EEDD82;
+    text-shadow: 1px 2px #000000;
 }
 th{
     font-size: 25px;
@@ -58,7 +60,7 @@ tr:hover {background-color: #00FFFF}
     background-position-y: -7%;
     background-size: 80%;
 }
-.title{
+h1{
     font-family: impact,monospace;
     text-transform: uppercase;
 }
@@ -72,14 +74,29 @@ button {
     text-transform: uppercase;
 }
 .logoSearch{
-         font-family: monospace;
-    background-image: url("img/HOM.png");
+    width: 370px;
+    height: 200px;
+    font-family: monospace;
+    background-image: url("img/HOME.png");
     background-repeat: no-repeat;    
-    
-   
+    bottom: 0;
+    color: black;
+    left: 800px;
+    overflow: auto;
+    padding: 3em;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 300px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
 }
-.search{
-     
+.keep{
+    font: monospace;
+    background-color: #9FB6CD;
+
 }
 input{
     color:#f56B2F;

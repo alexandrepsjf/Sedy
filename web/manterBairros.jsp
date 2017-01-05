@@ -9,14 +9,15 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Bairros</title>
+        <title >Bairros</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css.css">   
     </head>
-    <body>
+    <body class="keep">
         <h1>Bairros - ${operacao}</h1>
         <form action="ManterBairroController?acao=confirmar${operacao}" method="POST" name="frmManterBairros" onsubmit="return validarFormulario(this)">
-            <table>            
+            <table >            
                 <tr> 
                     <td > COD. DO BAIRRO </td><td><input type="text" name="id" value="${bairro.id}"  <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                     </tr> 
@@ -27,19 +28,23 @@ and open the template in the editor.
                         <td > TAXA DE ENTREGA </td><td><input type="text" name="taxa" value="${bairro.taxa}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
             </table>
-            <h3><button type="submit" >Confirmar</button></h3>
+            <div class="footer">
+                <button  type="submit" >Confirmar</button>
+            </div>
         </form>
-                <SCRIPT language="JavaScript">
-               <!--         
-            function campoNumerico(valor)
+                 <div class="logoSearch">            
+        </div>
+        <SCRIPT language="JavaScript">
+            <!--         
+    function campoNumerico(valor)
             {
                 var caracteresValidos = "0123456789";
                 var ehNumero = true;
                 var umCaracter;
-                for (i = 0; i < valor.length && ehNumero === true; i++) 
-                { 
-                    umCaracter = valor.charAt(i); 
-                    if (caracteresValidos.indexOf(umCaracter) === -1) 
+                for (i = 0; i < valor.length && ehNumero === true; i++)
+                {
+                    umCaracter = valor.charAt(i);
+                    if (caracteresValidos.indexOf(umCaracter) === -1)
                     {
                         ehNumero = false;
                     }
@@ -47,29 +52,29 @@ and open the template in the editor.
                 return ehNumero;
             }
 
-            function validarFormulario(form){ 
+            function validarFormulario(form) {
                 var mensagem;
                 mensagem = "";
-                if (form.id.value === ""){
+                if (form.id.value === "") {
                     mensagem = mensagem + "Informe o Código do Bairro\n";
-                }                             
-                if (form.taxa.value === ""){
+                }
+                if (form.taxa.value === "") {
                     mensagem = mensagem + "Informe o Taxa do Bairro\n";
                 }
-                if (!campoNumerico(form.id.value)){
+                if (!campoNumerico(form.id.value)) {
                     mensagem = mensagem + "Código do Bairro deve ser numérico\n";
                 }
-                if (!campoNumerico(form.taxa.value)){
+                if (!campoNumerico(form.taxa.value)) {
                     mensagem = mensagem + "Taxa deve ser numérica\n";
-                }                 
-                if (mensagem === ""){
+                }
+                if (mensagem === "") {
                     return true;
-                }else{
+                } else {
                     alert(mensagem);
                     return false;
-                }                
-                
-           }
+                }
+
+            }
             //-->
         </SCRIPT>
     </body>
