@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>PesquisaBairroController</servlet-name>
@@ -79,7 +79,7 @@
     <servlet>
         <servlet-name>ManterTelefoneController</servlet-name>
         <servlet-class>controller.ManterTelefoneController</servlet-class>
-    </servlet>   
+    </servlet>
     <servlet>
         <servlet-name>ManterListaProdutosController</servlet-name>
         <servlet-class>controller.ManterListaProdutosController</servlet-class>
@@ -88,7 +88,10 @@
         <servlet-name>TratamentoExcecao</servlet-name>
         <servlet-class>exception.TratamentoExcecao</servlet-class>
     </servlet>
-
+    <servlet>
+        <servlet-name>ManterInicio</servlet-name>
+        <servlet-class>controller.ManterInicio</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaBairroController</servlet-name>
         <url-pattern>/PesquisaBairroController</url-pattern>
@@ -168,7 +171,7 @@
     <servlet-mapping>
         <servlet-name>ManterTelefoneController</servlet-name>
         <url-pattern>/ManterTelefoneController</url-pattern>
-    </servlet-mapping>    
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManterListaProdutosController</servlet-name>
         <url-pattern>/ManterListaProdutosController</url-pattern>
@@ -177,7 +180,10 @@
         <servlet-name>TratamentoExcecao</servlet-name>
         <url-pattern>/TratamentoExcecao</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>ManterInicio</servlet-name>
+        <url-pattern>/ManterInicio</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -190,7 +196,6 @@
         <location>
             /TratamentoExcecao
         </location>
-            
     </error-page>
     <error-page>
         <exception-type>
@@ -199,5 +204,5 @@
         <location>
             /TratamentoExcecao
         </location>
-    </error-page>    
+    </error-page>
 </web-app>

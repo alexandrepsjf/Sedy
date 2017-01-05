@@ -26,14 +26,14 @@ table{
     font-size: 30px;   
     text-align: left;
     position: relative;
-    margin-left: 220px;
+    margin-left: 120px;
+    margin-bottom: 10px;
 }
 table, th , td {
     color: #000000;
     border: 2px solid black; 
-    padding-left:  auto;
-    padding-right: auto;
-    padding-bottom: auto;
+    padding:  auto;
+    
 }
 td a{
     color: #EEDD82;
@@ -102,4 +102,7 @@ input{
     font-size: 20px;
     text-transform: uppercase;
     margin: 1%;
+}
+form{
+    display: inline;
 }

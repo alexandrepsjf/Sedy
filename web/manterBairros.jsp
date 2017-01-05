@@ -16,6 +16,10 @@ and open the template in the editor.
     </head>
     <body class="keep">
         <h1>Bairros - ${operacao}</h1>
+        <div class="footer">
+          &#9668; <a  href="ManterInicio"><button>Voltar</button></a> 
+        </div>
+
         <form action="ManterBairroController?acao=confirmar${operacao}" method="POST" name="frmManterBairros" onsubmit="return validarFormulario(this)">
             <table >            
                 <tr> 
@@ -28,10 +32,12 @@ and open the template in the editor.
                         <td > TAXA DE ENTREGA </td><td><input type="text" name="taxa" value="${bairro.taxa}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
             </table>
-                <div class="footer">
-                    <button  type="submit" >Confirmar</button>
-                </div>
-        </form>
+            <div class="footer">
+                <button  type="submit" >Confirmar</button>
+            </div>
+        </form>                
+
+
         <div class="logoSearch">            
         </div>
         <SCRIPT language="JavaScript">

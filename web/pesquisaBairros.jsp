@@ -15,8 +15,12 @@ and open the template in the editor.
         <link rel="stylesheet" href="css.css">   
     </head>
     <body class="search">
+
         <div class="title"><h1>Pesquisa de Bairros</h1></div>
-         <div class="logoSearch">            
+        <div class="footer"> 
+           &#9668; <a href="ManterInicio"><button>inicio</button></a>    
+        </div>       
+        <div class="logoSearch">            
         </div>
         <table  class="table">            
             <tr> 
@@ -32,13 +36,14 @@ and open the template in the editor.
                     <td ><a href="ManterBairroController?acao=prepararExcluir&id=<c:out value="${bairro.id}"/>">Excluir</a></td>
                 </tr>
             </c:forEach>
-        </table> 
-        
-        <div class="footer">
-        <form  action="ManterBairroController?acao=prepararIncluir" method="POST">
-            <input  type="submit" name="btnIncluir" value="Incluir">
-        </form>
+        </table>         
+        <div class="footer">  
+
+            <form  action="ManterBairroController?acao=prepararIncluir" method="POST">             
+                <input  type="submit" name="btnIncluir" value="Incluir">
+            </form>
+          
         </div>
-       
+
     </body>
 </html>
