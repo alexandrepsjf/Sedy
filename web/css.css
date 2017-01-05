@@ -10,20 +10,17 @@ and open the template in the editor.
 body{
     text-align: center;
     background-color: #8FBC8F;
-
 }
 table{
     color:#4682B4;
     font-style: italic;
     font-family: monospace;
     font-size: 20px;
-    align-items: center;
     text-transform: uppercase;
     text-shadow: 1px 1px #FFFFFF;
     color: rgb(255,250,255);
-    text-align:center; 
-    border-collapse: collapse;
-
+    text-align: center; 
+    border-collapse: collapse;  
 }
 .footer{
     font-size: 30px;   
@@ -34,9 +31,9 @@ table{
 table, th , td {
     color: #000000;
     border: 2px solid black; 
-    padding-left:  5px;
-    padding-right: 2px;
-    padding-bottom: 10px;
+    padding-left:  auto;
+    padding-right: auto;
+    padding-bottom: auto;
 }
 td a{
     color: #EEDD82;
@@ -104,5 +101,5 @@ input{
     font-family: arial;
     font-size: 20px;
     text-transform: uppercase;
-
+    margin: 1%;
 }
