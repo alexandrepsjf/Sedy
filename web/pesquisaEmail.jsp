@@ -18,6 +18,9 @@ and open the template in the editor.
     </head>
     <body class="search">
         <div class="title"><h1>Pesquisa de Email</h1></div>
+        <div class="footer"> 
+           &#9668; <a href="ManterInicio"><button>inicio</button></a>    
+        </div>
         <table  class="table">             <tr> 
                 <th>Cod Email</th>
                 <th>Email</th>

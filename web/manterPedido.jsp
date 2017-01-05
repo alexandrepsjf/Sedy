@@ -16,6 +16,9 @@ and open the template in the editor.
     </head>
 <body>
     <div><h1>Pedido -  ${operacao}</h1></div>
+    <div class="footer">
+          &#9668; <a  href="ManterInicio"><button>Voltar</button></a> 
+        </div>
     <form action="ManterPedidoController?acao=confirmar${operacao}" method="POST" name="frmManterPedido" onsubmit="return validarFormulario(this)">
         <table>  
             <tr>

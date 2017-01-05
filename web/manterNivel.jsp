@@ -17,6 +17,9 @@ and open the template in the editor.
     </head>
 <body onLoad="checkbox()">
     <div><h1>Nivel - ${operacao}</h1></div>
+    <div class="footer">
+          &#9668; <a  href="ManterInicio"><button>Voltar</button></a> 
+        </div>
     <form action="ManterNivelController?acao=confirmar${operacao}" method="post" name="frmManterNivel" onsubmit="return validarFormulario(this)">
         <table>            
             <tr>

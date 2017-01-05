@@ -16,6 +16,9 @@ and open the template in the editor.
     </head>
     <body class="search">
         <div class="title"><h1>Pesquisa de Nivel</h1></div>
+        <div class="footer"> 
+           &#9668; <a href="ManterInicio"><button>inicio</button></a>    
+        </div>
         <table  class="table">             <tr> 
                 <th>Código nivel</th>
                 <th>Nome nivel</th>

@@ -16,6 +16,9 @@
     </head>
 <body >
     <div><h1>Lista produtos -  ${operacao}</h1></div>
+    <div class="footer">
+          &#9668; <a  href="ManterInicio"><button>Voltar</button></a> 
+        </div>
     <form action="ManterListaProdutosController?acao=confirmar${operacao}" method="POST" name="frmManterListaProdutos" onsubmit="return validarFormulario(this)" >
         <table>  
             <tr>

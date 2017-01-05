@@ -15,7 +15,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="css.css">   
     </head>
     <body class="keep">
-        <h1>Bairros - ${operacao}</h1>
+        <div><h1>Bairros - ${operacao}</h1></div>
         <div class="footer">
           &#9668; <a  href="ManterInicio"><button>Voltar</button></a> 
         </div>

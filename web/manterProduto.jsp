@@ -18,6 +18,9 @@ and open the template in the editor.
 <body>       
 
     <div><h1>Produto - ${operacao}</h1></div>
+    <div class="footer">
+          &#9668; <a  href="ManterInicio"><button>Voltar</button></a> 
+        </div>
     <form action="ManterProdutoController?acao=confirmar${operacao}" method="POST" name="frmManterProduto" onsubmit="return validarFormulario(this)" >
         <table>            
             <tr> 

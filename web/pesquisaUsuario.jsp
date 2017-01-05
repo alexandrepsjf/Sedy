@@ -19,6 +19,9 @@ and open the template in the editor.
     </head>
     <body class="search">
         <div class="title"><h1>Usuario</h1></div>
+        <div class="footer"> 
+           &#9668; <a href="ManterInicio"><button>inicio</button></a>    
+        </div>
         <table  class="table">             <tr> 
                 <th>Cod Usuário</th>
                 <th>Nome Usuário </th>
