@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -7,15 +7,16 @@ and open the template in the editor.
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
 <%@page contentType="text/html" pageEncoding="utf-8"%>  
+<!DOCTYPE html>
 <html>
     <head>
         <title>Cliente</title>
-        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <div><h1>Cliente -  ${operacao}</h1></div>
-        <form action="ManterClienteController?acao=confirmar${operacao}" method="post" name="frmManterCliente" >
+        <form action="ManterClienteController?acao=confirmar${operacao}" method="post" name="frmManterCliente" onsubmit="return validarFormulario(this)" >
             <table> 
                 <tr> 
                     <td> Cod. Cliente </td><td><input type="text" name="id" value="${cliente.id}"  <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>       
@@ -74,56 +75,76 @@ and open the template in the editor.
                 </tr>     
 
             </table>
-            <h3><button type="submit">Confirmar</button></h3>
+            <h3><button type="submit" >Confirmar</button></h3>
         </form>
-        <!--SCRIPT language="JavaScript">      
+       <SCRIPT language="JavaScript">
+               <!--         
+            function campoNumerico(valor)
+            {
+                var caracteresValidos = "0123456789";
+                var ehNumero = true;
+                var umCaracter;
+                for (i = 0; i < valor.length && ehNumero === true; i++) 
+                { 
+                    umCaracter = valor.charAt(i); 
+                    if (caracteresValidos.indexOf(umCaracter) === -1) 
+                    {
+                        ehNumero = false;
+                    }
+                }
+                return ehNumero;
+            }
 
-function campoNumerico(valor)
-{
-    var caracteresValidos = "0123456789";
-    var ehNumero = true;
-    var umCaracter;
-    for (i = 0; i < valor.length && ehNumero == true; i++) 
-    { 
-        umCaracter = valor.charAt(i); 
-        if (caracteresValidos.indexOf(umCaracter) == -1) 
-        {
-            ehNumero = false;
-        }
-    }
-    return ehNumero;
-}
-
-function validarFormulario(form) { 
-    var mensagem;
-    mensagem = "";
-    if (form.txtCodCliente.value == ""){
-        mensagem = mensagem + "Informe o Código do Cliente\n";
-    }
-    if (form.txtNumero.value == ""){
-        mensagem = mensagem + "Informe o Numero do Cliente\n";
-    }
-    if (form.txtTelefone.value == ""){
-        mensagem = mensagem + "Informe o Numero do Cliente\n";
-    }
-    if (!campoNumerico(form.txtCodCliente.value)){
-        mensagem = mensagem + "Código do Cliente deve ser numérico\n";
-    }                  
-    if (!campoNumerico(form.txtNumero.value)){
-        mensagem = mensagem + "O Numero deve ser numérico\n";
-    }                  
-    if (!campoNumerico(form.txtTelefone.value)){
-        mensagem = mensagem + "O Telefone deve ser numérico\n";
-    }                  
-    if (mensagem == ""){
-        return true;
-    }else{
-        alert(mensagem);
-        return false;
-    }                
-} 
-
-</SCRIPT-->
+            function validarFormulario(form){ 
+                var mensagem;
+                mensagem = "";
+                if (form.id.value === ""){
+                    mensagem = mensagem + "Informe o CÓDIGO DO CLIENTE \n";
+                }
+                if (form.data_cadastro.value === ""){
+                    mensagem = mensagem + "Informe A DATA DO CLIENTE \n";
+                }
+                if (form.data_cadastro.value === ""){
+                    mensagem = mensagem + "Informe A HORA DO CLIENTE \n";
+                }
+                if (form.addTelefone.value === ""){
+                    mensagem = mensagem + "Informe TELEFONE DO CLIENTE \n";
+                }
+                if (form.numero.value === ""){
+                    mensagem = mensagem + "Informe NUMERO DO CLIENTE \n";
+                }
+                if (form.cep.value === ""){
+                    mensagem = mensagem + "Informe CEP DO CLIENTE \n";
+                }
+                
+                if (!campoNumerico(form.id.value)){
+                    mensagem = mensagem + "CÓDIGO DO CLIENTE deve ser numérico\n";
+                }
+                if (!campoNumerico(form.data_cadastro.value)){
+                    mensagem = mensagem + "DATA DO CLIENTE deve ser numérico\n";
+                }
+                if (!campoNumerico(form.hora_cadastro.value)){
+                    mensagem = mensagem + "HORA DO CLIENTE deve ser numérico\n";
+                }
+                if (!campoNumerico(form.addTelefone.value)){
+                    mensagem = mensagem + "TELEFONE DO CLIENTE deve ser numérico\n";
+                }
+                if (!campoNumerico(form.numero.value)){
+                    mensagem = mensagem + "NUMERO DO CLIENTE deve ser numérico\n";
+                }
+                if (!campoNumerico(form.cep.value)){
+                    mensagem = mensagem + "CEP DO CLIENTE deve ser numérico\n";
+                }
+                       
+                if (mensagem === ""){
+                    return true;
+                }else{
+                    alert(mensagem);
+                    return false;
+                }                
+                
+           }
+            //-->
+        </SCRIPT>
     </body>
 </html>
-

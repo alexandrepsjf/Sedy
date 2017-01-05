@@ -15,7 +15,7 @@ and open the template in the editor.
     </head>
     <body>
         <div><h1>Email - ${operacao}</h1></div>
-        <form action="ManterEmailController?acao=confirmar${operacao}" method="post" name="frmManterEmail" >
+        <form action="ManterEmailController?acao=confirmar${operacao}" method="post" name="frmManterEmail" onsubmit="return validarFormulario(this)" >
             <table>            
                 <tr> 
                     <td > COD. EMAIL </td><td><input type="text" name="id" value="${email.id}"  <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
@@ -62,11 +62,11 @@ and open the template in the editor.
             function validarFormulario(form) {
                 var mensagem;
                 mensagem = "";
-                if (form.txtCodEmail.value == "") {
+                if (form.id.value == "") {
                     mensagem = mensagem + "Informe o Código do email\n";
                 }
 
-                if (!campoNumerico(form.txtCodEmail.value)) {
+                if (!campoNumerico(form.id.value)) {
                     mensagem = mensagem + "Código do Email deve ser numérico\n";
                 }
 

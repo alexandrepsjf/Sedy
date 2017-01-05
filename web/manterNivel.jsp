@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -6,16 +6,17 @@ and open the template in the editor.
 -->
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
-<%@page contentType="text/html" pageEncoding="utf-8"%>  
+<%@page contentType="text/html" pageEncoding="utf-8"%> 
+<!DOCTYPE html>
 <html>
     <head>
         <title>Nivel</title>
-        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body onLoad="checkbox()">
         <div><h1>Nivel - ${operacao}</h1></div>
-        <form action="ManterNivelController?acao=confirmar${operacao}" method="post" name="frmManterNivel" >
+        <form action="ManterNivelController?acao=confirmar${operacao}" method="post" name="frmManterNivel" onsubmit="return validarFormulario(this)">
             <table>            
                 <tr>
                     <td> COD. NÍVEL </td><td><input type="text"  name="id" value="${nivel.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
@@ -67,11 +68,11 @@ and open the template in the editor.
             function validarFormulario(form) { 
                 var mensagem;
                 mensagem = "";
-                if (form.txtCodNivel.value == ""){
+                if (form.id.value == ""){
                     mensagem = mensagem + "Informe o Código do Nivel\n";
                 }                             
                 
-                if (!campoNumerico(form.txtCodNivel.value)){
+                if (!campoNumerico(form.id.value)){
                     mensagem = mensagem + "Código do Nivel deve ser numérico\n";
                 }
                                                 

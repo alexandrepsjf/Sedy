@@ -15,7 +15,7 @@ and open the template in the editor.
     </head>
     <body>
         <div><h1>Pedido -  ${operacao}</h1></div>
-        <form action="ManterPedidoController?acao=confirmar${operacao}" method="POST" name="frmManterPedido" >
+        <form action="ManterPedidoController?acao=confirmar${operacao}" method="POST" name="frmManterPedido" onsubmit="return validarFormulario(this)">
             <table>  
                 <tr>
                     <td> USUARIO</td><td>
@@ -74,13 +74,13 @@ and open the template in the editor.
                     <td> VALOR TOTAL </td> <td><input type="text" id="teste" name="total" value="${pedido.total}" ></td>
                 </tr>
                 <tr>
-                    <td> DESCONTO </td> <td> <input type="text"></td>
+                    <td> DESCONTO </td> <td> <input type="text" name="desconto" ></td>
                 </tr>
                 <tr>
-                    <td> VALOR PAGO </td> <td><input type="text" ></td>
+                    <td> VALOR PAGO </td> <td><input type="text" name="valor_pago" ></td>
                 </tr>
                 <tr>
-                    <td> TROCO </td> <td><input type="text" ></td>                
+                    <td> TROCO </td> <td><input type="text" name="troco"  ></td>                
                 </tr>
             </table>
             <h5><button type="submit">Confirmar</button></h5>
@@ -164,13 +164,33 @@ and open the template in the editor.
             function validarFormulario(form) {
                 var mensagem;
                 mensagem = "";
-                if (form.txtCodPedido.value == "") {
+                if (form.id.value == "") {
                     mensagem = mensagem + "Informe o Código do Pedido\n";
                 }
+                if (form.data_2.value == "") {
+                    mensagem = mensagem + "Informe a DATA do Pedido\n";
+                }
+                if (form.hora.value == "") {
+                    mensagem = mensagem + "Informe a HORA do Pedido\n";
+                }
+                if (form.total.value == "") {
+                    mensagem = mensagem + "Informe o VALOR TOTAL do Pedido\n";
+                }
+               
 
-                if (!campoNumerico(form.txtCodPedido.value)) {
+                if (!campoNumerico(form.id.value)) {
                     mensagem = mensagem + "Código do Pedido deve ser numérico\n";
                 }
+                if (!campoNumerico(form.data_2.value)) {
+                    mensagem = mensagem + "A DATA do Pedido deve conter somente números\n";
+                }
+                if (!campoNumerico(form.hora.value)) {
+                    mensagem = mensagem + "A HORA do Pedido deve conter somente números\n";
+                }
+                if (!campoNumerico(form.total.value)) {
+                    mensagem = mensagem + "O VALOR TOTAL do Pedido deve conter somente números\n";
+                }
+               
 
                 if (mensagem == "") {
                     return true;

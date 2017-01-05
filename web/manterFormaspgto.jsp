@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -6,7 +6,8 @@ and open the template in the editor.
 -->
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
-<%@page contentType="text/html" pageEncoding="utf-8"%>  
+<%@page contentType="text/html" pageEncoding="utf-8"%> 
+<!DOCTYPE html>
 <html>
     <head>
         <title>Formas pgto</title>
@@ -15,7 +16,7 @@ and open the template in the editor.
     </head>
     <body>
         <div><h1>Forma de pagamento - ${operacao}</h1></div>
-        <form action="ManterFormaPagamentoController?acao=confirmar${operacao}" method="POST" name="frmManterFormaPagamento" >
+        <form action="ManterFormaPagamentoController?acao=confirmar${operacao}" method="POST" name="frmManterFormaPagamento" onsubmit="return validarFormulario(this)">
         <table>            
             <tr> 
                 <td> COD. FORMA DE PGTO </td><td><input name="id" type="text"  value="${formasPagamento.id}"<c:if test="${operacao != 'Incluir'}"> readonly </c:if>></td>
@@ -48,11 +49,11 @@ and open the template in the editor.
             function validarFormulario(form) { 
                 var mensagem;
                 mensagem = "";
-                if (form.txtCodFormaPagamento.value == ""){
+                if (form.id.value == ""){
                     mensagem = mensagem + "Informe o Código da Forma de Pagamento\n";
                 }                             
                 
-                if (!campoNumerico(form.txtCodFormaPagamento.value)){
+                if (!campoNumerico(form.id.value)){
                     mensagem = mensagem + "Código da Forma de Pagamento deve ser numérica\n";
                 }
                                                 

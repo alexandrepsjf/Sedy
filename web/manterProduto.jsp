@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -7,6 +7,7 @@ and open the template in the editor.
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
 <%@page contentType="text/html" pageEncoding="utf-8"%>  
+<!DOCTYPE html>
 <html>
     <head>
         <title>Produto</title>
@@ -16,7 +17,7 @@ and open the template in the editor.
     <body>       
 
         <div><h1>Produto - ${operacao}</h1></div>
-        <form action="ManterProdutoController?acao=confirmar${operacao}" method="POST" name="frmManterProduto" >
+        <form action="ManterProdutoController?acao=confirmar${operacao}" method="POST" name="frmManterProduto" onsubmit="return validarFormulario(this)" >
             <table>            
                 <tr> 
                     <td > COD. PRODUTO </td><td><input type="text"  name= "id" value="${produto.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
@@ -55,24 +56,26 @@ and open the template in the editor.
             function validarFormulario(form) { 
                 var mensagem;
                 mensagem = "";
-                if (form.txtCodProduto.value == ""){
+                if (form.id.value == ""){
                     mensagem = mensagem + "Informe o Código do Produto\n";
-                }                             
-                if (form.txtUnudade.value == ""){
-                    mensagem = mensagem + "Informe únidade do Produto\n";
+                } 
+                if (form.unidade.value == ""){
+                    mensagem = mensagem + "Informe AS UNIDADES do Produto\n";
                 }
-                if (form.txtValor.value == ""){
-                    mensagem = mensagem + "Informe o Valor do Produto\n";
+                if (form.valor.value == ""){
+                    mensagem = mensagem + "Informe o PREÇO do Produto\n";
                 }
-                if (!campoNumerico(form.txtProduto.value)){
+                
+                if (!campoNumerico(form.id.value)){
                     mensagem = mensagem + " O Código do Produto deve ser numérico\n";
                 }
-                if (!campoNumerico(form.txtUnidade.value)){
-                    mensagem = mensagem + "A únidade deve ser numérica\n";
+                if (!campoNumerico(form.unidade.value)){
+                    mensagem = mensagem + " AS UNIDADES Produto deve ser numérico\n";
                 }
-                if (!campoNumerico(form.txtValor.value)){
-                    mensagem = mensagem + " O Valor do Produto deve ser numérico\n";
+                if (!campoNumerico(form.valor.value)){
+                    mensagem = mensagem + " O PREÇO do Produto deve ser numérico\n";
                 }
+               
                 if (mensagem == ""){
                     return true;
                 }else{
