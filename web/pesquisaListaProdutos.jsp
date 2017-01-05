@@ -23,16 +23,15 @@ and open the template in the editor.
                 <th>Nome</th>
                 <th colspan =2>Ação</th>                                
             </tr>
-            <c:forEach items="${produtos}" var="produto">
+            <c:forEach items="${listaProdutos}" var="listaproduto">
                 <tr>
-                    <td ><c:out value="${produto.id}" /> </td>
-                    <td ><c:out value="${produto.nome}" /> </td>                   
-                    <td ><a href="ManterProdutoController?acao=prepararEditar&id=<c:out value="${produto.id}"/>">Editar</a></td>
-                    <td ><a href="ManterProdutoController?acao=prepararExcluir&id=<c:out value="${produto.id}"/>">Excluir</a></td>
+                    <td ><c:out value="${listaproduto.id}" /> </td>                                     
+                    <td ><a href="ManterListaProdutosController?acao=prepararEditar&id=<c:out value="${listaproduto.id}"/>">Editar</a></td>
+                    <td ><a href="ManterListaProdutosController?acao=prepararExcluir&id=<c:out value="${listaproduto.id}"/>">Excluir</a></td>
                 </tr>
             </c:forEach>
         </table>
-        <form action="ManterProdutoController?acao=prepararIncluir" method="POST">
+        <form action="ManterListaProdutosController?acao=prepararIncluir" method="POST">
             <input type="submit" name="btnIncluir" value="Incluir">
         </form>
     </body>

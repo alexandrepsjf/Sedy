@@ -14,7 +14,7 @@ import java.util.List;
  * @author Sujajeb
  */
 public class Pedido {
-    
+
     private int id;
     private String hora;
     private String data_2;
@@ -26,20 +26,21 @@ public class Pedido {
     private FormaPagamento formaPgto;
     private int idFormaPgto;
 
-    public Pedido(int id, String hora, String data, float total,  Cliente cliente, int idCliente, Usuario usuario, int idUsuario, FormaPagamento formaPgto, int idFormaPgto) {
+    public Pedido(int id, String hora, String data, float total, Cliente cliente, int idCliente, Usuario usuario, int idUsuario, FormaPagamento formaPgto, int idFormaPgto) {
         this.id = id;
         this.hora = hora;
         this.data_2 = data;
-        this.total = total;        
+        this.total = total;
         this.cliente = cliente;
         this.idCliente = idCliente;
         this.usuario = usuario;
         this.idUsuario = idUsuario;
         this.formaPgto = formaPgto;
-        this.idFormaPgto=idFormaPgto;        
+        this.idFormaPgto = idFormaPgto;
     }
+
     public Pedido() {
-       
+
     }
 
     public int getId() {
@@ -73,14 +74,14 @@ public class Pedido {
     public void setTotal(float total) {
         this.total = total;
     }
-  
+
     public Cliente getCliente() throws ClassNotFoundException, SQLException {
-         if((this.cliente == null)&&(this.idCliente != 0)){
-        cliente= Cliente.obterCliente(this.idCliente);        
+        if ((this.cliente == null) && (this.idCliente != 0)) {
+            cliente = Cliente.obterCliente(this.idCliente);
+        }
+        return cliente;
     }
-         return cliente;
-    }
-    
+
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
@@ -94,9 +95,9 @@ public class Pedido {
     }
 
     public Usuario getUsuario() throws ClassNotFoundException, SQLException {
-         if((this.usuario == null)&&(this.idUsuario != 0)){
-        usuario= Usuario.obterUsuario(this.idUsuario);        
-    }
+        if ((this.usuario == null) && (this.idUsuario != 0)) {
+            usuario = Usuario.obterUsuario(this.idUsuario);
+        }
         return usuario;
     }
 
@@ -113,9 +114,9 @@ public class Pedido {
     }
 
     public FormaPagamento getFormaPgto() throws ClassNotFoundException, SQLException {
-         if((this.formaPgto == null)&&(this.idFormaPgto != 0)){
-        formaPgto= FormaPagamento.obterFormaPagamento(this.idFormaPgto);        
-    }        
+        if ((this.formaPgto == null) && (this.idFormaPgto != 0)) {
+            formaPgto = FormaPagamento.obterFormaPagamento(this.idFormaPgto);
+        }
         return formaPgto;
     }
 
@@ -130,13 +131,24 @@ public class Pedido {
     public void setIdFormaPgto(int idFormaPgto) {
         this.idFormaPgto = idFormaPgto;
     }
-public static List<Pedido> obterPedidos() throws ClassNotFoundException, SQLException {
+
+    public static List<Pedido> obterPedidos() throws ClassNotFoundException, SQLException {
         return PedidoDAO.obterPedidos();
     }
-public static Pedido obterPedido(int id) throws ClassNotFoundException, SQLException {
+
+    public static Pedido obterPedido(int id) throws ClassNotFoundException, SQLException {
         return PedidoDAO.obterPedido(id);
-}
+    }
+
     public void gravar() throws SQLException, ClassNotFoundException {
-         PedidoDAO.gravar(this);
+        PedidoDAO.gravar(this);
+    }
+
+    public void alterar() throws ClassNotFoundException, SQLException {
+        PedidoDAO.alterar(this);
+    }
+
+    public void excluir() throws ClassNotFoundException, SQLException {
+        PedidoDAO.excluir(this);
     }
 }

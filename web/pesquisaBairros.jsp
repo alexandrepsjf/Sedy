@@ -12,10 +12,11 @@ and open the template in the editor.
         <title>Pesquisa de Bairros</title>
         <meta http-equiv="content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css.css">   
     </head>
-    <body>
-        <div><h1>Pesquisa de Bairros</h1></div>
-        <table border="1">            
+    <body class="search">
+        <div class="title"><h1>Pesquisa de Bairros</h1></div>
+        <table  class="table">            
             <tr> 
                 <th>Código Bairro</th>
                 <th>Nome Bairro</th>

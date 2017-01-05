@@ -22,19 +22,17 @@ public class ListaProdutosDAO {
     public static List<ListaProdutos> obterListaProdutos(int id) throws ClassNotFoundException, SQLException {
         Connection conexao = null;
         Statement comando = null;
-        List<ListaProdutos> listaProdutos = new ArrayList<ListaProdutos>();
+        List<ListaProdutos> listasProdutos = new ArrayList<ListaProdutos>();
 
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select*from ListaProdutos where pedido_id="+id);
+            ResultSet rs = comando.executeQuery("select*from ListaProdutos where lista_id=" + id);
+            rs.first();
             while (rs.next()) {
-                ListaProdutos listaProduto = new ListaProdutos(rs.getInt("ID"), rs.getInt("pedido_id"), rs.getInt("produto_id"), rs.getInt("QUANTIDADE"));
-                listaProduto.setIdPedido(rs.getInt("PEDIDO_ID"));
-                listaProduto.setIdProduto(rs.getInt("PRODUTO_ID"));
-                listaProduto.setId(rs.getInt("ID"));
+                ListaProdutos listaProduto = new ListaProdutos(rs.getInt("ID"), rs.getInt("pedido_ID"), rs.getInt("lista_ID"), rs.getInt("PRODUTO_ID"), rs.getInt("QUANTIDADE"));
                 listaProduto.setProduto(listaProduto.getProduto());
-                listaProdutos.add(listaProduto);
+                listasProdutos.add(listaProduto);
             }
 
         } catch (SQLException e) {
@@ -42,9 +40,8 @@ public class ListaProdutosDAO {
         } finally {
             fecharConexao(conexao, comando);
         }
-        return listaProdutos;
+        return listasProdutos;
     }
-    
 
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {
@@ -59,10 +56,6 @@ public class ListaProdutosDAO {
         }
     }
 
-    public static ListaProdutos obterListaProduto(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public static void gravar(ListaProdutos aThis) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -74,5 +67,31 @@ public class ListaProdutosDAO {
     public static void excluir(ListaProdutos aThis) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-  
+
+    public static Object obterListaProdutos() throws ClassNotFoundException {
+         Connection conexao = null;
+        Statement comando = null;
+        List<ListaProdutos> listasProdutos = new ArrayList<ListaProdutos>();
+
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("select*from ListaProdutos " );
+          
+            while (rs.next()) {
+                ListaProdutos listaProduto = new ListaProdutos(rs.getInt("ID"), rs.getInt("pedido_ID"), rs.getInt("lista_ID"), rs.getInt("PRODUTO_ID"), rs.getInt("QUANTIDADE"));
+                listaProduto.setProduto(listaProduto.getProduto());
+                listasProdutos.add(listaProduto);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return listasProdutos;
+    }
+
+    
+
 }
