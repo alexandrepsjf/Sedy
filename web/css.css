@@ -23,14 +23,19 @@ body{
     color: rgb(255,250,255);
     text-align:center; 
     border-collapse: collapse;
-   
-}
 
+}
+.footer{
+    font-size: 30px;   
+    text-align: left;
+    position: relative;
+    margin-left: 220px;
+}
 table, th , td {
     border: 2px solid black; 
-     padding-left:  5px;
-     padding-right: 2px;
-     padding-bottom: 10px;
+    padding-left:  5px;
+    padding-right: 2px;
+    padding-bottom: 10px;
 }
 td a{
     color: #EEDD82;
@@ -56,8 +61,8 @@ tr:hover {background-color: #00FFFF}
 .title{
     font-family: impact,monospace;
     text-transform: uppercase;
-
 }
+
 button {
     color:#556B2F;
     font-style: italic;
@@ -66,20 +71,21 @@ button {
     align-items: center;
     text-transform: uppercase;
 }
+.logoSearch{
+         font-family: monospace;
+    background-image: url("img/HOM.png");
+    background-repeat: no-repeat;    
+    
+   
+}
 .search{
-    font-family: monospace;
-        background-image: url("img/HOME.png");
-    background-repeat: no-repeat;
-    background-position-x: 50%;
-    background-position-y: 300px;
-    background-size: 30%;
-
+     
 }
 input{
-    color:#556B2F;
+    color:#f56B2F;
     font-style: italic;
-    font-family: monospace;
+    font-family: arial;
     font-size: 20px;
-    align-content: flex-start;
     text-transform: uppercase;
+
 }

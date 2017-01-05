@@ -30,9 +30,14 @@ and open the template in the editor.
                     <td ><a href="ManterBairroController?acao=prepararExcluir&id=<c:out value="${bairro.id}"/>">Excluir</a></td>
                 </tr>
             </c:forEach>
-        </table>
-        <form action="ManterBairroController?acao=prepararIncluir" method="POST">
-            <input type="submit" name="btnIncluir" value="Incluir">
+        </table> 
+        
+        <div class="footer">
+        <form  action="ManterBairroController?acao=prepararIncluir" method="POST">
+            <input  type="submit" name="btnIncluir" value="Incluir">
         </form>
+        </div>
+        <div class="logoSearch">            
+        </div>
     </body>
 </html>
