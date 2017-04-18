@@ -24,6 +24,7 @@ and open the template in the editor.
             <a href="PesquisaNivelController"> <button>Nivel</button></a>
             <a href="PesquisaProdutoController"><button>Produtos</button></a>
             <a href="PesquisaFormaPagamentoController"> <button>Formas de Pagamento</button></a>
+            <a href="RelatorioBairroController"> <button>Relatorio</button></a>
         </div>
     </body>
 </html>

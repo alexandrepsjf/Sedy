@@ -92,6 +92,10 @@
         <servlet-name>ManterInicio</servlet-name>
         <servlet-class>controller.ManterInicio</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RelatorioBairroController</servlet-name>
+        <servlet-class>controller.RelatorioBairroController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaBairroController</servlet-name>
         <url-pattern>/PesquisaBairroController</url-pattern>
@@ -183,6 +187,10 @@
     <servlet-mapping>
         <servlet-name>ManterInicio</servlet-name>
         <url-pattern>/ManterInicio</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RelatorioBairroController</servlet-name>
+        <url-pattern>/RelatorioBairroController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
