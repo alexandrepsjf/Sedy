@@ -18,43 +18,57 @@ and open the template in the editor.
 
         <div class="title"><h1>Pesquisa de Relatórios</h1></div>
         <div class="footer"> 
-           &#9668; <a href="ManterInicio"><button>inicio</button></a>    
+            &#9668; <a href="ManterInicio"><button>inicio</button></a>    
         </div>       
         <div class="logoSearch">            
         </div>
-        <table  class="table">            
-            <tr> 
-                <th>Tipo do relatorio</th>
-                <th>Parâmetro do relatòrio</th>
-                             
-            </tr>
-                     
+        <form  action="RelatorioBairroController" method="POST">  
+            <table  class="table">            
+                <tr> 
+                    <th>Tipo do relatorio</th>
+                    <th>Parâmetro do relatòrio</th>                             
+                </tr>
+
                 <tr>
                     <td>
-                        <select>
+                        <select name="reportName" >
                             <option>
-                                Cliente
+                                Clientes
                             </option>
                             <option>
-                                Pedido
+                                Pedidos
                             </option>
                             <option>
-                                Bairro
+                                Bairros
                             </option>
                             <option>
-                                Produto
+                                Produtos
                             </option>
                             <option>
-                                Forma de Pagamento
+                                Formas de pgto
                             </option>
                             <option>
-                                Nivel
+                                Niveis
                             </option>
-                            
+                            <option>
+                                Usuarios
+                            </option>
+                            <option>
+                                Emails
+                            </option>
+                            <option>
+                                Telefones
+                            </option>
+                            <option>
+                                Ligacoes
+                            </option>
                         </select>
                     </td>
                     <td>
-                        <select>
+                        <select name="reportParameter">
+                            <option> 
+
+                            </option>
                             <option>
                                 Cliente
                             </option>
@@ -67,15 +81,13 @@ and open the template in the editor.
                         </select>
                     </td>
                 </tr>
-            
-        </table>         
-        <div class="footer">  
 
-            <form  action="ManterBairroController?acao=prepararIncluir" method="POST">             
+            </table>         
+            <div class="footer">  
                 <input  type="submit" name="btnIncluir" value="Gerar">
-            </form>
-          
-        </div>
+                </form>
+
+            </div>
 
     </body>
 </html>

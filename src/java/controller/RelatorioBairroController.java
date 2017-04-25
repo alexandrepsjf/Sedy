@@ -5,6 +5,7 @@
  */
 package controller;
 
+import dao.BD;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,26 +25,25 @@ import net.sf.jasperreports.engine.JasperPrint;
  * @author Marco
  */
 public class RelatorioBairroController extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
- Connection conexao = null;
+        Connection conexao = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            conexao = DriverManager.getConnection("jdbc:mysql://localhost/sedy", "root", "");
-            HashMap parametros = new HashMap();
-//            parametros.put("PAR_codCurso", Integer.parseInt(request.getParameter("txtCodCurso")));
-            String relatorio = getServletContext().getRealPath("/WEB-INF/relatorios")+"/Bairros.jasper";
-            JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
+
+            conexao = BD.getConexao();
+            String reportName = request.getParameter("reportName");
+            String parameter = request.getParameter("reportParameter");
+            HashMap reportParameter = new HashMap();
+            if(!parameter.equals("")){
+                reportParameter.put("PAR_report", parameter);
+            }
+            String relatorio = getServletContext().getRealPath("/WEB-INF/relatorios") + "/" + reportName + ".jasper";
+            JasperPrint jp = JasperFillManager.fillReport(relatorio, reportParameter, conexao);
             byte[] relat = JasperExportManager.exportReportToPdf(jp);
             response.setHeader("Content-Disposition", "attachment;filename=relatorio.pdf");
             response.setContentType("application/pdf");
             response.getOutputStream().write(relat);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        } catch (JRException ex) {
-            ex.printStackTrace();
-        } catch (IOException ex) {
+        } catch (SQLException | ClassNotFoundException | JRException | IOException ex) {
             ex.printStackTrace();
         } finally {
             try {
@@ -56,8 +56,9 @@ public class RelatorioBairroController extends HttpServlet {
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -69,8 +70,9 @@ public class RelatorioBairroController extends HttpServlet {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -82,8 +84,9 @@ public class RelatorioBairroController extends HttpServlet {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override
