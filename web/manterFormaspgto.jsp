@@ -18,7 +18,7 @@ and open the template in the editor.
     <body class="keep">
         <div><h1>Forma de pagamento - ${operacao}</h1></div>
         <div class="footer">
-          &#9668; <a  href="ManterInicio"><button>Voltar</button></a> 
+            &#9668; <a  href="ManterInicio"><button>Voltar</button></a> 
         </div>
         <form action="ManterFormaPagamentoController?acao=confirmar${operacao}" method="POST" name="frmManterFormaPagamento" onsubmit="return validarFormulario(this)">
             <table>            
@@ -34,46 +34,47 @@ and open the template in the editor.
             </div>
         </form>
         <div class="logoSearch">            
-        </div>        </form>
-    <SCRIPT language="JavaScript">
-        <!--
+        </div>        
+
+        <SCRIPT language="JavaScript">
+            <!--
             
-        function campoNumerico(valor)
-        {
-            var caracteresValidos = "0123456789";
-            var ehNumero = true;
-            var umCaracter;
-            for (i = 0; i < valor.length && ehNumero == true; i++)
+            function campoNumerico(valor)
             {
-                umCaracter = valor.charAt(i);
-                if (caracteresValidos.indexOf(umCaracter) == -1)
+                var caracteresValidos = "0123456789";
+                var ehNumero = true;
+                var umCaracter;
+                for (i = 0; i < valor.length && ehNumero == true; i++)
                 {
-                    ehNumero = false;
+                    umCaracter = valor.charAt(i);
+                    if (caracteresValidos.indexOf(umCaracter) == -1)
+                    {
+                        ehNumero = false;
+                    }
                 }
-            }
-            return ehNumero;
-        }
-
-        function validarFormulario(form) {
-            var mensagem;
-            mensagem = "";
-            if (form.id.value == "") {
-                mensagem = mensagem + "Informe o Código da Forma de Pagamento\n";
+                return ehNumero;
             }
 
-            if (!campoNumerico(form.id.value)) {
-                mensagem = mensagem + "Código da Forma de Pagamento deve ser numérica\n";
-            }
+            function validarFormulario(form) {
+                var mensagem;
+                mensagem = "";
+                if (form.id.value == "") {
+                    mensagem = mensagem + "Informe o Código da Forma de Pagamento\n";
+                }
 
-            if (mensagem == "") {
-                return true;
-            } else {
-                alert(mensagem);
-                return false;
-            }
+                if (!campoNumerico(form.id.value)) {
+                    mensagem = mensagem + "Código da Forma de Pagamento deve ser numérica\n";
+                }
 
-        }
-        //-->
-    </SCRIPT>
-</body>
+                if (mensagem == "") {
+                    return true;
+                } else {
+                    alert(mensagem);
+                    return false;
+                }
+
+            }
+            //-->
+        </SCRIPT>
+    </body>
 </html>

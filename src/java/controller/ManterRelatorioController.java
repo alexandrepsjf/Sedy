@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashMap;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,9 +25,9 @@ import net.sf.jasperreports.engine.JasperPrint;
  *
  * @author Marco
  */
-public class RelatorioBairroController extends HttpServlet {
+public class ManterRelatorioController extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Connection conexao = null;
         try {
             String parameter = null;
@@ -41,24 +42,28 @@ public class RelatorioBairroController extends HttpServlet {
                     reportParameter.put("PAR_report" + i, parameter);
                 }
             }
-            String relatorio = getServletContext().getRealPath("/WEB-INF/Nova pasta") + "/" + reportName + ".jasper";
+            String relatorio = getServletContext().getRealPath("/WEB-INF/relatorios") + "/" + reportName + ".jasper";
             JasperPrint jp = JasperFillManager.fillReport(relatorio, reportParameter, conexao);
 
-                byte[] relat = JasperExportManager.exportReportToPdf(jp);
-                response.setHeader("Content-Disposition", "attachment;filename=relatorio.pdf");
-                response.setContentType("application/pdf");
-                response.getOutputStream().write(relat);
-            
-        } catch (SQLException | ClassNotFoundException | JRException | IOException | NullPointerException ex) {
-         
+            byte[] relat = JasperExportManager.exportReportToPdf(jp);
+            response.setHeader("Content-Disposition", "attachment;filename=relatorio.pdf");
+            response.setContentType("application/pdf");
+            response.getOutputStream().write(relat);
+
+        } catch (NullPointerException ex) {
+            RequestDispatcher view = request.getRequestDispatcher("/erroRelatorio.jsp");
+             view.forward(request,response);
+        } catch (SQLException | ClassNotFoundException | JRException | IOException ex) {
+
             ex.printStackTrace();
-            
+
         } finally {
             try {
                 if (!conexao.isClosed()) {
                     conexao.close();
                 }
             } catch (SQLException ex) {
+
             }
         }
     }

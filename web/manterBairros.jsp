@@ -17,7 +17,7 @@ and open the template in the editor.
     <body class="keep">
         <div><h1>Bairros - ${operacao}</h1></div>
         <div class="footer">
-          &#9668; <a  href="ManterInicio"><button>Voltar</button></a> 
+            &#9668; <a  href="ManterInicio"><button>Voltar</button></a> 
         </div>
 
         <form action="ManterBairroController?acao=confirmar${operacao}" method="POST" name="frmManterBairros" onsubmit="return validarFormulario(this)">
@@ -35,9 +35,7 @@ and open the template in the editor.
             <div class="footer">
                 <button  type="submit" >Confirmar</button>
             </div>
-        </form>                
-
-
+        </form>  
         <div class="logoSearch">            
         </div>
         <SCRIPT language="JavaScript">

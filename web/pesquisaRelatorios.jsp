@@ -17,16 +17,17 @@ and open the template in the editor.
     <body class="search">
 
         <div class="title"><h1>Pesquisa de Relatórios</h1></div>
+
         <div class="footer"> 
             &#9668; <a href="ManterInicio"><button>inicio</button></a>    
         </div>       
         <div class="logoSearch">            
         </div>
-        <form  action="RelatorioBairroController" method="POST">  
+        <form  action="ManterRelatorioController" method="POST">  
             <table  class="table" >            
                 <tr> 
                     <th>Tipo do relatorio</th>
-                    <th>Parâmetro do relatòrio</th>                             
+
                 </tr>
 
                 <tr>
@@ -67,12 +68,12 @@ and open the template in the editor.
                             </option>
                         </select>
                     </td>
-                    <td>
-                    </td>
+
                 </tr>                
             </table> 
+
             <table id ="reportParameter" name="reportParameter" class="table">
-                
+
             </table>
             <div class="footer">  
                 <input  type="submit" name="btnIncluir" value="Gerar">
@@ -85,23 +86,43 @@ and open the template in the editor.
         function changeParameter(report) {
             var opcao = report.valueOf().value;
             var selection = document.getElementById("reportParameter");
-                        switch (opcao)
+            switch (opcao)
             {
                 case 'Clientes' :
-                    document.getElementById("reportParameter").innerHTML = "<tr><td>Nome</td><td><input type='text'  name=\"reportParameter1\"></td></tr><tr><td>Rua</td><td><input type='text'name=\"reportParameter2\"></td></tr><tr><td>Numero</td><td><input type='text' name=\"reportParameter3\"></td></tr><tr><td>Bairro</td><td><input type='text' name=\"reportParameter4\"></td></tr><tr><td>CEP</td><td><input type='text' name=\"reportParameter5\"></td></tr><tr><td>Data de cadastro</td><td><input type='text' name=\"reportParameter6\"><input type='hidden' name='numParameter' value='6'></td></tr>";
+                    document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Nome</td><td><input type='text'  name=\"reportParameter1\"></td></tr><tr><td>Rua</td><td><input type='text'name=\"reportParameter2\"></td></tr><tr><td>Numero</td><td><input type='text' name=\"reportParameter3\"></td></tr><tr><td>Bairro</td><td><input type='text' name=\"reportParameter4\"></td></tr><tr><td>CEP</td><td><input type='text' name=\"reportParameter5\"></td></tr><tr><td>Data de cadastro</td><td><input type='text'  placeholder='aaaa-mm-dd' name=\"reportParameter6\"><input type='hidden' name='numParameter' value='6'></td></tr>";
                     break;
 
                 case 'Pedidos':
-                    document.getElementById("reportParameter").innerHTML = "<tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Rua</td><td><input type='text'></td></tr><tr><td>Numero</td><td><input type='text'></td></tr><tr><td>Bairro</td><td><input type='text'></td></tr><tr><td>CEP</td><td><input type='text'></td></tr><tr><td>Data de cadastro</td><td><input type='text'></td></tr>";
+                    document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Rua</td><td><input type='text'></td></tr><tr><td>Numero</td><td><input type='text'></td></tr><tr><td>Bairro</td><td><input type='text'></td></tr><tr><td>CEP</td><td><input type='text'></td></tr><tr><td>Data de cadastro</td><td><input type='text'></td></tr>";
                     break;
 
                 case 'Bairros':
-                    document.getElementById("reportParameter").innerHTML = "<tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Rua</td><td><input type='text'></td></tr><tr><td>Numero</td><td><input type='text'></td></tr><tr><td>Bairro</td><td><input type='text'></td></tr><tr><td>CEP</td><td><input type='text'></td></tr><tr><td>Data de cadastro</td><td><input type='text'></td></tr>";
+                    document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Rua</td><td><input type='text'></td></tr><tr><td>Numero</td><td><input type='text'></td></tr><tr><td>Bairro</td><td><input type='text'></td></tr><tr><td>CEP</td><td><input type='text'></td></tr><tr><td>Data de cadastro</td><td><input type='text'></td></tr>";
                     break;
-                    case 'Produtos':
-                    document.getElementById("reportParameter").innerHTML = "<tr><td>Id</td><td><input type='text'></td></tr><tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Unidade</td><td><input type='text'></td></tr><tr><td>Valor</td><td><input type='text'></td></tr>";
+                case 'Produtos':
+                    document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Id</td><td><input type='text'></td></tr><tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Unidade</td><td><input type='text'></td></tr><tr><td>Valor</td><td><input type='text'></td></tr>";
+                    break;
+                case 'Formas de pgto' :
+                    document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Nome</td><td><input type='text'  name=\"reportParameter1\"></td></tr><tr><td>Rua</td><td><input type='text'name=\"reportParameter2\"></td></tr><tr><td>Numero</td><td><input type='text' name=\"reportParameter3\"></td></tr><tr><td>Bairro</td><td><input type='text' name=\"reportParameter4\"></td></tr><tr><td>CEP</td><td><input type='text' name=\"reportParameter5\"></td></tr><tr><td>Data de cadastro</td><td><input type='text' name=\"reportParameter6\"><input type='hidden' name='numParameter' value='6'></td></tr>";
                     break;
 
+                case 'Niveis':
+                    document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Rua</td><td><input type='text'></td></tr><tr><td>Numero</td><td><input type='text'></td></tr><tr><td>Bairro</td><td><input type='text'></td></tr><tr><td>CEP</td><td><input type='text'></td></tr><tr><td>Data de cadastro</td><td><input type='text'></td></tr>";
+                    break;
+
+                case 'Usuarios':
+                    document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Rua</td><td><input type='text'></td></tr><tr><td>Numero</td><td><input type='text'></td></tr><tr><td>Bairro</td><td><input type='text'></td></tr><tr><td>CEP</td><td><input type='text'></td></tr><tr><td>Data de cadastro</td><td><input type='text'></td></tr>";
+                    break;
+                case 'Emails':
+                    document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Id</td><td><input type='text'></td></tr><tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Unidade</td><td><input type='text'></td></tr><tr><td>Valor</td><td><input type='text'></td></tr>";
+                    break;
+
+                case 'Telefones':
+                    document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Rua</td><td><input type='text'></td></tr><tr><td>Numero</td><td><input type='text'></td></tr><tr><td>Bairro</td><td><input type='text'></td></tr><tr><td>CEP</td><td><input type='text'></td></tr><tr><td>Data de cadastro</td><td><input type='text'></td></tr>";
+                    break;
+                case 'Emails':
+                    document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Id</td><td><input type='text'></td></tr><tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Unidade</td><td><input type='text'></td></tr><tr><td>Valor</td><td><input type='text'></td></tr>";
+                    break;
                 default:
                     break;
             }
