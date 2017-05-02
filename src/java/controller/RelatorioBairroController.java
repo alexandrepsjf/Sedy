@@ -29,22 +29,30 @@ public class RelatorioBairroController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
         Connection conexao = null;
         try {
-
+            String parameter = null;
             conexao = BD.getConexao();
             String reportName = request.getParameter("reportName");
-            String parameter = request.getParameter("reportParameter");
+
+            int numParameter = Integer.parseInt(request.getParameter("numParameter"));
             HashMap reportParameter = new HashMap();
-            if(!parameter.equals("")){
-                reportParameter.put("PAR_report", parameter);
+            for (int i = 1; i <= numParameter; i++) {
+                parameter = request.getParameter("reportParameter" + i);
+                if (!parameter.equals("")) {
+                    reportParameter.put("PAR_report" + i, parameter);
+                }
             }
-            String relatorio = getServletContext().getRealPath("/WEB-INF/relatorios") + "/" + reportName + ".jasper";
+            String relatorio = getServletContext().getRealPath("/WEB-INF/Nova pasta") + "/" + reportName + ".jasper";
             JasperPrint jp = JasperFillManager.fillReport(relatorio, reportParameter, conexao);
-            byte[] relat = JasperExportManager.exportReportToPdf(jp);
-            response.setHeader("Content-Disposition", "attachment;filename=relatorio.pdf");
-            response.setContentType("application/pdf");
-            response.getOutputStream().write(relat);
-        } catch (SQLException | ClassNotFoundException | JRException | IOException ex) {
+
+                byte[] relat = JasperExportManager.exportReportToPdf(jp);
+                response.setHeader("Content-Disposition", "attachment;filename=relatorio.pdf");
+                response.setContentType("application/pdf");
+                response.getOutputStream().write(relat);
+            
+        } catch (SQLException | ClassNotFoundException | JRException | IOException | NullPointerException ex) {
+         
             ex.printStackTrace();
+            
         } finally {
             try {
                 if (!conexao.isClosed()) {

@@ -71,7 +71,7 @@ and open the template in the editor.
                     </td>
                 </tr>                
             </table> 
-            <table id ="reportParameter" class="table">
+            <table id ="reportParameter" name="reportParameter" class="table">
                 
             </table>
             <div class="footer">  
@@ -88,7 +88,7 @@ and open the template in the editor.
                         switch (opcao)
             {
                 case 'Clientes' :
-                    document.getElementById("reportParameter").innerHTML = "<tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Rua</td><td><input type='text'></td></tr><tr><td>Numero</td><td><input type='text'></td></tr><tr><td>Bairro</td><td><input type='text'></td></tr><tr><td>CEP</td><td><input type='text'></td></tr><tr><td>Data de cadastro</td><td><input type='text'></td></tr>";
+                    document.getElementById("reportParameter").innerHTML = "<tr><td>Nome</td><td><input type='text'  name=\"reportParameter1\"></td></tr><tr><td>Rua</td><td><input type='text'name=\"reportParameter2\"></td></tr><tr><td>Numero</td><td><input type='text' name=\"reportParameter3\"></td></tr><tr><td>Bairro</td><td><input type='text' name=\"reportParameter4\"></td></tr><tr><td>CEP</td><td><input type='text' name=\"reportParameter5\"></td></tr><tr><td>Data de cadastro</td><td><input type='text' name=\"reportParameter6\"><input type='hidden' name='numParameter' value='6'></td></tr>";
                     break;
 
                 case 'Pedidos':
@@ -97,6 +97,9 @@ and open the template in the editor.
 
                 case 'Bairros':
                     document.getElementById("reportParameter").innerHTML = "<tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Rua</td><td><input type='text'></td></tr><tr><td>Numero</td><td><input type='text'></td></tr><tr><td>Bairro</td><td><input type='text'></td></tr><tr><td>CEP</td><td><input type='text'></td></tr><tr><td>Data de cadastro</td><td><input type='text'></td></tr>";
+                    break;
+                    case 'Produtos':
+                    document.getElementById("reportParameter").innerHTML = "<tr><td>Id</td><td><input type='text'></td></tr><tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Unidade</td><td><input type='text'></td></tr><tr><td>Valor</td><td><input type='text'></td></tr>";
                     break;
 
                 default:
