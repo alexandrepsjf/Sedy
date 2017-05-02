@@ -23,7 +23,7 @@ and open the template in the editor.
         <div class="logoSearch">            
         </div>
         <form  action="RelatorioBairroController" method="POST">  
-            <table  class="table">            
+            <table  class="table" >            
                 <tr> 
                     <th>Tipo do relatorio</th>
                     <th>Parâmetro do relatòrio</th>                             
@@ -31,7 +31,10 @@ and open the template in the editor.
 
                 <tr>
                     <td>
-                        <select name="reportName" >
+                        <select name="reportName" onChange=changeParameter(this)>
+                            <option>
+
+                            </option>
                             <option>
                                 Clientes
                             </option>
@@ -65,24 +68,12 @@ and open the template in the editor.
                         </select>
                     </td>
                     <td>
-                        <select name="reportParameter">
-                            <option> 
-
-                            </option>
-                            <option>
-                                Cliente
-                            </option>
-                            <option>
-                                Cliente
-                            </option>
-                            <option>
-                                Cliente
-                            </option>
-                        </select>
                     </td>
-                </tr>
-
-            </table>         
+                </tr>                
+            </table> 
+            <table id ="reportParameter" class="table">
+                
+            </table>
             <div class="footer">  
                 <input  type="submit" name="btnIncluir" value="Gerar">
                 </form>
@@ -90,4 +81,27 @@ and open the template in the editor.
             </div>
 
     </body>
+    <script>
+        function changeParameter(report) {
+            var opcao = report.valueOf().value;
+            var selection = document.getElementById("reportParameter");
+                        switch (opcao)
+            {
+                case 'Clientes' :
+                    document.getElementById("reportParameter").innerHTML = "<tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Rua</td><td><input type='text'></td></tr><tr><td>Numero</td><td><input type='text'></td></tr><tr><td>Bairro</td><td><input type='text'></td></tr><tr><td>CEP</td><td><input type='text'></td></tr><tr><td>Data de cadastro</td><td><input type='text'></td></tr>";
+                    break;
+
+                case 'Pedidos':
+                    document.getElementById("reportParameter").innerHTML = "<tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Rua</td><td><input type='text'></td></tr><tr><td>Numero</td><td><input type='text'></td></tr><tr><td>Bairro</td><td><input type='text'></td></tr><tr><td>CEP</td><td><input type='text'></td></tr><tr><td>Data de cadastro</td><td><input type='text'></td></tr>";
+                    break;
+
+                case 'Bairros':
+                    document.getElementById("reportParameter").innerHTML = "<tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Rua</td><td><input type='text'></td></tr><tr><td>Numero</td><td><input type='text'></td></tr><tr><td>Bairro</td><td><input type='text'></td></tr><tr><td>CEP</td><td><input type='text'></td></tr><tr><td>Data de cadastro</td><td><input type='text'></td></tr>";
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    </script>
 </html>

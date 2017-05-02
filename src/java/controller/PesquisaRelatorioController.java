@@ -36,6 +36,7 @@ public class PesquisaRelatorioController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
+        
         RequestDispatcher view =
                 request.getRequestDispatcher("/pesquisaRelatorios.jsp");
         view.forward(request,response);
