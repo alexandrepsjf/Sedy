@@ -92,11 +92,11 @@ and open the template in the editor.
                     break;
 
                 case 'Pedidos':
-                    document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Nome</td><td><input type='text' name=\"reportParameter1\"></td></tr><tr><td>Forma</td><td><input type='text' name=\"reportParameter2\"></td></tr><tr><td>Data</td><td><input type='text' name=\"reportParameter3\"></td></tr><tr><td>Total</td><td><input type='text' name=\"reportParameter4\"><input type='hidden' name='numParameter' value='4'></td></tr>";
+                    document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Nome</td><td><input type='text' name=\"reportParameter1\"></td></tr><tr><td>Data</td><td><input type='text' name=\"reportParameter2\"></td></tr><tr><td>Data</td><td><input type='text' name=\"reportParameter3\"></td></tr><tr><td>Total</td><td><input type='text' name=\"reportParameter4\"><input type='hidden' name='numParameter' value='4'></td></tr>";
                     break;
 
                 case 'Bairros':
-                    document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Rua</td><td><input type='text'></td></tr><tr><td>Numero</td><td><input type='text'></td></tr><tr><td>Bairro</td><td><input type='text'></td></tr><tr><td>CEP</td><td><input type='text'></td></tr><tr><td>Data de cadastro</td><td><input type='text'></td></tr>";
+                    document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Id</td><td><input type='text' name=\"reportParameter1\"></td></tr><tr><td>Bairro</td><td><input type='text' name=\"reportParameter2\"></td></tr><tr><td>Taxa</td><td><input type='text' name=\"reportParameter3\"><input type='hidden' name='numParameter' value='3'></td></tr>";
                     break;
                 case 'Produtos':
                     document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Id</td><td><input type='text' name=\"reportParameter1\"></td></tr><tr><td>Nome</td><td><input type='text' name=\"reportParameter2\"></td></tr><tr><td>Unidade</td><td><input type='text' name=\"reportParameter3\"></td></tr><tr><td>Valor</td><td><input type='text' name=\"reportParameter4\"><input type='hidden' name='numParameter' value='4'></td></tr>";
@@ -106,18 +106,18 @@ and open the template in the editor.
                     break;
 
                 case 'Niveis':
-                    document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Rua</td><td><input type='text'></td></tr><tr><td>Numero</td><td><input type='text'></td></tr><tr><td>Bairro</td><td><input type='text'></td></tr><tr><td>CEP</td><td><input type='text'></td></tr><tr><td>Data de cadastro</td><td><input type='text'></td></tr>";
+                    document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Id</td><td><input type='text' name=\"reportParameter1\"></td></tr><tr><td>Nivel</td><td><input type='text' name=\"reportParameter2\"><input type='hidden' name='numParameter' value='2'></td></tr>";
                     break;
 
                 case 'Usuarios':
-                    document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Rua</td><td><input type='text'></td></tr><tr><td>Numero</td><td><input type='text'></td></tr><tr><td>Bairro</td><td><input type='text'></td></tr><tr><td>CEP</td><td><input type='text'></td></tr><tr><td>Data de cadastro</td><td><input type='text'></td></tr>";
+                    document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Usuario</td><td><input type='text' name=\"reportParameter1\"></td></tr><tr><td>Login</td><td><input type='text' name=\"reportParameter2\"></td></tr><tr><td>Nome</td><td><input type='text' name=\"reportParameter3\"><input type='hidden' name='numParameter' value='3'></td></tr>";
                     break;
                 case 'Emails':
                     document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Id</td><td><input type='text'></td></tr><tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Unidade</td><td><input type='text'></td></tr><tr><td>Valor</td><td><input type='text'></td></tr>";
                     break;
 
                 case 'Telefones':
-                    document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Rua</td><td><input type='text'></td></tr><tr><td>Numero</td><td><input type='text'></td></tr><tr><td>Bairro</td><td><input type='text'></td></tr><tr><td>CEP</td><td><input type='text'></td></tr><tr><td>Data de cadastro</td><td><input type='text'></td></tr>";
+                    document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Nome</td><td><input type='text' name=\"reportParameter1\"></td></tr><tr><td>Telefone</td><td><input type='text' name=\"reportParameter2\"><input type='hidden' name='numParameter' value='2'></td></tr>";
                     break;
                 case 'Emails':
                     document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Id</td><td><input type='text'></td></tr><tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Unidade</td><td><input type='text'></td></tr><tr><td>Valor</td><td><input type='text'></td></tr>";
