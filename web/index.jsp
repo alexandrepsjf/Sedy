@@ -22,6 +22,7 @@ and open the template in the editor.
             <a href="PesquisaUsuarioController"><button>Usuarios</button></a>
             <a href="PesquisaEmailController">   <button>Email</button></a>
             <a href="PesquisaNivelController"> <button>Nivel</button></a>
+            <a href="PesquisaTelefoneController"> <button>Telefone</button></a>
             <a href="PesquisaProdutoController"><button>Produtos</button></a>
             <a href="PesquisaFormaPagamentoController"> <button>Formas de Pagamento</button></a>
             <a href="PesquisaRelatorioController"> <button>Relatorio</button></a>

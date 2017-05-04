@@ -37,18 +37,17 @@ public class PesquisaBairroController extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-                      
-           request.setAttribute("bairros", Bairro.obterBairros());
-           RequestDispatcher view = 
-                    request.getRequestDispatcher("/pesquisaBairros.jsp");
-           view.forward(request,response);
-        
-        }catch (ClassNotFoundException ex){
-                    
-                    }
-           
+
+            request.setAttribute("bairros", Bairro.obterBairros());
+            RequestDispatcher view
+                    = request.getRequestDispatcher("/pesquisaBairros.jsp");
+            view.forward(request, response);
+
+        } catch (ClassNotFoundException ex) {
+
         }
-    
+
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

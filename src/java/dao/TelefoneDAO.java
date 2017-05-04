@@ -23,11 +23,13 @@ public class TelefoneDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select*from telefone");
+            ResultSet rs = comando.executeQuery("select * from telefone");
             while (rs.next()) {
                 Telefone telefone = new Telefone(rs.getInt("ID"),
-                        rs.getString("TELEFONE"),
-                        rs.getInt("CLIENTE_ID"));
+                        rs.getString("TELEFONE")
+                        );
+                telefone.setIdCliente(rs.getInt("CLIENTE_ID"));
+                telefone.setCliente(telefone.getCliente());
                 telefones.add(telefone);
             }
 
