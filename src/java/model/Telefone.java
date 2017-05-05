@@ -23,7 +23,7 @@ public class Telefone {
     public Telefone(int id, String telefone) {
         this.id = id;
         this.numero = telefone;
-       
+
     }
 
     public Cliente getCliente() throws ClassNotFoundException, SQLException {
@@ -78,6 +78,10 @@ public class Telefone {
 
     public void alterar() throws ClassNotFoundException, SQLException {
         TelefoneDAO.alterar(this);
+    }
+
+    public void excluir() throws ClassNotFoundException, SQLException {
+        TelefoneDAO.excluir(this);
     }
 
 }

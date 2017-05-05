@@ -68,7 +68,6 @@ public class ManterTelefoneController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String telCliente = request.getParameter("numero");
         int idCliente = Integer.parseInt(request.getParameter("idCliente"));
-
         try {
             Telefone telefone = new Telefone(id, telCliente);
             telefone.setIdCliente(idCliente);
@@ -81,15 +80,58 @@ public class ManterTelefoneController extends HttpServlet {
 
     }
 
-    public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+    public void prepararEditar(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         try {
+            List<Cliente> clientes = ClienteDAO.obterClientes();
             request.setAttribute("operacao", "Editar");
+            request.setAttribute("clientes", clientes);
             int id = Integer.parseInt(request.getParameter("id"));
             Telefone telefone = Telefone.obterTelefone(id);
             request.setAttribute("telefone", telefone);
             RequestDispatcher view = request.getRequestDispatcher("/manterTelefone.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException | ClassNotFoundException ex) {
+        }
+    }
+
+    private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String telCliente = request.getParameter("numero");
+        try {
+            Telefone telefone = new Telefone(id, telCliente);
+            telefone.alterar();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaTelefoneController");
+            view.forward(request, response);
+        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
+
+        }
+
+    }
+
+    private void prepararExcluir(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+        try {
+            List<Cliente> clientes = ClienteDAO.obterClientes();
+            request.setAttribute("operacao", "Excluir");
+            request.setAttribute("clientes", clientes);
+            int id = Integer.parseInt(request.getParameter("id"));
+            Telefone telefone = Telefone.obterTelefone(id);
+            request.setAttribute("telefone", telefone);
+            RequestDispatcher view = request.getRequestDispatcher("/manterTelefone.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException | ClassNotFoundException ex) {
+        }
+    }
+
+    private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String telCliente = request.getParameter("numero");
+        try {
+            Telefone telefone = new Telefone(id, telCliente);
+            telefone.excluir();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaTelefoneController");
+            view.forward(request, response);
+        } catch (IOException | ServletException ex) {
+
         }
     }
 
@@ -143,17 +185,5 @@ public class ManterTelefoneController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }

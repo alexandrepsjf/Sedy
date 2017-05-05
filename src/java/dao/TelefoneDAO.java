@@ -27,7 +27,7 @@ public class TelefoneDAO {
             while (rs.next()) {
                 Telefone telefone = new Telefone(rs.getInt("ID"),
                         rs.getString("TELEFONE")
-                        );
+                );
                 telefone.setIdCliente(rs.getInt("CLIENTE_ID"));
                 telefone.setCliente(telefone.getCliente());
                 telefones.add(telefone);
@@ -102,6 +102,21 @@ public class TelefoneDAO {
             comando.setString(1, telefone.getNumero());
             comando.setFloat(2, telefone.getIdCliente());
             comando.setInt(3, telefone.getId());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
+    public static void excluir(Telefone telefone) throws ClassNotFoundException, SQLException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "delete from telefone where id =  ?";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, telefone.getId());
             comando.execute();
             comando.close();
             conexao.close();
