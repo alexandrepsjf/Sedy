@@ -17,10 +17,6 @@
         <servlet-class>controller.PesquisaFormaPagamentoController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>PesquisaLigacaoController</servlet-name>
-        <servlet-class>controller.PesquisaLigacaoController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>PesquisaUsuarioController</servlet-name>
         <servlet-class>controller.PesquisaUsuarioController</servlet-class>
     </servlet>
@@ -100,6 +96,10 @@
         <servlet-name>ManterRelatorioController</servlet-name>
         <servlet-class>controller.ManterRelatorioController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PesquisaLigacaoController</servlet-name>
+        <servlet-class>controller.PesquisaLigacaoController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaBairroController</servlet-name>
         <url-pattern>/PesquisaBairroController</url-pattern>
@@ -115,10 +115,6 @@
     <servlet-mapping>
         <servlet-name>PesquisaEmailController</servlet-name>
         <url-pattern>/PesquisaEmailController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>PesquisaLigacaoController</servlet-name>
-        <url-pattern>/PesquisaLigacaoController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PesquisaUsuarioController</servlet-name>
@@ -199,6 +195,10 @@
     <servlet-mapping>
         <servlet-name>ManterRelatorioController</servlet-name>
         <url-pattern>/ManterRelatorioController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PesquisaLigacaoController</servlet-name>
+        <url-pattern>/PesquisaLigacaoController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

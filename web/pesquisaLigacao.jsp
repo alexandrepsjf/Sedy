@@ -18,21 +18,23 @@ and open the template in the editor.
     <body class="search">
         <div class="title"><h1>Ligacao</h1></div>
         <div class="footer"> 
-           &#9668; <a href="ManterInicio"><button>inicio</button></a>    
+            &#9668; <a href="ManterInicio"><button>inicio</button></a>    
         </div>
-        <table  class="table">             <tr> 
+        <table  class="table">             
+            <tr> 
                 <th>Cod</th>
-                <th>Ligacao</th>
+                <th>Ligações</th>
                 <th colspan="2">Ação</th>                
             </tr>
-            <c:forEach items="${ligacao}" var="ligacao">
+            <c:forEach items="${chamadas}" var="chamada">
                 <tr>
-                    <td ><c:out value="${ligacao.id}" /> </td>
-                    <td ><c:out value="${ligacao.forma}" /> </td>
-                    <td ><a href="ManterLigacaoController?acao=preparaEditar&id=<c:out value="${ligacao.id}"/>">Editar</a></td>
-                    <td ><a href="ManterLigacaoController?acao=preparaExcluir&id=<c:out value="${ligacao.id}"/>">Excluir</a></td>
+                    <td ><c:out value="${chamada.id}" /> </td>
+                    <td ><c:out value="${chamada.id}" /> </td>
+                    <td ><a href="ManterLigacaoController?acao=preparaEditar&id=<c:out value="${chamada.id}"/>">Editar</a></td>
+                    <td ><a href="ManterLigacaoController?acao=preparaExcluir&id=<c:out value="${chamada.id}"/>">Excluir</a></td>
                 </tr>
             </c:forEach>
+
         </table>
         <div class="footer">
 

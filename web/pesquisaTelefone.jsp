@@ -30,7 +30,7 @@ and open the template in the editor.
             <c:forEach items="${telefones}" var="telefone">
                 <tr>
                     <td ><c:out value="${telefone.id}" /> </td>
-                    <td ><c:out value="${telefone.numero}" /> </td>                   
+                    <td ><c:out value="${telefone.id}" /> </td>                   
                     <td ><a href="ManterTelefoneController?acao=prepararEditar&id=<c:out value="${telefone.id}"/>">Editar</a></td>
                     <td ><a href="ManterTelefoneController?acao=prepararExcluir&id=<c:out value="${telefone.id}"/>">Excluir</a></td>
                 </tr>
