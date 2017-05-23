@@ -36,9 +36,10 @@ public class PesquisaTelefoneController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        try  {
+        try {
             request.setAttribute("telefones", Telefone.obterTelefones());
-            RequestDispatcher view = request.getRequestDispatcher("/pesquisaTelefone.jsp");
+                        RequestDispatcher view
+                    = request.getRequestDispatcher("/pesquisaTelefone.jsp");
             view.forward(request, response);
         } catch (ClassNotFoundException ex) {
         }

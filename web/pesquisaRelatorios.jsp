@@ -27,9 +27,7 @@ and open the template in the editor.
             <table  class="table" >            
                 <tr> 
                     <th>Tipo do relatorio</th>
-
                 </tr>
-
                 <tr>
                     <td>
                         <select name="reportName" onChange=changeParameter(this)>
@@ -56,10 +54,7 @@ and open the template in the editor.
                             <option>
                                 Usuarios
                             </option>
-                            <option>
-                                Emails
-                            </option>
-                            <option>
+                                                        <option>
                                 Telefones
                             </option>
                             <option>
@@ -82,7 +77,7 @@ and open the template in the editor.
 
     </body>
     <script>
-        function changeParameter(report) {
+        function changeParameter(Emailsreport) {
             var opcao = report.valueOf().value;
             var selection = document.getElementById("reportParameter");
             switch (opcao)
@@ -112,14 +107,11 @@ and open the template in the editor.
                 case 'Usuarios':
                     document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Usuario</td><td><input type='text' name=\"reportParameter1\"></td></tr><tr><td>Login</td><td><input type='text' name=\"reportParameter2\"></td></tr><tr><td>Nome</td><td><input type='text' name=\"reportParameter3\"><input type='hidden' name='numParameter' value='3'></td></tr>";
                     break;
-                case 'Emails':
-                    document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Id</td><td><input type='text'></td></tr><tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Unidade</td><td><input type='text'></td></tr><tr><td>Valor</td><td><input type='text'></td></tr>";
-                    break;
-
+                
                 case 'Telefones':
                     document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Nome</td><td><input type='text' name=\"reportParameter1\"></td></tr><tr><td>Telefone</td><td><input type='text' name=\"reportParameter2\"><input type='hidden' name='numParameter' value='2'></td></tr>";
                     break;
-                case 'Emails':
+                case 'Chamadas Recebidas':
                     document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Id</td><td><input type='text'></td></tr><tr><td>Nome</td><td><input type='text'></td></tr><tr><td>Unidade</td><td><input type='text'></td></tr><tr><td>Valor</td><td><input type='text'></td></tr>";
                     break;
                 default:

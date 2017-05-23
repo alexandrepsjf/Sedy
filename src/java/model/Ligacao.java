@@ -5,6 +5,7 @@
  */
 package model;
 
+import dao.LigacaoDAO;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -23,6 +24,11 @@ public class Ligacao {
         this.telefone = telefone;
         this.cliente = cliente;
         this.idCliente = idCliente;
+    }
+
+    public Ligacao(int id, String telefone) {
+        this.id = id;
+        this.telefone = telefone;
     }
 
     public String getTelefone() {
@@ -57,6 +63,6 @@ public class Ligacao {
         this.idCliente = idCliente;
     }
     public static List<Ligacao> obterLigacao() throws ClassNotFoundException, SQLException {
-        return Ligacao.obterLigacao();
+        return LigacaoDAO.obterLigacao();
     }
 }

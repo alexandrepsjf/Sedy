@@ -15,22 +15,32 @@ import java.util.List;
  */
 public class Telefone {
 
-   
-
     private int id;
     private String numero;
     private int idCliente;
+    private Cliente cliente;
 
-    public Telefone(int id, String telefone,  int idCliente) {
+    public Telefone(int id, String telefone) {
         this.id = id;
-        this.numero = telefone;        
-        this.idCliente = idCliente;
+        this.numero = telefone;
+
     }
-    
-    public Telefone() {        
+
+    public Cliente getCliente() throws ClassNotFoundException, SQLException {
+        if ((this.cliente == null) && (this.idCliente != 0)) {
+            cliente = Cliente.obterCliente(this.idCliente);
+        }
+        return cliente;
     }
-    
-     public int getId() {
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Telefone() {
+    }
+
+    public int getId() {
         return id;
     }
 
@@ -53,18 +63,25 @@ public class Telefone {
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
+
     public static List<Telefone> obterTelefones() throws ClassNotFoundException, SQLException {
         return TelefoneDAO.obterTelefones();
     }
- public static Telefone obterTelefone(int id) throws ClassNotFoundException {
+
+    public static Telefone obterTelefone(int id) throws ClassNotFoundException {
         return TelefoneDAO.obterTelefone(id);
     }
+
     public void gravar() throws SQLException, ClassNotFoundException {
         TelefoneDAO.gravar(this);
     }
 
     public void alterar() throws ClassNotFoundException, SQLException {
-       TelefoneDAO.alterar(this);
+        TelefoneDAO.alterar(this);
+    }
+
+    public void excluir() throws ClassNotFoundException, SQLException {
+        TelefoneDAO.excluir(this);
     }
 
 }

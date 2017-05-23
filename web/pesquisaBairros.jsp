@@ -15,10 +15,9 @@ and open the template in the editor.
         <link rel="stylesheet" href="css.css">   
     </head>
     <body class="search">
-
         <div class="title"><h1>Pesquisa de Bairros</h1></div>
         <div class="footer"> 
-           &#9668; <a href="ManterInicio"><button>inicio</button></a>    
+            &#9668; <a href="ManterInicio"><button>inicio</button></a>    
         </div>       
         <div class="logoSearch">            
         </div>
@@ -42,7 +41,7 @@ and open the template in the editor.
             <form  action="ManterBairroController?acao=prepararIncluir" method="POST">             
                 <input  type="submit" name="btnIncluir" value="Incluir">
             </form>
-          
+
         </div>
 
     </body>

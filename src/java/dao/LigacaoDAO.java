@@ -26,8 +26,7 @@ public class LigacaoDAO {
             ResultSet rs = comando.executeQuery("select*from ligacao");
             while (rs.next()) {
                 Ligacao ligacao = new Ligacao(rs.getInt("ID"),
-                        rs.getString("TELEFONE"), null, 0);
-                
+                        rs.getString("TELEFONE"));                
                 ligacoes.add(ligacao);
             }
 
