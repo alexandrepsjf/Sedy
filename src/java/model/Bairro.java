@@ -25,11 +25,11 @@ public class Bairro implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;  
+    private Long id;  
     private String nome;
     private float taxa;
 
-    public Bairro(int id, String nome, float taxa) {
+    public Bairro(Long id, String nome, float taxa) {
         this.id = id;
         this.nome = nome;
         this.taxa = taxa;
@@ -58,40 +58,26 @@ public class Bairro implements Serializable{
         return this.taxa;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public static List<Bairro> obterBairros() throws ClassNotFoundException, SQLException {
-        return BairroDAO.obterBairros();
-    }
-
-    public void gravar() throws SQLException, ClassNotFoundException{
-        BairroDAO.gravar(this);
-    }
-    public static Bairro obterBairro(int id) throws ClassNotFoundException, SQLException {
-        return BairroDAO.obterBairro(id);
-    }
-
-    public void alterar() throws SQLException, ClassNotFoundException {
-         BairroDAO.alterar(this);
-    }
-    public void excluir() throws SQLException, ClassNotFoundException {
-         BairroDAO.excluir(this);
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + this.id;
-        hash = 37 * hash + Objects.hashCode(this.nome);
-        hash = 37 * hash + Float.floatToIntBits(this.taxa);
+        int hash = 3;
+        hash = 43 * hash + Objects.hashCode(this.id);
+        hash = 43 * hash + Objects.hashCode(this.nome);
+        hash = 43 * hash + Float.floatToIntBits(this.taxa);
         return hash;
     }
+
+    
+
+ 
 
     @Override
     public boolean equals(Object obj) {
