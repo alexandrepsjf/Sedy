@@ -8,6 +8,7 @@ package model;
 import dao.BairroDAO;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,9 +22,9 @@ import javax.persistence.Id;
 public class Bairro {
 
     
-@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int id;  
     private String nome;
     private float taxa;
 
@@ -77,5 +78,36 @@ public class Bairro {
     public void excluir() throws SQLException, ClassNotFoundException {
          BairroDAO.excluir(this);
     }
-    
+      @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 53 * hash + this.id;
+        hash = 53 * hash + Objects.hashCode(this.nome);
+        hash = 53 * hash + Float.floatToIntBits(this.taxa);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Bairro other = (Bairro) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.taxa) != Float.floatToIntBits(other.taxa)) {
+            return false;
+        }
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        return true;
+    }
 }
