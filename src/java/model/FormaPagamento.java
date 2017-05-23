@@ -6,16 +6,24 @@
 package model;
 
 import dao.FormaPagamentoDAO;
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
  * @author Sujajeb
  */
-public class FormaPagamento {
-
-   
+@Entity
+public class FormaPagamento implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)   
     private String forma;    
     private int id;
     public FormaPagamento(int id,String forma ) {
@@ -25,6 +33,44 @@ public class FormaPagamento {
 
     public FormaPagamento() {
         }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 47 * hash + Objects.hashCode(this.forma);
+        hash = 47 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final FormaPagamento other = (FormaPagamento) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.forma, other.forma)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "FormaPagamento{" + "forma=" + forma + ", id=" + id + '}';
+    }
     
  
     public String getForma() {

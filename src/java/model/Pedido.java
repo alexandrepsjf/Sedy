@@ -6,41 +6,115 @@
 package model;
 
 import dao.PedidoDAO;
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author Sujajeb
  */
-public class Pedido {
-
+@Entity
+public class Pedido implements Serializable {
+private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String hora;
     private String data_2;
     private float total;
+     @ManyToOne
     private Cliente cliente;
-    private int idCliente;
+      @ManyToOne
     private Usuario usuario;
-    private int idUsuario;
-    private FormaPagamento formaPgto;
-    private int idFormaPgto;
+       @ManyToOne
+     private FormaPagamento formaPgto;
 
-    public Pedido(int id, String hora, String data, float total, Cliente cliente, int idCliente, Usuario usuario, int idUsuario, FormaPagamento formaPgto, int idFormaPgto) {
+    public Pedido(int id, String hora, String data, float total, Cliente cliente, Usuario usuario, FormaPagamento formaPgto) {
         this.id = id;
         this.hora = hora;
         this.data_2 = data;
         this.total = total;
         this.cliente = cliente;
-        this.idCliente = idCliente;
         this.usuario = usuario;
-        this.idUsuario = idUsuario;
         this.formaPgto = formaPgto;
-        this.idFormaPgto = idFormaPgto;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public Pedido() {
 
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + this.id;
+        hash = 37 * hash + Objects.hashCode(this.hora);
+        hash = 37 * hash + Objects.hashCode(this.data_2);
+        hash = 37 * hash + Float.floatToIntBits(this.total);
+        hash = 37 * hash + Objects.hashCode(this.cliente);
+        hash = 37 * hash + Objects.hashCode(this.usuario);
+        hash = 37 * hash + Objects.hashCode(this.formaPgto);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pedido other = (Pedido) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.total) != Float.floatToIntBits(other.total)) {
+            return false;
+        }
+        if (!Objects.equals(this.hora, other.hora)) {
+            return false;
+        }
+        if (!Objects.equals(this.data_2, other.data_2)) {
+            return false;
+        }
+        if (!Objects.equals(this.cliente, other.cliente)) {
+            return false;
+        }
+        if (!Objects.equals(this.formaPgto, other.formaPgto)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Pedido{" + "id=" + id + ", hora=" + hora + ", data_2=" + data_2 + ", total=" + total + ", cliente=" + cliente + ", usuario=" + usuario + ", formaPgto=" + formaPgto + '}';
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public FormaPagamento getFormaPgto() {
+        return formaPgto;
     }
 
     public int getId() {
@@ -75,61 +149,16 @@ public class Pedido {
         this.total = total;
     }
 
-    public Cliente getCliente() throws ClassNotFoundException, SQLException {
-        if ((this.cliente == null) && (this.idCliente != 0)) {
-            cliente = Cliente.obterCliente(this.idCliente);
-        }
-        return cliente;
-    }
-
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-    }
-
-    public int getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
-    }
-
-    public Usuario getUsuario() throws ClassNotFoundException, SQLException {
-        if ((this.usuario == null) && (this.idUsuario != 0)) {
-            usuario = Usuario.obterUsuario(this.idUsuario);
-        }
-        return usuario;
     }
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public FormaPagamento getFormaPgto() throws ClassNotFoundException, SQLException {
-        if ((this.formaPgto == null) && (this.idFormaPgto != 0)) {
-            formaPgto = FormaPagamento.obterFormaPagamento(this.idFormaPgto);
-        }
-        return formaPgto;
-    }
-
     public void setFormaPgto(FormaPagamento formaPgto) {
         this.formaPgto = formaPgto;
-    }
-
-    public int getIdFormaPgto() {
-        return idFormaPgto;
-    }
-
-    public void setIdFormaPgto(int idFormaPgto) {
-        this.idFormaPgto = idFormaPgto;
     }
 
     public static List<Pedido> obterPedidos() throws ClassNotFoundException, SQLException {

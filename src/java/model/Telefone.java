@@ -6,19 +6,27 @@
 package model;
 
 import dao.TelefoneDAO;
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
  * @author Sujajeb
  */
-public class Telefone {
-
+@Entity
+public class Telefone implements Serializable {
+    private static final long serialVersionUID = 1L;
+  @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String numero;
-    private int idCliente;
-    private Cliente cliente;
+      private Cliente cliente;
 
     public Telefone(int id, String telefone) {
         this.id = id;
@@ -26,13 +34,53 @@ public class Telefone {
 
     }
 
-    public Cliente getCliente() throws ClassNotFoundException, SQLException {
-        if ((this.cliente == null) && (this.idCliente != 0)) {
-            cliente = Cliente.obterCliente(this.idCliente);
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 13 * hash + this.id;
+        hash = 13 * hash + Objects.hashCode(this.numero);
+        hash = 13 * hash + Objects.hashCode(this.cliente);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
         }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Telefone other = (Telefone) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.numero, other.numero)) {
+            return false;
+        }
+        if (!Objects.equals(this.cliente, other.cliente)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Telefone{" + "id=" + id + ", numero=" + numero + ", cliente=" + cliente + '}';
+    }
+
+    public Cliente getCliente() {
         return cliente;
     }
 
+   
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
@@ -56,14 +104,7 @@ public class Telefone {
         this.numero = numero;
     }
 
-    public int getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
-    }
-
+   
     public static List<Telefone> obterTelefones() throws ClassNotFoundException, SQLException {
         return TelefoneDAO.obterTelefones();
     }
