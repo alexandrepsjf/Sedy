@@ -8,15 +8,21 @@ package model;
 import dao.BairroDAO;
 import java.sql.SQLException;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
  * @author Sujajeb
  */
+@Entity
 public class Bairro {
 
     
-
+@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String nome;
     private float taxa;
