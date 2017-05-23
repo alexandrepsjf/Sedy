@@ -6,6 +6,7 @@
 package model;
 
 import dao.BairroDAO;
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
@@ -19,9 +20,9 @@ import javax.persistence.Id;
  * @author Sujajeb
  */
 @Entity
-public class Bairro {
+public class Bairro implements Serializable{
 
-    
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;  
@@ -47,6 +48,10 @@ public class Bairro {
 
     public void setTaxa(float taxa) {
         this.taxa = taxa;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public float getTaxa() {
@@ -78,12 +83,13 @@ public class Bairro {
     public void excluir() throws SQLException, ClassNotFoundException {
          BairroDAO.excluir(this);
     }
-      @Override
+
+    @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + this.id;
-        hash = 53 * hash + Objects.hashCode(this.nome);
-        hash = 53 * hash + Float.floatToIntBits(this.taxa);
+        int hash = 5;
+        hash = 37 * hash + this.id;
+        hash = 37 * hash + Objects.hashCode(this.nome);
+        hash = 37 * hash + Float.floatToIntBits(this.taxa);
         return hash;
     }
 
@@ -109,5 +115,9 @@ public class Bairro {
             return false;
         }
         return true;
+    }
+    @Override
+    public String toString() {
+        return "model.Bairro[ id=" + id + " ]";
     }
 }
