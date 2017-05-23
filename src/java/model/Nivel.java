@@ -6,16 +6,24 @@
 package model;
 
 import dao.NivelDAO;
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
  * @author Sujajeb
  */
-public class Nivel {
-
-   
+@Entity
+public class Nivel implements Serializable{
+private static final long serialVersionUID = 1L;
+   @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
      private int id;
     private String nome;
     private int configuracao;
@@ -151,5 +159,76 @@ public class Nivel {
     }
         public void excluir() throws SQLException, ClassNotFoundException {
          NivelDAO.excluir(this);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 19 * hash + this.id;
+        hash = 19 * hash + Objects.hashCode(this.nome);
+        hash = 19 * hash + this.configuracao;
+        hash = 19 * hash + this.usuario;
+        hash = 19 * hash + this.nivel;
+        hash = 19 * hash + this.produto;
+        hash = 19 * hash + this.relatorio;
+        hash = 19 * hash + this.formaPagamento;
+        hash = 19 * hash + this.ligacaoRecebida;
+        hash = 19 * hash + this.pedido;
+        hash = 19 * hash + this.cliente;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Nivel other = (Nivel) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (this.configuracao != other.configuracao) {
+            return false;
+        }
+        if (this.usuario != other.usuario) {
+            return false;
+        }
+        if (this.nivel != other.nivel) {
+            return false;
+        }
+        if (this.produto != other.produto) {
+            return false;
+        }
+        if (this.relatorio != other.relatorio) {
+            return false;
+        }
+        if (this.formaPagamento != other.formaPagamento) {
+            return false;
+        }
+        if (this.ligacaoRecebida != other.ligacaoRecebida) {
+            return false;
+        }
+        if (this.pedido != other.pedido) {
+            return false;
+        }
+        if (this.cliente != other.cliente) {
+            return false;
+        }
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        return true;
+    }
+        
+        
+           @Override
+    public String toString() {
+        return "model.Nivel[ id=" + id + " ]";
     }
 }

@@ -6,28 +6,39 @@
 package model;
 
 import dao.UsuarioDAO;
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author Sujajeb
  */
-public class Usuario {
+@Entity
+public class Usuario  implements Serializable{
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String nome;
     private String senha;
     private String login;
+    @ManyToOne
     private Nivel nivel;
-    private int idNivel;
+    
 
-    public Usuario(int id, String nome, String senha, String login, Nivel nivel, int idNivel) {
+    public Usuario(int id, String nome, String senha, String login, Nivel nivel) {
         this.id = id;
         this.nome = nome;
         this.senha = senha;
         this.login = login;
         this.nivel = nivel;
-        this.idNivel = idNivel;
+      
     }
 
     public Usuario() {
@@ -73,13 +84,7 @@ public class Usuario {
         this.nivel = nivel;
     }
 
-    public int getIdNivel() {
-        return idNivel;
-    }
-
-    public void setIdNivel(int idNivel) {
-        this.idNivel = idNivel;
-    }
+ 
      public static List<Usuario> obterUsuarios() throws ClassNotFoundException, SQLException {
         return UsuarioDAO.obterUsuarios();
     }
@@ -96,5 +101,11 @@ public class Usuario {
     }
     public void excluir() throws SQLException, ClassNotFoundException {
          UsuarioDAO.excluir(this);
+    }
+    
+    
+            @Override
+    public String toString() {
+        return "model.Usuario[ id=" + id + " ]";
     }
 }

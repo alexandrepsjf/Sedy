@@ -6,14 +6,25 @@
 package model;
 
 import dao.ClienteDAO;
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author Sujajeb
  */
-public class Cliente {
+@Entity
+public class Cliente implements Serializable{
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String nome;
     private String rua;
@@ -23,9 +34,10 @@ public class Cliente {
     private String email;
     private String horaCadastro;
     private String referenciaEndereco;
+    @ManyToOne
     private Bairro bairro;
-    private int idBairro;
-public Cliente(int id, String nome, String rua, String numero, String cep, String dataCadastro, String horaCadastro, String email, String referenciaEndereco, Bairro bairro, int idBairro) {
+    
+public Cliente(int id, String nome, String rua, String numero, String cep, String dataCadastro, String horaCadastro, String email, String referenciaEndereco, Bairro bairro) {
         this.id = id;
         this.nome = nome;
         this.rua = rua;
@@ -36,7 +48,7 @@ public Cliente(int id, String nome, String rua, String numero, String cep, Strin
         this.email = email;
         this.referenciaEndereco = referenciaEndereco;
         this.bairro = bairro;
-        this.idBairro = idBairro;
+        
     }
 
     public Cliente() {
@@ -82,6 +94,10 @@ public Cliente(int id, String nome, String rua, String numero, String cep, Strin
         this.cep = cep;
     }
 
+    public Bairro getBairro() {
+        return bairro;
+    }
+
     public String getDataCadastro() {
         return dataCadastro;
     }
@@ -113,24 +129,14 @@ public Cliente(int id, String nome, String rua, String numero, String cep, Strin
         this.referenciaEndereco = referenciaEndereco;
     }
 
-    public Bairro getBairro() throws ClassNotFoundException, SQLException {
-        if((this.bairro == null)&&(this.idBairro != 0)){
-        bairro= Bairro.obterBairro(this.idBairro);
-    }
-        return bairro;
-    }
+
 
     public void setBairro(Bairro bairro) {
         this.bairro = bairro;
     }
 
-    public int getIdBairro() {
-        return idBairro;
-    }
 
-    public void setIdBairro(int idBairro) {
-        this.idBairro = idBairro;
-    }
+    
     public static List<Cliente> obterClientes() throws ClassNotFoundException, SQLException {
         return ClienteDAO.obterClientes();
     }
@@ -147,5 +153,70 @@ public Cliente(int id, String nome, String rua, String numero, String cep, Strin
 
     public void excluir() throws ClassNotFoundException, SQLException {
          ClienteDAO.excluir(this);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + this.id;
+        hash = 79 * hash + Objects.hashCode(this.nome);
+        hash = 79 * hash + Objects.hashCode(this.rua);
+        hash = 79 * hash + Objects.hashCode(this.numero);
+        hash = 79 * hash + Objects.hashCode(this.cep);
+        hash = 79 * hash + Objects.hashCode(this.dataCadastro);
+        hash = 79 * hash + Objects.hashCode(this.email);
+        hash = 79 * hash + Objects.hashCode(this.horaCadastro);
+        hash = 79 * hash + Objects.hashCode(this.referenciaEndereco);
+        hash = 79 * hash + Objects.hashCode(this.bairro);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cliente other = (Cliente) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (!Objects.equals(this.rua, other.rua)) {
+            return false;
+        }
+        if (!Objects.equals(this.numero, other.numero)) {
+            return false;
+        }
+        if (!Objects.equals(this.cep, other.cep)) {
+            return false;
+        }
+        if (!Objects.equals(this.dataCadastro, other.dataCadastro)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.horaCadastro, other.horaCadastro)) {
+            return false;
+        }
+        if (!Objects.equals(this.referenciaEndereco, other.referenciaEndereco)) {
+            return false;
+        }
+        if (!Objects.equals(this.bairro, other.bairro)) {
+            return false;
+        }
+        return true;
+    }
+       @Override
+    public String toString() {
+        return "model.Cliente[ id=" + id + " ]";
     }
 }
