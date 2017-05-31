@@ -25,7 +25,7 @@ public class Pedido implements Serializable {
 private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private String hora;
     private String data_2;
     private float total;
@@ -36,7 +36,7 @@ private static final long serialVersionUID = 1L;
        @ManyToOne
      private FormaPagamento formaPgto;
 
-    public Pedido(int id, String hora, String data, float total, Cliente cliente, Usuario usuario, FormaPagamento formaPgto) {
+    public Pedido(Long id, String hora, String data, float total, Cliente cliente, Usuario usuario, FormaPagamento formaPgto) {
         this.id = id;
         this.hora = hora;
         this.data_2 = data;
@@ -46,82 +46,16 @@ private static final long serialVersionUID = 1L;
         this.formaPgto = formaPgto;
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
 
     public Pedido() {
 
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 37 * hash + this.id;
-        hash = 37 * hash + Objects.hashCode(this.hora);
-        hash = 37 * hash + Objects.hashCode(this.data_2);
-        hash = 37 * hash + Float.floatToIntBits(this.total);
-        hash = 37 * hash + Objects.hashCode(this.cliente);
-        hash = 37 * hash + Objects.hashCode(this.usuario);
-        hash = 37 * hash + Objects.hashCode(this.formaPgto);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Pedido other = (Pedido) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (Float.floatToIntBits(this.total) != Float.floatToIntBits(other.total)) {
-            return false;
-        }
-        if (!Objects.equals(this.hora, other.hora)) {
-            return false;
-        }
-        if (!Objects.equals(this.data_2, other.data_2)) {
-            return false;
-        }
-        if (!Objects.equals(this.cliente, other.cliente)) {
-            return false;
-        }
-        if (!Objects.equals(this.formaPgto, other.formaPgto)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Pedido{" + "id=" + id + ", hora=" + hora + ", data_2=" + data_2 + ", total=" + total + ", cliente=" + cliente + ", usuario=" + usuario + ", formaPgto=" + formaPgto + '}';
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public FormaPagamento getFormaPgto() {
-        return formaPgto;
-    }
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -149,35 +83,78 @@ private static final long serialVersionUID = 1L;
         this.total = total;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
     }
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
+    public FormaPagamento getFormaPgto() {
+        return formaPgto;
+    }
+
     public void setFormaPgto(FormaPagamento formaPgto) {
         this.formaPgto = formaPgto;
     }
 
-    public static List<Pedido> obterPedidos() throws ClassNotFoundException, SQLException {
-        return PedidoDAO.obterPedidos();
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 17 * hash + Objects.hashCode(this.id);
+        hash = 17 * hash + Objects.hashCode(this.hora);
+        hash = 17 * hash + Objects.hashCode(this.data_2);
+        hash = 17 * hash + Float.floatToIntBits(this.total);
+        hash = 17 * hash + Objects.hashCode(this.cliente);
+        hash = 17 * hash + Objects.hashCode(this.usuario);
+        hash = 17 * hash + Objects.hashCode(this.formaPgto);
+        return hash;
     }
 
-    public static Pedido obterPedido(int id) throws ClassNotFoundException, SQLException {
-        return PedidoDAO.obterPedido(id);
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pedido other = (Pedido) obj;
+        if (Float.floatToIntBits(this.total) != Float.floatToIntBits(other.total)) {
+            return false;
+        }
+        if (!Objects.equals(this.hora, other.hora)) {
+            return false;
+        }
+        if (!Objects.equals(this.data_2, other.data_2)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.cliente, other.cliente)) {
+            return false;
+        }
+        if (!Objects.equals(this.usuario, other.usuario)) {
+            return false;
+        }
+        if (!Objects.equals(this.formaPgto, other.formaPgto)) {
+            return false;
+        }
+        return true;
     }
 
-    public void gravar() throws SQLException, ClassNotFoundException {
-        PedidoDAO.gravar(this);
-    }
-
-    public void alterar() throws ClassNotFoundException, SQLException {
-        PedidoDAO.alterar(this);
-    }
-
-    public void excluir() throws ClassNotFoundException, SQLException {
-        PedidoDAO.excluir(this);
-    }
+   
 }

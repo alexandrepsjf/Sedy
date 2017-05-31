@@ -12,6 +12,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 import model.Nivel;
 
 /**
@@ -20,133 +23,89 @@ import model.Nivel;
  */
 public class NivelDAO {
 
-    public static List<Nivel> obterNiveis() throws ClassNotFoundException, SQLException {
-        Connection conexao = null;
-        Statement comando = null;
-        
-        List<Nivel> niveis = new ArrayList<Nivel>();
+    private static NivelDAO instance = new NivelDAO();
 
+    public static NivelDAO getInstance() {
+        return instance;
+    }
+
+    private NivelDAO() {
+    }
+
+    public void salvar(Nivel nivel) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
         try {
-            conexao = BD.getConexao();
-            comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select*from nivel");
-            while (rs.next()) {
-                Nivel nivel = new Nivel(rs.getInt("ID"), rs.getString("NOME"), rs.getInt("configuracao"), rs.getInt("usuario"), rs.getInt("nivel"), rs.getInt("produto"), rs.getInt("relatorio"), rs.getInt("FORMA_PGM"), rs.getInt("LIGACAO_RECEBIDA"), rs.getInt("pedido"), rs.getInt("cliente"));
-                niveis.add(nivel);
+            tx.begin();
+            if (nivel.getId() != null) {
+                em.merge(nivel);
+            } else {
+                em.persist(nivel);
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
         } finally {
-            fecharConexao(conexao, comando);
+            PersistenceUtil.close(em);
+        }
+    }
+
+    public List<Nivel> getAllNivel() {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        List<Nivel> niveis = null;
+        try {
+            tx.begin();
+            TypedQuery<Nivel> query = em.createQuery("select n from Nivel n", Nivel.class);
+            niveis = query.getResultList();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            PersistenceUtil.close(em);
         }
         return niveis;
     }
 
-    public static void fecharConexao(Connection conexao, Statement comando) {
+    public Nivel getNivel(long id) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        Nivel nivel = null;
         try {
-            if (comando != null) {
-                comando.close();
+            tx.begin();
+            nivel = em.find(Nivel.class, id);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
             }
-            if (conexao != null) {
-                conexao.close();
-            }
-        } catch (SQLException e) {
-
-        }
-    }
-
-    public static void gravar(Nivel nivel) throws SQLException, ClassNotFoundException {
-        Connection conexao = null;
-        try {
-            conexao = BD.getConexao();
-            String sql = "INSERT INTO `nivel`(`ID`, `NOME`, `CONFIGURACAO`, `USUARIO`, `NIVEL`, `PRODUTO`, `RELATORIO`, `FORMA_PGM`, `LIGACAO_RECEBIDA`, `PEDIDO`, `CLIENTE`) values(?,?,?,?,?,?,?,?,?,?,?)";
-            PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setInt(1, nivel.getId());
-            comando.setString(2, nivel.getNome());
-            comando.setInt(3, nivel.getConfiguracao());
-            comando.setInt(8, nivel.getFormaPagamento());
-            comando.setInt(9, nivel.getLigacaoRecebida());
-            comando.setInt(5, nivel.getNivel());
-            comando.setInt(10, nivel.getPedido());
-            comando.setInt(6, nivel.getProduto());
-            comando.setInt(4, nivel.getUsuario());
-            comando.setInt(11, nivel.getCliente());
-            comando.setInt(7, nivel.getRelatorio());
-            comando.execute();
-            comando.close();
-            conexao.close();
-        } catch (SQLException e) {
-            throw e;
-        }
-    }
-
-    public static Nivel obterNivel(int id) throws ClassNotFoundException {
-        Connection conexao = null;
-        Statement comando = null;
-        Nivel nivel = new Nivel();
-        try {
-            conexao = BD.getConexao();
-            comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select*from nivel where id = " + id);
-            rs.first();            
-                nivel.setId(rs.getInt("ID"));
-                nivel.setNome(rs.getString("NOME"));
-                nivel.setConfiguracao(rs.getInt("configuracao"));
-                nivel.setUsuario(rs.getInt("usuario"));
-                nivel.setNivel(rs.getInt("nivel"));
-                nivel.setProduto(rs.getInt("produto"));
-                nivel.setRelatorio(rs.getInt("relatorio"));
-                nivel.setFormaPagamento(rs.getInt("FORMA_PGM"));
-                nivel.setLigacaoRecebida(rs.getInt("LIGACAO_RECEBIDA"));
-                nivel.setPedido(rs.getInt("pedido"));
-                nivel.setCliente(rs.getInt("cliente"));        
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         } finally {
-            fecharConexao(conexao, comando);
+            PersistenceUtil.close(em);
         }
         return nivel;
     }
-
-    public static void alterar(Nivel nivel) throws ClassNotFoundException, SQLException {
-        Connection conexao = null;
+    
+    public void excluir(Nivel nivel) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
         try {
-            conexao = BD.getConexao();
-            String sql = "update  `nivel`set `NOME` = ? , `CONFIGURACAO` = ? , `USUARIO` = ? , `NIVEL` = ? , `PRODUTO` = ? , `RELATORIO` = ? , `FORMA_PGM` = ? , `LIGACAO_RECEBIDA` = ? , `PEDIDO` = ? , `CLIENTE` = ? where id = ? ";
-            PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setString(1, nivel.getNome());
-            comando.setInt(2, nivel.getConfiguracao());
-            comando.setInt(7, nivel.getFormaPagamento());
-            comando.setInt(8, nivel.getLigacaoRecebida());
-            comando.setInt(4, nivel.getNivel());
-            comando.setInt(9, nivel.getPedido());
-            comando.setInt(5, nivel.getProduto());
-            comando.setInt(3, nivel.getUsuario());
-            comando.setInt(10, nivel.getCliente());
-            comando.setInt(6, nivel.getRelatorio());
-            comando.setInt(11, nivel.getId());
-            comando.execute();
-            comando.close();
-            conexao.close();
-        } catch (SQLException e) {
-            throw e;
-        }
-    }
-           public static void excluir (Nivel nivel)throws SQLException, ClassNotFoundException {
-        Connection conexao = null;
-        
-    try{
-        conexao = BD.getConexao();
-            String sql = "delete from nivel  where id = ? ";
-            PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setInt(1, nivel.getId());
-            comando.execute();
-            comando.close();
-            conexao.close();
-        } catch (SQLException e) {
-            throw e;
+            tx.begin();
+            em.remove(em.getReference(Nivel.class, nivel.getId()));
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            PersistenceUtil.close(em);
         }
     }
 }
