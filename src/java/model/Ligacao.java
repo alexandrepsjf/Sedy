@@ -5,10 +5,7 @@
  */
 package model;
 
-import dao.LigacaoDAO;
 import java.io.Serializable;
-import java.sql.SQLException;
-import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +22,7 @@ public class Ligacao implements Serializable {
     private static final long serialVersionUID = 1L;
       @Id
     @GeneratedValue(strategy = GenerationType.AUTO)  
-    private int id;
+    private Long id;
     private String telefone;
     @ManyToOne
     private Cliente cliente;
@@ -38,26 +35,36 @@ public class Ligacao implements Serializable {
     }
   
 
-    public Ligacao(int id, String telefone, Cliente cliente) {
+    public Ligacao(Long id, String telefone, Cliente cliente) {
         this.id = id;
         this.telefone = telefone;
         this.cliente = cliente;
        
     }
 
-    public Ligacao(int id, String telefone) {
+    public Ligacao(Long id, String telefone) {
         this.id = id;
         this.telefone = telefone;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 13 * hash + this.id;
-        hash = 13 * hash + Objects.hashCode(this.telefone);
-        hash = 13 * hash + Objects.hashCode(this.cliente);
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.id);
+        hash = 67 * hash + Objects.hashCode(this.telefone);
+        hash = 67 * hash + Objects.hashCode(this.cliente);
         return hash;
     }
+
+   
 
     @Override
     public boolean equals(Object obj) {
@@ -97,13 +104,7 @@ public class Ligacao implements Serializable {
         this.telefone = telefone;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+   
 
     public Cliente getCliente() {
         return cliente;
@@ -114,8 +115,4 @@ public class Ligacao implements Serializable {
     }
 
    
-  
-    public static List<Ligacao> obterLigacao() throws ClassNotFoundException, SQLException {
-        return LigacaoDAO.obterLigacao();
-    }
 }
