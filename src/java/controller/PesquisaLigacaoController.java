@@ -36,17 +36,19 @@ public class PesquisaLigacaoController extends HttpServlet {
      * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-             request.setAttribute("ligacoes", Ligacao.obterLigacao());
-            request.setAttribute("telefones", Telefone.obterTelefones());
-             request.setAttribute("clientes", Cliente.obterClientes());
-                        RequestDispatcher view
+
+            request.setAttribute("ligacoes", Ligacao.obterLigacao());
+            RequestDispatcher view
                     = request.getRequestDispatcher("/pesquisaLigacao.jsp");
             view.forward(request, response);
+
         } catch (ClassNotFoundException ex) {
+
         }
+
     }
 
 

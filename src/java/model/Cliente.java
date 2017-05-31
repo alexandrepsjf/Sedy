@@ -54,6 +54,10 @@ public Cliente(int id, String nome, String rua, String numero, String cep, Strin
     public Cliente() {
          }
 
+    public Cliente(int aInt, String string, String string0, String string1, String string2, String string3, String string4, String string5, String string6, Object object, int aInt0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getId() {
         return id;
     }

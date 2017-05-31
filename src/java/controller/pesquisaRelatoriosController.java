@@ -3,24 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package exception;
+package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Relatorio;
 
 /**
  *
  * @author mateu
  */
-public class TratamentoExcecao extends HttpServlet {
+public class pesquisaRelatoriosController extends HttpServlet {
 
-    
-
-    /**
+       /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -28,33 +30,19 @@ public class TratamentoExcecao extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        Exception excecao=(Exception)
-                request.getAttribute("javax.servlet.error.exception");
-        Integer codigoStatus=(Integer)
-                request.getAttribute("javax.servlet.error.status_code");
-        String nomeServlet=(String)
-                request.getAttribute("javax.servlet.error.servlet_name");
-        String uriRequisicao=(String)
-                request.getAttribute("javax.error.request_uri");
-        response.setContentType("text/html");
-        try (PrintWriter out = response.getWriter()) {
-            String titulo = "<h1>informação de Exceção<h1>";
-            String tipoDocto= "<!doctype html public\"-//w3c//dtd html 4.0 transitional//en\">";
-            /* TODO output your page here. You may use following sample code. */
-            out.println(tipoDocto+"<html><head><tittle>"+titulo+"</title></head>\n<body>");
-            out.println("<h2>Informação sobre exceção </h2>");
-            out.println("Codigo do Status:"+codigoStatus+"</br></br>");
-            out.println("Nome do Servelt:"+nomeServlet+"</br></br>");           
-            out.println("Tipo de Exceção:"+excecao.getClass().getName()+"</br></br>");
-            out.println("URI da requisição:"+uriRequisicao+"</br></br>");
-            out.println("Mensagem :"+excecao.getMessage()+"</br></br>");
-            out.println("</body>");
-            out.println("</html>");
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setAttribute("relatorios", Relatorio.obterRelatorios());
+        RequestDispatcher view =
+                request.getRequestDispatcher("/pesquisaRelatorios.jsp");
+        view.forward(request,response);
+           
         }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -68,7 +56,13 @@ public class TratamentoExcecao extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(pesquisaRelatoriosController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(pesquisaRelatoriosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -82,7 +76,13 @@ public class TratamentoExcecao extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(pesquisaRelatoriosController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(pesquisaRelatoriosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

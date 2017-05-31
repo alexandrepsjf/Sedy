@@ -100,6 +100,10 @@
         <servlet-name>PesquisaLigacaoController</servlet-name>
         <servlet-class>controller.PesquisaLigacaoController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManterLigacaoController</servlet-name>
+        <servlet-class>controller.ManterLigacaoController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaBairroController</servlet-name>
         <url-pattern>/PesquisaBairroController</url-pattern>
@@ -199,6 +203,10 @@
     <servlet-mapping>
         <servlet-name>PesquisaLigacaoController</servlet-name>
         <url-pattern>/PesquisaLigacaoController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterLigacaoController</servlet-name>
+        <url-pattern>/ManterLigacaoController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
