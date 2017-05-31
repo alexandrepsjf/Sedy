@@ -24,7 +24,7 @@ public class Nivel implements Serializable{
 private static final long serialVersionUID = 1L;
    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-     private int id;
+     private Long id;
     private String nome;
     private int configuracao;
     private int usuario;
@@ -36,7 +36,7 @@ private static final long serialVersionUID = 1L;
     private int pedido;
     private int cliente;
 
-    public Nivel(int id, String nome, int configuracao, int usuario, int nivel, int produto, int relatorio, int formaPagamento, int ligacaoRecebida, int pedido, int cliente) {
+    public Nivel(Long id, String nome, int configuracao, int usuario, int nivel, int produto, int relatorio, int formaPagamento, int ligacaoRecebida, int pedido, int cliente) {
         this.id = id;
         this.nome = nome;
         this.configuracao = configuracao;
@@ -54,11 +54,11 @@ private static final long serialVersionUID = 1L;
         
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -141,42 +141,25 @@ private static final long serialVersionUID = 1L;
     public void setCliente(int cliente) {
         this.cliente = cliente;
     }
-    
-
-
-     public static List<Nivel> obterNiveis() throws ClassNotFoundException, SQLException {
-        return NivelDAO.obterNiveis();
-    }
-      public static Nivel obterNivel(int id) throws ClassNotFoundException {
-         return NivelDAO.obterNivel(id);
-    }
-      public void gravar() throws SQLException, ClassNotFoundException{
-        NivelDAO.gravar(this);
-    }
-
-    public void alterar() throws ClassNotFoundException, SQLException {
-         NivelDAO.alterar(this);
-    }
-        public void excluir() throws SQLException, ClassNotFoundException {
-         NivelDAO.excluir(this);
-    }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 19 * hash + this.id;
-        hash = 19 * hash + Objects.hashCode(this.nome);
-        hash = 19 * hash + this.configuracao;
-        hash = 19 * hash + this.usuario;
-        hash = 19 * hash + this.nivel;
-        hash = 19 * hash + this.produto;
-        hash = 19 * hash + this.relatorio;
-        hash = 19 * hash + this.formaPagamento;
-        hash = 19 * hash + this.ligacaoRecebida;
-        hash = 19 * hash + this.pedido;
-        hash = 19 * hash + this.cliente;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.nome);
+        hash = 37 * hash + this.configuracao;
+        hash = 37 * hash + this.usuario;
+        hash = 37 * hash + this.nivel;
+        hash = 37 * hash + this.produto;
+        hash = 37 * hash + this.relatorio;
+        hash = 37 * hash + this.formaPagamento;
+        hash = 37 * hash + this.ligacaoRecebida;
+        hash = 37 * hash + this.pedido;
+        hash = 37 * hash + this.cliente;
         return hash;
     }
+
+    
 
     @Override
     public boolean equals(Object obj) {

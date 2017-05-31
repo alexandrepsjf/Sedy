@@ -25,7 +25,7 @@ public class Cliente implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private String nome;
     private String rua;
     private String numero;    
@@ -37,7 +37,7 @@ public class Cliente implements Serializable{
     @ManyToOne
     private Bairro bairro;
     
-public Cliente(int id, String nome, String rua, String numero, String cep, String dataCadastro, String horaCadastro, String email, String referenciaEndereco, Bairro bairro) {
+public Cliente(Long id, String nome, String rua, String numero, String cep, String dataCadastro, String horaCadastro, String email, String referenciaEndereco, Bairro bairro) {
         this.id = id;
         this.nome = nome;
         this.rua = rua;
@@ -54,18 +54,14 @@ public Cliente(int id, String nome, String rua, String numero, String cep, Strin
     public Cliente() {
          }
 
-    public Cliente(int aInt, String string, String string0, String string1, String string2, String string3, String string4, String string5, String string6, Object object, int aInt0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    
+
     public String getNome() {
         return nome;
     }
@@ -98,10 +94,6 @@ public Cliente(int id, String nome, String rua, String numero, String cep, Strin
         this.cep = cep;
     }
 
-    public Bairro getBairro() {
-        return bairro;
-    }
-
     public String getDataCadastro() {
         return dataCadastro;
     }
@@ -118,10 +110,6 @@ public Cliente(int id, String nome, String rua, String numero, String cep, Strin
         this.email = email;
     }
 
-    public String getReferenciaEndereco() {
-        return referenciaEndereco;
-    }
-
     public String getHoraCadastro() {
         return horaCadastro;
     }
@@ -129,52 +117,40 @@ public Cliente(int id, String nome, String rua, String numero, String cep, Strin
     public void setHoraCadastro(String horaCadastro) {
         this.horaCadastro = horaCadastro;
     }
+
+    public String getReferenciaEndereco() {
+        return referenciaEndereco;
+    }
+
     public void setReferenciaEndereco(String referenciaEndereco) {
         this.referenciaEndereco = referenciaEndereco;
     }
 
-
+    public Bairro getBairro() {
+        return bairro;
+    }
 
     public void setBairro(Bairro bairro) {
         this.bairro = bairro;
     }
 
-
-    
-    public static List<Cliente> obterClientes() throws ClassNotFoundException, SQLException {
-        return ClienteDAO.obterClientes();
-    }
-     public void gravar() throws SQLException, ClassNotFoundException{
-        ClienteDAO.gravar(this);
-    }
-    public static Cliente obterCliente(int id) throws ClassNotFoundException, SQLException {
-        return ClienteDAO.obterCliente(id);
-    }
-
-    public void alterar() throws ClassNotFoundException, SQLException {
-         ClienteDAO.alterar(this);
-    }
-
-    public void excluir() throws ClassNotFoundException, SQLException {
-         ClienteDAO.excluir(this);
-    }
-
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + this.id;
-        hash = 79 * hash + Objects.hashCode(this.nome);
-        hash = 79 * hash + Objects.hashCode(this.rua);
-        hash = 79 * hash + Objects.hashCode(this.numero);
-        hash = 79 * hash + Objects.hashCode(this.cep);
-        hash = 79 * hash + Objects.hashCode(this.dataCadastro);
-        hash = 79 * hash + Objects.hashCode(this.email);
-        hash = 79 * hash + Objects.hashCode(this.horaCadastro);
-        hash = 79 * hash + Objects.hashCode(this.referenciaEndereco);
-        hash = 79 * hash + Objects.hashCode(this.bairro);
+        int hash = 3;
+        hash = 29 * hash + Objects.hashCode(this.id);
+        hash = 29 * hash + Objects.hashCode(this.nome);
+        hash = 29 * hash + Objects.hashCode(this.rua);
+        hash = 29 * hash + Objects.hashCode(this.numero);
+        hash = 29 * hash + Objects.hashCode(this.cep);
+        hash = 29 * hash + Objects.hashCode(this.dataCadastro);
+        hash = 29 * hash + Objects.hashCode(this.email);
+        hash = 29 * hash + Objects.hashCode(this.horaCadastro);
+        hash = 29 * hash + Objects.hashCode(this.referenciaEndereco);
+        hash = 29 * hash + Objects.hashCode(this.bairro);
         return hash;
     }
 
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
