@@ -9,6 +9,7 @@ import dao.UsuarioDAO;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +25,7 @@ public class Usuario  implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private String nome;
     private String senha;
     private String login;
@@ -32,7 +33,7 @@ public class Usuario  implements Serializable{
     private Nivel nivel;
     
 
-    public Usuario(int id, String nome, String senha, String login, Nivel nivel) {
+    public Usuario(Long id, String nome, String senha, String login, Nivel nivel) {
         this.id = id;
         this.nome = nome;
         this.senha = senha;
@@ -43,7 +44,15 @@ public class Usuario  implements Serializable{
 
     public Usuario() {
     }    
-   
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -68,14 +77,6 @@ public class Usuario  implements Serializable{
         this.login = login;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public Nivel getNivel() {
         return nivel;
     }
@@ -84,24 +85,48 @@ public class Usuario  implements Serializable{
         this.nivel = nivel;
     }
 
- 
-     public static List<Usuario> obterUsuarios() throws ClassNotFoundException, SQLException {
-        return UsuarioDAO.obterUsuarios();
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 23 * hash + Objects.hashCode(this.id);
+        hash = 23 * hash + Objects.hashCode(this.nome);
+        hash = 23 * hash + Objects.hashCode(this.senha);
+        hash = 23 * hash + Objects.hashCode(this.login);
+        hash = 23 * hash + Objects.hashCode(this.nivel);
+        return hash;
     }
 
-    public void gravar() throws ClassNotFoundException, SQLException {
-        UsuarioDAO.gravar(this);
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (!Objects.equals(this.senha, other.senha)) {
+            return false;
+        }
+        if (!Objects.equals(this.login, other.login)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.nivel, other.nivel)) {
+            return false;
+        }
+        return true;
     }
-    public static Usuario obterUsuario(int id) throws ClassNotFoundException, SQLException {
-        return UsuarioDAO.obterUsuario(id);
-    }
-
-    public void alterar() throws SQLException, ClassNotFoundException {
-         UsuarioDAO.alterar(this);
-    }
-    public void excluir() throws SQLException, ClassNotFoundException {
-         UsuarioDAO.excluir(this);
-    }
+   
+   
     
     
             @Override
