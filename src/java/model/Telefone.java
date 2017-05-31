@@ -5,10 +5,7 @@
  */
 package model;
 
-import dao.TelefoneDAO;
 import java.io.Serializable;
-import java.sql.SQLException;
-import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,29 +21,38 @@ public class Telefone implements Serializable {
     private static final long serialVersionUID = 1L;
   @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private String numero;
       private Cliente cliente;
 
-    public Telefone(int id, String telefone) {
+    public Telefone(Long id, String telefone) {
         this.id = id;
         this.numero = telefone;
 
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 19 * hash + Objects.hashCode(this.id);
+        hash = 19 * hash + Objects.hashCode(this.numero);
+        hash = 19 * hash + Objects.hashCode(this.cliente);
+        return hash;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 13 * hash + this.id;
-        hash = 13 * hash + Objects.hashCode(this.numero);
-        hash = 13 * hash + Objects.hashCode(this.cliente);
-        return hash;
-    }
-
+   
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -88,14 +94,6 @@ public class Telefone implements Serializable {
     public Telefone() {
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getNumero() {
         return numero;
     }
@@ -103,26 +101,6 @@ public class Telefone implements Serializable {
     public void setNumero(String numero) {
         this.numero = numero;
     }
-
    
-    public static List<Telefone> obterTelefones() throws ClassNotFoundException, SQLException {
-        return TelefoneDAO.obterTelefones();
-    }
-
-    public static Telefone obterTelefone(int id) throws ClassNotFoundException {
-        return TelefoneDAO.obterTelefone(id);
-    }
-
-    public void gravar() throws SQLException, ClassNotFoundException {
-        TelefoneDAO.gravar(this);
-    }
-
-    public void alterar() throws ClassNotFoundException, SQLException {
-        TelefoneDAO.alterar(this);
-    }
-
-    public void excluir() throws ClassNotFoundException, SQLException {
-        TelefoneDAO.excluir(this);
-    }
 
 }

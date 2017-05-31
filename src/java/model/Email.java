@@ -5,10 +5,7 @@
  */
 package model;
 
-import dao.EmailDAO;
 import java.io.Serializable;
-import java.sql.SQLException;
-import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,14 +21,14 @@ public class Email implements Serializable{
     private static final long serialVersionUID = 1L;
  @Id
     @GeneratedValue(strategy = GenerationType.AUTO)    
-    private int id;
+    private Long id;
     private String email;
     private String senha;
     private String autentica;
     private String servidorSaida;
     private String servidorEntrada;
 
-    public Email(int id, String email, String senha, String autentica, String servidorSaida, String servidorEntrada) {
+    public Email(Long id, String email, String senha, String autentica, String servidorSaida, String servidorEntrada) {
         this.id = id;
         this.email = email;
         this.senha = senha;
@@ -49,15 +46,17 @@ public class Email implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 23 * hash + this.id;
-        hash = 23 * hash + Objects.hashCode(this.email);
-        hash = 23 * hash + Objects.hashCode(this.senha);
-        hash = 23 * hash + Objects.hashCode(this.autentica);
-        hash = 23 * hash + Objects.hashCode(this.servidorSaida);
-        hash = 23 * hash + Objects.hashCode(this.servidorEntrada);
+        int hash = 7;
+        hash = 61 * hash + Objects.hashCode(this.id);
+        hash = 61 * hash + Objects.hashCode(this.email);
+        hash = 61 * hash + Objects.hashCode(this.senha);
+        hash = 61 * hash + Objects.hashCode(this.autentica);
+        hash = 61 * hash + Objects.hashCode(this.servidorSaida);
+        hash = 61 * hash + Objects.hashCode(this.servidorEntrada);
         return hash;
     }
+
+    
 
     @Override
     public boolean equals(Object obj) {
@@ -97,13 +96,15 @@ public class Email implements Serializable{
         return "Email{" + "id=" + id + ", email=" + email + ", senha=" + senha + ", autentica=" + autentica + ", servidorSaida=" + servidorSaida + ", servidorEntrada=" + servidorEntrada + '}';
     }   
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
+
+   
 
     public String getEmail() {
         return email;
@@ -144,23 +145,7 @@ public class Email implements Serializable{
     public void setServidorEntrada(String servidorEntrada) {
         this.servidorEntrada = servidorEntrada;
     }
-    public static List<Email> obterEmail() throws ClassNotFoundException, SQLException {
-        return EmailDAO.obterEmails();
-    }
-    public void gravar() throws SQLException, ClassNotFoundException{
-        EmailDAO.gravar(this);
-    }
-    
-   public static Email obterEmail(int id) throws ClassNotFoundException, SQLException {
-        return EmailDAO.obterEmail(id);
-    }
-
-    public void alterar() throws ClassNotFoundException, SQLException {
-         EmailDAO.alterar(this);
-    }
-    public void excluir() throws SQLException, ClassNotFoundException {
-         EmailDAO.excluir(this);
-    }
+   
     
 }
     

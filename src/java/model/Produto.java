@@ -5,10 +5,7 @@
  */
 package model;
 
-import dao.ProdutoDAO;
 import java.io.Serializable;
-import java.sql.SQLException;
-import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,16 +17,17 @@ import javax.persistence.Id;
  * @author Sujajeb
  */
 @Entity
-public class Produto implements Serializable{
-private static final long serialVersionUID = 1L;
+public class Produto implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private String nome;
     private String unidade;
     private float valor;
 
-    public Produto(int id, String nome, String unidade, float valor) {
+    public Produto(Long id, String nome, String unidade, float valor) {
         this.id = id;
         this.nome = nome;
         this.unidade = unidade;
@@ -37,65 +35,53 @@ private static final long serialVersionUID = 1L;
     }
 
     public Produto() {
-        }
-    
-    public void setNome(String nome){
-        this.nome=nome;
     }
-    public String getNome(){
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNome() {
         return this.nome;
     }
-    public void setValor(float valor){
-        this.valor=valor;
+
+    public void setValor(float valor) {
+        this.valor = valor;
     }
-    public float getValor(){
+
+    public float getValor() {
         return this.valor;
     }
-    public void setUnidade(String unidade){
-        this.unidade=unidade;
+
+    public void setUnidade(String unidade) {
+        this.unidade = unidade;
     }
-    public String getUnidade(){
+
+    public String getUnidade() {
         return this.unidade;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-    public static List<Produto> obterProdutos() throws ClassNotFoundException, SQLException {
-        return ProdutoDAO.obterProdutos();
-    }
-    public void gravar() throws SQLException, ClassNotFoundException{
-        ProdutoDAO.gravar(this);
-    }
-    public static Produto obterProduto(int id) throws ClassNotFoundException, SQLException{
-        return ProdutoDAO.obterProduto(id);
-    }
-        public void excluir() throws SQLException, ClassNotFoundException {
-         ProdutoDAO.excluir(this);
-    }
-
-    public void alterar() throws ClassNotFoundException, SQLException {
-        ProdutoDAO.alterar(this);
-    }
-    
-    
-            @Override
+    @Override
     public String toString() {
         return "model.Produto[ id=" + id + " ]";
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 11 * hash + this.id;
-        hash = 11 * hash + Objects.hashCode(this.nome);
-        hash = 11 * hash + Objects.hashCode(this.unidade);
-        hash = 11 * hash + Float.floatToIntBits(this.valor);
+        int hash = 3;
+        hash = 89 * hash + Objects.hashCode(this.id);
+        hash = 89 * hash + Objects.hashCode(this.nome);
+        hash = 89 * hash + Objects.hashCode(this.unidade);
+        hash = 89 * hash + Float.floatToIntBits(this.valor);
         return hash;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override

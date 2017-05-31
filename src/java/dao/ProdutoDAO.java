@@ -5,13 +5,10 @@
  */
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 import model.Produto;
 
 /**
@@ -20,114 +17,89 @@ import model.Produto;
  */
 public class ProdutoDAO {
 
-    public static List<Produto> obterProdutos() throws ClassNotFoundException, SQLException {
-        Connection conexao = null;
-        Statement comando = null;
-        List<Produto> produtos = new ArrayList<Produto>();
+    private static ProdutoDAO instance = new ProdutoDAO();
 
+    public static ProdutoDAO getInstance() {
+        return instance;
+    }
+
+    private ProdutoDAO() {
+    }
+   public void salvar(Produto produto) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
         try {
-            conexao = BD.getConexao();
-            comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select * from produto");
-            while (rs.next()) {
-                Produto produto = new Produto(rs.getInt("ID"), rs.getString("NOME"), rs.getString("UNIDADE"), rs.getFloat("VALOR"));
-
-                produtos.add(produto);
+            tx.begin();
+            if (produto.getId() != null) {
+                em.merge(produto);
+            } else {
+                em.persist(produto);
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
         } finally {
-            fecharConexao(conexao, comando);
+            PersistenceUtil.close(em);
+        }
+    }
+
+    
+    public List<Produto> getAllProdutos() {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        List<Produto> produtos = null;
+        try {
+            tx.begin();
+            TypedQuery<Produto> query = em.createQuery("select Produto from Produto", Produto.class);
+            produtos = query.getResultList();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            PersistenceUtil.close(em);
         }
         return produtos;
     }
 
-    public static void fecharConexao(Connection conexao, Statement comando) {
+    public Produto getProduto(long id) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        Produto produto = null;
         try {
-            if (comando != null) {
-                comando.close();
+            tx.begin();
+            produto = em.find(Produto.class, id);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
             }
-            if (conexao != null) {
-                conexao.close();
-            }
-        } catch (SQLException e) {
-
-        }
-    }
-
-    public static void gravar(Produto produto) throws ClassNotFoundException, SQLException {
-        Connection conexao = null;
-        try {
-            conexao = BD.getConexao();
-            String sql = "insert into produto(id,nome,unidade,valor) values(?,?,?,?)";
-            PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setInt(1, produto.getId());
-            comando.setString(2, produto.getNome());
-            comando.setString(3, produto.getUnidade());
-            comando.setFloat(4, produto.getValor());
-            comando.execute();
-            comando.close();
-            conexao.close();
-        } catch (SQLException e) {
-            throw e;
-        }
-    }
-
-    public static Produto obterProduto(int id) throws ClassNotFoundException, SQLException {
-        Connection conexao = null;
-        Statement comando = null;
-        Produto produto = new Produto();
-        try {
-            conexao = BD.getConexao();
-            comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select*from produto where id = " + id);
-            rs.first();
-            produto.setId(rs.getInt("ID"));
-            produto.setNome(rs.getString("NOME"));
-            produto.setUnidade(rs.getString("UNIDADE"));
-            produto.setValor(rs.getFloat("VALOR"));
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         } finally {
-            fecharConexao(conexao, comando);
+            PersistenceUtil.close(em);
         }
         return produto;
     }
-
-    public static void excluir(Produto produto) throws SQLException, ClassNotFoundException {
-        Connection conexao = null;
-
+    
+    public void excluir(Produto produto) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
         try {
-            conexao = BD.getConexao();
-            String sql = "delete from produto  where id = ? ";
-            PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setInt(1, produto.getId());
-            comando.execute();
-            comando.close();
-            conexao.close();
-        } catch (SQLException e) {
-            throw e;
+            tx.begin();
+            em.remove(em.getReference(Produto.class, produto.getId()));
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            PersistenceUtil.close(em);
         }
-    }
-
-    public static void alterar(Produto produto) throws ClassNotFoundException, SQLException {
-        Connection conexao = null;
-        conexao = BD.getConexao();
-        try {            
-            String sql = "update produto set nome=?, unidade=?, valor=?  where id = ? ";
-            PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setString(1, produto.getNome());
-            comando.setString(2, produto.getUnidade());
-            comando.setFloat(3, produto.getValor());
-            comando.setInt(4, produto.getId());
-            comando.execute();
-            comando.close();
-            conexao.close();
-        } catch (SQLException e) {
-            throw e;
-        }
-    }
-
+    }   
 }

@@ -5,10 +5,7 @@
  */
 package model;
 
-import dao.BairroDAO;
 import java.io.Serializable;
-import java.sql.SQLException;
-import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,12 +17,12 @@ import javax.persistence.Id;
  * @author Sujajeb
  */
 @Entity
-public class Bairro implements Serializable{
+public class Bairro implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;  
+    private Long id;
     private String nome;
     private float taxa;
 
@@ -36,7 +33,7 @@ public class Bairro implements Serializable{
     }
 
     public Bairro() {
-        }
+    }
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -75,10 +72,6 @@ public class Bairro implements Serializable{
         return hash;
     }
 
-    
-
- 
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -102,6 +95,7 @@ public class Bairro implements Serializable{
         }
         return true;
     }
+
     @Override
     public String toString() {
         return "model.Bairro[ id=" + id + " ]";

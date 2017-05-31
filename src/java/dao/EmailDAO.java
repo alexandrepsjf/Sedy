@@ -5,134 +5,97 @@
  */
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 import model.Email;
 
 public class EmailDAO {
 
-    public static List<Email> obterEmails() throws ClassNotFoundException, SQLException {
-        Connection conexao = null;
-        Statement comando = null;
-        List<Email> emails = new ArrayList<Email>();
+    private static EmailDAO instance = new EmailDAO();
 
+    public static EmailDAO getInstance() {
+        return instance;
+    }
+
+    private EmailDAO() {
+    }
+   public void salvar(Email email) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
         try {
-            conexao = BD.getConexao();
-            comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select*from email");
-            while (rs.next()) {
-                Email email = new Email(rs.getInt("ID"),
-                        rs.getString("EMAIL"),
-                        rs.getString("SENHA"),
-                        rs.getString("AUTENTICA"),
-                        rs.getString("servidorSaida"),
-                        rs.getString("servidorEntrada"));
-                emails.add(email);
+            tx.begin();
+            if (email.getId() != null) {
+                em.merge(email);
+            } else {
+                em.persist(email);
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
         } finally {
-            fecharConexao(conexao, comando);
+            PersistenceUtil.close(em);
+        }
+    }
+
+    
+    public List<Email> getAllEmails() {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        List<Email> emails = null;
+        try {
+            tx.begin();
+            TypedQuery<Email> query = em.createQuery("select Email from Email", Email.class);
+            emails = query.getResultList();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            PersistenceUtil.close(em);
         }
         return emails;
     }
 
-    public static void fecharConexao(Connection conexao, Statement comando) {
+    public Email getEmail(long id) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        Email email = null;
         try {
-            if (comando != null) {
-                comando.close();
+            tx.begin();
+            email = em.find(Email.class, id);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
             }
-            if (conexao != null) {
-                conexao.close();
-            }
-        } catch (SQLException e) {
-
-        }
-    }
-
-    public static void gravar(Email email) throws SQLException, ClassNotFoundException {
-        Connection conexao = null;
-        try {
-            conexao = BD.getConexao();
-            String sql = "insert into email(id,email,senha,autentica,servidorSaida,servidorEntrada) values(?,?,?,?,?,?)";
-            PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setInt(1, email.getId());
-            comando.setString(2, email.getEmail());
-            comando.setString(3, email.getSenha());
-            comando.setString(4, email.getAutentica());
-            comando.setString(5, email.getServidorSaida());
-            comando.setString(6, email.getServidorEntrada());
-            comando.execute();
-            comando.close();
-            conexao.close();
-        } catch (SQLException e) {
-            throw e;
-        }
-    }
-
-    public static Email obterEmail(int id) throws ClassNotFoundException, SQLException {
-        Connection conexao = null;
-        Statement comando = null;
-        Email email = new Email();
-        try {
-            conexao = BD.getConexao();
-            comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select*from email where id = " + id);
-            rs.first();
-            email.setId(rs.getInt("ID"));
-            email.setEmail(rs.getString("email"));
-            email.setSenha(rs.getString("senha"));
-            email.setAutentica(rs.getString("autentica"));
-            email.setServidorSaida(rs.getString("servidorSaida"));
-            email.setServidorEntrada(rs.getString("servidorEntrada"));
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         } finally {
-            fecharConexao(conexao, comando);
+            PersistenceUtil.close(em);
         }
         return email;
     }
-
-    public static void alterar(Email email) throws ClassNotFoundException, SQLException {
-        Connection conexao = null;
+    
+    public void excluir(Email email) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
         try {
-            conexao = BD.getConexao();
-            String sql = " update email set email = ?,  senha = ?, autentica = ? , servidorSaida = ? , servidorEntrada = ?  where id = ? ";
-            PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setString(1, email.getEmail());
-            comando.setString(2, email.getSenha());
-            comando.setString(3, email.getAutentica());
-            comando.setString(4, email.getServidorSaida());
-            comando.setString(5, email.getServidorEntrada());
-            comando.setInt(6, email.getId());
-            comando.execute();
-            comando.close();
-            conexao.close();
-        } catch (SQLException e) {
-            throw e;
+            tx.begin();
+            em.remove(em.getReference(Email.class, email.getId()));
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            PersistenceUtil.close(em);
         }
-    }
-        public static void excluir (Email email)throws SQLException, ClassNotFoundException {
-        Connection conexao = null;
-        
-    try{
-        conexao = BD.getConexao();
-            String sql = "delete from email  where id = ? ";
-            PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setInt(1, email.getId());
-            comando.execute();
-            comando.close();
-            conexao.close();
-        } catch (SQLException e) {
-            throw e;
-        }
-    }
-
+    }   
 }

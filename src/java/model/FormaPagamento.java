@@ -5,10 +5,7 @@
  */
 package model;
 
-import dao.FormaPagamentoDAO;
 import java.io.Serializable;
-import java.sql.SQLException;
-import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,29 +18,23 @@ import javax.persistence.Id;
  */
 @Entity
 public class FormaPagamento implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)   
-    private String forma;    
-    private int id;
-    public FormaPagamento(int id,String forma ) {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String forma;
+    private Long id;
+
+    public FormaPagamento(Long id, String forma) {
         this.forma = forma;
         this.id = id;
     }
 
     public FormaPagamento() {
-        }
+    }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 47 * hash + Objects.hashCode(this.forma);
-        hash = 47 * hash + this.id;
-        return hash;
     }
 
     @Override
@@ -71,8 +62,15 @@ public class FormaPagamento implements Serializable {
     public String toString() {
         return "FormaPagamento{" + "forma=" + forma + ", id=" + id + '}';
     }
-    
- 
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.forma);
+        hash = 41 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
     public String getForma() {
         return forma;
     }
@@ -81,30 +79,12 @@ public class FormaPagamento implements Serializable {
         this.forma = forma;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    public static List<FormaPagamento> obterFormasPagamento() throws ClassNotFoundException, SQLException {
-        return FormaPagamentoDAO.obterFormasPagamento();
-    }
-    public void gravar() throws SQLException, ClassNotFoundException{
-        FormaPagamentoDAO.gravar(this);
-    }
-     public static FormaPagamento obterFormaPagamento(int id)throws ClassNotFoundException, SQLException {
-         return FormaPagamentoDAO.obterFormaPagamento(id);
-     }
 
-    public void excluir() throws ClassNotFoundException, SQLException {
-        FormaPagamentoDAO.excluir(this);
-    }
-
-    public void alterar() throws ClassNotFoundException, SQLException {
-        FormaPagamentoDAO.alterar(this);
-    }
-
-   
 }
