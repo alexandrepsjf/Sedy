@@ -37,7 +37,9 @@ public class Email implements Serializable{
         this.servidorEntrada = servidorEntrada;
     }
 
-    public Email() {
+    public Email(String email, String senha) {
+        this.email = email;
+        this.senha = senha;
         }
 
     public static long getSerialVersionUID() {
@@ -110,7 +112,7 @@ public class Email implements Serializable{
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(String emails) {
         this.email = email;
     }
 
