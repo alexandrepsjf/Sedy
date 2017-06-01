@@ -60,7 +60,7 @@ public class ManterTelefoneController extends HttpServlet {
                 telefone = TelefoneDAO.getInstance().getTelefone(id);
                 request.setAttribute("telefone", telefone);
             }
-            RequestDispatcher view = request.getRequestDispatcher("/manterBairro.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("/manterEmail.jsp");
             view.forward(request, response);
         } catch (ServletException e) {
             throw e;
