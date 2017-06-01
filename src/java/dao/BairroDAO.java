@@ -7,11 +7,6 @@ package dao;
 
 
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -50,7 +45,7 @@ public class BairroDAO {
     }
 
     
-    public List<Bairro> getAllCursos() {
+    public List<Bairro> getAllBairros() {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         List<Bairro> cursos = null;
