@@ -5,11 +5,8 @@
  */
 package controller;
 
+import dao.BairroDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,106 +29,64 @@ public class ManterBairroController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    private Bairro bairro;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String acao = request.getParameter("acao");
-        if (acao.equals("prepararIncluir")) {
-            prepararIncluir(request, response);
-        } else if (acao.equals("confirmarIncluir")) {
-            confirmarIncluir(request, response);
-        } else {
-            {
-                if (acao.equals("prepararEditar")) {
-                    prepararEditar(request, response);
-                } else if (acao.equals("confirmarEditar")) {
-                    confirmarEditar(request, response);
-                } else if (acao.equals("prepararExcluir")) {
-                    prepararExcluir(request, response);
-                } else if (acao.equals("confirmarExcluir")) {
-                    confirmarExcluir(request, response);
-                }
+        if (acao.equals("prepararOperacao")) {
+            prepararOperacao(request, response);
+        }
+        if (acao.equals("confirmarOperacao")) {
+            confirmarOperacao(request, response);
+        }
+
+    }
+
+    public void prepararOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+        try {
+            String operacao = request.getParameter("operacao");
+            request.setAttribute("operacao", operacao);
+            if (!operacao.equals("incluir")) {
+                long id = Long.parseLong(request.getParameter("id"));
+                bairro = BairroDAO.getInstance().getBairro(id);
+                request.setAttribute("bairro", bairro);
             }
-
-        }
-    }
-
-    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            request.setAttribute("operacao", "Incluir");
-            RequestDispatcher view = request.getRequestDispatcher("/manterBairros.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("/manterBairro.jsp");
             view.forward(request, response);
-        } catch (ServletException | IOException ex) {
+        } catch (ServletException e) {
+            throw e;
+        } catch (IOException e) {
+            throw new ServletException(e);
         }
+
     }
 
-    public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String nome = request.getParameter("nome");
-        float taxa = Float.parseFloat(request.getParameter("taxa"));
+    public void confirmarOperacao(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         try {
-            Bairro bairro = new Bairro(id, nome, taxa);
-            bairro.gravar();
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaBairroController");
+            String operacao = request.getParameter("operacao");
+            String nome = request.getParameter("nome");
+            if (operacao.equals("incluir")) {
+                bairro = new Bairro(nome);
+                BairroDAO.getInstance().salvar(bairro);
+            } else if (operacao.equals("editar")) {
+                bairro.setNome(nome);
+                BairroDAO.getInstance().salvar(bairro);
+            } else if (operacao.equals("excluir")) {
+                BairroDAO.getInstance().excluir(bairro);
+            }
+            RequestDispatcher view = request.getRequestDispatcher("PesquisarBairroController");
             view.forward(request, response);
-        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
 
-        }
-
-    }
-
-    public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String nome = request.getParameter("nome");
-        float taxa = Float.parseFloat(request.getParameter("taxa"));
-        try {
-            Bairro bairro = new Bairro(id, nome, taxa);
-            bairro.alterar();
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaBairroController");
-            view.forward(request, response);
-        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
-
-        }
-
-    }
-
-    public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            request.setAttribute("operacao", "Editar");
-            int id = Integer.parseInt(request.getParameter("id"));
-            Bairro bairro = Bairro.obterBairro(id);
-            request.setAttribute("bairro", bairro);
-            RequestDispatcher view = request.getRequestDispatcher("/manterBairros.jsp");
-            view.forward(request, response);
-        } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
+        } catch (ServletException e) {
+            throw e;
+        } catch (IOException e) {
+            throw new ServletException(e);
         }
     }
 
-    public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String nome = request.getParameter("nome");
-        float taxa = Float.parseFloat(request.getParameter("taxa"));
-        try {
-            Bairro bairro = new Bairro(id, nome, taxa);
-            bairro.excluir();
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaBairroController");
-            view.forward(request, response);
-        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
-
-        }
-
-    }
-
-    public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            request.setAttribute("operacao", "Excluir");
-            int id = Integer.parseInt(request.getParameter("id"));
-            Bairro bairro = Bairro.obterBairro(id);
-            request.setAttribute("bairro", bairro);
-            RequestDispatcher view = request.getRequestDispatcher("/manterBairros.jsp");
-            view.forward(request, response);
-        } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
-        }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
