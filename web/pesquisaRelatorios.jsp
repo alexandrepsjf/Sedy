@@ -53,14 +53,14 @@ and open the template in the editor.
             </div>
         </nav>
         <main class="  ">
-              <h4 class=" teal-text shadowOrange center">Sistema de entregas delivery</h4>
+            <h4 class=" teal-text shadowOrange center">Sistema de entregas delivery</h4>
             <div class="center">
                 <h5>Pesquisa de Relatórios</h5>
             </div>
             <div class=" row col s12  center ">
-                <form  action="ManterRelatorioController" method="POST" class=" offset-s3 col s6 center">              
-                    
-                    <div class="input-field offset-s3 col s6 ">
+                <form  action="ManterRelatorioController" method="POST" class=" offset-s4 col s6 center">              
+
+                    <div class="input-field offset-s1  col s6 ">
                         <select name="reportName" onChange=changeParameter(this)>
                             <option value="" disabled selected>Escolha uma opção</option>
                             <option>Clientes</option>
@@ -74,9 +74,38 @@ and open the template in the editor.
                             <option>Ligações</option>
                         </select>
                         <label> Tipo do relatorio</label>
-                    </div>                                
-                    <table id ="reportParameter" name="reportParameter" class="table highlight centered">
-                    </table>
+                    </div>  
+                    <div class="center">
+                        <table id ="reportParameter" name="reportParameter" class="table highlight centered ">
+                            <thead>
+                                <tr>
+                                    <th>Parâmetro do relatòrio</th>
+                                </tr>
+                                <tr>
+                                    <th>Deixe em branco p/ completo</th> 
+                                </tr>
+                            </thead>
+                            <tbody class=" ">
+                                <tr>                               
+                                    <td class='input-field' ><input  type='text' class='validate' id='nome' name='reportParameter1'><label for="nome">Nome</label></td>
+                                </tr>
+                                <tr>
+                                    <td class='input-field'><input class='validate' id='rua' type='text'name='reportParameter2'><label for="rua">Rua</label></td>
+                                </tr>
+                                <tr>
+                                    <td class='input-field'><input type='text'class='validate' id='Numero' name='reportParameter3'><label for='Numero'>Numero</label></td>
+                                </tr>
+                                <tr>
+                                    <td class='input-field'><input type='text' class='validate' id='Bairro' name='reportParameter4'><label for="Bairro">Bairro</label></td>
+                                </tr>
+                                <tr>
+                                    <td class='input-field'><input type='text' class='validate' id='CEP' name='reportParameter5'><label for="CEP">CEP</label></td>
+                                </tr>
+                                <tr>
+                                    <td class='input-field'><input type='text' class='validate' id='data' placeholder='aaaa-mm-dd' name='reportParameter6'><label for="data">Data de cadastro</label><input type='hidden' name='numParameter' value='6'></td>
+                                </tr>
+                        </table>
+                    </div>
                     <div class="">  
                         <input  type="submit" name="btnIncluir" value="Gerar">
                     </div>
@@ -99,8 +128,8 @@ and open the template in the editor.
             switch (opcao)
             {
                 case 'Clientes' :
-                    document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Nome</td><td><input type='text'  name=\"reportParameter1\"></td></tr><tr><td>Rua</td><td><input type='text'name=\"reportParameter2\"></td></tr><tr><td>Numero</td><td><input type='text' name=\"reportParameter3\"></td></tr><tr><td>Bairro</td><td><input type='text' name=\"reportParameter4\"></td></tr><tr><td>CEP</td><td><input type='text' name=\"reportParameter5\"></td></tr><tr><td>Data de cadastro</td><td><input type='text'  placeholder='aaaa-mm-dd' name=\"reportParameter6\"><input type='hidden' name='numParameter' value='6'></td></tr>";
-                    break;
+                    document.getElementById("reportParameter").innerHTML = " <thead><tr><th>Parâmetro do relatòrio</th></tr><tr><th>Deixe em branco p/ completo</th></tr></thead><tbody><tr><td class='input-field'><input  type='text' class='validate' id='nome' name='reportParameter1'><label for='nome'>Nome</label></td></tr><tr><td class='input-field'><input class='validate' id='rua' type='text'name='reportParameter2'><label for='rua'>Rua</label></td></tr><tr><td class='input-field'><input type='text'class='validate' id='Numero' name='reportParameter3'><label for='Numero'>Numero</label></td></tr><tr><td class='input-field'><input type='text' class='validate' id='Bairro' name='reportParameter4'><label for='Bairro'>Bairro</label></td></tr><tr><td class='input-field'><input type='text' class='validate' id='CEP' name='reportParameter5'><label for='CEP'>CEP</label></td></tr><tr><td class='input-field'><input type='text' class='validate' id='data' placeholder='aaaa-mm-dd' name='reportParameter6'><label for='data'>Data de cadastro</label><input type='hidden' name='numParameter' value='6'></td></tr>";
+                            break;
 
                 case 'Pedidos':
                     document.getElementById("reportParameter").innerHTML = " <th>Parâmetro do relatòrio<td>Deixe em branco p/ completo</td></th> <tr><td>Nome</td><td><input type='text' name=\"reportParameter1\"></td></tr><tr><td>Data</td><td><input type='text' name=\"reportParameter2\"></td></tr><tr><td>Data</td><td><input type='text' name=\"reportParameter3\"></td></tr><tr><td>Total</td><td><input type='text' name=\"reportParameter4\"><input type='hidden' name='numParameter' value='4'></td></tr>";
