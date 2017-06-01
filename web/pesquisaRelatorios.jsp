@@ -1,18 +1,30 @@
+<%@page contentType="text/html" pageEncoding="utf-8"%>  
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
+
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
-<%@page contentType="text/html" pageEncoding="utf-8"%>  
+
 <html>
     <head>
         <title>Pesquisa de Relatorios</title>
-        <meta http-equiv="content-Type" content="text/html; charset=utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css.css">   
+       <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta Name="robots" content="index">
+    <meta Name="robots" content="follow">
+    <meta name="author" content="Alexandre de Paula Santos">
+    <meta name="author" content="Icaro Alvarenga">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/google-fonts.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/css.css"> 
     </head>
     <body class="search">
 
