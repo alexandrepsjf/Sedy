@@ -34,6 +34,15 @@ public class Bairro implements Serializable {
 
     public Bairro() {
     }
+    
+    public Bairro(String nome, Float taxa){
+        this.nome = nome;
+        this.taxa = taxa;
+    }
+    
+    public void setTaxa(Float taxa) {
+        this.taxa = taxa;
+    }
 
     public void setNome(String nome) {
         this.nome = nome;

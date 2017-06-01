@@ -67,11 +67,13 @@ public class ManterBairroController extends HttpServlet {
         try {
             String operacao = request.getParameter("operacao");
             String nome = request.getParameter("nome");
+            float taxa = Float.parseFloat(request.getParameter("taxa"));
             if (operacao.equals("incluir")) {
-                bairro = new Bairro(nome);
+                bairro = new Bairro(nome, taxa);
                 BairroDAO.getInstance().salvar(bairro);
             } else if (operacao.equals("editar")) {
                 bairro.setNome(nome);
+                bairro.setTaxa(taxa);
                 BairroDAO.getInstance().salvar(bairro);
             } else if (operacao.equals("excluir")) {
                 BairroDAO.getInstance().excluir(bairro);
