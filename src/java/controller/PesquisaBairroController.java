@@ -5,6 +5,7 @@
  */
 package controller;
 
+import dao.BairroDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -14,7 +15,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Bairro;
 
 /**
  *
@@ -34,19 +34,10 @@ public class PesquisaBairroController extends HttpServlet {
      * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException {
-        response.setContentType("text/html;charset=UTF-8");
-        try {
-
-            request.setAttribute("bairros", Bairro.obterBairros());
-            RequestDispatcher view
-                    = request.getRequestDispatcher("/pesquisaBairros.jsp");
-            view.forward(request, response);
-
-        } catch (ClassNotFoundException ex) {
-
-        }
-
+            throws ServletException, IOException {
+        request.setAttribute("bairros", BairroDAO.getInstance().getAllBairros());
+        RequestDispatcher view = request.getRequestDispatcher("/pesquisarBairro.jsp");
+        view.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
