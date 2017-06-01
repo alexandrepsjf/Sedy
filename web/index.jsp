@@ -28,16 +28,17 @@ and open the template in the editor.
 
 <nav class="nav-extended teal lighten-3">
     <div class="nav-wrapper">
-        <a href="#" class=" brand-logo center mylogo shadowOrange blue-text">SEDY</a>
+        <a href="ManterInicio" class=" brand-logo center mylogo shadowOrange blue-text tooltipped" data-position="bottom" data-delay="50"
+           data-tooltip="HOME">SEDY</a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li>
                 <a href="PesquisaRelatorioController">
                     <i class="large teal-text material-icons shadowOrange tooltipped  " data-position="bottom" data-delay="50"
-                       data-tooltip="RELATÃ“RIOS">print</i>
+                       data-tooltip="RELATÓRIOS">print</i>
                 </a>
-            </li>
-            <li>
+            </li> 
+           <li>
 
                 <a class=" waves-effect">
                     <i class="large teal-text material-icons shadowOrange tooltipped" data-position="bottom" data-delay="50"
@@ -69,7 +70,7 @@ and open the template in the editor.
     </a>
     <a href="PesquisaLigacaoController">
         <i class="large teal-text material-icons icone tooltipped" data-position="bottom" data-delay="50"
-           data-tooltip="LIGAÃ‡Ã•ES">contact_phone</i>
+           data-tooltip="LIGAÇÕES">contact_phone</i>
     </a>
     <a href="PesquisaEmailController">
         <i class="large teal-text material-icons icone tooltipped" data-position="bottom" data-delay="50"
@@ -77,7 +78,7 @@ and open the template in the editor.
     </a>
     <a href="PesquisaUsuarioController">
         <i class="large teal-text material-icons icone tooltipped" data-position="top" data-delay="50"
-           data-tooltip="USUÃRIOS">assignment_ind</i>
+           data-tooltip="USUÁRIOS">assignment_ind</i>
     </a>
     <a href="PesquisaNivelController">
         <i class="large teal-text material-icons icone tooltipped" data-position="top" data-delay="50"

@@ -8,23 +8,23 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 
- 
+
 <html>
     <head>
         <title>Pesquisa de Bairros</title>
-       <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta Name="robots" content="index">
-    <meta Name="robots" content="follow">
-    <meta name="author" content="Alexandre de Paula Santos">
-    <meta name="author" content="Icaro Alvarenga">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="css/google-fonts.css"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/css.css">
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta Name="robots" content="index">
+        <meta Name="robots" content="follow">
+        <meta name="author" content="Alexandre de Paula Santos">
+        <meta name="author" content="Icaro Alvarenga">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="css/google-fonts.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/css.css">
     </head>
     <body class="search">
         <div class="title"><h1>Pesquisa de Bairros</h1></div>
