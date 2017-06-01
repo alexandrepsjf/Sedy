@@ -5,7 +5,9 @@
  */
 package controller;
 
+import dao.BairroDAO;
 import dao.ClienteDAO;
+import dao.TelefoneDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -17,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Bairro;
 import model.Cliente;
 import model.Telefone;
 
@@ -35,105 +38,65 @@ public class ManterTelefoneController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private Telefone telefone;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException {
+            throws ServletException, IOException {
         String acao = request.getParameter("acao");
-        if (acao.equals("prepararIncluir")) {
-            prepararIncluir(request, response);
-        } else if (acao.equals("confirmarIncluir")) {
-            confirmarIncluir(request, response);
-        } else if (acao.equals("prepararEditar")) {
-            prepararEditar(request, response);
-        } else if (acao.equals("confirmarEditar")) {
-            confirmarEditar(request, response);
-        } else if (acao.equals("prepararExcluir")) {
-            prepararExcluir(request, response);
-        } else if (acao.equals("confirmarExcluir")) {
-            confirmarExcluir(request, response);
+        if (acao.equals("prepararOperacao")) {
+            prepararOperacao(request, response);
         }
+        if (acao.equals("confirmarOperacao")) {
+            confirmarOperacao(request, response);
+        }
+
     }
 
-    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException {
+    public void prepararOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         try {
-            List<Cliente> clientes = ClienteDAO.obterClientes();
-            request.setAttribute("operacao", "Incluir");
-            request.setAttribute("clientes", clientes);
-            RequestDispatcher view = request.getRequestDispatcher("/manterTelefone.jsp");
+            String operacao = request.getParameter("operacao");
+            request.setAttribute("operacao", operacao);
+            if (!operacao.equals("incluir")) {
+                long id = Long.parseLong(request.getParameter("id"));
+                telefone = TelefoneDAO.getInstance().getTelefone(id);
+                request.setAttribute("telefone", telefone);
+            }
+            RequestDispatcher view = request.getRequestDispatcher("/manterBairro.jsp");
             view.forward(request, response);
-        } catch (ServletException | IOException ex) {
+        } catch (ServletException e) {
+            throw e;
+        } catch (IOException e) {
+            throw new ServletException(e);
         }
+
     }
 
-    public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String telCliente = request.getParameter("numero");
-        int idCliente = Integer.parseInt(request.getParameter("idCliente"));
+    public void confirmarOperacao(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         try {
-            Telefone telefone = new Telefone(id, telCliente);
-            telefone.setIdCliente(idCliente);
-            telefone.gravar();
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaTelefoneController");
+            String operacao = request.getParameter("operacao");
+            String numero = request.getParameter("numero");
+            String cliente = request.getParameter("cliente");
+            if (operacao.equals("incluir")) {
+                telefone = new Telefone(numero, cliente);
+                TelefoneDAO.getInstance().salvar(telefone);
+            } else if (operacao.equals("editar")) {
+                telefone.setNumero(numero);
+                telefone.setCliente(cliente);
+                TelefoneDAO.getInstance().salvar(telefone);
+            } else if (operacao.equals("excluir")) {
+                TelefoneDAO.getInstance().excluir(telefone);
+            }
+            RequestDispatcher view = request.getRequestDispatcher("PesquisarBairroController");
             view.forward(request, response);
-        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
 
-        }
-
-    }
-
-    public void prepararEditar(HttpServletRequest request, HttpServletResponse response) throws SQLException {
-        try {
-            List<Cliente> clientes = ClienteDAO.obterClientes();
-            request.setAttribute("operacao", "Editar");
-            request.setAttribute("clientes", clientes);
-            int id = Integer.parseInt(request.getParameter("id"));
-            Telefone telefone = Telefone.obterTelefone(id);
-            request.setAttribute("telefone", telefone);
-            RequestDispatcher view = request.getRequestDispatcher("/manterTelefone.jsp");
-            view.forward(request, response);
-        } catch (ServletException | IOException | ClassNotFoundException ex) {
+        } catch (ServletException e) {
+            throw e;
+        } catch (IOException e) {
+            throw new ServletException(e);
         }
     }
 
-    private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String telCliente = request.getParameter("numero");
-        try {
-            Telefone telefone = new Telefone(id, telCliente);
-            telefone.alterar();
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaTelefoneController");
-            view.forward(request, response);
-        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
-
-        }
-
-    }
-
-    private void prepararExcluir(HttpServletRequest request, HttpServletResponse response) throws SQLException {
-        try {
-            List<Cliente> clientes = ClienteDAO.obterClientes();
-            request.setAttribute("operacao", "Excluir");
-            request.setAttribute("clientes", clientes);
-            int id = Integer.parseInt(request.getParameter("id"));
-            Telefone telefone = Telefone.obterTelefone(id);
-            request.setAttribute("telefone", telefone);
-            RequestDispatcher view = request.getRequestDispatcher("/manterTelefone.jsp");
-            view.forward(request, response);
-        } catch (ServletException | IOException | ClassNotFoundException ex) {
-        }
-    }
-
-    private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String telCliente = request.getParameter("numero");
-        try {
-            Telefone telefone = new Telefone(id, telCliente);
-            telefone.excluir();
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaTelefoneController");
-            view.forward(request, response);
-        } catch (IOException | ServletException ex) {
-
-        }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -147,13 +110,7 @@ public class ManterTelefoneController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ManterTelefoneController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ManterTelefoneController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -167,13 +124,7 @@ public class ManterTelefoneController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ManterTelefoneController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ManterTelefoneController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

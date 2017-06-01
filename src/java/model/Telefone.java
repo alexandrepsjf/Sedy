@@ -25,10 +25,14 @@ public class Telefone implements Serializable {
     private String numero;
       private Cliente cliente;
 
-    public Telefone(Long id, String telefone) {
+    public Telefone(Long id, String telefone, String numero, String cliente) {
         this.id = id;
         this.numero = telefone;
 
+    }
+
+    public Telefone(String numero, String cliente) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -100,6 +104,10 @@ public class Telefone implements Serializable {
 
     public void setNumero(String numero) {
         this.numero = numero;
+    }
+
+    public void setCliente(String cliente) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
    
 
