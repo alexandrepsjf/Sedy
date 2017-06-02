@@ -5,6 +5,7 @@
  */
 package controller;
 
+import dao.ProdutoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -36,12 +37,9 @@ public class PesquisaProdutoController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-            request.setAttribute("produtos", Produto.obterProdutos());
-            RequestDispatcher view = request.getRequestDispatcher("/pesquisaProduto.jsp");
-            view.forward(request, response);
-        } catch (ClassNotFoundException ex) {
-        }
+        request.setAttribute("produtos", ProdutoDAO.getInstance().getAllProdutos());
+        RequestDispatcher view = request.getRequestDispatcher("/pesquisaProduto.jsp");
+        view.forward(request, response);
     
     }
 

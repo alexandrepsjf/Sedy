@@ -5,6 +5,7 @@
  */
 package controller;
 
+import dao.FormaPagamentoDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -36,16 +37,10 @@ public class PesquisaFormaPagamentoController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-                      
-           request.setAttribute("formasPagamento",FormaPagamento.obterFormasPagamento());
-           RequestDispatcher view = 
-                    request.getRequestDispatcher("/pesquisaFormaspgto.jsp");
-           view.forward(request,response);
-        
-        }catch (ClassNotFoundException ex){
-                    
-                    }
+        request.setAttribute("formasPagamento",FormaPagamentoDAO.getInstance().getAllFormaPagamento());
+        RequestDispatcher view =
+                request.getRequestDispatcher("/pesquisaFormaspgto.jsp");
+        view.forward(request,response);
            
         }
     

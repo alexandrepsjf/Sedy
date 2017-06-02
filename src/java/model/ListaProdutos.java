@@ -39,9 +39,7 @@ public class ListaProdutos {
    
 
     public Produto getProduto() throws ClassNotFoundException, SQLException {
-        if ((this.produto == null) && (this.idProduto != 0)) {
-            produto = Produto.obterProduto(this.idProduto);
-        }
+        
         return produto;
     }
 

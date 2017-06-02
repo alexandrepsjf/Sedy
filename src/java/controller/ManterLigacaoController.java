@@ -35,103 +35,24 @@ public class ManterLigacaoController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String acao = request.getParameter("acao");
-        if (acao.equals("prepararIncluir")) {
-            prepararIncluir(request, response);
-        } else if (acao.equals("confirmarIncluir")) {
-            confirmarIncluir(request, response);
-        } else {
-            {
-                if (acao.equals("prepararEditar")) {
-                    prepararEditar(request, response);
-                } else if (acao.equals("confirmarEditar")) {
-                    confirmarEditar(request, response);
-                } else if (acao.equals("prepararExcluir")) {
-                    prepararExcluir(request, response);
-                } else if (acao.equals("confirmarExcluir")) {
-                    confirmarExcluir(request, response);
-                }
-            }
-
+        if (acao.equals("prepararOperacao")) {
+            prepararOperacao(request, response);
+        }
+        if (acao.equals("confirmarOperacao")) {
+            confirmarOperacao(request, response);
         }
     }
 
-    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            request.setAttribute("operacao", "Incluir");
-            RequestDispatcher view = request.getRequestDispatcher("/manterLigacao.jsp");
-            view.forward(request, response);
-        } catch (ServletException | IOException ex) {
-        }
+    private void prepararOperacao(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String nome = request.getParameter("ligacao");
-        
-        try {
-            Ligacao ligacao = new Ligacao(id, ligacao);
-            Ligacao.gravar();
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaLigacaoController");
-            view.forward(request, response);
-        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
-
-        }
-
+    private void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String nome = request.getParameter("ligacao");
-       
-        try {
-            Ligacao ligacao = new Ligacao(id,ligacao);
-            ligacao.alterar();
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaLigacaoController");
-            view.forward(request, response);
-        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
-
-        }
-
-    }
-
-    public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            request.setAttribute("operacao", "Editar");
-            int id = Integer.parseInt(request.getParameter("id"));
-            Ligacao ligacao = Ligacao.obterLigacao(id);
-            request.setAttribute("ligacao", ligacao);
-            RequestDispatcher view = request.getRequestDispatcher("/manterLigacao.jsp");
-            view.forward(request, response);
-        } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
-        }
-    }
-
-    public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String nome = request.getParameter("ligacao");
-        
-        try {
-            Ligacao ligacao = new Ligacao(id, ligacao);
-            ligacao.excluir();
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaLigacaoController");
-            view.forward(request, response);
-        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
-
-        }
-
-    }
-
-    public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            request.setAttribute("operacao", "Excluir");
-            int id = Integer.parseInt(request.getParameter("id"));
-            Ligacao ligacao = Ligacao.obterLigacao(id);
-            request.setAttribute("ligacao", ligacacao);
-            RequestDispatcher view = request.getRequestDispatcher("/manterLigacao.jsp");
-            view.forward(request, response);
-        } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
-        }
-    }
+    
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

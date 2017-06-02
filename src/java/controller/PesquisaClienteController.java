@@ -5,6 +5,7 @@
  */
 package controller;
 
+import dao.ClienteDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -36,12 +37,9 @@ public class PesquisaClienteController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        try  {
-            request.setAttribute("clientes", Cliente.obterClientes());
-            RequestDispatcher view = request.getRequestDispatcher("/pesquisaCliente.jsp");
-            view.forward(request, response);
-        } catch (ClassNotFoundException ex) {
-        }
+        request.setAttribute("clientes", ClienteDAO.getInstance().getAllCliente());
+        RequestDispatcher view = request.getRequestDispatcher("/pesquisaCliente.jsp");
+        view.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

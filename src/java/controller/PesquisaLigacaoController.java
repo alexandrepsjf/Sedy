@@ -5,6 +5,7 @@
  */
 package controller;
 
+import dao.LigacaoDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -35,16 +36,10 @@ public class PesquisaLigacaoController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-
-            request.setAttribute("ligacoes", Ligacao.obterLigacao());
-            RequestDispatcher view
-                    = request.getRequestDispatcher("/pesquisaLigacao.jsp");
-            view.forward(request, response);
-
-        } catch (ClassNotFoundException ex) {
-
-        }
+        request.setAttribute("ligacoes", LigacaoDAO.getInstance().getAllLigacao());
+        RequestDispatcher view
+                = request.getRequestDispatcher("/pesquisaLigacao.jsp");
+        view.forward(request, response);
 
     }
 
@@ -65,6 +60,8 @@ public class PesquisaLigacaoController extends HttpServlet {
             processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(PesquisaLigacaoController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PesquisaLigacaoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -82,6 +79,8 @@ public class PesquisaLigacaoController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
+            Logger.getLogger(PesquisaLigacaoController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(PesquisaLigacaoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

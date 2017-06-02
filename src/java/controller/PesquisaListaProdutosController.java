@@ -34,14 +34,6 @@ public class PesquisaListaProdutosController extends HttpServlet {
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         
-        try {            
-                   request.setAttribute("listaProdutos", ListaProdutos.obterListaProdutos());
-            request.setAttribute("produtos", Produto.obterProdutos());           
-            RequestDispatcher view = request.getRequestDispatcher("/pesquisaListaProdutos.jsp");
-            view.forward(request, response);
-        } catch (ClassNotFoundException ex) {
-
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
