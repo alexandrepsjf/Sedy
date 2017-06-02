@@ -22,7 +22,7 @@ public class PersistenceUtil {
 
     public static EntityManager getEntityManager() {
         if (emf == null)
-            emf = Persistence.createEntityManagerFactory("exemploJPAPU");
+            emf = Persistence.createEntityManagerFactory("SedyModelPU");
         return emf.createEntityManager();
     }
 

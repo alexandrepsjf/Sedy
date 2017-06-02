@@ -5,21 +5,14 @@
  */
 package controller;
 
-import dao.BairroDAO;
-import dao.TelefoneDAO;
+import dao.ClienteDAO;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Bairro;
 import model.Cliente;
-import model.Telefone;
 
 /**
  *
@@ -36,163 +29,63 @@ public class ManterClienteController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private Cliente cliente;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String acao = request.getParameter("acao");
-        if (acao.equals("prepararIncluir")) {
-            prepararIncluir(request, response);
-        } else if (acao.equals("confirmarIncluir")) {
-            confirmarIncluir(request, response);
-        } else if (acao.equals("prepararEditar")) {
-            prepararEditar(request, response);
-        } else if (acao.equals("confirmarEditar")) {
-            confirmarEditar(request, response);
-        } else if (acao.equals("prepararExcluir")) {
-            prepararExcluir(request, response);
-        } else if (acao.equals("confirmarExcluir")) {
-            confirmarExcluir(request, response);
+        if (acao.equals("prepararOperacao")) {
+            prepararOperacao(request, response);
+        }
+        if (acao.equals("confirmarOperacao")) {
+            confirmarOperacao(request, response);
         }
 
     }
 
-    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
+    public void prepararOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         try {
-            List<Telefone> telefones = TelefoneDAO.obterTelefones();
-            List<Bairro> bairros = BairroDAO.obterBairros();
-            request.setAttribute("telefones", telefones);
-            request.setAttribute("bairros", bairros);
-            request.setAttribute("operacao", "Incluir");
+            String operacao = request.getParameter("operacao");
+            request.setAttribute("operacao", operacao);
+            if (!operacao.equals("incluir")) {
+                long id = Long.parseLong(request.getParameter("id"));
+                cliente = ClienteDAO.getInstance().getCliente(id);
+                request.setAttribute("cliente", cliente);
+            }
             RequestDispatcher view = request.getRequestDispatcher("/manterCliente.jsp");
             view.forward(request, response);
-
-        } catch (ServletException | IOException ex) {
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ManterClienteController.class
-                    .getName()).log(Level.SEVERE, null, ex);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ManterClienteController.class
-                    .getName()).log(Level.SEVERE, null, ex);
+        } catch (ServletException e) {
+            throw e;
+        } catch (IOException e) {
+            throw new ServletException(e);
         }
+
     }
- public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String nome = request.getParameter("nome");
-        String rua = request.getParameter("rua");
-        String numero = request.getParameter("numero");
-        String cep = request.getParameter("cep");
-        String dataCadastro = request.getParameter("data_cadastro");
-        String horaCadastro = request.getParameter("hora_cadastro");
-        String email = request.getParameter("email");
-        String referenciaEndereco = request.getParameter("referencia");
-        int idBairro = Integer.parseInt(request.getParameter("bairrocliente"));
-        String addTelefone=request.getParameter("addTelefone");
-         int addIdTelefone=Integer.parseInt(request.getParameter("addIdTelefone"));
+
+    public void confirmarOperacao(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         try {
-            Cliente cliente = new Cliente(id, nome, rua, numero, cep, dataCadastro, horaCadastro, email, referenciaEndereco, null, idBairro);
-            cliente.setBairro(cliente.getBairro());
-            Telefone telefone=new Telefone();
-            telefone.setId(addIdTelefone);
-            telefone.setIdCliente(id);
-            telefone.setNumero(addTelefone);
-            cliente.gravar();
-            telefone.gravar();
-            
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaClienteController");
+            String operacao = request.getParameter("operacao");
+            String nome = request.getParameter("nome");
+            if (operacao.equals("incluir")) {
+                cliente = new Cliente(nome);
+                ClienteDAO.getInstance().salvar(cliente);
+            } else if (operacao.equals("editar")) {
+                cliente.setNome(nome);
+                ClienteDAO.getInstance().salvar(cliente);
+            } else if (operacao.equals("excluir")) {
+                ClienteDAO.getInstance().excluir(cliente);
+            }
+            RequestDispatcher view = request.getRequestDispatcher("PesquisarClienteController");
             view.forward(request, response);
-        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
+
+        } catch (ServletException e) {
+            throw e;
+        } catch (IOException e) {
+            throw new ServletException(e);
         }
     }
 
-    public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            List<Telefone> telefones = TelefoneDAO.obterTelefones();
-            List<Bairro> bairros = BairroDAO.obterBairros();
-            request.setAttribute("telefones", telefones);
-            request.setAttribute("bairros", bairros);
-            request.setAttribute("operacao", "Editar");
-            int id = Integer.parseInt(request.getParameter("id"));
-            Cliente cliente = Cliente.obterCliente(id);
-            request.setAttribute("cliente", cliente);
-            RequestDispatcher view = request.getRequestDispatcher("/manterCliente.jsp");
-            view.forward(request, response);
-        } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
-        }
-    }
-
-    private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
-       int id = Integer.parseInt(request.getParameter("id"));
-        String nome = request.getParameter("nome");
-        String rua = request.getParameter("rua");
-        String numero = request.getParameter("numero");
-        String cep = request.getParameter("cep");
-        String dataCadastro = request.getParameter("data_cadastro");
-        String horaCadastro = request.getParameter("hora_cadastro");
-        String email = request.getParameter("email");
-        String referenciaEndereco = request.getParameter("referencia");
-        int idBairro = Integer.parseInt(request.getParameter("bairrocliente"));
-        //String addTelefone=request.getParameter("addTelefone");
-        // int addIdTelefone=Integer.parseInt(request.getParameter("addIdTelefone"));
-
-        try {
-            Cliente cliente = new Cliente(id, nome, rua, numero, cep, dataCadastro, horaCadastro, email, referenciaEndereco, null, idBairro);
-            cliente.setBairro(cliente.getBairro());
-           /* Telefone telefone=new Telefone();
-            telefone.setId(addIdTelefone);
-            telefone.setIdCliente(id);
-            telefone.setNumero(addTelefone);
-            telefone.alterar();*/
-            cliente.alterar();           
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaClienteController");
-            view.forward(request, response);
-        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
-        }
-    }
-
-    private void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
-       try {
-            List<Telefone> telefones = TelefoneDAO.obterTelefones();
-            List<Bairro> bairros = BairroDAO.obterBairros();
-            request.setAttribute("telefones", telefones);
-            request.setAttribute("bairros", bairros);
-            request.setAttribute("operacao", "Excluir");
-            int id = Integer.parseInt(request.getParameter("id"));
-            Cliente cliente = Cliente.obterCliente(id);
-            request.setAttribute("cliente", cliente);
-            RequestDispatcher view = request.getRequestDispatcher("/manterCliente.jsp");
-            view.forward(request, response);
-        } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
-        }
-    }
-
-    private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
-         int id = Integer.parseInt(request.getParameter("id"));
-        String nome = request.getParameter("nome");
-        String rua = request.getParameter("rua");
-        String numero = request.getParameter("numero");
-        String cep = request.getParameter("cep");
-        String dataCadastro = request.getParameter("data_cadastro");
-        String horaCadastro = request.getParameter("hora_cadastro");
-        String email = request.getParameter("email");
-        String referenciaEndereco = request.getParameter("referencia");
-        int idBairro = Integer.parseInt(request.getParameter("bairrocliente"));
-        //String addTelefone=request.getParameter("addTelefone");
-        // int addIdTelefone=Integer.parseInt(request.getParameter("addIdTelefone"));
-
-        try {
-            Cliente cliente = new Cliente(id, nome, rua, numero, cep, dataCadastro, horaCadastro, email, referenciaEndereco, null, idBairro);
-            cliente.setBairro(cliente.getBairro());
-           /* Telefone telefone=new Telefone();
-            telefone.setId(addIdTelefone);
-            telefone.setIdCliente(id);
-            telefone.setNumero(addTelefone);
-            telefone.alterar();*/
-            cliente.excluir();           
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaClienteController");
-            view.forward(request, response);
-        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
-        }
-    }
+    
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

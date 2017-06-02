@@ -52,7 +52,12 @@ public Cliente(Long id, String nome, String rua, String numero, String cep, Stri
     }
 
     public Cliente() {
-         }
+         
+    }
+    public Cliente(String nome) {
+        this.nome = nome;
+         
+    }
 
     public Long getId() {
         return id;

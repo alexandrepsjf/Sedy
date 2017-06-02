@@ -5,13 +5,6 @@
  */
 package dao;
 
-
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -20,7 +13,7 @@ import model.Bairro;
 
 public class BairroDAO {
 
-    private static BairroDAO instance = new BairroDAO();
+    private static final BairroDAO instance = new BairroDAO();
 
     public static BairroDAO getInstance() {
         return instance;
@@ -53,11 +46,11 @@ public class BairroDAO {
     public List<Bairro> getAllBairros() {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
-        List<Bairro> cursos = null;
+        List<Bairro> bairros = null;
         try {
             tx.begin();
-            TypedQuery<Bairro> query = em.createQuery("select Bairro from Bairro", Bairro.class);
-            cursos = query.getResultList();
+            TypedQuery<Bairro> query = em.createQuery("select b from Bairro b", Bairro.class);
+            bairros = query.getResultList();
             tx.commit();
         } catch (Exception e) {
             if (tx != null && tx.isActive()) {
@@ -67,7 +60,7 @@ public class BairroDAO {
         } finally {
             PersistenceUtil.close(em);
         }
-        return cursos;
+        return bairros;
     }
 
     public Bairro getBairro(long id) {

@@ -28,6 +28,9 @@ public class Email implements Serializable{
     private String servidorSaida;
     private String servidorEntrada;
 
+    public Email() {
+    }
+
     public Email(Long id, String email, String senha, String autentica, String servidorSaida, String servidorEntrada) {
         this.id = id;
         this.email = email;
@@ -113,7 +116,7 @@ public class Email implements Serializable{
     }
 
     public void setEmail(String emails) {
-        this.email = email;
+        this.email = emails;
     }
 
     public String getSenha() {
