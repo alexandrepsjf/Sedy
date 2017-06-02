@@ -102,29 +102,48 @@ and open the template in the editor.
                             break;
 
                 case 'Pedidos':
-                    document.getElementById("reportParameter").innerHTML = " <thead><tr><th>Parâmetro do relatòrio</th></tr><tr><th>Deixe em branco p/ completo</th><tr></thead><tbody><tr><td class='input-field'><input type='text' class='validate' id='nome' name='reportParameter1'><label for='nome'>Nome</label></td></tr><tr><td class='input-field'><input class='validate' id='data' type='text' name='reportParameter2'><label for='data'>Data</label></td></tr><tr><td class='input-field'><input type='text' class='validate' id='total' name='reportParameter3'><label for='total'>Total</label><input type='hidden' name='numParameter' value='4'></td></tr>";
+                    document.getElementById("reportParameter").innerHTML = " <thead><tr><th>Parâmetro do relatòrio</th></tr><tr><th>Deixe em branco p/ completo</th><tr></thead><tbody><tr><td class='input-field'><input type='text' class='validate' id='nome' name='reportParameter1'><label for='nome'>Nome</label></td></tr>"+
+                            "<tr><td class='input-field'><input class='validate' id='forma' type='text' name='reportParameter2'><label for='forma'>Forma</label></td></tr>"+
+                            "<tr><td class='input-field'><input class='validate' id='data' type='text' name='reportParameter4'><label for='data'>Data</label></td></tr>"+
+                            "<tr><td class='input-field'><input type='text' class='validate' id='total' name='reportParameter4'><label for='total'>Total</label><input type='hidden' name='numParameter' value='4'></td></tr>";
                     break;
 
                 case 'Bairros':
-                    document.getElementById("reportParameter").innerHTML = " <thead><tr><th>Parâmetro do relatòrio</th></tr><tr><th>Deixe em branco p/ completo</th><tr></thead><tbody><tr><td class='input-field'><input type='text' class='validate' id='id' name='reportParameter1'><label for='id'>Id</label></td></tr><tr><td class='input-field'><input class='validate' id='bairro'  type='text' name='reportParameter2'><label for='bairro'>Bairro</label></td></tr><tr><td class='input-field'><input type='text' class='validate' id='taxa' type='text' name='reportParameter3'><label for='taxa'>Taxa</label><input type='hidden' name='numParameter' value='3'></td></tr>";
+                    document.getElementById("reportParameter").innerHTML = " <thead><tr><th>Parâmetro do relatòrio</th></tr><tr><th>Deixe em branco p/ completo</th><tr></thead><tbody>"+
+                            "<tr><td class='input-field'><input type='text' class='validate' id='id' name='reportParameter1'><label for='id'>Id</label></td></tr>"+
+                            "<tr><td class='input-field'><input class='validate' id='bairro'  type='text' name='reportParameter2'><label for='bairro'>Bairro</label></td></tr>"+
+                            "<tr><td class='input-field'><input type='text' class='validate' id='taxa' type='text' name='reportParameter3'><label for='taxa'>Taxa</label><input type='hidden' name='numParameter' value='3'></td></tr>";
                     break;
                 case 'Produtos':
-                    document.getElementById("reportParameter").innerHTML = "  <thead><tr><th>Parâmetro do relatòrio</th></tr><tr><th>Deixe em branco p/ completo</th><tr></thead><tbody><tr><td class='input-field'><input type='text' class='validate' id='nome' name='reportParameter1'><label for='nome'>Nome</label></td></tr><tr><td class='input-field'><input class='validate' id='un' type='text' name='reportParameter2'><label for='un'>Unidade</label></td></tr><td class='input-field'><input type='text' class='validate' id='valor' name='reportParameter3'><label for='valor'>Valor</label><input type='hidden' name='numParameter' value='4'></td></tr>";
+                    document.getElementById("reportParameter").innerHTML = "  <thead><tr><th>Parâmetro do relatòrio</th></tr><tr><th>Deixe em branco p/ completo</th><tr></thead>"+
+                            "<tbody><tr><td class='input-field'><input type='text' class='validate' id='id' name='reportParameter1'><label for='id'>Id</label></td></tr>"+
+                        "<tbody><tr><td class='input-field'><input type='text' class='validate' id='nome' name='reportParameter2'><label for='nome'>Nome</label></td></tr>"+
+                            "<tr><td class='input-field'><input class='validate' id='un' type='text' name='reportParameter3'><label for='un'>Unidade</label></td></tr>"+
+                            "<td class='input-field'><input type='text' class='validate' id='valor' name='reportParameter4'><label for='valor'>Valor</label><input type='hidden' name='numParameter' value='4'></td></tr>";
                     break;
                 case 'Formas de pgto' :
-                    document.getElementById("reportParameter").innerHTML = "  <thead><tr><th>Parâmetro do relatòrio</th></tr><tr><th>Deixe em branco p/ completo</th><tr></thead><tbody><tr><td class='input-field'><input type='text' class='validate' id='id' name='reportParameter1'><label for='id'>Id</label></td></tr><tr><td class='input-field'><input class='validate' id='forma'  type='text' name='reportParameter2'><label for='forma'>Forma</label><input type='hidden' name='numParameter' value='2'></td></tr>";
+                    document.getElementById("reportParameter").innerHTML = "  <thead><tr><th>Parâmetro do relatòrio</th></tr><tr><th>Deixe em branco p/ completo</th><tr></thead>"+
+                            "<tbody><tr><td class='input-field'><input type='text' class='validate' id='id' name='reportParameter1'><label for='id'>Id</label></td></tr>"+
+                            "<tr><td class='input-field'><input class='validate' id='forma'  type='text' name='reportParameter2'><label for='forma'>Forma</label><input type='hidden' name='numParameter' value='2'></td></tr>";
                     break;
 
                 case 'Niveis':
-                    document.getElementById("reportParameter").innerHTML = "  <thead><tr><th>Parâmetro do relatòrio</th></tr><tr><th>Deixe em branco p/ completo</th><tr></thead><tbody><tr><td class='input-field'><input type='text' class='validate' id='id' name='reportParameter1'><label for='id'>Id</label></td></tr><tr><td class='input-field'><input class='validate' id='nivel' type='text' name='reportParameter2'><label for='nivel'>Nivel</label><input type='hidden' name='numParameter' value='2'></td></tr>";
+                    document.getElementById("reportParameter").innerHTML = "  <thead><tr><th>Parâmetro do relatòrio</th></tr><tr><th>Deixe em branco p/ completo</th><tr></thead>"+
+                            "<tbody><tr><td class='input-field'><input type='text' class='validate' id='id' name='reportParameter1'><label for='id'>Id</label></td></tr>"+
+                            "<tr><td class='input-field'><input class='validate' id='nome' type='text' name='reportParameter2'><label for='nome'>Nome</label><input type='hidden' name='numParameter' value='2'></td></tr>";
                     break;
 
                 case 'Usuarios':
-                    document.getElementById("reportParameter").innerHTML = "  <thead><tr><th>Parâmetro do relatòrio</th></tr><tr><th>Deixe em branco p/ completo</th><tr></thead><tbody><tr><td class='input-field'><input type='text' class='validate' id='login' name='reportParameter1'><label for='login'>Login</label></td></tr><tr><td class='input-field'><input type='text' id='nome' name='reportParameter2'><label for='nome'>Nome</label></td></tr><tr><td><input type='text' name=\"reportParameter3\"><input type='hidden' name='numParameter' value='3'></td></tr>";
+                    document.getElementById("reportParameter").innerHTML = "  <thead><tr><th>Parâmetro do relatòrio</th></tr><tr><th>Deixe em branco p/ completo</th><tr></thead>"+
+                             "<tbody><tr><td class='input-field'><input type='text' class='validate' id='usuario' name='reportParameter1'><label for='usuario'>Usuario</label></td></tr>"+
+                             "<tr><td class='input-field'><input type='text' class='validate' id='login' name='reportParameter2'><label for='login'>Login</label></td></tr>"+
+                            "<tr><td class='input-field'><input type='text' id='nome' name='reportParameter3'><label for='nome'>Nome</label><input type='hidden' name='numParameter' value='3'></td></tr>";
                     break;
 
                 case 'Telefones':
-                    document.getElementById("reportParameter").innerHTML = " <thead><tr><th>Parâmetro do relatòrio</th></tr><tr><th>Deixe em branco p/ completo</th><tr></thead><tbody><tr><td class='input-field'><input type='text' class='validate' id='id' name='reportParameter1'><label for='id'>Id</label></td></tr><tr><td class='input-field'><input type='text' name='reportParameter2'><label for='telefone'>Telefone</label><input type='hidden' name='numParameter' value='2'></td></tr>";
+                    document.getElementById("reportParameter").innerHTML = " <thead><tr><th>Parâmetro do relatòrio</th></tr><tr><th>Deixe em branco p/ completo</th><tr></thead>"+
+                            "<tbody><tr><td class='input-field'><input type='text' class='validate' id='nome' name='reportParameter1'><label for='nome'>Nome</label></td></tr>"+
+                            "<tr><td class='input-field'><input type='text' name='reportParameter2'><label for='telefone'>Telefone</label><input type='hidden' name='numParameter' value='2'></td></tr>";
                     break;
                 case 'Chamadas Recebidas':
                     document.getElementById("reportParameter").innerHTML = " <thead><tr><th>Parâmetro do relatòrio</th></tr><tr><th>Deixe em branco p/ completo</th><tr></thead><tbody><tr><td class='input-field'><input type='text' class='validate' id='nome'  name='reportParameter1'><label for='nome'>Nome</label></td></tr><tr><td class='input-field'><input type='text'></td></tr><tr><td>Unidade</td><td><input type='text'></td></tr><tr><td>Valor</td><td><input type='text'></td></tr>";
