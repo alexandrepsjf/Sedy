@@ -5,60 +5,82 @@
  */
 package model;
 
-import dao.NivelDAO;
 import java.io.Serializable;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.Objects;
+import java.util.Collection;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Sujajeb
+ * @author asus note
  */
 @Entity
-public class Nivel implements Serializable{
-private static final long serialVersionUID = 1L;
-   @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-     private Long id;
-    private String nome;
-    private int configuracao;
-    private int usuario;
-    private int nivel;
-    private int produto;
-    private int relatorio;
-    private int formaPagamento;
-    private int ligacaoRecebida;
-    private int pedido;
-    private int cliente;
+@Table(name = "nivel")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Nivel.findAll", query = "SELECT n FROM Nivel n"),
+    @NamedQuery(name = "Nivel.findById", query = "SELECT n FROM Nivel n WHERE n.id = :id"),
+    @NamedQuery(name = "Nivel.findByNome", query = "SELECT n FROM Nivel n WHERE n.nome = :nome"),
+    @NamedQuery(name = "Nivel.findByConfiguracao", query = "SELECT n FROM Nivel n WHERE n.configuracao = :configuracao"),
+    @NamedQuery(name = "Nivel.findByUsuario", query = "SELECT n FROM Nivel n WHERE n.usuario = :usuario"),
+    @NamedQuery(name = "Nivel.findByNivel", query = "SELECT n FROM Nivel n WHERE n.nivel = :nivel"),
+    @NamedQuery(name = "Nivel.findByProduto", query = "SELECT n FROM Nivel n WHERE n.produto = :produto"),
+    @NamedQuery(name = "Nivel.findByRelatorio", query = "SELECT n FROM Nivel n WHERE n.relatorio = :relatorio"),
+    @NamedQuery(name = "Nivel.findByFormaPgm", query = "SELECT n FROM Nivel n WHERE n.formaPgm = :formaPgm"),
+    @NamedQuery(name = "Nivel.findByLigacaoRecebida", query = "SELECT n FROM Nivel n WHERE n.ligacaoRecebida = :ligacaoRecebida"),
+    @NamedQuery(name = "Nivel.findByPedido", query = "SELECT n FROM Nivel n WHERE n.pedido = :pedido"),
+    @NamedQuery(name = "Nivel.findByCliente", query = "SELECT n FROM Nivel n WHERE n.cliente = :cliente")})
+public class Nivel implements Serializable {
 
-    public Nivel(Long id, String nome, int configuracao, int usuario, int nivel, int produto, int relatorio, int formaPagamento, int ligacaoRecebida, int pedido, int cliente) {
-        this.id = id;
-        this.nome = nome;
-        this.configuracao = configuracao;
-        this.usuario = usuario;
-        this.nivel = nivel;
-        this.produto = produto;
-        this.relatorio = relatorio;
-        this.formaPagamento = formaPagamento;
-        this.ligacaoRecebida = ligacaoRecebida;
-        this.pedido = pedido;
-        this.cliente = cliente;
-    }
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
+    @Column(name = "NOME")
+    private String nome;
+    @Column(name = "CONFIGURACAO")
+    private Boolean configuracao;
+    @Column(name = "USUARIO")
+    private Boolean usuario;
+    @Column(name = "NIVEL")
+    private Boolean nivel;
+    @Column(name = "PRODUTO")
+    private Boolean produto;
+    @Column(name = "RELATORIO")
+    private Boolean relatorio;
+    @Column(name = "FORMA_PGM")
+    private Boolean formaPgm;
+    @Column(name = "LIGACAO_RECEBIDA")
+    private Boolean ligacaoRecebida;
+    @Column(name = "PEDIDO")
+    private Boolean pedido;
+    @Column(name = "CLIENTE")
+    private Boolean cliente;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nivelId")
+    private Collection<Usuario> usuarioCollection;
 
     public Nivel() {
-        
     }
 
-    public Long getId() {
+    public Nivel(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -70,148 +92,110 @@ private static final long serialVersionUID = 1L;
         this.nome = nome;
     }
 
-    public int getConfiguracao() {
+    public Boolean getConfiguracao() {
         return configuracao;
     }
 
-    public void setConfiguracao(int configuracao) {
+    public void setConfiguracao(Boolean configuracao) {
         this.configuracao = configuracao;
     }
 
-    public int getUsuario() {
+    public Boolean getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(int usuario) {
+    public void setUsuario(Boolean usuario) {
         this.usuario = usuario;
     }
 
-    public int getNivel() {
+    public Boolean getNivel() {
         return nivel;
     }
 
-    public void setNivel(int nivel) {
+    public void setNivel(Boolean nivel) {
         this.nivel = nivel;
     }
 
-    public int getProduto() {
+    public Boolean getProduto() {
         return produto;
     }
 
-    public void setProduto(int produto) {
+    public void setProduto(Boolean produto) {
         this.produto = produto;
     }
 
-    public int getRelatorio() {
+    public Boolean getRelatorio() {
         return relatorio;
     }
 
-    public void setRelatorio(int relatorio) {
+    public void setRelatorio(Boolean relatorio) {
         this.relatorio = relatorio;
     }
 
-    public int getFormaPagamento() {
-        return formaPagamento;
+    public Boolean getFormaPgm() {
+        return formaPgm;
     }
 
-    public void setFormaPagamento(int formaPagamento) {
-        this.formaPagamento = formaPagamento;
+    public void setFormaPgm(Boolean formaPgm) {
+        this.formaPgm = formaPgm;
     }
 
-    public int getLigacaoRecebida() {
+    public Boolean getLigacaoRecebida() {
         return ligacaoRecebida;
     }
 
-    public void setLigacaoRecebida(int ligacaoRecebida) {
+    public void setLigacaoRecebida(Boolean ligacaoRecebida) {
         this.ligacaoRecebida = ligacaoRecebida;
     }
 
-    public int getPedido() {
+    public Boolean getPedido() {
         return pedido;
     }
 
-    public void setPedido(int pedido) {
+    public void setPedido(Boolean pedido) {
         this.pedido = pedido;
     }
 
-    public int getCliente() {
+    public Boolean getCliente() {
         return cliente;
     }
 
-    public void setCliente(int cliente) {
+    public void setCliente(Boolean cliente) {
         this.cliente = cliente;
+    }
+
+    @XmlTransient
+    public Collection<Usuario> getUsuarioCollection() {
+        return usuarioCollection;
+    }
+
+    public void setUsuarioCollection(Collection<Usuario> usuarioCollection) {
+        this.usuarioCollection = usuarioCollection;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.id);
-        hash = 37 * hash + Objects.hashCode(this.nome);
-        hash = 37 * hash + this.configuracao;
-        hash = 37 * hash + this.usuario;
-        hash = 37 * hash + this.nivel;
-        hash = 37 * hash + this.produto;
-        hash = 37 * hash + this.relatorio;
-        hash = 37 * hash + this.formaPagamento;
-        hash = 37 * hash + this.ligacaoRecebida;
-        hash = 37 * hash + this.pedido;
-        hash = 37 * hash + this.cliente;
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
-    
-
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Nivel)) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Nivel other = (Nivel) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (this.configuracao != other.configuracao) {
-            return false;
-        }
-        if (this.usuario != other.usuario) {
-            return false;
-        }
-        if (this.nivel != other.nivel) {
-            return false;
-        }
-        if (this.produto != other.produto) {
-            return false;
-        }
-        if (this.relatorio != other.relatorio) {
-            return false;
-        }
-        if (this.formaPagamento != other.formaPagamento) {
-            return false;
-        }
-        if (this.ligacaoRecebida != other.ligacaoRecebida) {
-            return false;
-        }
-        if (this.pedido != other.pedido) {
-            return false;
-        }
-        if (this.cliente != other.cliente) {
-            return false;
-        }
-        if (!Objects.equals(this.nome, other.nome)) {
+        Nivel other = (Nivel) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
     }
-        
-        
-           @Override
+
+    @Override
     public String toString() {
         return "model.Nivel[ id=" + id + " ]";
     }
+    
 }

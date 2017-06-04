@@ -6,32 +6,61 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Objects;
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Alexandre
+ * @author asus note
  */
 @Entity
-public class Email implements Serializable{
+@Table(name = "email")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Email.findAll", query = "SELECT e FROM Email e"),
+    @NamedQuery(name = "Email.findById", query = "SELECT e FROM Email e WHERE e.id = :id"),
+    @NamedQuery(name = "Email.findByEmail", query = "SELECT e FROM Email e WHERE e.email = :email"),
+    @NamedQuery(name = "Email.findBySenha", query = "SELECT e FROM Email e WHERE e.senha = :senha"),
+    @NamedQuery(name = "Email.findByAutentica", query = "SELECT e FROM Email e WHERE e.autentica = :autentica"),
+    @NamedQuery(name = "Email.findByServidorSaida", query = "SELECT e FROM Email e WHERE e.servidorSaida = :servidorSaida"),
+    @NamedQuery(name = "Email.findByServidorEntrada", query = "SELECT e FROM Email e WHERE e.servidorEntrada = :servidorEntrada")})
+public class Email implements Serializable {
+
     private static final long serialVersionUID = 1L;
- @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)    
-    private Long id;
+    @Id
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
+    @Basic(optional = false)
+    @Column(name = "email")
     private String email;
+    @Basic(optional = false)
+    @Column(name = "senha")
     private String senha;
+    @Basic(optional = false)
+    @Column(name = "autentica")
     private String autentica;
+    @Basic(optional = false)
+    @Column(name = "servidorSaida")
     private String servidorSaida;
+    @Basic(optional = false)
+    @Column(name = "servidorEntrada")
     private String servidorEntrada;
 
     public Email() {
     }
 
-    public Email(Long id, String email, String senha, String autentica, String servidorSaida, String servidorEntrada) {
+    public Email(Integer id) {
+        this.id = id;
+    }
+
+    public Email(Integer id, String email, String senha, String autentica, String servidorSaida, String servidorEntrada) {
         this.id = id;
         this.email = email;
         this.senha = senha;
@@ -40,83 +69,20 @@ public class Email implements Serializable{
         this.servidorEntrada = servidorEntrada;
     }
 
-    public Email(String email, String senha) {
-        this.email = email;
-        this.senha = senha;
-        }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 61 * hash + Objects.hashCode(this.id);
-        hash = 61 * hash + Objects.hashCode(this.email);
-        hash = 61 * hash + Objects.hashCode(this.senha);
-        hash = 61 * hash + Objects.hashCode(this.autentica);
-        hash = 61 * hash + Objects.hashCode(this.servidorSaida);
-        hash = 61 * hash + Objects.hashCode(this.servidorEntrada);
-        return hash;
-    }
-
-    
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Email other = (Email) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (!Objects.equals(this.email, other.email)) {
-            return false;
-        }
-        if (!Objects.equals(this.senha, other.senha)) {
-            return false;
-        }
-        if (!Objects.equals(this.autentica, other.autentica)) {
-            return false;
-        }
-        if (!Objects.equals(this.servidorSaida, other.servidorSaida)) {
-            return false;
-        }
-        if (!Objects.equals(this.servidorEntrada, other.servidorEntrada)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Email{" + "id=" + id + ", email=" + email + ", senha=" + senha + ", autentica=" + autentica + ", servidorSaida=" + servidorSaida + ", servidorEntrada=" + servidorEntrada + '}';
-    }   
-
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
-
-   
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String emails) {
-        this.email = emails;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getSenha() {
@@ -150,7 +116,30 @@ public class Email implements Serializable{
     public void setServidorEntrada(String servidorEntrada) {
         this.servidorEntrada = servidorEntrada;
     }
-   
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Email)) {
+            return false;
+        }
+        Email other = (Email) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "model.Email[ id=" + id + " ]";
+    }
     
 }
-    

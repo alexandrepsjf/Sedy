@@ -5,57 +5,80 @@
  */
 package model;
 
-import dao.PedidoDAO;
 import java.io.Serializable;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.Objects;
+import java.util.Collection;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Sujajeb
+ * @author asus note
  */
 @Entity
+@Table(name = "pedido")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Pedido.findAll", query = "SELECT p FROM Pedido p"),
+    @NamedQuery(name = "Pedido.findById", query = "SELECT p FROM Pedido p WHERE p.id = :id"),
+    @NamedQuery(name = "Pedido.findByHora", query = "SELECT p FROM Pedido p WHERE p.hora = :hora"),
+    @NamedQuery(name = "Pedido.findByData2", query = "SELECT p FROM Pedido p WHERE p.data2 = :data2"),
+    @NamedQuery(name = "Pedido.findByTotal", query = "SELECT p FROM Pedido p WHERE p.total = :total")})
 public class Pedido implements Serializable {
-private static final long serialVersionUID = 1L;
+
+    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
+    @Basic(optional = false)
+    @Column(name = "HORA")
     private String hora;
-    private String data_2;
+    @Column(name = "DATA_2")
+    private String data2;
+    @Basic(optional = false)
+    @Column(name = "TOTAL")
     private float total;
-     @ManyToOne
-    private Cliente cliente;
-      @ManyToOne
-    private Usuario usuario;
-       @ManyToOne
-     private FormaPagamento formaPgto;
-
-    public Pedido(Long id, String hora, String data, float total, Cliente cliente, Usuario usuario, FormaPagamento formaPgto) {
-        this.id = id;
-        this.hora = hora;
-        this.data_2 = data;
-        this.total = total;
-        this.cliente = cliente;
-        this.usuario = usuario;
-        this.formaPgto = formaPgto;
-    }
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedidoId")
+    private Collection<ListaProdutos> listaProdutosCollection;
+    @JoinColumn(name = "CLIENTE_ID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Cliente clienteId;
+    @JoinColumn(name = "FORMA_PGM_ID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private FormaPgm formaPgmId;
+    @JoinColumn(name = "USUARIO_ID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Usuario usuarioId;
 
     public Pedido() {
-
     }
 
-    public Long getId() {
+    public Pedido(Integer id) {
+        this.id = id;
+    }
+
+    public Pedido(Integer id, String hora, float total) {
+        this.id = id;
+        this.hora = hora;
+        this.total = total;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -67,12 +90,12 @@ private static final long serialVersionUID = 1L;
         this.hora = hora;
     }
 
-    public String getData_2() {
-        return data_2;
+    public String getData2() {
+        return data2;
     }
 
-    public void setData_2(String data_2) {
-        this.data_2 = data_2;
+    public void setData2(String data2) {
+        this.data2 = data2;
     }
 
     public float getTotal() {
@@ -83,78 +106,62 @@ private static final long serialVersionUID = 1L;
         this.total = total;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    @XmlTransient
+    public Collection<ListaProdutos> getListaProdutosCollection() {
+        return listaProdutosCollection;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setListaProdutosCollection(Collection<ListaProdutos> listaProdutosCollection) {
+        this.listaProdutosCollection = listaProdutosCollection;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Cliente getClienteId() {
+        return clienteId;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setClienteId(Cliente clienteId) {
+        this.clienteId = clienteId;
     }
 
-    public FormaPagamento getFormaPgto() {
-        return formaPgto;
+    public FormaPgm getFormaPgmId() {
+        return formaPgmId;
     }
 
-    public void setFormaPgto(FormaPagamento formaPgto) {
-        this.formaPgto = formaPgto;
+    public void setFormaPgmId(FormaPgm formaPgmId) {
+        this.formaPgmId = formaPgmId;
+    }
+
+    public Usuario getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(Usuario usuarioId) {
+        this.usuarioId = usuarioId;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 17 * hash + Objects.hashCode(this.id);
-        hash = 17 * hash + Objects.hashCode(this.hora);
-        hash = 17 * hash + Objects.hashCode(this.data_2);
-        hash = 17 * hash + Float.floatToIntBits(this.total);
-        hash = 17 * hash + Objects.hashCode(this.cliente);
-        hash = 17 * hash + Objects.hashCode(this.usuario);
-        hash = 17 * hash + Objects.hashCode(this.formaPgto);
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Pedido)) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Pedido other = (Pedido) obj;
-        if (Float.floatToIntBits(this.total) != Float.floatToIntBits(other.total)) {
-            return false;
-        }
-        if (!Objects.equals(this.hora, other.hora)) {
-            return false;
-        }
-        if (!Objects.equals(this.data_2, other.data_2)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        if (!Objects.equals(this.cliente, other.cliente)) {
-            return false;
-        }
-        if (!Objects.equals(this.usuario, other.usuario)) {
-            return false;
-        }
-        if (!Objects.equals(this.formaPgto, other.formaPgto)) {
+        Pedido other = (Pedido) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
     }
 
-   
+    @Override
+    public String toString() {
+        return "model.Pedido[ id=" + id + " ]";
+    }
+    
 }

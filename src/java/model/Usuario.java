@@ -5,60 +5,85 @@
  */
 package model;
 
-import dao.UsuarioDAO;
 import java.io.Serializable;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.Objects;
+import java.util.Collection;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Sujajeb
+ * @author asus note
  */
 @Entity
-public class Usuario  implements Serializable{
+@Table(name = "usuario")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
+    @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id"),
+    @NamedQuery(name = "Usuario.findByUsuario", query = "SELECT u FROM Usuario u WHERE u.usuario = :usuario"),
+    @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha"),
+    @NamedQuery(name = "Usuario.findByLogin", query = "SELECT u FROM Usuario u WHERE u.login = :login")})
+public class Usuario implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String nome;
+    @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
+    @Basic(optional = false)
+    @Column(name = "USUARIO")
+    private String usuario;
+    @Basic(optional = false)
+    @Column(name = "SENHA")
     private String senha;
+    @Basic(optional = false)
+    @Column(name = "LOGIN")
     private String login;
-    @ManyToOne
-    private Nivel nivel;
-    
-
-    public Usuario(Long id, String nome, String senha, String login, Nivel nivel) {
-        this.id = id;
-        this.nome = nome;
-        this.senha = senha;
-        this.login = login;
-        this.nivel = nivel;
-      
-    }
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioId")
+    private Collection<Pedido> pedidoCollection;
+    @JoinColumn(name = "NIVEL_ID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Nivel nivelId;
 
     public Usuario() {
-    }    
+    }
 
-    public Long getId() {
+    public Usuario(Integer id) {
+        this.id = id;
+    }
+
+    public Usuario(Integer id, String usuario, String senha, String login) {
+        this.id = id;
+        this.usuario = usuario;
+        this.senha = senha;
+        this.login = login;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getSenha() {
@@ -77,60 +102,46 @@ public class Usuario  implements Serializable{
         this.login = login;
     }
 
-    public Nivel getNivel() {
-        return nivel;
+    @XmlTransient
+    public Collection<Pedido> getPedidoCollection() {
+        return pedidoCollection;
     }
 
-    public void setNivel(Nivel nivel) {
-        this.nivel = nivel;
+    public void setPedidoCollection(Collection<Pedido> pedidoCollection) {
+        this.pedidoCollection = pedidoCollection;
+    }
+
+    public Nivel getNivelId() {
+        return nivelId;
+    }
+
+    public void setNivelId(Nivel nivelId) {
+        this.nivelId = nivelId;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 23 * hash + Objects.hashCode(this.id);
-        hash = 23 * hash + Objects.hashCode(this.nome);
-        hash = 23 * hash + Objects.hashCode(this.senha);
-        hash = 23 * hash + Objects.hashCode(this.login);
-        hash = 23 * hash + Objects.hashCode(this.nivel);
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Usuario)) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Usuario other = (Usuario) obj;
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        if (!Objects.equals(this.senha, other.senha)) {
-            return false;
-        }
-        if (!Objects.equals(this.login, other.login)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        if (!Objects.equals(this.nivel, other.nivel)) {
+        Usuario other = (Usuario) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
     }
-   
-   
-    
-    
-            @Override
+
+    @Override
     public String toString() {
         return "model.Usuario[ id=" + id + " ]";
     }
+    
 }

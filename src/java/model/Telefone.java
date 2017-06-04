@@ -6,76 +6,119 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.Collection;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Sujajeb
+ * @author asus note
  */
 @Entity
+@Table(name = "telefone")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Telefone.findAll", query = "SELECT t FROM Telefone t"),
+    @NamedQuery(name = "Telefone.findById", query = "SELECT t FROM Telefone t WHERE t.id = :id"),
+    @NamedQuery(name = "Telefone.findByClienteId", query = "SELECT t FROM Telefone t WHERE t.clienteId = :clienteId"),
+    @NamedQuery(name = "Telefone.findByTelefone", query = "SELECT t FROM Telefone t WHERE t.telefone = :telefone")})
 public class Telefone implements Serializable {
+
     private static final long serialVersionUID = 1L;
-  @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String numero;
-      private Cliente cliente;
+    @Id
+    @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
+    @Basic(optional = false)
+    @Column(name = "CLIENTE_ID")
+    private int clienteId;
+    @Basic(optional = false)
+    @Column(name = "TELEFONE")
+    private String telefone;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "telefone")
+    private Cliente cliente;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "telefoneId")
+    private Collection<TelefoneHasLigacoes> telefoneHasLigacoesCollection;
 
-    public Telefone(Long id, String telefone, String numero, String cliente) {
-        this.id = id;
-        this.numero = telefone;
-
+    public Telefone() {
     }
 
-    public Telefone(String numero, String cliente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Telefone(Integer id) {
+        this.id = id;
+    }
+
+    public Telefone(Integer id, int clienteId, String telefone) {
+        this.id = id;
+        this.clienteId = clienteId;
+        this.telefone = telefone;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public int getClienteId() {
+        return clienteId;
+    }
+
+    public void setClienteId(int clienteId) {
+        this.clienteId = clienteId;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    @XmlTransient
+    public Collection<TelefoneHasLigacoes> getTelefoneHasLigacoesCollection() {
+        return telefoneHasLigacoesCollection;
+    }
+
+    public void setTelefoneHasLigacoesCollection(Collection<TelefoneHasLigacoes> telefoneHasLigacoesCollection) {
+        this.telefoneHasLigacoesCollection = telefoneHasLigacoesCollection;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 19 * hash + Objects.hashCode(this.id);
-        hash = 19 * hash + Objects.hashCode(this.numero);
-        hash = 19 * hash + Objects.hashCode(this.cliente);
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-   
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Telefone)) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Telefone other = (Telefone) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (!Objects.equals(this.numero, other.numero)) {
-            return false;
-        }
-        if (!Objects.equals(this.cliente, other.cliente)) {
+        Telefone other = (Telefone) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -83,32 +126,7 @@ public class Telefone implements Serializable {
 
     @Override
     public String toString() {
-        return "Telefone{" + "id=" + id + ", numero=" + numero + ", cliente=" + cliente + '}';
+        return "model.Telefone[ id=" + id + " ]";
     }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-   
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public Telefone() {
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public void setCliente(String cliente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-   
-
+    
 }

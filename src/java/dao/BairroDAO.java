@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
 import java.util.List;
@@ -21,16 +16,13 @@ public class BairroDAO {
 
     private BairroDAO() {
     }
-   public void salvar(Bairro bairro) {
+
+    public void salvar(Bairro bairro) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
             tx.begin();
-            if (bairro.getId() != null) {
-                em.merge(bairro);
-            } else {
-                em.persist(bairro);
-            }
+            em.persist(bairro);
             tx.commit();
         } catch (Exception e) {
             if (tx != null && tx.isActive()) {
@@ -42,7 +34,24 @@ public class BairroDAO {
         }
     }
 
-    
+    public void alterar(Bairro bairro) {
+
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            em.merge(bairro);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            PersistenceUtil.close(em);
+        }
+    }
+
     public List<Bairro> getAllBairros() {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -63,7 +72,7 @@ public class BairroDAO {
         return bairros;
     }
 
-    public Bairro getBairro(long id) {
+    public Bairro getBairro(Integer id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         Bairro bairro = null;
@@ -81,7 +90,7 @@ public class BairroDAO {
         }
         return bairro;
     }
-    
+
     public void excluir(Bairro bairro) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -97,7 +106,6 @@ public class BairroDAO {
         } finally {
             PersistenceUtil.close(em);
         }
-    }   
+    }
 
-    
 }
