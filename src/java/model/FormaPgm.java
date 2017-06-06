@@ -27,9 +27,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "forma_pgm")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "FormaPgm.findAll", query = "SELECT f FROM FormaPgm f"),
-    @NamedQuery(name = "FormaPgm.findById", query = "SELECT f FROM FormaPgm f WHERE f.id = :id"),
-    @NamedQuery(name = "FormaPgm.findByForma", query = "SELECT f FROM FormaPgm f WHERE f.forma = :forma")})
+    @NamedQuery(name = "forma_pgm.findAll", query = "SELECT f FROM FormaPgm f"),
+    @NamedQuery(name = "forma_pgm.findById", query = "SELECT f FROM FormaPgm f WHERE f.id = :id"),
+    @NamedQuery(name = "forma_pgm.findByForma", query = "SELECT f FROM FormaPgm f WHERE f.forma = :forma")})
 public class FormaPgm implements Serializable {
 
     private static final long serialVersionUID = 1L;

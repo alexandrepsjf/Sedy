@@ -68,7 +68,6 @@ public class ManterFormaPagamentoController extends HttpServlet {
         try {
             Integer id = Integer.parseInt(request.getParameter("id"));
             String formapgm = request.getParameter("forma");
-            
 
             FormaPgm forma = new FormaPgm(id, formapgm);
 
@@ -81,7 +80,7 @@ public class ManterFormaPagamentoController extends HttpServlet {
         }
     }
 
-        public void prepararEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void prepararEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
             request.setAttribute("operacao", "Editar");
@@ -97,12 +96,12 @@ public class ManterFormaPagamentoController extends HttpServlet {
             throw ex;
         }
     }
-            private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+    private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         try {
             Integer id = Integer.parseInt(request.getParameter("id"));
             String formapgm = request.getParameter("forma");
-           
 
             FormaPgm forma = new FormaPgm(id, formapgm);
 
@@ -114,7 +113,8 @@ public class ManterFormaPagamentoController extends HttpServlet {
             throw ex;
         }
     }
-                private void prepararExcluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    private void prepararExcluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
             request.setAttribute("operacao", "Excluir");
@@ -130,12 +130,12 @@ public class ManterFormaPagamentoController extends HttpServlet {
             throw ex;
         }
     }
+
     private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         try {
             Integer id = Integer.parseInt(request.getParameter("id"));
             String forma = request.getParameter("forma");
-            
 
             FormaPgm formapgm = new FormaPgm(id, forma);
 
@@ -147,4 +147,55 @@ public class ManterFormaPagamentoController extends HttpServlet {
             throw ex;
         }
     }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ManterBairroController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ManterBairroController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ManterBairroController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ManterBairroController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
 }

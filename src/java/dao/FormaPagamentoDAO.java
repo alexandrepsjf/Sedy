@@ -53,7 +53,7 @@ public class FormaPagamentoDAO {
         List<FormaPgm> formasPagamento = null;
         try {
             tx.begin();
-            TypedQuery<FormaPgm> query = em.createQuery("select f from Formapgm f", FormaPgm.class);
+            TypedQuery<FormaPgm> query = em.createQuery("select f from FormaPgm f", FormaPgm.class);
             formasPagamento = query.getResultList();
             tx.commit();
         } catch (Exception e) {
@@ -67,7 +67,7 @@ public class FormaPagamentoDAO {
         return formasPagamento;
     }
 
-    public FormaPgm getFormaPagamento(long id) {
+    public FormaPgm getFormaPagamento(int id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         FormaPgm formaPagamento = null;
