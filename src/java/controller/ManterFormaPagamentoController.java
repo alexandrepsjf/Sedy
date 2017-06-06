@@ -5,6 +5,7 @@
  */
 package controller;
 
+import dao.FormaPagamentoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -15,7 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.FormaPagamento;
+import model.FormaPgm;
 
 /**
  *
@@ -33,24 +34,117 @@ public class ManterFormaPagamentoController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
         String acao = request.getParameter("acao");
-        if (acao.equals("prepararOperacao")) {
-            prepararOperacao(request, response);
+        if (acao.equals("prepararIncluir")) {
+            prepararIncluir(request, response);
+        } else if (acao.equals("confirmarIncluir")) {
+            confirmarIncluir(request, response);
+        } else if (acao.equals("prepararEditar")) {
+            prepararEditar(request, response);
+        } else if (acao.equals("confirmarEditar")) {
+            confirmarEditar(request, response);
+        } else if (acao.equals("prepararExcluir")) {
+            prepararExcluir(request, response);
+        } else if (acao.equals("confirmarExcluir")) {
+            confirmarExcluir(request, response);
         }
-        if (acao.equals("confirmarOperacao")) {
-            confirmarOperacao(request, response);
+    }
+
+    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        try {
+            request.setAttribute("operacao", "Incluir");
+
+            RequestDispatcher view = request.getRequestDispatcher("/manterFormaspgto.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            throw ex;
         }
     }
 
-    private void prepararOperacao(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        try {
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            String formapgm = request.getParameter("forma");
+            
+
+            FormaPgm forma = new FormaPgm(id, formapgm);
+
+            FormaPagamentoDAO.getInstance().salvar(forma);
+
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaFormaPagamentoController");
+            view.forward(request, response);
+        } catch (IOException | ServletException ex) {
+            throw ex;
+        }
     }
 
-    private void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        public void prepararEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        try {
+            request.setAttribute("operacao", "Editar");
+
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            FormaPgm formapgm = FormaPagamentoDAO.getInstance().getFormaPagamento(id);
+
+            request.setAttribute("forma", formapgm);
+
+            RequestDispatcher view = request.getRequestDispatcher("/manterFormaspgto.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            throw ex;
+        }
     }
+            private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-    
+        try {
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            String formapgm = request.getParameter("forma");
+           
 
+            FormaPgm forma = new FormaPgm(id, formapgm);
+
+            FormaPagamentoDAO.getInstance().alterar(forma);
+
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaFormaPagamentoController");
+            view.forward(request, response);
+        } catch (IOException | ServletException ex) {
+            throw ex;
+        }
+    }
+                private void prepararExcluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        try {
+            request.setAttribute("operacao", "Excluir");
+
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            FormaPgm formapgm = FormaPagamentoDAO.getInstance().getFormaPagamento(id);
+
+            request.setAttribute("forma", formapgm);
+
+            RequestDispatcher view = request.getRequestDispatcher("/manterFormaspgto.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            throw ex;
+        }
+    }
+    private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        try {
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            String forma = request.getParameter("forma");
+            
+
+            FormaPgm formapgm = new FormaPgm(id, forma);
+
+            FormaPagamentoDAO.getInstance().excluir(formapgm);
+
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaFormaPagamentoController");
+            view.forward(request, response);
+        } catch (IOException | ServletException ex) {
+            throw ex;
+        }
+    }
 }

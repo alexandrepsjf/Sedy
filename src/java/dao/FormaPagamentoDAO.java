@@ -13,7 +13,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
-import model.FormaPagamento;
+import model.FormaPgm;
 
 public class FormaPagamentoDAO {
 
@@ -26,7 +26,7 @@ public class FormaPagamentoDAO {
     private FormaPagamentoDAO() {
     }
 
-    public void salvar(FormaPagamento formaPagamento) {
+    public void salvar(FormaPgm formaPagamento) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
@@ -47,13 +47,13 @@ public class FormaPagamentoDAO {
         }
     }
 
-    public List<FormaPagamento> getAllFormaPagamento() {
+    public List<FormaPgm> getAllFormaPagamento() {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
-        List<FormaPagamento> formasPagamento = null;
+        List<FormaPgm> formasPagamento = null;
         try {
             tx.begin();
-            TypedQuery<FormaPagamento> query = em.createQuery("select FormaPagamento from FormaPagamento", FormaPagamento.class);
+            TypedQuery<FormaPgm> query = em.createQuery("select f from Formapgm f", FormaPgm.class);
             formasPagamento = query.getResultList();
             tx.commit();
         } catch (Exception e) {
@@ -67,13 +67,13 @@ public class FormaPagamentoDAO {
         return formasPagamento;
     }
 
-    public FormaPagamento getFormaPagamento(long id) {
+    public FormaPgm getFormaPagamento(long id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
-        FormaPagamento formaPagamento = null;
+        FormaPgm formaPagamento = null;
         try {
             tx.begin();
-            formaPagamento = em.find(FormaPagamento.class, id);
+            formaPagamento = em.find(FormaPgm.class, id);
             tx.commit();
         } catch (Exception e) {
             if (tx != null && tx.isActive()) {
@@ -86,12 +86,29 @@ public class FormaPagamentoDAO {
         return formaPagamento;
     }
 
-    public void excluir(FormaPagamento formaPagamento) {
+    public void excluir(FormaPgm formaPagamento) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
             tx.begin();
-            em.remove(em.getReference(FormaPagamento.class, formaPagamento.getId()));
+            em.remove(em.getReference(FormaPgm.class, formaPagamento.getId()));
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            PersistenceUtil.close(em);
+        }
+    }
+        public void alterar(FormaPgm forma) {
+
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            em.merge(forma);
             tx.commit();
         } catch (Exception e) {
             if (tx != null && tx.isActive()) {

@@ -9,7 +9,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
-import model.Ligacao;
+import model.Ligacoes;
 
 public class LigacaoDAO {
 
@@ -22,7 +22,7 @@ public class LigacaoDAO {
     private LigacaoDAO() {
     }
 
-    public void salvar(Ligacao ligacao) {
+    public void salvar(Ligacoes ligacao) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
@@ -43,13 +43,13 @@ public class LigacaoDAO {
         }
     }
 
-    public List<Ligacao> getAllLigacao() {
+    public List<Ligacoes> getAllLigacao() {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
-        List<Ligacao> ligacao = null;
+        List<Ligacoes> ligacao = null;
         try {
             tx.begin();
-            TypedQuery<Ligacao> query = em.createQuery("select Ligacao from Ligacao", Ligacao.class);
+            TypedQuery<Ligacoes> query = em.createQuery("select Ligacao from Ligacao", Ligacoes.class);
             ligacao = query.getResultList();
             tx.commit();
         } catch (Exception e) {
@@ -63,13 +63,13 @@ public class LigacaoDAO {
         return ligacao;
     }
 
-    public Ligacao getLigacao(long id) {
+    public Ligacoes getLigacao(long id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
-        Ligacao ligacao = null;
+        Ligacoes ligacao = null;
         try {
             tx.begin();
-            ligacao = em.find(Ligacao.class, id);
+            ligacao = em.find(Ligacoes.class, id);
             tx.commit();
         } catch (Exception e) {
             if (tx != null && tx.isActive()) {
@@ -82,12 +82,12 @@ public class LigacaoDAO {
         return ligacao;
     }
 
-    public void excluir(Ligacao ligacao) {
+    public void excluir(Ligacoes ligacao) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
             tx.begin();
-            em.remove(em.getReference(Ligacao.class, ligacao.getId()));
+            em.remove(em.getReference(Ligacoes.class, ligacao.getId()));
             tx.commit();
         } catch (Exception e) {
             if (tx != null && tx.isActive()) {
