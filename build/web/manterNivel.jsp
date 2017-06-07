@@ -51,38 +51,62 @@ and open the template in the editor.
                 </ul>
             </div>
         </nav>
-        <h4 class=" teal-text shadowOrange center">Sistema de entregas delivery</h4>
-        <div class="center "><h3>Nivel - ${operacao}</h3>
-
-            <form action="ManterNivelController?acao=confirmar${operacao}"  method="post" name="frmManterNivel" onsubmit="return validarFormulario(this)">
-                <table class=" highlight ">            
-                    <tr class=" ">
-                        <td class='input-field '> <input type="text" class='validate' name="id" id="id" value="${nivel.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>><label for='id'>Id</label></td>
-                        </tr>
-                        <tr>
-                            <td class='input-field'><input type="text"  class='validate' name="nome" id="nome" value="${nivel.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>><label for='nome'>Nome</label></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" id="1" name="nivel" value="${nivel.nivel}" <c:if test="${operacao == 'Excluir'}"> disabled</c:if> ><label for="1">NIVEL</label></td>
-                        <td> <input type="checkbox" id="2" name="relatorio" value="${nivel.relatorio}" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>><label for="2">RELATORIO</label></td>
-                        <td><input checked   type="checkbox" id="3" name="ligacaoRecebida" value="${nivel.ligacaoRecebida}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>><label for="3">LIGACAO RECEBIDA</label> </td>
-                        </tr>
-                        <tr> 
-                            <td><input type="checkbox" id="4" name="configuracao" value="${nivel.configuracao}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>><label for="4">CONFIGURACAO</label></td>
-                        <td> <input type="checkbox" id="5" name="usuario" value="${nivel.usuario}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>><label for="5">USUARIO</label></td>
-                        <td><input checked   type="checkbox" id="6" name="pedido" value="${nivel.pedido}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>><label for="6">PEDIDO</label></td>
-                        </tr>
-                        <tr><td><input  type="checkbox" name="produto" id="7" value="${nivel.produto}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>><label for="7">PRODUTOS</label></td>
-                        <td> <input c type="checkbox" name="formaPagamento" id="8" value="${nivel.forma_pgm}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>><label for="8">FORMAS DE PAGTO</label></td>
-                        <td><input checked="checked"   type="checkbox" name="cliente" id="9" value="${nivel.cliente}" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>><label for="9">CLIENTES</label></td>
-                    </tr>
-                </table>
-                <div class="input-field col s12 btn waves-effect waves-light">
-                    <input id="submit" type="submit" class="submit" name="btnIncluir" value="Incluir">                 
-                    <i class="material-icons right">send</i>
-                </div>
+        <div class="center"><h4 class=" teal-text shadowOrange ">Sistema de entregas delivery</h4>
+        <h3>Nivel - ${operacao}</h3></div>
+            <div class=" row ">
+                <form action="ManterNivelController?acao=confirmar${operacao}"  method="post" name="frmManterNivel" onsubmit="return validarFormulario(this)">
+                    <div class="row ">
+                        <div class='input-field col l6 push-l3'> <input type="text" class='validate' name="id" id="id" value="${nivel.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>><label for='id'>Id</label>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class='input-field col l6 push-l3'> <input type="text"  class='validate' name="nome" id="nome" value="${nivel.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>><label for='nome'>Nome</label>
+                            </div> 
+                        </div>
+                        <div class=" ">
+                            <div class='input-field col l4'> <input type="checkbox" id="1" name="nivel" value="${nivel.nivel}" <c:if test="${operacao == 'Excluir'}"> disabled</c:if> ><label for="1">NIVEL</label>
+                            </div>
+                        </div>
+                        <div class="  ">
+                            <div class='input-field col l4'>  <input type="checkbox" id="2" name="relatorio" value="${nivel.relatorio}" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>><label for="2">RELATORIO</label>
+                            </div>
+                        </div>
+                        <div class="   ">
+                            <div class='input-field col l4'> <input checked   type="checkbox" id="3" name="ligacaoRecebida" value="${nivel.ligacaoRecebida}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>><label for="3">LIGACAO RECEBIDA</label>
+                            </div>
+                        </div>
+                        <div class=" ">
+                            <div class='input-field col l4'> <input type="checkbox" id="4" name="configuracao" value="${nivel.configuracao}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>><label for="4">CONFIGURACAO</label>
+                            </div>
+                        </div>
+                        <div class="  ">
+                            <div class='input-field col l4'>  <input type="checkbox" id="5" name="usuario" value="${nivel.usuario}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>><label for="5">USUARIO</label>
+                            </div>
+                        </div>
+                        <div class="   ">
+                            <div class='input-field col l4'> <input checked   type="checkbox" id="6" name="pedido" value="${nivel.pedido}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>><label for="6">PEDIDO</label>
+                            </div> 
+                        </div>
+                        <div class=" ">
+                            <div class='input-field col l4'> <input  type="checkbox" name="produto" id="7" value="${nivel.produto}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>><label for="7">PRODUTOS</label>
+                            </div>
+                        </div>
+                        <div class="  ">
+                            <div class='input-field col l4'> <input c type="checkbox" name="formaPagamento" id="8" value="${nivel.forma_pgm}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>><label for="8">FORMAS DE PAGTO</label>
+                            </div>
+                        </div>
+                        <div class="   ">
+                            <div class='input-field col l4'><input checked="checked"   type="checkbox" name="cliente" id="9" value="${nivel.cliente}" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>><label for="9">CLIENTES</label>
+                        </div> 
+                    </div>                                       
+                </form>
+                        <div class=" col l2 push-l10 btn waves-effect waves-light">
+                        <input id="submit" type="submit" class="submit" name="btnIncluir" value="Incluir">                 
+                        <i class="material-icons right">send</i>
+                    </div>
+      
         </div>
-    </form>
+   
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
