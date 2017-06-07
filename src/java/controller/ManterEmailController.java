@@ -10,86 +10,134 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Email;
 
-
 public class ManterEmailController extends HttpServlet {
 
-    
     private Email email;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String acao = request.getParameter("acao");
-        if (acao.equals("prepararOperacao")) {
-            prepararOperacao(request, response);
+        if (acao.equals("prepararIncluir")) {
+            prepararIncluir(request, response);
+        } else if (acao.equals("confirmarIncluir")) {
+            confirmarIncluir(request, response);
+        } else if (acao.equals("prepararEditar")) {
+            prepararEditar(request, response);
+        } else if (acao.equals("confirmarEditar")) {
+            confirmarEditar(request, response);
+        } else if (acao.equals("prepararExcluir")) {
+            prepararExcluir(request, response);
+        } else if (acao.equals("confirmarExcluir")) {
+            confirmarExcluir(request, response);
         }
-        if (acao.equals("confirmarOperacao")) {
-            confirmarOperacao(request, response);
-        }
-
     }
 
-    public void prepararOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         try {
-            String operacao = request.getParameter("operacao");
-            request.setAttribute("operacao", operacao);
-            if (!operacao.equals("incluir")) {
-                long id = Long.parseLong(request.getParameter("id"));
-                email = EmailDAO.getInstance().getEmail(id);
-                request.setAttribute("emails", email);
-            }
+            request.setAttribute("operacao", "Incluir");
             RequestDispatcher view = request.getRequestDispatcher("/manterEmail.jsp");
             view.forward(request, response);
-        } catch (ServletException e) {
-            throw e;
-        } catch (IOException e) {
-            throw new ServletException(e);
+        } catch (ServletException | IOException ex) {
+            throw ex;
         }
-
     }
 
-    public void confirmarOperacao(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
         try {
-            String operacao = request.getParameter("operacao");
-            String emailParam = request.getParameter("email");
+            Integer id = Integer.parseInt(request.getParameter("id"));
             String senha = request.getParameter("senha");
-            if (operacao.equals("incluir")) {
-                email = new Email(emailParam, senha);
-                EmailDAO.getInstance().salvar(email);
-            } else if (operacao.equals("editar")) {
-                email.setEmail(emailParam);
-                email.setSenha(senha);
-                EmailDAO.getInstance().salvar(email);
-            } else if (operacao.equals("excluir")) {
-                EmailDAO.getInstance().excluir(email);
-            }
-            RequestDispatcher view = request.getRequestDispatcher("PesquisarEmailController");
+            String emailParam = request.getParameter("email");
+            String autentica = request.getParameter("autentica");
+            String servidorSaida = request.getParameter("servidorSaida");
+            String servidorEntrada = request.getParameter("servidorEntrada");
+            email = new Email(id, emailParam, senha, autentica, servidorSaida, servidorEntrada);
+            EmailDAO.getInstance().salvar(email);
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaEmailController");
             view.forward(request, response);
-
-        } catch (ServletException e) {
-            throw e;
-        } catch (IOException e) {
-            throw new ServletException(e);
+        } catch (IOException | ServletException ex) {
+            throw ex;
         }
     }
+    
 
- 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-  
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
- 
     @Override
     public String getServletInfo() {
         return "Short description";
+    }
+
+    private void prepararEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        try {
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            email = EmailDAO.getInstance().getEmail(id);
+            request.setAttribute("email", email);
+            request.setAttribute("operacao", "Incluir");
+            RequestDispatcher view = request.getRequestDispatcher("/manterEmail.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            throw ex;
+        }
+    }
+
+    private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            String senha = request.getParameter("senha");
+            String emailParam = request.getParameter("email");
+            String autentica = request.getParameter("autentica");
+            String servidorSaida = request.getParameter("servidorSaida");
+            String servidorEntrada = request.getParameter("servidorEntrada");
+            email = new Email(id, emailParam, senha, autentica, servidorSaida, servidorEntrada);
+            EmailDAO.getInstance().alterar(email);
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaNivelController");
+            view.forward(request, response);
+        } catch (IOException | ServletException ex) {
+            throw ex;
+        }
+    }
+
+    private void prepararExcluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            email = EmailDAO.getInstance().getEmail(id);
+            request.setAttribute("email", email);
+            request.setAttribute("operacao", "Incluir");
+            RequestDispatcher view = request.getRequestDispatcher("/manterNivel.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            throw ex;
+        }
+    }
+
+    private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        try {
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            String senha = request.getParameter("senha");
+            String emailParam = request.getParameter("email");
+            String autentica = request.getParameter("autentica");
+            String servidorSaida = request.getParameter("servidorSaida");
+            String servidorEntrada = request.getParameter("servidorEntrada");
+            email = new Email(id, emailParam, senha, autentica, servidorSaida, servidorEntrada);
+            EmailDAO.getInstance().excluir(email);
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaNivelController");
+            view.forward(request, response);
+        } catch (IOException | ServletException ex) {
+            throw ex;
+        }
     }
 
 }

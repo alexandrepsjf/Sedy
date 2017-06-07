@@ -69,6 +69,7 @@ public class Email implements Serializable {
         this.servidorEntrada = servidorEntrada;
     }
 
+   
     public Integer getId() {
         return id;
     }

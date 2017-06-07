@@ -25,7 +25,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="css.css">
     </head>
     <body onLoad="checkbox()">
-         <nav class="nav-extended teal lighten-3">
+        <nav class="nav-extended teal lighten-3">
             <div class="nav-wrapper">
                 <a href="ManterInicio" class=" brand-logo center mylogo shadowOrange blue-text tooltipped" data-position="bottom" data-delay="50"
                    data-tooltip="HOME">SEDY</a>
@@ -52,84 +52,90 @@ and open the template in the editor.
             </div>
         </nav>
         <h4 class=" teal-text shadowOrange center">Sistema de entregas delivery</h4>
-        <div class="center "><h3>Nivel - ${operacao}</h3></div>
-        
-        <form action="ManterNivelController?acao=confirmar${operacao}" method="post" name="frmManterNivel" onsubmit="return validarFormulario(this)">
-            <table class=" highlight centered">            
-                <tr>
-                    <td> COD. NÍVEL </td><td><input type="text"  name="id" value="${nivel.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
+        <div class="center "><h3>Nivel - ${operacao}</h3>
+
+            <form action="ManterNivelController?acao=confirmar${operacao}"  method="post" name="frmManterNivel" onsubmit="return validarFormulario(this)">
+                <table class=" highlight ">            
+                    <tr class=" ">
+                        <td class='input-field '> <input type="text" class='validate' name="id" id="id" value="${nivel.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>><label for='id'>Id</label></td>
+                        </tr>
+                        <tr>
+                            <td class='input-field'><input type="text"  class='validate' name="nome" id="nome" value="${nivel.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>><label for='nome'>Nome</label></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" id="1" name="nivel" value="${nivel.nivel}" <c:if test="${operacao == 'Excluir'}"> disabled</c:if> ><label for="1">NIVEL</label></td>
+                        <td> <input type="checkbox" id="2" name="relatorio" value="${nivel.relatorio}" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>><label for="2">RELATORIO</label></td>
+                        <td><input checked   type="checkbox" id="3" name="ligacaoRecebida" value="${nivel.ligacaoRecebida}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>><label for="3">LIGACAO RECEBIDA</label> </td>
+                        </tr>
+                        <tr> 
+                            <td><input type="checkbox" id="4" name="configuracao" value="${nivel.configuracao}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>><label for="4">CONFIGURACAO</label></td>
+                        <td> <input type="checkbox" id="5" name="usuario" value="${nivel.usuario}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>><label for="5">USUARIO</label></td>
+                        <td><input checked   type="checkbox" id="6" name="pedido" value="${nivel.pedido}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>><label for="6">PEDIDO</label></td>
+                        </tr>
+                        <tr><td><input  type="checkbox" name="produto" id="7" value="${nivel.produto}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>><label for="7">PRODUTOS</label></td>
+                        <td> <input c type="checkbox" name="formaPagamento" id="8" value="${nivel.forma_pgm}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>><label for="8">FORMAS DE PAGTO</label></td>
+                        <td><input checked="checked"   type="checkbox" name="cliente" id="9" value="${nivel.cliente}" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>><label for="9">CLIENTES</label></td>
                     </tr>
-                    <tr>
-                        <td > NOME DO NÍVEL</td><td><input type="text"   name="nome"  value="${nivel.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" id="1" name="nivel" value="${nivel.nivel}" <c:if test="${operacao == 'Excluir'}"> disabled</c:if> >NIVEL</td>
-                    <td> <input type="checkbox" id="2" name="relatorio" value="${nivel.relatorio}" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>RELATORIO</td>
-                    <td><input checked   type="checkbox" id="3" name="ligacaoRecebida" value="${nivel.ligacaoRecebida}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>LIGACAO RECEBIDA</td>
-                    </tr>
-                    <tr> 
-                        <td><input type="checkbox" id="4" name="configuracao" value="${nivel.configuracao}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>CONFIGURACAO</td>
-                    <td> <input type="checkbox" id="5" name="usuario" value="${nivel.usuario}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>USUARIO</td>
-                    <td><input checked   type="checkbox" id="6" name="pedido" value="${nivel.pedido}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>PEDIDO</td>
-                    </tr>
-                    <tr><td><input  type="checkbox" name="produto" id="7" value="${nivel.produto}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>PRODUTOS</td>
-                    <td> <input c type="checkbox" name="formaPagamento" id="8" value="${nivel.forma_pgm}"<c:if test="${operacao == 'Excluir'}"> disabled</c:if>>FORMAS DE PAGTO</td>
-                    <td><input checked   type="checkbox" name="cliente" id="9" value="${nivel.cliente}" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>CLIENTES</td>
-                </tr>
-            </table>
-            <div class="footer">
-                <button  type="submit" >Confirmar</button>
-            </div>
-        </form>
-        <div class="logoSearch">            
-        </div>        </form>
+                </table>
+                <div class="input-field col s12 btn waves-effect waves-light">
+                    <input id="submit" type="submit" class="submit" name="btnIncluir" value="Incluir">                 
+                    <i class="material-icons right">send</i>
+                </div>
+        </div>
+    </form>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <!--js extra-->
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript"></script>
     <SCRIPT language="JavaScript">
 
-        function checkbox() {
-            for (x = 1; x <= 9; x++) {
-                var valor = document.getElementById(x);
-                alert(valor.value);
-                if (valor.value) {
-                    alert("entrei");
-                    valor.checked = true;
+                function checkbox() {
+                    for (x = 1; x <= 9; x++) {
+                        var valor = document.getElementById(x);
+                        var teste = valor.valueOf().value;
+                        if (teste === "true") {
+
+                            valor.checked = "checked";
+                        }
+                    }
                 }
-            }
-        }
-        function campoNumerico(valor)
-        {
-            var caracteresValidos = "0123456789";
-            var ehNumero = true;
-            var umCaracter;
-            for (i = 0; i < valor.length && ehNumero == true; i++)
-            {
-                umCaracter = valor.charAt(i);
-                if (caracteresValidos.indexOf(umCaracter) == -1)
+                function campoNumerico(valor)
                 {
-                    ehNumero = false;
+                    var caracteresValidos = "0123456789";
+                    var ehNumero = true;
+                    var umCaracter;
+                    for (i = 0; i < valor.length && ehNumero == true; i++)
+                    {
+                        umCaracter = valor.charAt(i);
+                        if (caracteresValidos.indexOf(umCaracter) == -1)
+                        {
+                            ehNumero = false;
+                        }
+                    }
+                    return ehNumero;
                 }
-            }
-            return ehNumero;
-        }
 
-        function validarFormulario(form) {
-            var mensagem;
-            mensagem = "";
-            if (form.id.value == "") {
-                mensagem = mensagem + "Informe o Código do Nivel\n";
-            }
+                function validarFormulario(form) {
+                    var mensagem;
+                    mensagem = "";
+                    if (form.id.value == "") {
+                        mensagem = mensagem + "Informe o Código do Nivel\n";
+                    }
 
-            if (!campoNumerico(form.id.value)) {
-                mensagem = mensagem + "Código do Nivel deve ser numérico\n";
-            }
+                    if (!campoNumerico(form.id.value)) {
+                        mensagem = mensagem + "Código do Nivel deve ser numérico\n";
+                    }
 
-            if (mensagem == "") {
-                return true;
-            } else {
-                alert(mensagem);
-                return false;
-            }
+                    if (mensagem == "") {
+                        return true;
+                    } else {
+                        alert(mensagem);
+                        return false;
+                    }
 
-        }
+                }
 
     </SCRIPT>            
 </body>

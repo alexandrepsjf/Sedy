@@ -21,7 +21,8 @@ public class EmailDAO {
 
     private EmailDAO() {
     }
-   public void salvar(Email email) {
+
+    public void salvar(Email email) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
@@ -42,14 +43,13 @@ public class EmailDAO {
         }
     }
 
-    
     public List<Email> getAllEmails() {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         List<Email> emails = null;
         try {
             tx.begin();
-            TypedQuery<Email> query = em.createQuery("select Email from Email", Email.class);
+            TypedQuery<Email> query = em.createQuery("select e  from Email e", Email.class);
             emails = query.getResultList();
             tx.commit();
         } catch (Exception e) {
@@ -63,7 +63,7 @@ public class EmailDAO {
         return emails;
     }
 
-    public Email getEmail(long id) {
+    public Email getEmail(Integer id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         Email email = null;
@@ -81,7 +81,7 @@ public class EmailDAO {
         }
         return email;
     }
-    
+
     public void excluir(Email email) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -97,5 +97,22 @@ public class EmailDAO {
         } finally {
             PersistenceUtil.close(em);
         }
-    }   
+    }
+
+    public void alterar(Email email) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            em.merge(email);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            PersistenceUtil.close(em);
+        }
+    }
 }
