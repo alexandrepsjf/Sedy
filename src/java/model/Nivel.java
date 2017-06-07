@@ -27,17 +27,28 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "nivel")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Nivel.findAll", query = "SELECT n FROM Nivel n"),
-    @NamedQuery(name = "Nivel.findById", query = "SELECT n FROM Nivel n WHERE n.id = :id"),
-    @NamedQuery(name = "Nivel.findByNome", query = "SELECT n FROM Nivel n WHERE n.nome = :nome"),
-    @NamedQuery(name = "Nivel.findByConfiguracao", query = "SELECT n FROM Nivel n WHERE n.configuracao = :configuracao"),
-    @NamedQuery(name = "Nivel.findByUsuario", query = "SELECT n FROM Nivel n WHERE n.usuario = :usuario"),
-    @NamedQuery(name = "Nivel.findByNivel", query = "SELECT n FROM Nivel n WHERE n.nivel = :nivel"),
-    @NamedQuery(name = "Nivel.findByProduto", query = "SELECT n FROM Nivel n WHERE n.produto = :produto"),
-    @NamedQuery(name = "Nivel.findByRelatorio", query = "SELECT n FROM Nivel n WHERE n.relatorio = :relatorio"),
-    @NamedQuery(name = "Nivel.findByFormaPgm", query = "SELECT n FROM Nivel n WHERE n.formaPgm = :formaPgm"),
-    @NamedQuery(name = "Nivel.findByLigacaoRecebida", query = "SELECT n FROM Nivel n WHERE n.ligacaoRecebida = :ligacaoRecebida"),
-    @NamedQuery(name = "Nivel.findByPedido", query = "SELECT n FROM Nivel n WHERE n.pedido = :pedido"),
+    @NamedQuery(name = "Nivel.findAll", query = "SELECT n FROM Nivel n")
+    ,
+    @NamedQuery(name = "Nivel.findById", query = "SELECT n FROM Nivel n WHERE n.id = :id")
+    ,
+    @NamedQuery(name = "Nivel.findByNome", query = "SELECT n FROM Nivel n WHERE n.nome = :nome")
+    ,
+    @NamedQuery(name = "Nivel.findByConfiguracao", query = "SELECT n FROM Nivel n WHERE n.configuracao = :configuracao")
+    ,
+    @NamedQuery(name = "Nivel.findByUsuario", query = "SELECT n FROM Nivel n WHERE n.usuario = :usuario")
+    ,
+    @NamedQuery(name = "Nivel.findByNivel", query = "SELECT n FROM Nivel n WHERE n.nivel = :nivel")
+    ,
+    @NamedQuery(name = "Nivel.findByProduto", query = "SELECT n FROM Nivel n WHERE n.produto = :produto")
+    ,
+    @NamedQuery(name = "Nivel.findByRelatorio", query = "SELECT n FROM Nivel n WHERE n.relatorio = :relatorio")
+    ,
+    @NamedQuery(name = "Nivel.findByFormaPgm", query = "SELECT n FROM Nivel n WHERE n.forma_pgm = :forma_pgm")
+    ,
+    @NamedQuery(name = "Nivel.findByLigacaoRecebida", query = "SELECT n FROM Nivel n WHERE n.ligacaoRecebida = :ligacaoRecebida")
+    ,
+    @NamedQuery(name = "Nivel.findByPedido", query = "SELECT n FROM Nivel n WHERE n.pedido = :pedido")
+    ,
     @NamedQuery(name = "Nivel.findByCliente", query = "SELECT n FROM Nivel n WHERE n.cliente = :cliente")})
 public class Nivel implements Serializable {
 
@@ -59,7 +70,7 @@ public class Nivel implements Serializable {
     @Column(name = "RELATORIO")
     private Boolean relatorio;
     @Column(name = "FORMA_PGM")
-    private Boolean formaPgm;
+    private Boolean forma_pgm;
     @Column(name = "LIGACAO_RECEBIDA")
     private Boolean ligacaoRecebida;
     @Column(name = "PEDIDO")
@@ -74,6 +85,20 @@ public class Nivel implements Serializable {
 
     public Nivel(Integer id) {
         this.id = id;
+    }
+
+    public Nivel(Integer id, String nome, int configuracao, int usuario, int checkNivel, int produto, int relatorio, int forma_pgm, int ligacaoRecebida, int pedido, int cliente) {
+        this.nome = nome;
+        this.id=id;
+        this.cliente = (cliente == 1);
+        this.configuracao = (configuracao == 1);
+        this.forma_pgm = (forma_pgm == 1);
+        this.ligacaoRecebida = (ligacaoRecebida == 1);
+        this.nivel = (checkNivel == 1);
+        this.pedido = (pedido == 1);
+        this.produto = (produto == 1);
+        this.relatorio = (relatorio == 1);
+        this.usuario = (usuario == 1);
     }
 
     public Integer getId() {
@@ -132,12 +157,12 @@ public class Nivel implements Serializable {
         this.relatorio = relatorio;
     }
 
-    public Boolean getFormaPgm() {
-        return formaPgm;
+    public Boolean getForma_pgm() {
+        return forma_pgm;
     }
 
-    public void setFormaPgm(Boolean formaPgm) {
-        this.formaPgm = formaPgm;
+    public void setForma_pgm(Boolean forma_pgm) {
+        this.forma_pgm = forma_pgm;
     }
 
     public Boolean getLigacaoRecebida() {
@@ -197,5 +222,5 @@ public class Nivel implements Serializable {
     public String toString() {
         return "model.Nivel[ id=" + id + " ]";
     }
-    
+
 }

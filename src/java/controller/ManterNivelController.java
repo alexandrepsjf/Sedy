@@ -5,9 +5,11 @@
  */
 package controller;
 
+import dao.NivelDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,17 +33,245 @@ public class ManterNivelController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-         String acao = request.getParameter("acao");
-        if (acao.equals("prepararOperacao")) {
-            prepararOperacao(request, response);
-        }
-        if (acao.equals("confirmarOperacao")) {
-            confirmarOperacao(request, response);
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
+        String acao = request.getParameter("acao");
+        if (acao.equals("prepararIncluir")) {
+            prepararIncluir(request, response);
+        } else if (acao.equals("confirmarIncluir")) {
+            confirmarIncluir(request, response);
+        } else if (acao.equals("prepararEditar")) {
+            prepararEditar(request, response);
+        } else if (acao.equals("confirmarEditar")) {
+            confirmarEditar(request, response);
+        } else if (acao.equals("prepararExcluir")) {
+            prepararExcluir(request, response);
+        } else if (acao.equals("confirmarExcluir")) {
+            confirmarExcluir(request, response);
         }
     }
 
-    
+    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        try {
+            request.setAttribute("operacao", "Incluir");
+            RequestDispatcher view = request.getRequestDispatcher("/manterNivel.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            throw ex;
+        }
+    }
+
+    private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        try {
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            String nome = request.getParameter("nome");
+            int checkNivel, cliente, pedido, ligacaoRecebida, configuracao, usuario, relatorio, forma_pgm, produto;
+            if (request.getParameter("nivel") == null) {
+                checkNivel = 0;
+            } else {
+                checkNivel = 1;
+            }
+            if (request.getParameter("cliente") == null) {
+                cliente = 0;
+            } else {
+                cliente = 1;
+            }
+            if (request.getParameter("pedido") == null) {
+                pedido = 0;
+            } else {
+                pedido = 1;
+            }
+            if (request.getParameter("ligacaoRecebida") == null) {
+                ligacaoRecebida = 0;
+            } else {
+                ligacaoRecebida = 1;
+            }
+            if (request.getParameter("configuracao") == null) {
+                configuracao = 0;
+            } else {
+                configuracao = 1;
+            }
+            if (request.getParameter("usuario") == null) {
+                usuario = 0;
+            } else {
+                usuario = 1;
+            }
+            if (request.getParameter("relatorio") == null) {
+                relatorio = 0;
+            } else {
+                relatorio = 1;
+            }
+            if (request.getParameter("formaPagamento") == null) {
+                forma_pgm = 0;
+            } else {
+                forma_pgm = 1;
+            }
+            if (request.getParameter("produto") == null) {
+                produto = 0;
+            } else {
+                produto = 1;
+            }
+            Nivel nivel = new Nivel(id, nome, configuracao, usuario, checkNivel, produto, relatorio, forma_pgm, ligacaoRecebida, pedido, cliente);
+            NivelDAO.getInstance().salvar(nivel);
+
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaNivelController");
+            view.forward(request, response);
+        } catch (IOException | ServletException ex) {
+            throw ex;
+        }
+    }
+
+    public void prepararEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        try {
+            request.setAttribute("operacao", "Editar");
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            Nivel nivel = NivelDAO.getInstance().getNivel(id);
+            request.setAttribute("nivel", nivel);
+            RequestDispatcher view = request.getRequestDispatcher("/manterNivel.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            throw ex;
+        }
+    }
+
+    private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        try {
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            String nome = request.getParameter("nome");
+             String test = request.getParameter("nivel");
+            int checkNivel, cliente, pedido, ligacaoRecebida, configuracao, usuario, relatorio, forma_pgm, produto;
+            if (request.getParameter("nivel") == null) {
+                checkNivel = 0;
+            } else {
+                checkNivel = 1;
+            }
+            if (request.getParameter("cliente") == null) {
+                cliente = 0;
+            } else {
+                cliente = 1;
+            }
+            if (request.getParameter("pedido") == null) {
+                pedido = 0;
+            } else {
+                pedido = 1;
+            }
+            if (request.getParameter("ligacaoRecebida") == null) {
+                ligacaoRecebida = 0;
+            } else {
+                ligacaoRecebida = 1;
+            }
+            if (request.getParameter("configuracao") == null) {
+                configuracao = 0;
+            } else {
+                configuracao = 1;
+            }
+            if (request.getParameter("usuario") == null) {
+                usuario = 0;
+            } else {
+                usuario = 1;
+            }
+            if (request.getParameter("relatorio") == null) {
+                relatorio = 0;
+            } else {
+                relatorio = 1;
+            }
+            if (request.getParameter("formaPagamento") == null) {
+                forma_pgm = 0;
+            } else {
+                forma_pgm = 1;
+            }
+            if (request.getParameter("produto") == null) {
+                produto = 0;
+            } else {
+                produto = 1;
+            }
+            Nivel nivel = new Nivel(id, nome, configuracao, usuario, checkNivel, produto, relatorio, forma_pgm, ligacaoRecebida, pedido, cliente);
+            NivelDAO.getInstance().alterar(nivel);
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaNivelController");
+            view.forward(request, response);
+        } catch (IOException | ServletException ex) {
+            throw ex;
+        }
+    }
+
+    private void prepararExcluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        try {
+            request.setAttribute("operacao", "Excluir");
+
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            Nivel nivel = NivelDAO.getInstance().getNivel(id);
+            request.setAttribute("nivel", nivel);
+            RequestDispatcher view = request.getRequestDispatcher("/manterNivel.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            throw ex;
+        }
+    }
+
+    private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        try {
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            String nome = request.getParameter("nome");
+            int checkNivel, cliente, pedido, ligacaoRecebida, configuracao, usuario, relatorio, forma_pgm, produto;
+           
+            if (request.getParameter("nivel") == null) {
+                checkNivel = 1;
+            } else {
+                checkNivel = 0;
+            }
+            if (request.getParameter("cliente") == null) {
+                cliente = 0;
+            } else {
+                cliente = 1;
+            }
+            if (request.getParameter("pedido") == null) {
+                pedido = 0;
+            } else {
+                pedido = 1;
+            }
+            if (request.getParameter("ligacaoRecebida") == null) {
+                ligacaoRecebida = 0;
+            } else {
+                ligacaoRecebida = 1;
+            }
+            if (request.getParameter("configuracao") == null) {
+                configuracao = 0;
+            } else {
+                configuracao = 1;
+            }
+            if (request.getParameter("usuario") == null) {
+                usuario = 0;
+            } else {
+                usuario = 1;
+            }
+            if (request.getParameter("relatorio") == null) {
+                relatorio = 0;
+            } else {
+                relatorio = 1;
+            }
+            if (request.getParameter("formaPagamento") == null) {
+                forma_pgm = 0;
+            } else {
+                forma_pgm = 1;
+            }
+            if (request.getParameter("produto") == null) {
+                produto = 0;
+            } else {
+                produto = 1;
+            }
+            Nivel nivel = new Nivel(id, nome, configuracao, usuario, checkNivel, produto, relatorio, forma_pgm, ligacaoRecebida, pedido, cliente);
+            NivelDAO.getInstance().excluir(nivel);
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaNivelController");
+            view.forward(request, response);
+        } catch (IOException | ServletException ex) {
+            throw ex;
+        }
+    }
 
 //    public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
 //        int id = Integer.parseInt(request.getParameter("id"));
@@ -100,17 +330,6 @@ public class ManterNivelController extends HttpServlet {
 //        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
 //
 //        }
-
-    private void prepararOperacao(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -123,7 +342,13 @@ public class ManterNivelController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ManterNivelController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ManterNivelController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -137,7 +362,13 @@ public class ManterNivelController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ManterNivelController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ManterNivelController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -149,8 +380,6 @@ public class ManterNivelController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    
 
 //    private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
 //        int id = Integer.parseInt(request.getParameter("id"));

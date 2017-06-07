@@ -36,7 +36,6 @@ public class ManterBairroController extends HttpServlet {
 
         try {
             request.setAttribute("operacao", "Incluir");
-
             RequestDispatcher view = request.getRequestDispatcher("/manterBairros.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException ex) {

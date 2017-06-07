@@ -60,7 +60,7 @@ and open the template in the editor.
 
 
         <table class=" highlight centered">
-            <thead>  </div>
+            <thead>  
                 <tr>
                     <th>Código</th>
                     <th>Nome do Bairro</th>

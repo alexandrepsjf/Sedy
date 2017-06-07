@@ -5,12 +5,6 @@
  */
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -73,7 +67,7 @@ public class NivelDAO {
         return niveis;
     }
 
-    public Nivel getNivel(long id) {
+    public Nivel getNivel(Integer id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         Nivel nivel = null;
@@ -91,13 +85,30 @@ public class NivelDAO {
         }
         return nivel;
     }
-    
+
     public void excluir(Nivel nivel) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
             tx.begin();
             em.remove(em.getReference(Nivel.class, nivel.getId()));
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            PersistenceUtil.close(em);
+        }
+    }
+
+    public void alterar(Nivel nivel) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            em.merge(nivel);
             tx.commit();
         } catch (Exception e) {
             if (tx != null && tx.isActive()) {
