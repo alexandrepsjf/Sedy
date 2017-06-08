@@ -5,22 +5,13 @@
  */
 package controller;
 
-import dao.BairroDAO;
-import dao.ClienteDAO;
 import dao.TelefoneDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Bairro;
-import model.Cliente;
 import model.Telefone;
 
 /**
@@ -56,7 +47,7 @@ public class ManterTelefoneController extends HttpServlet {
             String operacao = request.getParameter("operacao");
             request.setAttribute("operacao", operacao);
             if (!operacao.equals("incluir")) {
-                long id = Long.parseLong(request.getParameter("id"));
+                Integer id = Integer.parseInt(request.getParameter("id"));
                 telefone = TelefoneDAO.getInstance().getTelefone(id);
                 request.setAttribute("telefone", telefone);
             }
