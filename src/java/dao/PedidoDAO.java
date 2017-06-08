@@ -48,6 +48,23 @@ private static PedidoDAO instance = new PedidoDAO();
             PersistenceUtil.close(em);
         }
     }
+    public void alterar(Pedido pedido) {
+
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            em.merge(pedido);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            PersistenceUtil.close(em);
+        }
+    }
 
     public List<Pedido> getAllPedidos() {
         EntityManager em = PersistenceUtil.getEntityManager();
