@@ -103,7 +103,7 @@ public class ManterEmailController extends HttpServlet {
             String servidorEntrada = request.getParameter("servidorEntrada");
             email = new Email(id, emailParam, senha, autentica, servidorSaida, servidorEntrada);
             EmailDAO.getInstance().alterar(email);
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaNivelController");
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaEmailController");
             view.forward(request, response);
         } catch (IOException | ServletException ex) {
             throw ex;
@@ -116,7 +116,7 @@ public class ManterEmailController extends HttpServlet {
             email = EmailDAO.getInstance().getEmail(id);
             request.setAttribute("email", email);
             request.setAttribute("operacao", "Excluir");
-            RequestDispatcher view = request.getRequestDispatcher("/manterNivel.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("/manterEmail.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
             throw ex;
@@ -133,7 +133,7 @@ public class ManterEmailController extends HttpServlet {
             String servidorEntrada = request.getParameter("servidorEntrada");
             email = new Email(id, emailParam, senha, autentica, servidorSaida, servidorEntrada);
             EmailDAO.getInstance().excluir(email);
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaNivelController");
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaEmailController");
             view.forward(request, response);
         } catch (IOException | ServletException ex) {
             throw ex;

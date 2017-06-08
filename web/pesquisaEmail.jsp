@@ -64,7 +64,7 @@ and open the template in the editor.
             <c:forEach items="${emails}" var="email">
                 <tr>
                     <td ><c:out value="${email.id}" /> </td>
-                    <td ><c:out value="${email.id}" /> </td>
+                    <td ><c:out value="${email.email}" /> </td>
                     <td ><a href="ManterEmailController?acao=prepararEditar&id=<c:out value="${email.id}"/>">Editar</a></td>
                     <td ><a href="ManterEmailController?acao=prepararExcluir&id=<c:out value="${email.id}"/>">Excluir</a></td>
                 </tr>

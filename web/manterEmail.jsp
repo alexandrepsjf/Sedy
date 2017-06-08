@@ -76,9 +76,13 @@ and open the template in the editor.
                             <div class='input-field col l6 push-l3'> <input type="text" class='validate' name="servidorSaida" id="servidorSaida" value="${email.servidorSaida}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>><label for='servidorSaida'>Servidor de saída</label>
                         </div> 
                     </div>
+                         <div class="row   ">
+                            <div class='input-field col l6 push-l3'> <input type="text" class='validate' name="servidorEntrada" id="servidorEntrada" value="${email.servidorEntrada}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>><label for='servidorEntrada'>Servidor de entrada</label>
+                        </div> 
+                    </div>
 
                     <div class=" row  col l2 push-l5 btn waves-effect waves-light">
-                        <input id="submit" type="submit" class="submit" name="btnIncluir" value="Incluir">                 
+                        <input id="submit" type="submit" class="submit" name="btnIncluir" value="Enviar">                 
                         <i class="material-icons right">send</i>
                     </div>
                 </form>
