@@ -36,6 +36,7 @@ public class ManterLigacaoController extends HttpServlet {
 
         try {
             request.setAttribute("operacao", "Incluir");
+            
             RequestDispatcher view = request.getRequestDispatcher("/manterLigacao.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException ex) {

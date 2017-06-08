@@ -47,8 +47,8 @@ public class Telefone implements Serializable {
     private String telefone;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "telefone")
     private Cliente cliente;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "telefoneId")
-    private Collection<TelefoneHasLigacoes> telefoneHasLigacoesCollection;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "telefoneId")
+//    private Collection<TelefoneHasLigacoes> telefoneHasLigacoesCollection;
 
     public Telefone() {
     }
@@ -100,14 +100,14 @@ public class Telefone implements Serializable {
         this.cliente = cliente;
     }
 
-    @XmlTransient
-    public Collection<TelefoneHasLigacoes> getTelefoneHasLigacoesCollection() {
-        return telefoneHasLigacoesCollection;
-    }
-
-    public void setTelefoneHasLigacoesCollection(Collection<TelefoneHasLigacoes> telefoneHasLigacoesCollection) {
-        this.telefoneHasLigacoesCollection = telefoneHasLigacoesCollection;
-    }
+//    @XmlTransient
+//    public Collection<TelefoneHasLigacoes> getTelefoneHasLigacoesCollection() {
+//        return telefoneHasLigacoesCollection;
+//    }
+//
+//    public void setTelefoneHasLigacoesCollection(Collection<TelefoneHasLigacoes> telefoneHasLigacoesCollection) {
+//        this.telefoneHasLigacoesCollection = telefoneHasLigacoesCollection;
+//    }
 
     @Override
     public int hashCode() {

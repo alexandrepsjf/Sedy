@@ -38,9 +38,9 @@ public class Ligacoes implements Serializable {
     @Basic(optional = false)
     @Column(name = "LIGACAO")
     private String ligacao;
-    @JoinColumn(name = "ID", referencedColumnName = "LIGACOES_ID", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private TelefoneHasLigacoes telefoneHasLigacoes;
+//    @JoinColumn(name = "ID", referencedColumnName = "LIGACOES_ID", insertable = false, updatable = false)
+//    @OneToOne(optional = false)
+//    private TelefoneHasLigacoes telefoneHasLigacoes;
 
     public Ligacoes() {
     }
@@ -70,13 +70,13 @@ public class Ligacoes implements Serializable {
         this.ligacao = ligacao;
     }
 
-    public TelefoneHasLigacoes getTelefoneHasLigacoes() {
-        return telefoneHasLigacoes;
-    }
-
-    public void setTelefoneHasLigacoes(TelefoneHasLigacoes telefoneHasLigacoes) {
-        this.telefoneHasLigacoes = telefoneHasLigacoes;
-    }
+//    public TelefoneHasLigacoes getTelefoneHasLigacoes() {
+//        return telefoneHasLigacoes;
+//    }
+//
+//    public void setTelefoneHasLigacoes(TelefoneHasLigacoes telefoneHasLigacoes) {
+//        this.telefoneHasLigacoes = telefoneHasLigacoes;
+//    }
 
     @Override
     public int hashCode() {
