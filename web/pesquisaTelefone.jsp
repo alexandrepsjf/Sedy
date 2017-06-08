@@ -64,7 +64,7 @@ and open the template in the editor.
             <c:forEach items="${telefones}" var="telefone">
                 <tr>
                     <td ><c:out value="${telefone.id}" /> </td>
-                    <td ><c:out value="${telefone.id}" /> </td>                   
+                    <td ><c:out value="${telefone.telefone}" /> </td>                   
                     <td ><a href="ManterTelefoneController?acao=prepararEditar&id=<c:out value="${telefone.id}"/>">Editar</a></td>
                     <td ><a href="ManterTelefoneController?acao=prepararExcluir&id=<c:out value="${telefone.id}"/>">Excluir</a></td>
                 </tr>
@@ -72,7 +72,7 @@ and open the template in the editor.
                  </tbody>
         </table>
        
-            <form action="ManterTelefoneController?acao=prepararOperacao&operacao=incluir" method="POST">
+            <form action="ManterTelefoneController?acao=prepararIncluir" method="POST">
                <div class="input-field col s12 btn waves-effect waves-light">
                     <input id="submit" type="submit" class="submit" name="btnIncluir" value="Incluir">                 
                     <i class="material-icons right">send</i>

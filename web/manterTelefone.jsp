@@ -22,18 +22,18 @@ and open the template in the editor.
         <form action="ManterTelefoneController?acao=confirmar${operacao}" method="post" name="frmManterTelefone" onsubmit="return validarFormulario(this)" >
             <table>            
                 <tr> 
-                    <td > COD. Telefone </td><td><input type="text" name="id" value="${telefone.id}"  <c:if test="${operacao != 'incluir'}"> readonly</c:if>></td>
+                    <td > COD. Telefone </td><td><input type="text" name="id" value="${telefone.id}"  <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                     </tr>
 
                     <tr> 
-                        <td >  Telefone </td><td><input type="text" name="numero" value="${telefone.numero}"  <c:if test="${operacao == 'excluir'}"> readonly</c:if>></td>
+                        <td >  Telefone </td><td><input type="text" name="telefone" value="${telefone.telefone}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
                         <td>CLIENTE</td><td>
-                            <select name="idCliente" id="clientes" <c:if test="${operacao != 'incluir'}"> disabled</c:if>>
+                            <select name="idCliente" id="clientes" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                                 <option value="" >Selecione</option>
                             <c:forEach  items="${clientes}" var="cliente">
-                                <option value="${cliente.id}" <c:if test="${telefone.idCliente == cliente.id}"> selected</c:if> >  ${cliente.nome} </option>
+                                <option value="${cliente.id}" <c:if test="${telefone.cliente.id == cliente.id}"> selected</c:if> >  ${cliente.nome} </option>
                             </c:forEach>
                         </select>
                 </tr>  

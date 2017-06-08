@@ -63,7 +63,7 @@ public class TelefoneDAO {
         return telefones;
     }
 
-    public Telefone getTelefone(int id) {
+    public Telefone getTelefone(Integer id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         Telefone telefone = null;
@@ -98,4 +98,20 @@ public class TelefoneDAO {
             PersistenceUtil.close(em);
         }
     }   
+
+    public void alterar(Telefone telefone) {
+ EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            em.merge(telefone);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            PersistenceUtil.close(em);
+        }    }
 }

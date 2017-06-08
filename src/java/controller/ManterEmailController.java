@@ -85,7 +85,7 @@ public class ManterEmailController extends HttpServlet {
             Integer id = Integer.parseInt(request.getParameter("id"));
             email = EmailDAO.getInstance().getEmail(id);
             request.setAttribute("email", email);
-            request.setAttribute("operacao", "Incluir");
+            request.setAttribute("operacao", "Editar");
             RequestDispatcher view = request.getRequestDispatcher("/manterEmail.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
@@ -115,7 +115,7 @@ public class ManterEmailController extends HttpServlet {
             Integer id = Integer.parseInt(request.getParameter("id"));
             email = EmailDAO.getInstance().getEmail(id);
             request.setAttribute("email", email);
-            request.setAttribute("operacao", "Incluir");
+            request.setAttribute("operacao", "Excluir");
             RequestDispatcher view = request.getRequestDispatcher("/manterNivel.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException ex) {

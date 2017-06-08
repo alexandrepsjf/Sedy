@@ -80,13 +80,9 @@ public class ManterClienteController extends HttpServlet {
             String email = request.getParameter("email");
             String referenciaEndereco = request.getParameter("referenciaEndereco");
             Integer idBairro = Integer.parseInt(request.getParameter("idBairro"));
-            Integer idTelefone = Integer.parseInt(request.getParameter("idTelefone"));
-
             Cliente cliente = new Cliente(id, nome, rua, numero, cep, dataCadastro,horaCadastro,email,referenciaEndereco);
            cliente.setBairroId(BairroDAO.getInstance().getBairro(idBairro));
-           cliente.setTelefone(TelefoneDAO.getInstance().getTelefone(idTelefone));
             ClienteDAO.getInstance().salvar(cliente);
-
             RequestDispatcher view = request.getRequestDispatcher("PesquisaClienteController");
             view.forward(request, response);
         } catch (IOException | ServletException ex) {

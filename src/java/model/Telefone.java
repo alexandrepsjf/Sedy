@@ -6,7 +6,6 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,11 +13,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -57,14 +54,9 @@ public class Telefone implements Serializable {
         this.id = id;
     }
     
-    public Telefone(String numeroTelefone , Cliente cliente) {
-        this.telefone = numeroTelefone;
-        this.cliente = cliente;
-    }
-
-    public Telefone(Integer id, int clienteId, String telefone) {
+   
+    public Telefone(Integer id,  String telefone) {
         this.id = id;
-        this.clienteId = clienteId;
         this.telefone = telefone;
     }
 

@@ -42,12 +42,7 @@ and open the template in the editor.
                         </select>
                     </td>
                 </tr>
-                <tr> 
-                    <td >${operacao} Telefone </td><td><input type="text" name="addTelefone" value="${telefone.telefone}"  <c:if test="${operacao != 'Incluir'}"> hidden </c:if>></td>
-                    </tr>
-                    <tr>
-                        <td> Id telefone</td><td><input type="text" name="addIdTelefone" value="${telefone.id}"  <c:if test="${operacao != 'Incluir'}"> hidden </c:if>></td>
-                    </tr>
+                <tr>
                     <tr> 
                         <td >Nome </td><td><input type="text" name="nome" value="${cliente.nome}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
