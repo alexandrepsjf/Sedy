@@ -63,7 +63,7 @@ public class LigacaoDAO {
         return ligacao;
     }
 
-    public Ligacoes getLigacao(long id) {
+    public Ligacoes getLigacao(Integer id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         Ligacoes ligacao = null;
@@ -98,6 +98,22 @@ public class LigacaoDAO {
             PersistenceUtil.close(em);
         }
     }
+
+    public void alterar(Ligacoes ligacao) {
+ EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            em.merge(ligacao);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            PersistenceUtil.close(em);
+        }    }
     
 }
     

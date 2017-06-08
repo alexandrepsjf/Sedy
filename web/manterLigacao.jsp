@@ -15,7 +15,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="css.css">   
     </head>
     <body class="keep">
-        <div><h1>Ligacao - ${operacao}</h1></div>
+        <div><h1>Ligação - ${operacao}</h1></div>
         <div class="footer">
             &#9668; <a  href="ManterInicio"><button>Voltar</button></a> 
         </div>
@@ -26,7 +26,7 @@ and open the template in the editor.
                     <td > COD. DA LIGACAO </td><td><input type="text" name="id" value="${ligacao.id}"  <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                     </tr> 
                     <tr>
-                        <td > NUMERO DA LIGACAO </td><td><input type="text" name="nome" value="${ligacao.nome}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td > NUMERO DA LIGACAO </td><td><input type="text" name="ligacao" value="${ligacao.ligacao}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     
                 </tr>
@@ -38,7 +38,7 @@ and open the template in the editor.
         <div class="logoSearch">            
         </div>
         <SCRIPT language="JavaScript">
-            <!--         
+                  
     function campoNumerico(valor)
             {
                 var caracteresValidos = "0123456789";
@@ -73,7 +73,7 @@ and open the template in the editor.
                 }
 
             }
-            //-->
+           
         </SCRIPT>
     </body>
 </html>

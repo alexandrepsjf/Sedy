@@ -2,7 +2,6 @@ package controller;
 
 import dao.LigacaoDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,7 +14,7 @@ import model.Ligacoes;
 
 public class ManterLigacaoController extends HttpServlet {
 
-     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         String acao = request.getParameter("acao");
         if (acao.equals("prepararIncluir")) {
@@ -48,12 +47,9 @@ public class ManterLigacaoController extends HttpServlet {
 
         try {
             Integer id = Integer.parseInt(request.getParameter("id"));
-            String nome = request.getParameter("nome");
-
-            Ligacoes ligacoes = new Ligacoes(id, nome);
-
+            String ligacao = request.getParameter("ligacao");
+            Ligacoes ligacoes = new Ligacoes(id, ligacao);
             LigacaoDAO.getInstance().salvar(ligacoes);
-
             RequestDispatcher view = request.getRequestDispatcher("PesquisaLigacaoController");
             view.forward(request, response);
         } catch (IOException | ServletException ex) {
@@ -62,19 +58,15 @@ public class ManterLigacaoController extends HttpServlet {
     }
 
     public void prepararEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         try {
             request.setAttribute("operacao", "Editar");
-
             Integer id = Integer.parseInt(request.getParameter("id"));
-            Ligacoes ligacoes = LigacaoDAO.getInstance().getLigacao(id);
-
-            request.setAttribute("ligacoes", ligacoes);
-
+            Ligacoes ligacao = LigacaoDAO.getInstance().getLigacao(id);
+            request.setAttribute("ligacao", ligacao);
             RequestDispatcher view = request.getRequestDispatcher("/manterLigacao.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
-            throw ex;
+
         }
     }
 
@@ -82,10 +74,9 @@ public class ManterLigacaoController extends HttpServlet {
 
         try {
             Integer id = Integer.parseInt(request.getParameter("id"));
-            String nome = request.getParameter("nome");
-
-            Ligacoes ligacoes = new Ligacoes(id, nome);
-
+            String ligacao = request.getParameter("ligacao");
+            Ligacoes ligacoes = new Ligacoes(id, ligacao);
+            LigacaoDAO.getInstance().alterar(ligacoes);
             RequestDispatcher view = request.getRequestDispatcher("PesquisaLigacaoController");
             view.forward(request, response);
         } catch (IOException | ServletException ex) {
@@ -97,12 +88,9 @@ public class ManterLigacaoController extends HttpServlet {
 
         try {
             request.setAttribute("operacao", "Excluir");
-
             Integer id = Integer.parseInt(request.getParameter("id"));
-            Ligacoes ligacoes = LigacaoDAO.getInstance().getLigacao(id);
-
-            request.setAttribute("ligacoes", ligacoes);
-
+            Ligacoes ligacao = LigacaoDAO.getInstance().getLigacao(id);
+            request.setAttribute("ligacao", ligacao);
             RequestDispatcher view = request.getRequestDispatcher("/manterLigacao.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
@@ -114,13 +102,9 @@ public class ManterLigacaoController extends HttpServlet {
 
         try {
             Integer id = Integer.parseInt(request.getParameter("id"));
-            String nome = request.getParameter("nome");
-            float taxa = Float.parseFloat(request.getParameter("taxa"));
-
-            Ligacoes ligacoes = new Ligacoes(id, nome);
-
+            String ligacao = request.getParameter("ligacao");
+            Ligacoes ligacoes = new Ligacoes(id, ligacao);
             LigacaoDAO.getInstance().excluir(ligacoes);
-
             RequestDispatcher view = request.getRequestDispatcher("PesquisaLigacaoController");
             view.forward(request, response);
         } catch (IOException | ServletException ex) {

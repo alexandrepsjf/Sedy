@@ -7,7 +7,6 @@ package controller;
 
 import dao.ProdutoDAO;
 import java.io.IOException;
-import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -86,7 +85,7 @@ public class ManterProdutoController extends HttpServlet {
 
     public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
         try {
-             request.setAttribute("operacao", "Editar");
+            request.setAttribute("operacao", "Editar");
             Integer id = Integer.parseInt(request.getParameter("id"));
             Produto produto = ProdutoDAO.getInstance().getProduto(id);
             request.setAttribute("produto", produto);
@@ -165,7 +164,5 @@ public class ManterProdutoController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    
 
 }

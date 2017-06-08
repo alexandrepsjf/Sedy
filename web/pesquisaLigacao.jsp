@@ -62,12 +62,12 @@ and open the template in the editor.
             </tr>
              </thead>
             <tbody>
-            <c:forEach items="${chamadas}" var="chamada">
+            <c:forEach items="${ligacoes}" var="ligacao">
                 <tr>
-                    <td ><c:out value="${chamada.id}" /> </td>
-                    <td ><c:out value="${chamada.id}" /> </td>
-                    <td ><a href="ManterLigacaoController?acao=preparaEditar&id=<c:out value="${chamada.id}"/>">Editar</a></td>
-                    <td ><a href="ManterLigacaoController?acao=preparaExcluir&id=<c:out value="${chamada.id}"/>">Excluir</a></td>
+                    <td ><c:out value="${ligacao.id}" /> </td>
+                    <td ><c:out value="${ligacao.ligacao}" /> </td>
+                    <td ><a href="ManterLigacaoController?acao=preparaEditar&id=<c:out value="${ligacao.id}"/>">Editar</a></td>
+                    <td ><a href="ManterLigacaoController?acao=preparaExcluir&id=<c:out value="${ligacao.id}"/>">Excluir</a></td>
                 </tr>
             </c:forEach>
  </tbody>
