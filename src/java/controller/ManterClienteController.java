@@ -58,8 +58,8 @@ public class ManterClienteController extends HttpServlet {
 
         try {
             request.setAttribute("operacao", "Incluir");
-            request.setAttribute(("telefones"), TelefoneDAO.getInstance().getAllTelefones());
-            request.setAttribute(("bairros"), BairroDAO.getInstance().getAllBairros());
+            request.setAttribute("telefones", TelefoneDAO.getInstance().getAllTelefones());
+            request.setAttribute("bairros", BairroDAO.getInstance().getAllBairros());
             RequestDispatcher view = request.getRequestDispatcher("/manterCliente.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException ex) {

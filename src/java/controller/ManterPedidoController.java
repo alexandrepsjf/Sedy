@@ -5,164 +5,160 @@
  */
 package controller;
 
+import dao.ClienteDAO;
+import dao.FormaPagamentoDAO;
+import dao.PedidoDAO;
+import dao.UsuarioDAO;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import model.Pedido;
 /**
  *
- * @author Alexandre
+ * @author Mateu
  */
 public class ManterPedidoController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
         String acao = request.getParameter("acao");
-        if (acao.equals("prepararOperacao")) {
-            prepararOperacao(request, response);
-        }
-        if (acao.equals("confirmarOperacao")) {
-            confirmarOperacao(request, response);
+        if (acao.equals("prepararIncluir")) {
+            prepararIncluir(request, response);
+        } else if (acao.equals("confirmarIncluir")) {
+            confirmarIncluir(request, response);
+        } else if (acao.equals("prepararEditar")) {
+            prepararEditar(request, response);
+        } else if (acao.equals("confirmarEditar")) {
+            confirmarEditar(request, response);
+        } else if (acao.equals("prepararExcluir")) {
+            prepararExcluir(request, response);
+        } else if (acao.equals("confirmarExcluir")) {
+            confirmarExcluir(request, response);
         }
     }
 
-//    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
-//        try {
-//            List<Produto> produtos = ProdutoDAO.obterProdutos();
-//            List<FormaPagamento> formaPagamentos = FormaPagamentoDAO.obterFormasPagamento();
-//            List<Usuario> usuarios = UsuarioDAO.obterUsuarios();
-//            List<Cliente> clientes = ClienteDAO.obterClientes();
-//            request.setAttribute("clientes", clientes);
-//            request.setAttribute("usuarios", usuarios);
-//            request.setAttribute("produtos", produtos);
-//            request.setAttribute("formaPagamentos", formaPagamentos);
-//            request.setAttribute("operacao", "Incluir");
-//            RequestDispatcher view = request.getRequestDispatcher("/manterPedido.jsp");
-//            view.forward(request, response);
-//
-//        } catch (ServletException | IOException ex) {
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(ManterPedidoController.class
-//                    .getName()).log(Level.SEVERE, null, ex);
-//
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ManterPedidoController.class
-//                    .getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-//
-//    private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
-//        int id = Integer.parseInt(request.getParameter("id"));
-//        String data_2 = request.getParameter("data_2");
-//        String hora = request.getParameter("hora");
-//        int idCliente = Integer.parseInt(request.getParameter("idCliente"));
-//        int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
-//        int idFrmPgto = Integer.parseInt(request.getParameter("idFrmPgto"));
-//        float total = Float.parseFloat(request.getParameter("total"));
-//        try {
-//            Pedido pedido = new Pedido(id, hora, data_2, total, null, idCliente, null, idUsuario, null, idFrmPgto);
-//            pedido.gravar();
-//            RequestDispatcher view = request.getRequestDispatcher("PesquisaPedidoController");
-//            view.forward(request, response);
-//        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
-//
-//        }
-//
-//    }
-//
-//    private void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
-//        try {
-//            int id = Integer.parseInt(request.getParameter("id"));
-//            List<Produto> produtos = ProdutoDAO.obterProdutos();
-//            List<FormaPagamento> formaPagamentos = FormaPagamentoDAO.obterFormasPagamento();
-//            List<Usuario> usuarios = UsuarioDAO.obterUsuarios();
-//            List<Cliente> clientes = ClienteDAO.obterClientes();
-//            Pedido pedido = Pedido.obterPedido(id);
-//            request.setAttribute("clientes", clientes);
-//            request.setAttribute("usuarios", usuarios);
-//            request.setAttribute("produtos", produtos);
-//            request.setAttribute("formaPagamentos", formaPagamentos);
-//            request.setAttribute("operacao", "Editar");
-//            request.setAttribute("pedido", pedido);
-//            RequestDispatcher view = request.getRequestDispatcher("/manterPedido.jsp");
-//            view.forward(request, response);
-//
-//        } catch (ServletException | IOException ex) {
-//        } catch (ClassNotFoundException | SQLException ex) {
-//            Logger.getLogger(ManterPedidoController.class
-//                    .getName()).log(Level.SEVERE, null, ex);
-//
-//        }
-//    }
-//
-//    private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
-//        int id = Integer.parseInt(request.getParameter("id"));
-//        String data_2 = request.getParameter("data_2");
-//        String hora = request.getParameter("hora"); 
-//        
-//        int idFrmPgto = Integer.parseInt(request.getParameter("idFrmPgto"));
-//        float total = Float.parseFloat(request.getParameter("total"));
-//        try {
-//            Pedido pedido = new Pedido(id, hora, data_2, total, null, 0, null, 0, null, idFrmPgto);
-//            pedido.alterar();
-//            RequestDispatcher view = request.getRequestDispatcher("PesquisaPedidoController");
-//            view.forward(request, response);
-//        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
-//
-//        }
-//
-//    }
-//
-//    private void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
-//try {
-//            int id = Integer.parseInt(request.getParameter("id"));
-//            List<Produto> produtos = ProdutoDAO.obterProdutos();
-//            List<FormaPagamento> formaPagamentos = FormaPagamentoDAO.obterFormasPagamento();
-//            List<Usuario> usuarios = UsuarioDAO.obterUsuarios();
-//            List<Cliente> clientes = ClienteDAO.obterClientes();
-//            Pedido pedido = Pedido.obterPedido(id);
-//            request.setAttribute("clientes", clientes);
-//            request.setAttribute("usuarios", usuarios);
-//            request.setAttribute("produtos", produtos);
-//            request.setAttribute("formaPagamentos", formaPagamentos);
-//            request.setAttribute("operacao", "Excluir");
-//            request.setAttribute("pedido", pedido);
-//            RequestDispatcher view = request.getRequestDispatcher("/manterPedido.jsp");
-//            view.forward(request, response);
-//
-//        } catch (ServletException | IOException ex) {
-//        } catch (ClassNotFoundException | SQLException ex) {
-//            Logger.getLogger(ManterPedidoController.class
-//                    .getName()).log(Level.SEVERE, null, ex);
-//
-//        }    }
-//
-//    private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
-//        int id = Integer.parseInt(request.getParameter("id"));
-//        String data_2 = request.getParameter("data_2");
-//        String hora = request.getParameter("hora");         
-//        int idFrmPgto = Integer.parseInt(request.getParameter("idFrmPgto"));
-//        float total = Float.parseFloat(request.getParameter("total"));
-//        try {
-//            Pedido pedido = new Pedido(id, hora, data_2, total, null, 0, null, 0, null, idFrmPgto);
-//            pedido.excluir();
-//            RequestDispatcher view = request.getRequestDispatcher("PesquisaPedidoController");
-//            view.forward(request, response);
-//        } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {
-//
-//        }
-    
+    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        try {
+            request.setAttribute("operacao", "Incluir");
+            RequestDispatcher view = request.getRequestDispatcher("/manterPedidos.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            throw ex;
+        }
+    }
+
+    private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        try {
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            String hora = request.getParameter("hora");
+            float total = Float.parseFloat(request.getParameter("total"));
+            Integer idCliente = Integer.parseInt(request.getParameter("idCliente")); 
+            Integer idFormaPgm = Integer.parseInt(request.getParameter("idFormaPgm")); 
+            Integer idUsuario = Integer.parseInt(request.getParameter("idUsuario")); 
+
+            Pedido pedido = new Pedido(id, hora, total);
+            pedido.setClienteId(ClienteDAO.getInstance().getCliente(idCliente));
+            pedido.setFormaPgmId(FormaPagamentoDAO.getInstance().getFormaPagamento(idFormaPgm));
+            pedido.setUsuarioId(UsuarioDAO.getInstance().getUsuario(idUsuario));
+
+            PedidoDAO.getInstance().salvar(pedido);
+
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaPedidoController");
+            view.forward(request, response);
+        } catch (IOException | ServletException ex) {
+            throw ex;
+        }
+    }
+
+    public void prepararEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        try {
+            request.setAttribute("operacao", "Editar");
+
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            Pedido pedido = PedidoDAO.getInstance().getPedido(id);
+
+            request.setAttribute("pedido", pedido);
+            request.setAttribute(("clientes"), ClienteDAO.getInstance().getAllCliente());
+            request.setAttribute(("formaDePagamento"), FormaPagamentoDAO.getInstance().getAllFormaPagamento());
+            request.setAttribute(("usuarios"), UsuarioDAO.getInstance().getAllUsuarios());
+
+            RequestDispatcher view = request.getRequestDispatcher("/manterPedidos.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            throw ex;
+        }
+    }
+
+    private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        try {
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            String hora = request.getParameter("horas");
+            float total = Float.parseFloat(request.getParameter("total"));
+            Integer idCliente = Integer.parseInt(request.getParameter("idCliente")); 
+            Integer idFormaPgm = Integer.parseInt(request.getParameter("idFormaPgm")); 
+            Integer idUsuario = Integer.parseInt(request.getParameter("idUsuario")); 
+
+            Pedido pedido = new Pedido(id, hora, total);
+            pedido.setClienteId(ClienteDAO.getInstance().getCliente(idCliente));
+            pedido.setFormaPgmId(FormaPagamentoDAO.getInstance().getFormaPagamento(idFormaPgm));
+            pedido.setUsuarioId(UsuarioDAO.getInstance().getUsuario(idUsuario));
+            PedidoDAO.getInstance().alterar(pedido);
+
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaPedidoController");
+            view.forward(request, response);
+        } catch (IOException | ServletException ex) {
+            throw ex;
+        }
+    }
+
+    private void prepararExcluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        try {
+            request.setAttribute("operacao", "Excluir");
+
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            Pedido pedido = PedidoDAO.getInstance().getPedido(id);
+
+            request.setAttribute("pedido", pedido);
+
+            RequestDispatcher view = request.getRequestDispatcher("/manterpedidos.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            throw ex;
+        }
+    }
+
+    private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        try {
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            String hora = request.getParameter("hora");
+            float total = Float.parseFloat(request.getParameter("total"));
+            Integer idCliente = Integer.parseInt(request.getParameter("idCliente")); 
+            Integer idFormaPgm = Integer.parseInt(request.getParameter("idFormaPgm")); 
+            Integer idUsuario = Integer.parseInt(request.getParameter("idUsuario")); 
+            Pedido pedido = new Pedido(id, hora, total);
+
+            PedidoDAO.getInstance().excluir(pedido);
+
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaPedidoController");
+            view.forward(request, response);
+        } catch (IOException | ServletException ex) {
+            throw ex;
+        }
+    }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -176,7 +172,13 @@ public class ManterPedidoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ManterBairroController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ManterBairroController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -190,7 +192,13 @@ public class ManterPedidoController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ManterBairroController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ManterBairroController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -202,13 +210,5 @@ public class ManterPedidoController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private void prepararOperacao(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }

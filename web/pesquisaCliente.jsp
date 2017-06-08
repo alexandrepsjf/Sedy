@@ -72,7 +72,7 @@ and open the template in the editor.
             </c:forEach>  
                  </tbody>
         </table>
-        <form action="ManterClienteController?acao=prepararOperacao&operacao=incluir" method="post">
+        <form action="ManterClienteController?acao=prepararIncluir" method="post">
                <div class="input-field col s12 btn waves-effect waves-light">
                     <input id="submit" type="submit" class="submit" name="btnIncluir" value="Incluir">                 
                     <i class="material-icons right">send</i>
