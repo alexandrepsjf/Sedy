@@ -5,7 +5,10 @@
  */
 package controller;
 
+import dao.ClienteDAO;
+import dao.FormaPagamentoDAO;
 import dao.PedidoDAO;
+import dao.UsuarioDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -59,8 +62,14 @@ public class ManterPedidoController extends HttpServlet {
             Integer id = Integer.parseInt(request.getParameter("id"));
             String hora = request.getParameter("hora");
             float total = Float.parseFloat(request.getParameter("total"));
+            Integer idCliente = Integer.parseInt(request.getParameter("idCliente")); 
+            Integer idFormaPgm = Integer.parseInt(request.getParameter("idFormaPgm")); 
+            Integer idUsuario = Integer.parseInt(request.getParameter("idUsuario")); 
 
             Pedido pedido = new Pedido(id, hora, total);
+            pedido.setClienteId(ClienteDAO.getInstance().getCliente(idCliente));
+            pedido.setFormaPgmId(FormaPagamentoDAO.getInstance().getFormaPagamento(idFormaPgm));
+            pedido.setUsuarioId(UsuarioDAO.getInstance().getUsuario(idUsuario));
 
             PedidoDAO.getInstance().salvar(pedido);
 
@@ -80,6 +89,9 @@ public class ManterPedidoController extends HttpServlet {
             Pedido pedido = PedidoDAO.getInstance().getPedido(id);
 
             request.setAttribute("pedido", pedido);
+            request.setAttribute(("clientes"), ClienteDAO.getInstance().getAllCliente());
+            request.setAttribute(("formaDePagamento"), FormaPagamentoDAO.getInstance().getAllFormaPagamento());
+            request.setAttribute(("usuarios"), UsuarioDAO.getInstance().getAllUsuarios());
 
             RequestDispatcher view = request.getRequestDispatcher("/manterPedidos.jsp");
             view.forward(request, response);
@@ -94,9 +106,14 @@ public class ManterPedidoController extends HttpServlet {
             Integer id = Integer.parseInt(request.getParameter("id"));
             String hora = request.getParameter("horas");
             float total = Float.parseFloat(request.getParameter("total"));
+            Integer idCliente = Integer.parseInt(request.getParameter("idCliente")); 
+            Integer idFormaPgm = Integer.parseInt(request.getParameter("idFormaPgm")); 
+            Integer idUsuario = Integer.parseInt(request.getParameter("idUsuario")); 
 
             Pedido pedido = new Pedido(id, hora, total);
-
+            pedido.setClienteId(ClienteDAO.getInstance().getCliente(idCliente));
+            pedido.setFormaPgmId(FormaPagamentoDAO.getInstance().getFormaPagamento(idFormaPgm));
+            pedido.setUsuarioId(UsuarioDAO.getInstance().getUsuario(idUsuario));
             PedidoDAO.getInstance().alterar(pedido);
 
             RequestDispatcher view = request.getRequestDispatcher("PesquisaPedidoController");
@@ -129,7 +146,9 @@ public class ManterPedidoController extends HttpServlet {
             Integer id = Integer.parseInt(request.getParameter("id"));
             String hora = request.getParameter("hora");
             float total = Float.parseFloat(request.getParameter("total"));
-
+            Integer idCliente = Integer.parseInt(request.getParameter("idCliente")); 
+            Integer idFormaPgm = Integer.parseInt(request.getParameter("idFormaPgm")); 
+            Integer idUsuario = Integer.parseInt(request.getParameter("idUsuario")); 
             Pedido pedido = new Pedido(id, hora, total);
 
             PedidoDAO.getInstance().excluir(pedido);
