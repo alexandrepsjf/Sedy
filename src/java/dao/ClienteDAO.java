@@ -73,7 +73,7 @@ public class ClienteDAO {
         return clientes;
     }
 
-    public Cliente getCliente(long id) {
+    public Cliente getCliente(int id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         Cliente cliente = null;
@@ -108,4 +108,19 @@ public class ClienteDAO {
             PersistenceUtil.close(em);
         }
     }
+        public void alterar(Cliente cliente) {
+ EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            em.merge(cliente);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            PersistenceUtil.close(em);
+        }    }
 }

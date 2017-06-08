@@ -20,7 +20,7 @@ and open the template in the editor.
         <div class="footer">
           &#9668; <a  href="ManterInicio"><button>Voltar</button></a> 
         </div>
-        <form action="ManterClienteController?acao=confirmar${operacao}" method="post" name="frmManterCliente" onsubmit="return validarFormulario(this)" >
+        <form action="ManterClienteController?acao=confirmar${operacao}" method="post" name="frmManterCliente"  >
             <table> 
                 <tr> 
                     <td> Cod. Cliente </td><td><input type="text" name="id" value="${cliente.id}"  <c:if test="${operacao != 'incluir'}"> readonly</c:if>></td>       
@@ -37,13 +37,13 @@ and open the template in the editor.
                             <select name="telefonesCliente" <c:if test="${operacao == 'Incluir'}"> disabled</c:if>>
                                 <option value="">Selecione</option>
                             <c:forEach var="telefone" items="${telefones}">
-                                <option value="${telefone.id}" <c:if test="${telefone.idCliente == cliente.id}"> selected</c:if>> ${telefone.numero} </option>
+                                <option value="${telefone.id}" <c:if test="${telefone.cliente.id == cliente.id}"> selected</c:if>> ${telefone.telefone} </option>
                             </c:forEach>
                         </select>
                     </td>
                 </tr>
                 <tr> 
-                    <td >${operacao} Telefone </td><td><input type="text" name="addTelefone" value="${telefone.numero}"  <c:if test="${operacao != 'Incluir'}"> hidden </c:if>></td>
+                    <td >${operacao} Telefone </td><td><input type="text" name="addTelefone" value="${telefone.telefone}"  <c:if test="${operacao != 'Incluir'}"> hidden </c:if>></td>
                     </tr>
                     <tr>
                         <td> Id telefone</td><td><input type="text" name="addIdTelefone" value="${telefone.id}"  <c:if test="${operacao != 'Incluir'}"> hidden </c:if>></td>
@@ -72,7 +72,7 @@ and open the template in the editor.
                         <select name="bairrocliente">
                             <option value="">Selecione</option>
                             <c:forEach var="bairro" items="${bairros}">
-                                <option value="${bairro.id}" <c:if test="${cliente.idBairro == bairro.id}"> selected</c:if>> ${bairro.nome} </option>
+                                <option value="${bairro.id}" <c:if test="${cliente.bairroId.id == bairro.id}"> selected</c:if>> ${bairro.bairro} </option>
                             </c:forEach>
                         </select>
                     </td>

@@ -8,7 +8,7 @@ and open the template in the editor.
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
 <%@page contentType="text/html" pageEncoding="utf-8"%>  
 <html>
-    <body class="keep">
+    <head class="keep">
         <title>cliente</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">

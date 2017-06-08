@@ -89,6 +89,18 @@ public class Cliente implements Serializable {
         this.numero = numero;
     }
 
+    public Cliente(Integer id, String nome, String rua, String numero, String cep, String dataCadastro, String horaCadastro, String email, String referenciaEndereco) {
+        this.id = id;
+        this.nome = nome;
+        this.rua = rua;
+        this.numero = numero;
+        this.cep=cep;
+        this.dataCadastro=dataCadastro;
+        this.horaCadastro=horaCadastro;
+        this.email=email;
+        this.referenciaEndereco=referenciaEndereco;
+    }
+
     public Integer getId() {
         return id;
     }

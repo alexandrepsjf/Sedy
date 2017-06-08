@@ -63,7 +63,7 @@ public class TelefoneDAO {
         return telefones;
     }
 
-    public Telefone getTelefone(long id) {
+    public Telefone getTelefone(int id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         Telefone telefone = null;

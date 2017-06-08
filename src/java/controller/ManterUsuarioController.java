@@ -72,7 +72,7 @@ public class ManterUsuarioController extends HttpServlet {
             String usuarioNome = request.getParameter("usuario");
             String senha = request.getParameter("senha");
             String login = request.getParameter("login");
-        Integer idNivel = Integer.parseInt(request.getParameter("idNivel"));
+            Integer idNivel = Integer.parseInt(request.getParameter("idNivel"));
             Usuario usuario = new Usuario(id, usuarioNome, senha, login);
             usuario.setNivelId(NivelDAO.getInstance().getNivel(idNivel));
             UsuarioDAO.getInstance().salvar(usuario);
