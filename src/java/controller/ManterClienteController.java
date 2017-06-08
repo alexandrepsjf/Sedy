@@ -67,7 +67,7 @@ public class ManterClienteController extends HttpServlet {
             String operacao = request.getParameter("operacao");
             String nome = request.getParameter("nome");
             if (operacao.equals("incluir")) {
-                cliente = new Cliente(nome);
+                cliente = new Cliente();
                 ClienteDAO.getInstance().salvar(cliente);
             } else if (operacao.equals("editar")) {
                 cliente.setNome(nome);

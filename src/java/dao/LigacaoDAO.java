@@ -49,7 +49,7 @@ public class LigacaoDAO {
         List<Ligacoes> ligacao = null;
         try {
             tx.begin();
-            TypedQuery<Ligacoes> query = em.createQuery("select Ligacao from Ligacao", Ligacoes.class);
+            TypedQuery<Ligacoes> query = em.createQuery("select l from Ligacoes l", Ligacoes.class);
             ligacao = query.getResultList();
             tx.commit();
         } catch (Exception e) {

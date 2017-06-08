@@ -58,10 +58,10 @@ public class ClienteDAO {
         EntityTransaction tx = em.getTransaction();
         List<Cliente> clientes = null;
         try {
-            tx.begin();
+            //tx.begin();
             TypedQuery<Cliente> query = em.createQuery("select c from Cliente c", Cliente.class);
             clientes = query.getResultList();
-            tx.commit();
+            //tx.commit();
         } catch (Exception e) {
             if (tx != null && tx.isActive()) {
                 tx.rollback();

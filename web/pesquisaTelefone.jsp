@@ -72,7 +72,7 @@ and open the template in the editor.
                  </tbody>
         </table>
        
-            <form action="ManterTelefoneController?acao=prepararIncluir" method="POST">
+            <form action="ManterTelefoneController?acao=prepararOperacao&operacao=incluir" method="POST">
                <div class="input-field col s12 btn waves-effect waves-light">
                     <input id="submit" type="submit" class="submit" name="btnIncluir" value="Incluir">                 
                     <i class="material-icons right">send</i>

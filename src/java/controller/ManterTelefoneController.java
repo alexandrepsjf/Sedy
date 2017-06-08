@@ -60,7 +60,7 @@ public class ManterTelefoneController extends HttpServlet {
                 telefone = TelefoneDAO.getInstance().getTelefone(id);
                 request.setAttribute("telefone", telefone);
             }
-            RequestDispatcher view = request.getRequestDispatcher("/manterEmail.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("/manterTelefone.jsp");
             view.forward(request, response);
         } catch (ServletException e) {
             throw e;
@@ -76,12 +76,13 @@ public class ManterTelefoneController extends HttpServlet {
             String operacao = request.getParameter("operacao");
             String numero = request.getParameter("numero");
             String cliente = request.getParameter("cliente");
+            
             if (operacao.equals("incluir")) {
-                telefone = new Telefone(numero, cliente);
+                telefone = new Telefone(numero, null);
                 TelefoneDAO.getInstance().salvar(telefone);
             } else if (operacao.equals("editar")) {
-                telefone.setNumero(numero);
-                telefone.setCliente(cliente);
+                telefone.setTelefone(numero);
+                //telefone.setCliente(cliente);
                 TelefoneDAO.getInstance().salvar(telefone);
             } else if (operacao.equals("excluir")) {
                 TelefoneDAO.getInstance().excluir(telefone);

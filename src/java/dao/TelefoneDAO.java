@@ -49,7 +49,7 @@ public class TelefoneDAO {
         List<Telefone> telefones = null;
         try {
             tx.begin();
-            TypedQuery<Telefone> query = em.createQuery("select Telefone from Telefone", Telefone.class);
+            TypedQuery<Telefone> query = em.createQuery("select t from Telefone t", Telefone.class);
             telefones = query.getResultList();
             tx.commit();
         } catch (Exception e) {

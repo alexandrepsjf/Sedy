@@ -39,7 +39,7 @@ public class PesquisaTelefoneController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("telefone", TelefoneDAO.getInstance().getAllTelefones());
-        RequestDispatcher view = request.getRequestDispatcher("/pesquisarTelefone.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("/pesquisaTelefone.jsp");
         view.forward(request, response);
     }
 

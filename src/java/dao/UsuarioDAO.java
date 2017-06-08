@@ -58,7 +58,7 @@ public class UsuarioDAO {
         List<Usuario> usuarios = null;
         try {
             tx.begin();
-            TypedQuery<Usuario> query = em.createQuery("select Usuario from Usuario", Usuario.class);
+            TypedQuery<Usuario> query = em.createQuery("select u from Usuario u", Usuario.class);
             usuarios = query.getResultList();
             tx.commit();
         } catch (Exception e) {

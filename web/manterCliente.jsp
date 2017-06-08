@@ -23,7 +23,7 @@ and open the template in the editor.
         <form action="ManterClienteController?acao=confirmar${operacao}" method="post" name="frmManterCliente" onsubmit="return validarFormulario(this)" >
             <table> 
                 <tr> 
-                    <td> Cod. Cliente </td><td><input type="text" name="id" value="${cliente.id}"  <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>       
+                    <td> Cod. Cliente </td><td><input type="text" name="id" value="${cliente.id}"  <c:if test="${operacao != 'incluir'}"> readonly</c:if>></td>       
                     </tr>
                     <tr>
                         <td>Data cadastro </td><td><input type="text" name="data_cadastro"  value="${cliente.dataCadastro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>

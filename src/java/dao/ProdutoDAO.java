@@ -53,7 +53,7 @@ public class ProdutoDAO {
         List<Produto> produtos = null;
         try {
             tx.begin();
-            TypedQuery<Produto> query = em.createQuery("select Produto from Produto", Produto.class);
+            TypedQuery<Produto> query = em.createQuery("select p from Produto p", Produto.class);
             produtos = query.getResultList();
             tx.commit();
         } catch (Exception e) {
