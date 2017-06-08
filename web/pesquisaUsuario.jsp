@@ -52,35 +52,34 @@ and open the template in the editor.
                 </ul>
             </div>
         </nav>
-         <h4 class=" teal-text shadowOrange center">Sistema de entregas delivery</h4>
+        <h4 class=" teal-text shadowOrange center">Sistema de entregas delivery</h4>
         <div class="center "><h3>Pesquisa de Usuarios</h3></div>
         <table class=" highlight centered">            
-             <thead>                 <tr> 
-                <th>Cod Usuário</th>
-                <th>Nome Usuário </th>
-                <th colspan =2>Ação</th>
-            </tr>
+            <thead>                 
+                <tr> 
+                    <th>Cod Usuário</th>
+                    <th>Nome Usuário </th>
+                    <th colspan =2>Ação</th>
+                </tr>
             </thead>
             <tbody>
-            <c:forEach items="${usuarios}" var="usuario">
-                <tr> 
-                    <td><c:out value="${usuario.id}"/></td>
-                    <td><c:out value="${usuario.nome}"/></td>
-                    <td><a href="ManterUsuarioController?acao=prepararEditar&id=<c:out value="${usuario.id}"/>">Editar</a></td>
-                    <td><a href="ManterUsuarioController?acao=prepararExcluir&id=<c:out value="${usuario.id}"/>">Excluir</a></td>
+                <c:forEach items="${usuarios}" var="usuario">
+                    <tr> 
+                        <td><c:out value="${usuario.id}"/></td>
+                        <td><c:out value="${usuario.usuario}"/></td>
+                        <td><a href="ManterUsuarioController?acao=prepararEditar&id=<c:out value="${usuario.id}"/>">Editar</a></td>
+                        <td><a href="ManterUsuarioController?acao=prepararExcluir&id=<c:out value="${usuario.id}"/>">Excluir</a></td>
 
-                </tr>
-            </c:forEach>  
-                 </tbody>
+                    </tr>
+                </c:forEach>  
+            </tbody>
         </table>
-      
-            <form action="ManterUsuarioController?acao=prepararIncluir" method="POST">
-                 <div class="input-field col s12 btn waves-effect waves-light">
-                    <input id="submit" type="submit" class="submit" name="btnIncluir" value="Incluir">                 
-                    <i class="material-icons right">send</i>
-                </div>
-            </form>
-        
+        <form action="ManterUsuarioController?acao=prepararIncluir" method="POST">
+            <div class="input-field col s12 btn waves-effect waves-light">
+                <input id="submit" type="submit" class="submit" name="btnIncluir" value="Incluir">                 
+                <i class="material-icons right">send</i>
+            </div>
+        </form>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>

@@ -63,11 +63,12 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-    public Usuario(Integer id, String usuario, String senha, String login) {
+    public Usuario(Integer id, String usuario, String senha, String login ) {
         this.id = id;
         this.usuario = usuario;
         this.senha = senha;
         this.login = login;
+        
     }
 
     public Integer getId() {

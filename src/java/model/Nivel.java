@@ -77,8 +77,8 @@ public class Nivel implements Serializable {
     private Boolean pedido;
     @Column(name = "CLIENTE")
     private Boolean cliente;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nivelId")
-    private Collection<Usuario> usuarioCollection;
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "nivel")
+    //private Collection<Usuario> usuarioCollection;
 
     public Nivel() {
     }
@@ -189,14 +189,14 @@ public class Nivel implements Serializable {
         this.cliente = cliente;
     }
 
-    @XmlTransient
-    public Collection<Usuario> getUsuarioCollection() {
-        return usuarioCollection;
-    }
-
-    public void setUsuarioCollection(Collection<Usuario> usuarioCollection) {
-        this.usuarioCollection = usuarioCollection;
-    }
+//    @XmlTransient
+//    public Collection<Usuario> getUsuarioCollection() {
+//        return usuarioCollection;
+//    }
+//
+//    public void setUsuarioCollection(Collection<Usuario> usuarioCollection) {
+//        this.usuarioCollection = usuarioCollection;
+//    }
 
     @Override
     public int hashCode() {

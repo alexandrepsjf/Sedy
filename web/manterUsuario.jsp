@@ -33,12 +33,12 @@ and open the template in the editor.
                         <select name="idNivel" class="usuario"  <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                             <option value="">Selecione</option>
                         <c:forEach var="nivel" items="${niveis}">
-                            <option value="${nivel.id}" <c:if test="${usuario.idNivel == nivel.id}"> selected</c:if>> ${nivel.nome} </option>
+                            <option value="${nivel.id}" <c:if test="${usuario.nivelId.id == nivel.id}"> selected</c:if>> ${nivel.nome} </option>
                         </c:forEach>
                     </select>
             </tr>
             <tr> 
-                <td >NOME USUARIO </td><td><input type="text" name="nome" value="${usuario.nome}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                <td >NOME USUARIO </td><td><input type="text" name="usuario" value="${usuario.usuario}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr> 
                     <td >LOGIN USUARIO </td><td><input type="text" name="login" value="${usuario.login}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>

@@ -5,12 +5,6 @@
  */
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -30,16 +24,12 @@ public class UsuarioDAO {
 
     private UsuarioDAO() {
     }
-   public void salvar(Usuario usuario) {
+  public void salvar(Usuario usuario) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
             tx.begin();
-            if (usuario.getId() != null) {
-                em.merge(usuario);
-            } else {
-                em.persist(usuario);
-            }
+            em.persist(usuario);
             tx.commit();
         } catch (Exception e) {
             if (tx != null && tx.isActive()) {
@@ -72,7 +62,7 @@ public class UsuarioDAO {
         return usuarios;
     }
 
-    public Usuario getUsuario(long id) {
+    public Usuario getUsuario(Integer id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         Usuario usuario = null;
@@ -107,4 +97,24 @@ public class UsuarioDAO {
             PersistenceUtil.close(em);
         }
     }  
+
+    
+
+    public void alterar(Usuario usuario) {
+ EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            em.merge(usuario);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            PersistenceUtil.close(em);
+        }    }
+
+   
 }

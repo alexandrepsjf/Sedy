@@ -5,27 +5,11 @@
  */
 package controller;
 
-import dao.ClienteDAO;
-import dao.FormaPagamentoDAO;
-import dao.ListaProdutosDAO;
-import dao.ProdutoDAO;
-import dao.UsuarioDAO;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Cliente;
-import model.FormaPagamento;
-import model.ListaProdutos;
-import model.Pedido;
-import model.Produto;
-import model.Usuario;
 
 /**
  *
