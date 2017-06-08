@@ -67,7 +67,7 @@ public class ProdutoDAO {
         return produtos;
     }
 
-    public Produto getProduto(long id) {
+    public Produto getProduto(Integer id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         Produto produto = null;
@@ -102,4 +102,20 @@ public class ProdutoDAO {
             PersistenceUtil.close(em);
         }
     }   
+
+    public void alterar(Produto produto) {
+ EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            em.merge(produto);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            PersistenceUtil.close(em);
+        }    }
 }

@@ -9,92 +9,92 @@ and open the template in the editor.
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
-    <body class="keep">
+    <head>
         <title>Usuario</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css.css">
     </head>
-<body>
-    <div><h1>Usuario -  ${operacao}</h1></div>
-    <div class="footer">
-          &#9668; <a  href="ManterInicio"><button>Voltar</button></a> 
-        </div>
-    <form action="ManterUsuarioController?acao=confirmar${operacao}" method="POST" name="frmManterUsuario" onsubmit="return validarFormulario(this)">
-        <table>            
-            <tr> 
-                <td > COD. USUARIO </td><td><input type="text"  name="id" value="${usuario.id}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
-                </tr>
-
-                <tr> 
-                    <td > NIVEL USUARIO </td>
-
-                    <td>
-                        <select name="idNivel" class="usuario"  <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                            <option value="">Selecione</option>
-                        <c:forEach var="nivel" items="${niveis}">
-                            <option value="${nivel.id}" <c:if test="${usuario.nivelId.id == nivel.id}"> selected</c:if>> ${nivel.nome} </option>
-                        </c:forEach>
-                    </select>
-            </tr>
-            <tr> 
-                <td >NOME USUARIO </td><td><input type="text" name="usuario" value="${usuario.usuario}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                </tr>
-                <tr> 
-                    <td >LOGIN USUARIO </td><td><input type="text" name="login" value="${usuario.login}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                </tr>
-                <tr> 
-                    <td > SENHA DE USUARIO </td><td><input type="password" name="senha1" value="${usuario.senha}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                </tr>
-                <tr> 
-                    <td > CONFIRME SENHA </td><td><input type="password"  name="senha" value="${usuario.senha}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-            </tr>
-
-        </table>
+    <body>
+        <div><h1>Usuario -  ${operacao}</h1></div>
         <div class="footer">
-            <button  type="submit" >Confirmar</button>
+            &#9668; <a  href="ManterInicio"><button>Voltar</button></a> 
         </div>
-    </form>
-    <div class="logoSearch">            
-    </div>        </form>
-<SCRIPT language="JavaScript">
-    <!--         
-    function campoNumerico(valor)
-    {
-        var caracteresValidos = "0123456789";
-        var ehNumero = true;
-        var umCaracter;
-        for (i = 0; i < valor.length && ehNumero === true; i++)
+        <form action="ManterUsuarioController?acao=confirmar${operacao}" method="POST" name="frmManterUsuario" onsubmit="return validarFormulario(this)">
+            <table>            
+                <tr> 
+                    <td > COD. USUARIO </td><td><input type="text"  name="id" value="${usuario.id}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
+                    </tr>
+
+                    <tr> 
+                        <td > NIVEL USUARIO </td>
+
+                        <td>
+                            <select name="idNivel" class="usuario"  <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                <option value="">Selecione</option>
+                            <c:forEach var="nivel" items="${niveis}">
+                                <option value="${nivel.id}" <c:if test="${usuario.nivelId.id == nivel.id}"> selected</c:if>> ${nivel.nome} </option>
+                            </c:forEach>
+                        </select>
+                </tr>
+                <tr> 
+                    <td >NOME USUARIO </td><td><input type="text" name="usuario" value="${usuario.usuario}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    </tr>
+                    <tr> 
+                        <td >LOGIN USUARIO </td><td><input type="text" name="login" value="${usuario.login}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    </tr>
+                    <tr> 
+                        <td > SENHA DE USUARIO </td><td><input type="password" name="senha1" value="${usuario.senha}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    </tr>
+                    <tr> 
+                        <td > CONFIRME SENHA </td><td><input type="password"  name="senha" value="${usuario.senha}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                </tr>
+
+            </table>
+            <div class="footer">
+                <button  type="submit" >Confirmar</button>
+            </div>
+        </form>
+        <div class="logoSearch">            
+        </div>        </form>
+    <SCRIPT language="JavaScript">
+        <!--         
+        function campoNumerico(valor)
         {
-            umCaracter = valor.charAt(i);
-            if (caracteresValidos.indexOf(umCaracter) === -1)
+            var caracteresValidos = "0123456789";
+            var ehNumero = true;
+            var umCaracter;
+            for (i = 0; i < valor.length && ehNumero === true; i++)
             {
-                ehNumero = false;
+                umCaracter = valor.charAt(i);
+                if (caracteresValidos.indexOf(umCaracter) === -1)
+                {
+                    ehNumero = false;
+                }
             }
-        }
-        return ehNumero;
-    }
-
-    function validarFormulario(form) {
-        var mensagem;
-        mensagem = "";
-        if (form.id.value === "") {
-            mensagem = mensagem + "Informe o Código do usuário\n";
+            return ehNumero;
         }
 
-        if (!campoNumerico(form.id.value)) {
-            mensagem = mensagem + "Código do usuário deve ser numérico\n";
-        }
+        function validarFormulario(form) {
+            var mensagem;
+            mensagem = "";
+            if (form.id.value === "") {
+                mensagem = mensagem + "Informe o Código do usuário\n";
+            }
 
-        if (mensagem === "") {
-            return true;
-        } else {
-            alert(mensagem);
-            return false;
-        }
+            if (!campoNumerico(form.id.value)) {
+                mensagem = mensagem + "Código do usuário deve ser numérico\n";
+            }
 
-    }
-    //-->
-</SCRIPT>   
+            if (mensagem === "") {
+                return true;
+            } else {
+                alert(mensagem);
+                return false;
+            }
+
+        }
+        //-->
+    </SCRIPT>   
 </body>
 </html>
