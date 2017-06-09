@@ -40,7 +40,7 @@ and open the template in the editor.
             </li> 
            <li>
 
-                <a class=" waves-effect">
+                <a class=" waves-effect" onclick="self.close ()">
                     <i class="large teal-text material-icons shadowOrange tooltipped" data-position="bottom" data-delay="50"
                        data-tooltip="SAIR">room</i>
                 </a>

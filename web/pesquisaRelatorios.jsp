@@ -65,9 +65,7 @@ and open the template in the editor.
                             <option>Produtos</option>
                             <option>Formas de pgto</option>
                             <option>Niveis</option>
-                            <option>Usuarios</option>
-                            <option>Telefones</option>
-                            <option>Ligações</option>
+                            <option>Usuarios</option>                           
                         </select>
                         <label> Tipo do relatorio</label>
                     </div>  

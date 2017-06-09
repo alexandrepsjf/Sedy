@@ -5,12 +5,6 @@
  */
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -58,10 +52,10 @@ public class ClienteDAO {
         EntityTransaction tx = em.getTransaction();
         List<Cliente> clientes = null;
         try {
-            //tx.begin();
+            tx.begin();
             TypedQuery<Cliente> query = em.createQuery("select c from Cliente c", Cliente.class);
             clientes = query.getResultList();
-            //tx.commit();
+            tx.commit();
         } catch (Exception e) {
             if (tx != null && tx.isActive()) {
                 tx.rollback();
@@ -73,7 +67,7 @@ public class ClienteDAO {
         return clientes;
     }
 
-    public Cliente getCliente(int id) {
+    public Cliente getCliente(Integer id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         Cliente cliente = null;

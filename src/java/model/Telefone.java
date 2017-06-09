@@ -91,7 +91,7 @@ public class Telefone implements Serializable {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-
+//
 //    @XmlTransient
 //    public Collection<TelefoneHasLigacoes> getTelefoneHasLigacoesCollection() {
 //        return telefoneHasLigacoesCollection;

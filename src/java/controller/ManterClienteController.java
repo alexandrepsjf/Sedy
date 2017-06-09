@@ -79,7 +79,7 @@ public class ManterClienteController extends HttpServlet {
             String horaCadastro = request.getParameter("horaCadastro");
             String email = request.getParameter("email");
             String referenciaEndereco = request.getParameter("referenciaEndereco");
-            Integer idBairro = Integer.parseInt(request.getParameter("idBairro"));
+            Integer idBairro = Integer.parseInt(request.getParameter("bairrocliente"));
             Cliente cliente = new Cliente(id, nome, rua, numero, cep, dataCadastro,horaCadastro,email,referenciaEndereco);
            cliente.setBairroId(BairroDAO.getInstance().getBairro(idBairro));
             ClienteDAO.getInstance().salvar(cliente);
@@ -122,11 +122,11 @@ public class ManterClienteController extends HttpServlet {
             String email = request.getParameter("email");
             String referenciaEndereco = request.getParameter("referencia");
             Integer idBairro = Integer.parseInt(request.getParameter("bairrocliente"));
-            Integer idTelefone = Integer.parseInt(request.getParameter("telefonesCliente"));
+ //           Integer idTelefone = Integer.parseInt(request.getParameter("telefonesCliente"));
 
             Cliente cliente = new Cliente(id, nome, rua, numero, cep, dataCadastro,horaCadastro,email,referenciaEndereco);
             cliente.setBairroId(BairroDAO.getInstance().getBairro(idBairro));
-            cliente.setTelefone(TelefoneDAO.getInstance().getTelefone(idTelefone));
+    //        cliente.setTelefone(TelefoneDAO.getInstance().getTelefone(idTelefone));
             ClienteDAO.getInstance().alterar(cliente);
 
             RequestDispatcher view = request.getRequestDispatcher("PesquisaClienteController");
