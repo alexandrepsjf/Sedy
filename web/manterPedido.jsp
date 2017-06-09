@@ -26,7 +26,7 @@ and open the template in the editor.
                     <select name="idUsuario" id="usuarios" <c:if test="${operacao != 'Incluir'}"> disabled</c:if>>
                             <option value="" >Selecione</option>
                         <c:forEach var="usuario" items="${usuarios}">
-                            <option value="${usuario.id}" <c:if test="${pedido.idUsuario == usuario.id}"> selected</c:if> >  ${usuario.nome} </option>
+                            <option value="${usuario.id}" <c:if test="${pedido.usuarioId.id == usuario.id}"> selected</c:if> >  ${usuario.usuario} </option>
                         </c:forEach>
                     </select>  </td>                              
             </tr>                     
@@ -34,7 +34,7 @@ and open the template in the editor.
                 <td> COD. PEDIDO </td> <td> <input type="text"  name="id" value="${pedido.id}"<c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>               
                 </tr>
                 <tr>
-                    <td> DATA PEDIDO </td> <td><input type="text" name="data_2" value="${pedido.data_2}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td> DATA PEDIDO </td> <td><input type="text" name="data_2" value="${pedido.data2}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
                     <td> HORA PEDIDO </td> <td> <input type="text" name="hora" value="${pedido.hora}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
@@ -44,7 +44,7 @@ and open the template in the editor.
                         <select name="idCliente" id="clientes" <c:if test="${operacao != 'Incluir'}"> disabled</c:if>>
                             <option value="" >Selecione</option>
                         <c:forEach var="cliente" items="${clientes}">
-                            <option value="${cliente.id}" <c:if test="${pedido.idCliente == cliente.id}"> selected</c:if> >  ${cliente.nome} </option>
+                            <option value="${cliente.id}" <c:if test="${pedido.clienteId.id == cliente.id}"> selected</c:if> >  ${cliente.nome} </option>
                         </c:forEach>
                     </select>
             </tr>  
@@ -68,14 +68,14 @@ and open the template in the editor.
                 <td>                             
                     <select name="idFrmPgto">
                         <option value="">Selecione</option>
-                        <c:forEach var="formaPagamento" items="${formaPagamentos}">
-                            <option value="${formaPagamento.id}" <c:if test="${pedido.idFormaPgto == formaPagamento.id}"> selected</c:if>> ${formaPagamento.forma} </option>
+                        <c:forEach var="formaPagamento" items="${formaPagamento}">
+                            <option value="${formaPagamento.id}" <c:if test="${pedido.formaPgmId.id == formaPagamento.id}"> selected</c:if>> ${formaPagamento.forma} </option>
                         </c:forEach>
                     </select>
                 </td>
             </tr>
             <tr>
-                <td> VALOR TOTAL </td> <td><input type="text" id="teste" name="total" value="${pedido.total}" ></td>
+                <td> VALOR TOTAL </td> <td><input type="text" name="total" value="${pedido.total}" ></td>
             </tr>
             <tr>
                 <td> DESCONTO </td> <td> <input type="text" name="desconto" ></td>

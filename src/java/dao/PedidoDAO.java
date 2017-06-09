@@ -86,7 +86,7 @@ private static PedidoDAO instance = new PedidoDAO();
         return pedidos;
     }
 
-    public Pedido getPedido(long id) {
+    public Pedido getPedido(int id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         Pedido pedido = null;

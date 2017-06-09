@@ -49,7 +49,7 @@ public class ManterPedidoController extends HttpServlet {
 
         try {
             request.setAttribute("operacao", "Incluir");
-            RequestDispatcher view = request.getRequestDispatcher("/manterPedidos.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("/manterPedido.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
             throw ex;
@@ -90,10 +90,10 @@ public class ManterPedidoController extends HttpServlet {
 
             request.setAttribute("pedido", pedido);
             request.setAttribute(("clientes"), ClienteDAO.getInstance().getAllCliente());
-            request.setAttribute(("formaDePagamento"), FormaPagamentoDAO.getInstance().getAllFormaPagamento());
+            request.setAttribute(("formaPagamento"), FormaPagamentoDAO.getInstance().getAllFormaPagamento());
             request.setAttribute(("usuarios"), UsuarioDAO.getInstance().getAllUsuarios());
-
-            RequestDispatcher view = request.getRequestDispatcher("/manterPedidos.jsp");
+            
+            RequestDispatcher view = request.getRequestDispatcher("/manterPedido.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
             throw ex;
@@ -104,10 +104,10 @@ public class ManterPedidoController extends HttpServlet {
 
         try {
             Integer id = Integer.parseInt(request.getParameter("id"));
-            String hora = request.getParameter("horas");
+            String hora = request.getParameter("hora");
             float total = Float.parseFloat(request.getParameter("total"));
             Integer idCliente = Integer.parseInt(request.getParameter("idCliente")); 
-            Integer idFormaPgm = Integer.parseInt(request.getParameter("idFormaPgm")); 
+            Integer idFormaPgm = Integer.parseInt(request.getParameter("idFrmPgto")); 
             Integer idUsuario = Integer.parseInt(request.getParameter("idUsuario")); 
 
             Pedido pedido = new Pedido(id, hora, total);
@@ -133,7 +133,7 @@ public class ManterPedidoController extends HttpServlet {
 
             request.setAttribute("pedido", pedido);
 
-            RequestDispatcher view = request.getRequestDispatcher("/manterpedidos.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("/manterPedido.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
             throw ex;
