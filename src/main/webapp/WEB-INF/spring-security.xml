@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:sec="http://www.springframework.org/schema/security" 
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+          http://www.springframework.org/schema/security
+          http://www.springframework.org/schema/security/spring-security-3.2.xsd
+          http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-3.2.xsd
+          http://www.springframework.org/schema/mvc
+          http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<context:annotation-config />
+	
+	<!-- 	SECURITY CONFIG -->
+	
+	<sec:http auto-config='true' use-expressions="true" >
+		<sec:intercept-url pattern="/login.xhtml" access="permitAll" />
+		<sec:intercept-url pattern="/publico/**" access="permitAll" />
+		<sec:intercept-url pattern="/javax.faces.resource/**" access="permitAll" />
+		<sec:intercept-url pattern="/pages/home/inicioGerente.xhtml" access="hasRole('GERENTE')" />
+		<sec:intercept-url pattern="/pages/funcionario/cadastroFuncionario.xhtml" access="hasRole('GERENTE')" />
+		<sec:intercept-url pattern="/pages/servico/cadastroServico.xhtml" access="hasAnyRole('GERENTE','CAIXA','FUNCIONARIO')" />
+		<sec:intercept-url pattern="/pages/funcionario/consultaFuncionarios.xhtml" access="hasRole('GERENTE')" />
+		<sec:intercept-url pattern="/pages/servico/consultaServicos.xhtml" access="hasAnyRole('GERENTE','FUNCIONARIO')" />
+		<sec:intercept-url pattern="/pages/servico/relatorioServico.xhtml" access="hasRole('GERENTE')" />
+		<sec:intercept-url pattern="/pages/transacao/cadastroTransacao.xhtml" access="hasRole('GERENTE')" />
+		<sec:intercept-url pattern="/pages/transacao/consultaTransacoes.xhtml" access="hasRole('GERENTE')" />
+		<sec:intercept-url pattern="/pages/caixa/gerenciarCaixa.xhtml" access="hasRole('GERENTE')" />
+		<sec:intercept-url pattern="/pages/home/agenda.xhtml" access="isAuthenticated()" />
+		
+
+		<sec:intercept-url pattern="/pages/dialogs/**" access="isAuthenticated()" />
+		<sec:intercept-url pattern="/pages/menus/**" access="isAuthenticated()" />
+		
+		<sec:logout logout-success-url="/login.xhtml" />
+		
+		<sec:form-login login-page="/login.xhtml"
+		authentication-failure-url="/login.xhtml?erro=true"
+		authentication-success-handler-ref="customAuthenticationSuccessHandler"
+		username-parameter="j_username"
+		password-parameter="j_password"/>
+	</sec:http>
+	
+	<!-- 	BEANS CONFIG -->
+	
+	<beans:bean id="customAuthenticationProvider"  scope="prototype"
+   	class="com.snf.security.CustomAuthenticationProvider" />
+	<beans:bean id="encripta" class="com.snf.library.Encripta" />
+	<beans:bean id="commons" class="com.snf.controller.CommonsController" />
+	<beans:bean id="customUserService" class="com.snf.service.CustomUserService" />
+	<beans:bean id="usuarioDao" class="com.snf.dao.CustomUserDAO" />
+	<beans:bean id="defaultRedirect" class="org.springframework.security.web.DefaultRedirectStrategy" />
+	<beans:bean id="customAuthenticationSuccessHandler" class="com.snf.security.CustomAuthenticationSuccessHandler" >
+		<beans:property name="defaultTargetUrl" value="/pages/home/inicioGerente.xhtml" />
+	</beans:bean>
+	
+	<!-- 	AUTHENTICATION CONFIG -->
+	
+	<sec:authentication-manager alias="authenticationManager"  >
+		<sec:authentication-provider  ref="customAuthenticationProvider"  />
+	</sec:authentication-manager>
+
+
+</beans>

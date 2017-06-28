@@ -1,4 +1,10 @@
-/nbproject/private/
-/dist/
-build/**
-nbproject/**
+/build/
+/target/
+/.DS_Store
+/.classpath
+*/.gitignore
+/.project
+*/META-INF/
+/.settings
+/.tern-project
+src/test/java/**
