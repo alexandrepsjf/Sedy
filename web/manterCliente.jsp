@@ -32,14 +32,7 @@ and open the template in the editor.
                         <td>Hora cadastro </td><td><input type="text" name="hora_cadastro"  value="${cliente.horaCadastro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr> 
-                        <td>(DDD)Telefone</td>
-                        <td>                             
-                            <select name="telefonesCliente" <c:if test="${operacao == 'Incluir'}"> disabled</c:if>>
-                                <option value="">Selecione</option>
-                            <c:forEach var="telefone" items="${telefones}">
-                                <option value="${telefone.id}" <c:if test="${telefone.cliente.id == cliente.id}"> selected</c:if>> ${telefone.telefone} </option>
-                            </c:forEach>
-                        </select>
+                        
                     </td>
                 </tr>
                 <tr>

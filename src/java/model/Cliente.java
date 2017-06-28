@@ -72,8 +72,8 @@ public class Cliente implements Serializable {
     @JoinColumn(name = "ID", referencedColumnName = "CLIENTE_ID", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private Telefone telefone;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteId")
-    private Collection<Pedido> pedidoCollection;
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteId")
+   // private Collection<Pedido> pedidoCollection;
 
     public Cliente() {
     }
@@ -189,14 +189,14 @@ public class Cliente implements Serializable {
         this.telefone = telefone;
     }
 
-    @XmlTransient
-    public Collection<Pedido> getPedidoCollection() {
-        return pedidoCollection;
-    }
-
-    public void setPedidoCollection(Collection<Pedido> pedidoCollection) {
-        this.pedidoCollection = pedidoCollection;
-    }
+//    @XmlTransient
+//    public Collection<Pedido> getPedidoCollection() {
+//        return pedidoCollection;
+//    }
+//
+//    public void setPedidoCollection(Collection<Pedido> pedidoCollection) {
+//        this.pedidoCollection = pedidoCollection;
+//    }
 
     @Override
     public int hashCode() {
