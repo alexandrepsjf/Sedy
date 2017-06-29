@@ -218,9 +218,12 @@ public class Cliente implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "model.Cliente[ id=" + id + " ]";
-    }
-    
+	@Override
+	public String toString() {
+		return "Cliente [id=" + id + ", nome=" + nome + ", rua=" + rua + ", numero=" + numero + ", cep=" + cep
+				+ ", dataCadastro=" + dataCadastro + ", horaCadastro=" + horaCadastro + ", email=" + email
+				+ ", referenciaEndereco=" + referenciaEndereco + ", bairroId=" + bairroId + ", telefone=" + telefone
+				+ ", pedidoCollection=" + pedidoCollection + "]";
+	}
+
 }

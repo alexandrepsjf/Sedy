@@ -15,7 +15,7 @@ import model.Bairro;
 public class HomeController implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
     @Inject
     private Bairro bairro;
     
