@@ -8,3 +8,4 @@
 /.settings
 /.tern-project
 src/test/java/**
+dist/**
