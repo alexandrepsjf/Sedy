@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/template/layout.xhtml">
+	<ui:define name="corpoLayout">
+	
+		<div class="titulo-topo md-48" >
+			<h1 style="font-size: 36px">Inclusão de Email</h1>
+		</div>
+		
+		<h:form prependId="false">
+		
+		<h:panelGrid columns="2" style="margin-bottom:10px; margin: auto" cellpadding="5">
+			<p:outputLabel for="id" value="ID:"/>
+			<p:inputText id="id" value="#{inclusaoEmailController.registro.id}" required="true" />
+			
+			<p:outputLabel for="email" value="Email: "/>
+			<p:inputText id="email" value="#{inclusaoEmailController.registro.email}" required="true" />
+			
+			<p:outputLabel for="senha" value="Senha: "/>
+			<p:inputText id="senha" value="#{inclusaoEmailController.registro.senha}" required="true" />
+                        
+                        <p:outputLabel for="autenticacao" value="Autenticação: "/>
+                        <p:inputText id="autenticacao" value="#{inclusaoEmailController.registro.autentica}" required="true" />
+			
+                        <p:outputLabel for="saida" value="Servidor de saída:  "/>
+			<p:inputText id="saida" value="#{inclusaoEmailController.registro.servidorSaida}" required="true" />
+                        
+                        <p:outputLabel for="entrada" value="Servidor de entrada  "/>
+			<p:inputText id="entrada" value="#{inclusaoEmailController.registro.servidorEntrada}" required="true" />
+                        
+			<p:commandButton action="#{inclusaoEmailController.voltar()}" immediate="true" ajax="false" value="Voltar"/>
+			<p:commandButton action="#{inclusaoEmailController.salvar()}" process="@form @this" update="@form" value="Enviar"/>
+			
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

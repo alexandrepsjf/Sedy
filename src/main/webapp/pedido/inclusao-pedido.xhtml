@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/template/layout.xhtml">
+	<ui:define name="corpoLayout">
+	
+		<div class="titulo-topo md-48" >
+			<h1 style="font-size: 36px">Pedidos - Incluir</h1>
+		</div>
+		
+		<h:form prependId="false">
+		
+		<h:panelGrid columns="2" style="margin-bottom:10px; margin: auto" cellpadding="5">
+                    
+                    <p:outputLabel for="usuarios" value="Usuário:"/>
+                    <p:selectOneMenu required="true" id="usuarios" value="#{inclusaoPedidoController.usuarioSelecionado}" >
+                            <c:selectItem itemLabel="Selecione" itemValue="" />
+                            <c:selectItems value="#{inclusaoPedidoController.usuarios}" var="reg" itemValue="#{reg.id}"
+                                           itemLabel="#{reg.usuario}"  />
+                        </p:selectOneMenu>
+                    
+			<p:outputLabel for="cod" value="Cod. Pedido: "/>
+			<p:inputText id="cod" value="#{inclusaoPedidoController.registro.id}" required="true" />
+                        
+                        <p:outputLabel for="cod" value="Cod. Pedido: "/>
+			<p:inputText id="cod" value="#{inclusaoPedidoController.registro.id}" required="true" />
+			
+			<p:outputLabel for="data" value="Data Pedido: "/>
+                        <p:inputText id="data" value="#{inclusaoPedidoController.registro.data2}" required="true" />
+                        
+                        <p:outputLabel for="hora" value="Hora Pedido: "/>
+                        <p:inputText id="hora" value="#{inclusaoPedidoController.registro.hora}" required="true" />
+                        
+                        <p:outputLabel for="cli" value="Cliente: "/>
+                        <p:selectOneMenu required="true" id="cli" value="#{inclusaoPedidoController.clienteSelecionado}" >
+                            <c:selectItem itemLabel="Selecione" itemValue="" />
+                            <c:selectItems value="#{inclusaoPedidoController.clientes}" var="reg" itemValue="#{reg.id}"
+                                           itemLabel="#{reg.nome}"  />
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel for="forma" value="Forma de Pagamento: "/>
+                        <p:selectOneMenu required="true" id="forma" value="#{inclusaoPedidoController.formaPagamentoSelecionada}" >
+                            <c:selectItem itemLabel="Selecione" itemValue="" />
+                            <c:selectItems value="#{inclusaoPedidoController.formasPagamento}" var="reg" itemValue="#{reg.id}"
+                                           itemLabel="#{reg.forma}"  />
+                        </p:selectOneMenu>
+                        <p:outputLabel for="valorTotal" value="Valor Total: "/>
+                        <p:inputText id="valorTotal" value="#{inclusaoPedidoController.registro.total}" required="true" />
+			
+                        
+                        <p:commandButton action="#{inclusaoPedidoController.voltar()}" immediate="true" ajax="false" value="Voltar"/>
+			<p:commandButton action="#{inclusaoPedidoController.salvar()}" process="@form @this" update="@form" value="Confirmar"/>
+			
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

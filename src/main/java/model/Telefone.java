@@ -11,6 +11,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -42,7 +43,8 @@ public class Telefone implements Serializable {
     @Basic(optional = false)
     @Column(name = "TELEFONE")
     private String telefone;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "telefone")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "CLIENTE_ID", insertable = false, updatable = false)
     private Cliente cliente;
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "telefoneId")
 //    private Collection<TelefoneHasLigacoes> telefoneHasLigacoesCollection;

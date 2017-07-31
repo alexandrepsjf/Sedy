@@ -67,10 +67,10 @@ public class Cliente implements Serializable {
     @Column(name = "REFERENCIA_ENDERECO")
     private String referenciaEndereco;
     @JoinColumn(name = "BAIRRO_ID", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private Bairro bairroId;
-    @JoinColumn(name = "ID", referencedColumnName = "CLIENTE_ID", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "cliente")
     private Telefone telefone;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteId")
     private Collection<Pedido> pedidoCollection;

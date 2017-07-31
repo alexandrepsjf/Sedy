@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/template/layout.xhtml">
+	<ui:define name="corpoLayout">
+	
+	<div class="titulo-topo md-48" >
+		<h1 style="font-size: 36px">Pesquisa de Produtos</h1>
+	</div>
+	
+	<h:form prependId="false" >
+		<p:dataTable id="tabela" var="reg" value="#{consultaProdutoController.registros}">
+		    <p:column headerText="Cod. Produto" style="text-align: center">
+		        <h:outputText value="#{reg.id}" />
+		    </p:column>
+		 
+		    <p:column headerText="Nome" style="text-align: center">
+		        <h:outputText value="#{reg.nome}" />
+		    </p:column>
+		 
+		    <p:column headerText="Ação" style="text-align: center">
+		    	<p:commandButton value="Editar" action="inclusao-produto.xhtml" ajax="false" >
+		    		<c:param name="id" value="#{reg.id}" />
+		    	</p:commandButton>
+		    	<p:commandButton value="Excluir" action="#{consultaProdutoController.excluir(reg)}" process="@this" update="tabela"/>
+		    </p:column>
+		 
+		</p:dataTable>
+		
+		<div style="margin: 20px" >
+			<p:commandButton action="#{consultaProdutoController.incluir()}" ajax="false" value="Incluir"/>
+		</div>
+	</h:form>
+	
+	</ui:define>
+</ui:composition>

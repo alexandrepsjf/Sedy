@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/template/layout.xhtml">
+	<ui:define name="corpoLayout">
+	
+	<div class="titulo-topo md-48" >
+		<h1 style="font-size: 36px">Pesquisa de Formas de Pagamento</h1>
+	</div>
+	
+	<h:form prependId="false" >
+		<p:dataTable id="tabela" var="reg" value="#{consultaFormaPagamentoController.registros}">
+		    <p:column headerText="Cod. FormaPagamento" style="text-align: center">
+		        <h:outputText value="#{reg.id}" />
+		    </p:column>
+		 
+		    <p:column headerText="Forma de Pagamento" style="text-align: center">
+		        <h:outputText value="#{reg.forma}" />
+		    </p:column>
+		 
+		    <p:column headerText="Ação" style="text-align: center">
+		    	<p:commandButton value="Editar" action="inclusao-formaPagamento.xhtml" ajax="false" >
+		    		<c:param name="id" value="#{reg.id}" />
+		    	</p:commandButton>
+		    	<p:commandButton value="Excluir" action="#{consultaFormaPagamentoController.excluir(reg)}" process="@this" update="tabela"/>
+		    </p:column>
+		 
+		</p:dataTable>
+		
+		<div style="margin: 20px" >
+			<p:commandButton action="#{consultaFormaPagamentoController.incluir()}" ajax="false" value="Incluir"/>
+		</div>
+	</h:form>
+	
+	</ui:define>
+</ui:composition>

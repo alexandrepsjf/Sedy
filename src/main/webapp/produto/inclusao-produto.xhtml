@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/template/layout.xhtml">
+	<ui:define name="corpoLayout">
+	
+		<div class="titulo-topo md-48" >
+			<h1 style="font-size: 36px">Inclusão de Produto</h1>
+		</div>
+		
+		<h:form prependId="false">
+		
+		<h:panelGrid columns="2" style="margin-bottom:10px; margin: auto" cellpadding="5">
+			<p:outputLabel for="id" value="Código do Produto: "/>
+			<p:inputText id="id" value="#{inclusaoProdutoController.registro.id}" required="true" />
+			
+			<p:outputLabel for="nome" value="Nome produto: "/>
+			<p:inputText id="nome" value="#{inclusaoProdutoController.registro.nome}" required="true" />
+			
+			<p:outputLabel for="unidade" value="Unidade do Produto:  "/>
+			<p:inputText id="unidade" value="#{inclusaoProdutoController.registro.unidade}" required="true" />
+                        
+                        <p:outputLabel for="preco" value="Preço do Produto: "/>
+                        <p:inputText id="preco" value="#{inclusaoProdutoController.registro.valor}" required="true" />
+			
+			<p:commandButton action="#{inclusaoProdutoController.voltar()}" immediate="true" ajax="false" value="Voltar"/>
+			<p:commandButton action="#{inclusaoProdutoController.salvar()}" process="@form @this" update="@form" value="Confirmar"/>
+			
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

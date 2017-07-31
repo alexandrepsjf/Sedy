@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/template/layout.xhtml">
+	<ui:define name="corpoLayout">
+	
+		<div class="titulo-topo md-48" >
+			<h1 style="font-size: 36px">Inclusão de Usuário</h1>
+		</div>
+		
+		<h:form prependId="false">
+		
+		<h:panelGrid columns="2" style="margin-bottom:10px; margin: auto" cellpadding="5">
+			<p:outputLabel for="id" value="Cod. Usuário:"/>
+			<p:inputText id="id" value="#{inclusaoUsuarioController.registro.id}" required="true" />
+			
+                       
+                        <p:outputLabel for="niveis" value="Nível Usuário:"/>
+			<p:selectOneMenu required="true" id="niveis" value="#{inclusaoUsuarioController.nivelSelecionado}" >
+                            <c:selectItem itemLabel="Selecione" itemValue="" />
+                            <c:selectItems value="#{inclusaoUsuarioController.niveisUsuario}" var="reg" itemValue="#{reg.id}"
+                                           itemLabel="#{reg.nome}"  />
+                        </p:selectOneMenu>
+                        
+			<p:outputLabel for="nome" value="Nome Usuário: "/>
+			<p:inputText id="nome" value="#{inclusaoUsuarioController.registro.usuario}" required="true" />
+			
+                        <p:outputLabel for="login" value="Login Usuário: "/>
+			<p:inputText id="login" value="#{inclusaoUsuarioController.registro.login}" required="true" />
+                     
+			<p:outputLabel for="senha" value="Senha de Usuário: "/>
+			<p:inputText id="senha" value="#{inclusaoUsuarioController.registro.senha}" required="true" />
+                        
+                        <p:outputLabel for="autenticacao" value="Confirmar Senha: "/>
+                        <p:inputText id="autenticacao" value="#{inclusaoUsuarioController.registro.senha}" required="true" />
+			
+			<p:commandButton action="#{inclusaoUsuarioController.voltar()}" immediate="true" ajax="false" value="Voltar"/>
+			<p:commandButton action="#{inclusaoUsuarioController.salvar()}" process="@form @this" update="@form" value="Enviar"/>
+			
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

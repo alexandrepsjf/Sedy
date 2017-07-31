@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/template/layout.xhtml">
+	<ui:define name="corpoLayout">
+	
+	<div class="titulo-topo md-48" >
+		<h1 style="font-size: 36px">Pesquisa de Pedidos</h1>
+	</div>
+	
+	<h:form prependId="false" >
+		<p:dataTable id="tabela" var="reg" value="#{consultaPedidoController.registros}">
+		    <p:column headerText="Código Pedido" style="text-align: center">
+		        <h:outputText value="#{reg.id}" />
+		    </p:column>
+		 
+		    <p:column headerText="Nome Pedido" style="text-align: center">
+                        <h:outputText value="#{reg.clienteId.nome}" />
+		    </p:column>
+		 
+		    <p:column headerText="Ação" style="text-align: center">
+		    	<p:commandButton value="Editar" action="inclusao-pedido.xhtml" ajax="false" >
+		    		<c:param name="id" value="#{reg.id}" />
+		    	</p:commandButton>
+		    	<p:commandButton value="Excluir" action="#{consultaPedidoController.excluir(reg)}" process="@this" update="tabela"/>
+		    </p:column>
+		 
+		</p:dataTable>
+		
+		<div style="margin: 20px" >
+			<p:commandButton action="#{consultaPedidoController.incluir()}" ajax="false" value="Incluir"/>
+		</div>
+	</h:form>
+	
+	</ui:define>
+</ui:composition>
